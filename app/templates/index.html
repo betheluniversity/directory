@@ -54,4 +54,46 @@
             </form>
         </div>
     </div>
+    <div class="card" style="margin-top: 1em">
+        <div class="card-header"><strong>Advanced Search:</strong></div>
+        <div class="card-block" style="padding: 1em">
+            <p>To search by course, please fill in the course field with a word from the course title or a course number (like "GES105") and click "Find Course".</p>
+            <form>
+                <div class="form-group">
+                    <label for="courseInfo">Course title/number</label>
+                    <input type="text" class="form-control" id="courseInfo" placeholder="GES105">
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary">Find Courses</button>
+                </div>
+            </form>
+            <p>To search by department, please fill in the department field with a word from the department name and click "Find Department".</p>
+            <form>
+                <div class="form-group">
+                    <label for="deptName">Department Name:</label>
+                    <input type="text" class="form-control" id="deptName" placeholder="Science">
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary">Find Department</button>
+                </div>
+            </form>
+            <p>To search by advisor, please fill in the advisor field with a first or last name and click "Find Advisor".</p>
+            <form>
+                <div class="form-group">
+                    <label for="advisorName">Advisor:</label>
+                    <input type="text" class="form-control" id="advisorName" placeholder="Advisor Name">
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary">Find Advisor</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <p>
+    <a href="https://my.bethel.edu">Go to MyBethel</a>
+        </p>
+    <p>
+    <a href="https://www.bethel.edu/">Go to Bethel.edu</a>
+    </p>
 {% endblock %}
