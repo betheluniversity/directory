@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+    <div>
+        <p>You're logged into the Bethel Directory.</p>
+        <p><i><strong>Instructions.</strong></i> To search by name, please fill in the last and/or first name fields and
+            click "Find Name". Use
+            "?" to stand for "any letter", and "*" to stand for "any sequence of letters". Use the checkboxes to include
+            or exclude information; the fewer you check, the faster you will get your results.</p>
+        <p><i><strong>Examples.</strong></i> "Johns*" would find Johns, Johnson, and Johnston. "Hans?n" would find
+            Hansen and Hanson. "Mi*"
+            would find Mike and Michael. "*ara" would find Barbara, Lara, Sara, and Tamara.</p>
+    </div>
+    <div class="card">
+        <div class="card-header"><strong>Search:</strong></div>
+        <div class="card-block" style="padding: 1em">
+            <form>
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="Barnes">
+                </div>
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="Jay">
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" id="Pictures" value="Pictures"> Pictures
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" id="Groups" value="Groups"> Groups
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" id="Home" value="Home"> Home
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" id="Staff" value="Staff"> Faculty/Staff
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" id="Students" value="Students"> Students
+                    </label>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary">Find Name 🔎</button>
+                    <button type="button" class="btn btn-secondary">Reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
