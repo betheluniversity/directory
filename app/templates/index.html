@@ -16,11 +16,11 @@
             <form>
                 <div class="form-group">
                     <label for="lastName">Last Name:</label>
-                    <input type="text" class="form-control" id="lastName" placeholder="Barnes">
+                    <input type="text" class="form-control col-12 col-md-8 col-lg-4" id="lastName" placeholder="Barnes">
                 </div>
                 <div class="form-group">
                     <label for="firstName">First Name:</label>
-                    <input type="text" class="form-control" id="firstName" placeholder="Jay">
+                    <input type="text" class="form-control col-12 col-md-8 col-lg-4" id="firstName" placeholder="Jay">
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
@@ -54,34 +54,42 @@
             </form>
         </div>
     </div>
+    {% block results %}
+    {% endblock %}
     <div class="card" style="margin-top: 1em">
         <div class="card-header"><strong>Advanced Search:</strong></div>
         <div class="card-block" style="padding: 1em">
-            <p>To search by course, please fill in the course field with a word from the course title or a course number (like "GES105") and click "Find Course".</p>
+            <p>To search by course, please fill in the course field with a word from the course title or a course number
+                (like "GES105") and click "Find Course".</p>
             <form>
                 <div class="form-group">
                     <label for="courseInfo">Course title/number</label>
-                    <input type="text" class="form-control" id="courseInfo" placeholder="GES105">
+                    <input type="text" class="form-control col-12 col-md-8 col-lg-4" id="courseInfo"
+                           placeholder="GES105">
                 </div>
                 <div class="form-group">
                     <button type="button" class="btn btn-primary">Find Courses</button>
                 </div>
             </form>
-            <p>To search by department, please fill in the department field with a word from the department name and click "Find Department".</p>
+            <p>To search by department, please fill in the department field with a word from the department name and
+                click "Find Department".</p>
             <form>
                 <div class="form-group">
                     <label for="deptName">Department Name:</label>
-                    <input type="text" class="form-control" id="deptName" placeholder="Science">
+                    <input type="text" class="form-control col-12 col-md-8 col-lg-4" id="deptName"
+                           placeholder="Science">
                 </div>
                 <div class="form-group">
                     <button type="button" class="btn btn-primary">Find Department</button>
                 </div>
             </form>
-            <p>To search by advisor, please fill in the advisor field with a first or last name and click "Find Advisor".</p>
+            <p>To search by advisor, please fill in the advisor field with a first or last name and click "Find
+                Advisor".</p>
             <form>
                 <div class="form-group">
                     <label for="advisorName">Advisor:</label>
-                    <input type="text" class="form-control" id="advisorName" placeholder="Advisor Name">
+                    <input type="text" class="form-control col-12 col-md-8 col-lg-4" id="advisorName"
+                           placeholder="Advisor Name">
                 </div>
                 <div class="form-group">
                     <button type="button" class="btn btn-primary">Find Advisor</button>
@@ -91,9 +99,9 @@
     </div>
     <hr>
     <p>
-    <a href="https://my.bethel.edu">Go to MyBethel</a>
-        </p>
+        <a href="https://my.bethel.edu">Go to MyBethel</a>
+    </p>
     <p>
-    <a href="https://www.bethel.edu/">Go to Bethel.edu</a>
+        <a href="https://www.bethel.edu/">Go to Bethel.edu</a>
     </p>
 {% endblock %}
