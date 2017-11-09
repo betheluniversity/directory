@@ -1,5 +1,12 @@
 {% extends "index.html" %}
 {% block results %}
+    <style>
+    @media (max-width: 400px) {
+        .img-col {
+            margin: 0 auto
+        }
+    }
+    </style>
     {#    DUMMY Repeat#}
     {# TODO mimic the Student repeat with Faculty #}
     {#    <hr>#}
@@ -37,15 +44,15 @@
             <div class="card-block">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-2 col-md-2 col-sm-3 col-6">
+                        <div class="col-lg-2 col-md-2 col-sm-3 col-6 img-col">
                             <div class="card-text">
-                                <div class="img-thumbnail rounded float-left" style="max-height: 120px">
+                                <div class="img-thumbnail rounded float-left" style="min-width: 70px">
                                     <img src="https://bsp-nas-dav.bethel.edu/IMAGES/CARS/CARS/20010905/13145000.JPG"
-                                         style="height: 7em">
+                                         style="max-width: inherit;">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-2 col-sm-3 col-6">
+                        <div class="col">
                             <div class="card-text">
                                 <p><strong>Barnes, Jay</strong></p>
                                 <p><a href="mailto:jay-barnes@bethel.edu">jay-barnes@bethel.edu</a></p>
@@ -53,7 +60,7 @@
                                 <p>PO# 1</p>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-2 col-sm-3 col-6">
+                        <div class="col">
                             <div class="card-text">
                                 <p>Pr.: College Sophomore</p>
                                 <p>Maj.: Computer Science, Bs</p>
@@ -61,7 +68,7 @@
                                 <p>Adv.: Gossett, Nathan</p>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-2 col-sm-3 col-6">
+                        <div class="col">
                             <div class="card-text">
                                 <p>513 Holt Ave NW</p>
                                 <p>Elk River, MN 55330-1419</p>
