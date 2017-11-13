@@ -13,7 +13,7 @@
     <div class="card">
         <div class="card-header"><strong>Search:</strong></div>
         <div class="card-block" style="padding: 1em">
-            <form>
+            <form role="form" action="/search" method="post">
                 <div class="form-group">
                     <label for="lastName">Last Name:</label>
                     <input type="text" class="form-control col-12 col-md-8 col-lg-4" id="lastName" placeholder="Barnes">
@@ -48,7 +48,7 @@
                     </label>
                 </div>
                 <div class="form-group">
-                    <button type="button" class="btn btn-primary">Find Name 🔎</button>
+                    <button type="submit" class="btn btn-primary">Find Name 🔎</button>
                     <button type="button" class="btn btn-secondary">Reset</button>
                 </div>
             </form>

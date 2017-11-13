@@ -1,10 +1,17 @@
 {% extends "index.html" %}
 {% block results %}
     <style>
-    @media (max-width: 400px) {
+    @media (max-width: 575px) {
         .border-edge {
-            border-left: none;
-            border-top: thick double #ff0000;
+            border-top: solid #d9dadb;
+        }
+        .vertical-padding {
+            padding-top: 1em;
+        }
+    }
+    @media (min-width: 575px) {
+        .border-edge {
+            border-left: solid #d9dadb;
         }
     }
     </style>
@@ -45,7 +52,7 @@
             <div class="card-block">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-4">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-4" style="padding-bottom: 1em;">
                             <div class="card-text">
                                 <div class="img-thumbnail rounded float-left" style="min-width: 70px">
                                     <img src="https://bsp-nas-dav.bethel.edu/IMAGES/CARS/CARS/20010905/13145000.JPG"
@@ -53,24 +60,24 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-3 col-sm-4 col-12 border-edge" style="border-left: thick double #ff0000;">
-                            <div class="card-text">
+                        <div class="col-lg-3 col-md-3 col-sm-4 col-12 border-edge">
+                            <div class="card-text vertical-padding">
                                 <p><strong>Barnes, Jay</strong></p>
                                 <p><a href="mailto:jay-barnes@bethel.edu">jay-barnes@bethel.edu</a></p>
                                 <p>President's Office</p>
                                 <p>PO# 1</p>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-3 col-12 border-edge" style="border-left: thick double #ff0000;">
-                            <div class="card-text">
+                        <div class="col-lg-4 col-md-4 col-sm-3 col-12 border-edge">
+                            <div class="card-text vertical-padding">
                                 <p>Pr.: College Sophomore</p>
                                 <p>Maj.: Computer Science, Bs</p>
                                 <p>Min.: Business</p>
                                 <p>Adv.: Gossett, Nathan</p>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-12 border-edge" style="border-left: thick double #ff0000;">
-                            <div class="card-text">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-12 border-edge">
+                            <div class="card-text vertical-padding">
                                 <p>513 Holt Ave NW</p>
                                 <p>Elk River, MN 55330-1419</p>
                                 <p>763.241.1417</p>

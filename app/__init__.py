@@ -12,6 +12,14 @@ def index():
 
 
 @app.route("/results")
-def search():
+def results():
     repeat = 10
     return render_template('results.html', repeat=repeat)
+
+
+@app.route("/search")
+def search():
+    print "memes"
+    print "We got here"
+    repeat = 10
+    # #return render_template('results.html', repeat=repeat)
