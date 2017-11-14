@@ -13,38 +13,38 @@
     <div class="card">
         <div class="card-header"><strong>Search:</strong></div>
         <div class="card-block" style="padding: 1em">
-            <form role="form" action="/search" method="post">
+            <form role="form" action="/search" method="POST">
                 <div class="form-group">
                     <label for="lastName">Last Name:</label>
-                    <input type="text" class="form-control col-12 col-md-8 col-lg-4" id="lastName" placeholder="Barnes">
+                    <input type="text" class="form-control col-12 col-md-8 col-lg-4" name="lastName" id="lastName" placeholder="Barnes">
                 </div>
                 <div class="form-group">
                     <label for="firstName">First Name:</label>
-                    <input type="text" class="form-control col-12 col-md-8 col-lg-4" id="firstName" placeholder="Jay">
+                    <input type="text" class="form-control col-12 col-md-8 col-lg-4" name="firstName" id="firstName" placeholder="Jay">
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" id="Pictures" value="Pictures"> Pictures
+                        <input class="form-check-input" type="checkbox" name="Pictures" id="Pictures" value="Pictures"> Pictures
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" id="Groups" value="Groups"> Groups
+                        <input class="form-check-input" type="checkbox" name="Groups" id="Groups" value="Groups"> Groups
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" id="Home" value="Home"> Home
+                        <input class="form-check-input" type="checkbox" name="Home" id="Home" value="Home"> Home
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" id="Staff" value="Staff"> Faculty/Staff
+                        <input class="form-check-input" type="checkbox" name="Staff" id="Staff" value="Staff" checked="checked"> Faculty/Staff
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" id="Students" value="Students"> Students
+                        <input class="form-check-input" type="checkbox" name="Students" id="Students" value="Students" checked="checked"> Students
                     </label>
                 </div>
                 <div class="form-group">
