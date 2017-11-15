@@ -33,5 +33,5 @@ def search():
     if "Staff" in data:
         search_for.__set__("teacher", data['Students'])
 
-    repeat = 10
+    repeat = 5
     return render_template('results.html', repeat=repeat, query=search_for)
