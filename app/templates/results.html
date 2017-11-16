@@ -21,12 +21,12 @@
             font-size: 80%;
         }
     </style>
-    <div class="card-view">
+    <div class="card-view mx-auto">
     {% if query.student is defined %}
         <hr>
         <h2>Students</h2>
 
-        {% for x in range(repeat) %}
+        {% for person in people %}
             <div class="card bg-light mb-3" style="margin-top: 1em">
                 <div class="card-block">
                     <div class="card-body">
@@ -35,7 +35,7 @@
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-4" style="padding-bottom: 1em;">
                                     <div class="card-text">
                                         <div class="img-thumbnail rounded float-left" style="min-width: 70px">
-                                            <img src="https://bsp-nas-dav.bethel.edu/IMAGES/CARS/CARS/20010905/13145000.JPG"
+                                            <img src="{{ person.picture }}"
                                                  style="max-width: inherit; max-height: 100px">
                                         </div>
                                     </div>
@@ -43,28 +43,28 @@
                             {% endif %}
                             <div class="col-lg-3 col-md-3 col-sm-4 col-12 border-edge">
                                 <div class="card-text vertical-padding">
-                                    <p><strong>Barnes, Jay</strong></p>
-                                    <p><a href="mailto:jay-barnes@bethel.edu">jay-barnes@bethel.edu</a></p>
-                                    <p>President's Office</p>
-                                    <p>PO# 1</p>
+                                    <p><strong>{{ person.last_name }}, {{ person.first_name }}</strong></p>
+                                    <p><a href="mailto:{{ person.email }}">{{ person.email }}</a></p>
+                                    <p>{{ person.living }}</p>
+                                    <p>PO# {{ person.po }}</p>
                                 </div>
                             </div>
                             {% if query.groups|string() != None %}
                                 <div class="col-lg-4 col-md-4 col-sm-3 col-12 border-edge">
                                     <div class="card-text vertical-padding">
-                                        <p>Pr.: College Sophomore</p>
-                                        <p>Maj.: Computer Science, Bs</p>
-                                        <p>Min.: Business</p>
-                                        <p>Adv.: Gossett, Nathan</p>
+                                        <p>Pr.: College [Credit Year]</p>
+                                        <p>Maj.: [Major], [Classification of Degree]</p>
+                                        <p>Min.: [Minor]</p>
+                                        <p>Adv.: [Advisor Name]</p>
                                     </div>
                                 </div>
                             {% endif %}
                             {% if query.home|string() != None %}
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-12 border-edge">
                                     <div class="card-text vertical-padding">
-                                        <p>513 Holt Ave NW</p>
-                                        <p>Elk River, MN 55330-1419</p>
-                                        <p>763.241.1417</p>
+                                        <p>[Address first line]</p>
+                                        <p>[Address second line]</p>
+                                        <p>[Phone number]</p>
                                     </div>
                                 </div>
                             {% endif %}

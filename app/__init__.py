@@ -1,9 +1,12 @@
 import jinja2
 
 from flask import Flask, render_template, request
+import datetime
 from app import person, query
 app = Flask(__name__)
 
+# Shows the year for the template
+app.jinja_env.globals.update(now=datetime.datetime.now())
 
 @app.route("/")
 def index():
@@ -33,5 +36,14 @@ def search():
     if "Staff" in data:
         search_for.__set__("teacher", data['Students'])
 
-    repeat = 5
-    return render_template('results.html', repeat=repeat, query=search_for)
+    people = make_dummy()
+    return render_template('results.html', people=people, query=search_for)
+
+
+def make_dummy():
+    people = []
+    for i in range(3):
+        people.append(person.Person("Boston", "Knighton-Johnson", "bak45247@bethel.edu", "Heritage Hall 105A", 1368, "student", "https://bsp-nas-dav.bethel.edu/IDCentre/Photos/51189.jpg"))
+        people.append(person.Person("Jay", "Barnes", "j-barnes@bethel.edu", "CLC 234", 2372, "faculty", "https://bsp-nas-dav.bethel.edu/IMAGES/CARS/CARS/20010905/13145000.JPG"))
+        people.append(person.Person("Eric", "Jameson", "e-jameson@bethel.edu", "St. Paul", 2355, "faculty", "https://bsp-nas-dav.bethel.edu/IDCentre/Photos/36897.jpg"))
+    return people

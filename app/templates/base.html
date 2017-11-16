@@ -26,16 +26,33 @@
     #page-content-wrapper {
         padding: 1em;
     }
+
+    .footer {
+        border-top: 1px solid #eee;
+        padding: 3em 1em;
+    }
 </style>
 <nav class="navbar navbar-light" style="background-color: #0F2C52; max-height: 60px">
-  <a class="navbar-brand" href="/">
-    <img src="{{ url_for('static', filename='src/img/logo-directory.png') }}" height="56" class="d-inline-block align-top" alt="">
-  </a>
+    <a class="navbar-brand" href="/">
+        <img src="{{ url_for('static', filename='src/img/logo-directory.png') }}" height="56"
+             class="d-inline-block align-top" alt="">
+    </a>
 </nav>
 <div id="page-content-wrapper">
     {% block content %}
         <!-- Where the content of the templates go -->
     {% endblock %}
 </div>
+<footer class="footer">
+    <div class="inner">
+                <span class="text-muted  u-fs14"><a href="https://www.bethel.edu/about/contact/questions-comments"
+                                                    target="_blank" rel="noopener">Comments &amp; Questions</a> | <a
+                        href="https://confluence.bethel.edu/display/commmarketing/MyBethel+Documentation"
+                        target="_blank" rel="noopener">Need help?</a> | <a href="https://www.bethel.edu" target="_blank"
+                                                                           rel="noopener">www.bethel.edu</a><br>
+                    Copyright © {{ now.strftime('%Y') }} Bethel University
+                </span>
+    </div>
+</footer>
 </body>
 </html>
