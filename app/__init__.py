@@ -37,7 +37,14 @@ def search():
         search_for.__set__("teacher", data['Students'])
 
     people = make_dummy()
-    return render_template('results.html', people=people, query=search_for)
+    students = []
+    faculty = []
+    for user in people:
+        if user.role == "student":
+            students.append(user)
+        if user.role == "faculty":
+            faculty.append(user)
+    return render_template('results.html', students=students, faculty=faculty, query=search_for)
 
 
 def make_dummy():
