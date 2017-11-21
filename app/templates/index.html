@@ -1,262 +1,167 @@
 {% extends "base.html" %}
 {% block content %}
-    <div>
-        <p><i><strong>Examples.</strong></i> "Johns*" would find Johns, Johnson, and Johnston. "Hans?n" would find
-            Hansen and Hanson. "Mi*"
-            would find Mike and Michael. "*ara" would find Barbara, Lara, Sara, and Tamara.</p>
-    </div>
     <div class="row">
-        <div class="search card col-lg-4">
-            <div class="card-header"><strong>Search:</strong></div>
-            <div class="card-block" style="padding: 1em">
-                <form role="form" action="/search" method="POST">
-                    <div class="form-group">
-                        <label for="lastName">Last Name:</label>
-                        <input type="text" class="form-control col-12 col-md-8 col-lg-12" name="lastName" id="lastName"
-                               placeholder="Barnes">
-                    </div>
-                    <div class="form-group">
-                        <label for="firstName">First Name:</label>
-                        <input type="text" class="form-control col-12 col-md-8 col-lg-12" name="firstName" id="firstName"
-                               placeholder="Jay">
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="Pictures" id="Pictures"
-                                   value="Pictures">
-                            Pictures
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="Groups" id="Groups" value="Groups">
-                            Groups
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="Home" id="Home" value="Home"> Home
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="Staff" id="Staff" value="Staff"
-                                   checked="checked"> Faculty/Staff
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="Students" id="Students"
-                                   value="Students"
-                                   checked="checked"> Students
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Find Name</button>
-                        <button type="button" class="btn btn-secondary">Clear</button>
-                    </div>
-                </form>
-                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#advancedSearch"
-                        aria-expanded="false" aria-controls="advancedSearch">Advanced Search
-                </button>
-                <div id="accordion" role="tablist" aria-multiselectable="true">
-                    <div class="card">
-                        <div class="card-header" role="tab" id="headingOne">
-                            <h5 class="mb-0">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
-                                   aria-expanded="true" aria-controls="collapseOne">
-                                    Student / Faculty Search:
-                                </a>
-                            </h5>
-                        </div>
+        <div class="search col-lg-4" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="card">
+                <div class="card-header" role="tab" id="headingOne">
+                    <h5 class="mb-0">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                           aria-expanded="true" aria-controls="collapseOne">
+                            Person Search:
+                            {#                                    Maybe a different name? #}
+                        </a>
+                    </h5>
+                </div>
 
-                        <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
-                            <div class="card-block">
-                                <form role="form" action="/search" method="POST">
-                                    <div class="form-group">
-                                        <label for="lastName">Last Name:</label>
-                                        <input type="text" class="form-control col-12 col-md-8 col-lg-4" name="lastName"
-                                               id="lastName"
-                                               placeholder="Barnes">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="firstName">First Name:</label>
-                                        <input type="text" class="form-control col-12 col-md-8 col-lg-4"
-                                               name="firstName" id="firstName"
-                                               placeholder="Jay">
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" name="Pictures"
-                                                   id="Pictures"
-                                                   value="Pictures">
-                                            Pictures
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" name="Groups" id="Groups"
-                                                   value="Groups">
-                                            Groups
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" name="Home" id="Home"
-                                                   value="Home"> Home
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" name="Staff" id="Staff"
-                                                   value="Staff"
-                                                   checked="checked"> Faculty/Staff
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" name="Students"
-                                                   id="Students"
-                                                   value="Students"
-                                                   checked="checked"> Students
-                                        </label>
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary">Find Name</button>
-                                        <button type="button" class="btn btn-secondary">Clear</button>
-                                    </div>
-                                </form>
+                <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="card-block">
+                        <div>
+                            <p><i><strong>Examples.</strong></i> "Johns*" would find Johns, Johnson, and
+                                Johnston. "Hans?n" would find
+                                Hansen and Hanson. "Mi*"
+                                would find Mike and Michael. "*ara" would find Barbara, Lara, Sara, and Tamara.
+                            </p>
+                        </div>
+                        <form role="form" action="/search" method="POST">
+                            <div class="form-group">
+                                <label for="lastName">Last Name:</label>
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-4" name="lastName"
+                                       id="lastName"
+                                       placeholder="Barnes">
                             </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header" role="tab" id="headingTwo">
-                            <h5 class="mb-0">
-                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
-                                   aria-expanded="false" aria-controls="collapseTwo">
-                                    Course Search:
-                                </a>
-                            </h5>
-                        </div>
-                        <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
-                            <div class="card-block">
-                                <p>To search by course, please fill in the course field with a word from the course
-                                    title or a
-                                    course
-                                    number
-                                    (like "GES105") and click "Find Course".</p>
-                                <form>
-                                    <div class="form-group">
-                                        <label for="courseInfo">Course title/number</label>
-                                        <input type="text" class="form-control col-12 col-md-8 col-lg-4" id="courseInfo"
-                                               placeholder="GES105">
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="button" class="btn btn-primary">Find Courses</button>
-                                    </div>
-                                </form>
+                            <div class="form-group">
+                                <label for="firstName">First Name:</label>
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-4"
+                                       name="firstName" id="firstName"
+                                       placeholder="Jay">
                             </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header" role="tab" id="headingThree">
-                            <h5 class="mb-0">
-                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
-                                   href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    Department Search:
-                                </a>
-                            </h5>
-                        </div>
-                        <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
-                            <div class="card-block">
-                                <p>To search by department, please fill in the department field with a word from the
-                                    department name
-                                    and
-                                    click "Find Department".</p>
-                                <form>
-                                    <div class="form-group">
-                                        <label for="deptName">Department Name:</label>
-                                        <input type="text" class="form-control col-12 col-md-8 col-lg-4" id="deptName"
-                                               placeholder="Science">
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="button" class="btn btn-primary">Find Department</button>
-                                    </div>
-                                </form>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" name="Pictures"
+                                           id="Pictures"
+                                           value="Pictures">
+                                    Pictures
+                                </label>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header" role="tab" id="headingFour">
-                            <h5 class="mb-0">
-                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
-                                   href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                    Advisor Search:
-                                </a>
-                            </h5>
-                        </div>
-                        <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour">
-                            <div class="card-block">
-                                <p>To search by advisor, please fill in the advisor field with a first or last name and
-                                    click "Find
-                                    Advisor".</p>
-                                <form>
-                                    <div class="form-group">
-                                        <label for="advisorName">Advisor:</label>
-                                        <input type="text" class="form-control col-12 col-md-8 col-lg-4"
-                                               id="advisorName"
-                                               placeholder="Advisor Name">
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="button" class="btn btn-primary">Find Advisor</button>
-                                    </div>
-                                </form>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" name="Groups" id="Groups"
+                                           value="Groups">
+                                    Groups
+                                </label>
                             </div>
-                        </div>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" name="Home" id="Home"
+                                           value="Home"> Home
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" name="Staff" id="Staff"
+                                           value="Staff"
+                                           checked="checked"> Faculty/Staff
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" name="Students"
+                                           id="Students"
+                                           value="Students"
+                                           checked="checked"> Students
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Find Name</button>
+                                <button type="button" class="btn btn-secondary">Clear</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-            <div class="collapse" id="advancedSearch">
-                <div style="padding: 0 1em 0 1em;">
-                    <p>To search by course, please fill in the course field with a word from the course title or a
-                        course
-                        number
-                        (like "GES105") and click "Find Course".</p>
-                    <form>
-                        <div class="form-group">
-                            <label for="courseInfo">Course title/number</label>
-                            <input type="text" class="form-control col-12 col-md-8 col-lg-4" id="courseInfo"
-                                   placeholder="GES105">
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-primary">Find Courses</button>
-                        </div>
-                    </form>
-                    <p>To search by department, please fill in the department field with a word from the department name
-                        and
-                        click "Find Department".</p>
-                    <form>
-                        <div class="form-group">
-                            <label for="deptName">Department Name:</label>
-                            <input type="text" class="form-control col-12 col-md-8 col-lg-4" id="deptName"
-                                   placeholder="Science">
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-primary">Find Department</button>
-                        </div>
-                    </form>
-                    <p>To search by advisor, please fill in the advisor field with a first or last name and click "Find
-                        Advisor".</p>
-                    <form>
-                        <div class="form-group">
-                            <label for="advisorName">Advisor:</label>
-                            <input type="text" class="form-control col-12 col-md-8 col-lg-4" id="advisorName"
-                                   placeholder="Advisor Name">
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-primary">Find Advisor</button>
-                        </div>
-                    </form>
+            <div class="card">
+                <div class="card-header" role="tab" id="headingTwo">
+                    <h5 class="mb-0">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
+                           aria-expanded="false" aria-controls="collapseTwo">
+                            Course Search:
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="card-block">
+                        <p>To search by course, please fill in the course field with a word from the course
+                            title or a
+                            course
+                            number
+                            (like "GES105") and click "Find Course".</p>
+                        <form>
+                            <div class="form-group">
+                                <label for="courseInfo">Course title/number</label>
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-4" id="courseInfo"
+                                       placeholder="GES105">
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary">Find Courses</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" role="tab" id="headingThree">
+                    <h5 class="mb-0">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Department Search:
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="card-block">
+                        <p>To search by department, please fill in the department field with a word from the
+                            department name
+                            and
+                            click "Find Department".</p>
+                        <form>
+                            <div class="form-group">
+                                <label for="deptName">Department Name:</label>
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-4" id="deptName"
+                                       placeholder="Science">
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary">Find Department</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" role="tab" id="headingFour">
+                    <h5 class="mb-0">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            Advisor Search:
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour">
+                    <div class="card-block">
+                        <p>To search by advisor, please fill in the advisor field with a first or last name and
+                            click "Find
+                            Advisor".</p>
+                        <form>
+                            <div class="form-group">
+                                <label for="advisorName">Advisor:</label>
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-4"
+                                       id="advisorName"
+                                       placeholder="Advisor Name">
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary">Find Advisor</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
