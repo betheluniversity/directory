@@ -14,7 +14,7 @@
                 </div>
 
                 <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
-                    <div class="card-block">
+                    <div class="card-body">
                         <div>
                             <p><i><strong>Examples.</strong></i> "Johns*" would find Johns, Johnson, and
                                 Johnston. "Hans?n" would find
@@ -25,13 +25,13 @@
                         <form role="form" action="/search" method="POST">
                             <div class="form-group">
                                 <label for="lastName">Last Name:</label>
-                                <input type="text" class="form-control col-12 col-md-8 col-lg-4" name="lastName"
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="lastName"
                                        id="lastName"
                                        placeholder="Barnes">
                             </div>
                             <div class="form-group">
                                 <label for="firstName">First Name:</label>
-                                <input type="text" class="form-control col-12 col-md-8 col-lg-4"
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-10"
                                        name="firstName" id="firstName"
                                        placeholder="Jay">
                             </div>
@@ -89,7 +89,7 @@
                     </h5>
                 </div>
                 <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
-                    <div class="card-block">
+                    <div class="card-body">
                         <p>To search by course, please fill in the course field with a word from the course
                             title or a
                             course
@@ -98,7 +98,7 @@
                         <form>
                             <div class="form-group">
                                 <label for="courseInfo">Course title/number</label>
-                                <input type="text" class="form-control col-12 col-md-8 col-lg-4" id="courseInfo"
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" id="courseInfo"
                                        placeholder="GES105">
                             </div>
                             <div class="form-group">
@@ -118,7 +118,7 @@
                     </h5>
                 </div>
                 <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
-                    <div class="card-block">
+                    <div class="card-body">
                         <p>To search by department, please fill in the department field with a word from the
                             department name
                             and
@@ -126,7 +126,7 @@
                         <form>
                             <div class="form-group">
                                 <label for="deptName">Department Name:</label>
-                                <input type="text" class="form-control col-12 col-md-8 col-lg-4" id="deptName"
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" id="deptName"
                                        placeholder="Science">
                             </div>
                             <div class="form-group">
@@ -146,14 +146,14 @@
                     </h5>
                 </div>
                 <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour">
-                    <div class="card-block">
+                    <div class="card-body">
                         <p>To search by advisor, please fill in the advisor field with a first or last name and
                             click "Find
                             Advisor".</p>
                         <form>
                             <div class="form-group">
                                 <label for="advisorName">Advisor:</label>
-                                <input type="text" class="form-control col-12 col-md-8 col-lg-4"
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-10"
                                        id="advisorName"
                                        placeholder="Advisor Name">
                             </div>
@@ -168,47 +168,5 @@
         {% block results %}
         {% endblock %}
     </div>
-    {#    TODO make the advanced search a dropdown#}
-    {#    <div class="card" style="margin-top: 1em">#}
-    {#        <div class="card-header"><strong>Advanced Search:</strong></div>#}
-    {#        <div class="card-block" style="padding: 1em">#}
-    {#            <p>To search by course, please fill in the course field with a word from the course title or a course number#}
-    {#                (like "GES105") and click "Find Course".</p>#}
-    {#            <form>#}
-    {#                <div class="form-group">#}
-    {#                    <label for="courseInfo">Course title/number</label>#}
-    {#                    <input type="text" class="form-control col-12 col-md-8 col-lg-4" id="courseInfo"#}
-    {#                           placeholder="GES105">#}
-    {#                </div>#}
-    {#                <div class="form-group">#}
-    {#                    <button type="button" class="btn btn-primary">Find Courses</button>#}
-    {#                </div>#}
-    {#            </form>#}
-    {#            <p>To search by department, please fill in the department field with a word from the department name and#}
-    {#                click "Find Department".</p>#}
-    {#            <form>#}
-    {#                <div class="form-group">#}
-    {#                    <label for="deptName">Department Name:</label>#}
-    {#                    <input type="text" class="form-control col-12 col-md-8 col-lg-4" id="deptName"#}
-    {#                           placeholder="Science">#}
-    {#                </div>#}
-    {#                <div class="form-group">#}
-    {#                    <button type="button" class="btn btn-primary">Find Department</button>#}
-    {#                </div>#}
-    {#            </form>#}
-    {#            <p>To search by advisor, please fill in the advisor field with a first or last name and click "Find#}
-    {#                Advisor".</p>#}
-    {#            <form>#}
-    {#                <div class="form-group">#}
-    {#                    <label for="advisorName">Advisor:</label>#}
-    {#                    <input type="text" class="form-control col-12 col-md-8 col-lg-4" id="advisorName"#}
-    {#                           placeholder="Advisor Name">#}
-    {#                </div>#}
-    {#                <div class="form-group">#}
-    {#                    <button type="button" class="btn btn-primary">Find Advisor</button>#}
-    {#                </div>#}
-    {#            </form>#}
-    {#        </div>#}
-    {#    </div>#}
     <hr>
 {% endblock %}
