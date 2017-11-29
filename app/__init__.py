@@ -26,7 +26,8 @@ def search():
     search_for = query.Query(data["firstName"], data['lastName'])
 
     if "Students" in data:
-        search_for.__set__("student", data['Students'])
+        search_for.set_student(data['Students'])
+    #TODO FIx the following blocks
     if "Pictures" in data:
         search_for.__set__("picture", data['Students'])
     if "Groups" in data:
@@ -34,16 +35,18 @@ def search():
     if "Home" in data:
         search_for.__set__("home", data['Students'])
     if "Staff" in data:
-        search_for.__set__("teacher", data['Students'])
+        search_for.set_teacher(data['Staff'])
 
     people = make_dummy()
     students = []
     faculty = []
     for user in people:
-        if user.role == "student":
-            students.append(user)
-        if user.role == "faculty":
-            faculty.append(user)
+        if search_for.student == "Students":
+            if user.role == "student":
+                students.append(user)
+        if search_for.teacher == "Staff":
+            if user.role == "faculty":
+                faculty.append(user)
     return render_template('results.html', students=students, faculty=faculty, query=search_for)
 
 

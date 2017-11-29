@@ -31,7 +31,7 @@
         }
     </style>
     <div class="card-view mx-auto col-lg-8">
-        {% if query.student is defined %}
+        {% if query.student is equalto "Students" %}
             <hr>
             <h2>Students</h2>
 
@@ -83,7 +83,7 @@
                 </div>
             {% endfor %}
         {% endif %}
-        {% if query.teacher is defined %}
+        {% if query.teacher is equalto "Staff" %}
             <hr>
             <h2>Faculty/Staff</h2>
 
