@@ -11,3 +11,9 @@ class Query:
 
     def __set__(self, instance, value):
         self.instance = value
+
+    def set_student(self, value):
+        self.student = value
+
+    def set_teacher(self, value):
+        self.teacher = value
