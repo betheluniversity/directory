@@ -1,3 +1,4 @@
 Flask
 requests
 jinja2
+sqlalchemy
