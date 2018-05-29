@@ -1,4 +1,6 @@
 Flask
 requests
-jinja2
+Jinja2
 sqlalchemy
+cx_Oracle
+Flask-Classy

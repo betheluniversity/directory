@@ -4,31 +4,24 @@ from flask import Flask, render_template, request, session
 from flask.ext.classy import FlaskView, route
 import datetime
 
-from app import person, query, app
+from app import query, person
 
 
-class DirectoryView(FlaskView):
+class ResultsView(FlaskView):
     def __init__(self):
         pass
 
-    @app.route("/")
-    def index():
-        return render_template('index.html')
-
-    @app.route("/results")
-    def results():
+    def results(self):
         repeat = 10
         return render_template('results.html', repeat=repeat)
 
-    @app.route("/search", methods=["POST"])
-    def search():
+    def search(self):
         data = request.form
         # The Query
         search_for = query.Query(data["firstName"], data['lastName'])
 
         if "Students" in data:
             search_for.set_student(data['Students'])
-        #TODO FIx the following blocks
         if "Pictures" in data:
             search_for.__set__("picture", data['Students'])
         if "Groups" in data:
@@ -38,7 +31,7 @@ class DirectoryView(FlaskView):
         if "Staff" in data:
             search_for.set_teacher(data['Staff'])
 
-        people = make_dummy()
+        people = self.make_dummy()
         students = []
         faculty = []
         for user in people:
@@ -48,13 +41,12 @@ class DirectoryView(FlaskView):
             if search_for.teacher == "Staff":
                 if user.role == "faculty":
                     faculty.append(user)
-        return render_template('results.html', students=students, faculty=faculty, query=search_for)
+        return render_template(self.results(), students=students, faculty=faculty, query=search_for)
 
-
-def make_dummy(self):
-    people = []
-    for i in range(3):
-        people.append(person.Person("Boston", "Knighton-Johnson", "bak45247@bethel.edu", "Heritage Hall 105A", 1368, "student", "https://bsp-nas-dav.bethel.edu/IDCentre/Photos/51189.jpg"))
-        people.append(person.Person("Jay", "Barnes", "j-barnes@bethel.edu", "CLC 234", 2372, "faculty", "https://bsp-nas-dav.bethel.edu/IMAGES/CARS/CARS/20010905/13145000.JPG"))
-        people.append(person.Person("Eric", "Jameson", "e-jameson@bethel.edu", "St. Paul", 2355, "faculty", "https://bsp-nas-dav.bethel.edu/IDCentre/Photos/36897.jpg"))
-    return people
+    def make_dummy(self):
+        people = []
+        for i in range(3):
+            people.append(person.Person("Boston", "Knighton-Johnson", "bak45247@bethel.edu", "Heritage Hall 105A", 1368, "student", "https://bsp-nas-dav.bethel.edu/IDCentre/Photos/51189.jpg"))
+            people.append(person.Person("Jay", "Barnes", "j-barnes@bethel.edu", "CLC 234", 2372, "faculty", "https://bsp-nas-dav.bethel.edu/IMAGES/CARS/CARS/20010905/13145000.JPG"))
+            people.append(person.Person("Eric", "Jameson", "e-jameson@bethel.edu", "St. Paul", 2355, "faculty", "https://bsp-nas-dav.bethel.edu/IDCentre/Photos/36897.jpg"))
+        return people
