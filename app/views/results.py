@@ -5,6 +5,7 @@ from flask.ext.classy import FlaskView, route
 import datetime
 
 from app import query, person
+from app.db.db_functions import portal_profile
 
 
 class ResultsView(FlaskView):
@@ -21,7 +22,7 @@ class ResultsView(FlaskView):
         search_for = query.Query(data["firstName"], data['lastName'])
 
         if "Students" in data:
-            search_for.set_student(data['Students'])
+            search_for.student(data['Students'])
         if "Pictures" in data:
             search_for.__set__("picture", data['Students'])
         if "Groups" in data:
@@ -29,7 +30,7 @@ class ResultsView(FlaskView):
         if "Home" in data:
             search_for.__set__("home", data['Students'])
         if "Staff" in data:
-            search_for.set_teacher(data['Staff'])
+            search_for.teacher(data['Staff'])
 
         people = self.make_dummy()
         students = []
@@ -45,8 +46,10 @@ class ResultsView(FlaskView):
 
     def make_dummy(self):
         people = []
-        for i in range(3):
-            people.append(person.Person("Boston", "Knighton-Johnson", "bak45247@bethel.edu", "Heritage Hall 105A", 1368, "student", "https://bsp-nas-dav.bethel.edu/IDCentre/Photos/51189.jpg"))
-            people.append(person.Person("Jay", "Barnes", "j-barnes@bethel.edu", "CLC 234", 2372, "faculty", "https://bsp-nas-dav.bethel.edu/IMAGES/CARS/CARS/20010905/13145000.JPG"))
-            people.append(person.Person("Eric", "Jameson", "e-jameson@bethel.edu", "St. Paul", 2355, "faculty", "https://bsp-nas-dav.bethel.edu/IDCentre/Photos/36897.jpg"))
+        # for i in range(3):
+        #     people.append(person.Person("Boston", "Knighton-Johnson", "bak45247@bethel.edu", "Heritage Hall 105A", 1368, "student", "https://bsp-nas-dav.bethel.edu/IDCentre/Photos/51189.jpg"))
+        #     people.append(person.Person("Jay", "Barnes", "j-barnes@bethel.edu", "CLC 234", 2372, "faculty", "https://bsp-nas-dav.bethel.edu/IMAGES/CARS/CARS/20010905/13145000.JPG"))
+        #     people.append(person.Person("Eric", "Jameson", "e-jameson@bethel.edu", "St. Paul", 2355, "faculty", "https://bsp-nas-dav.bethel.edu/IDCentre/Photos/36897.jpg"))
+        # return people
+        people.append(portal_profile('bak45247'))
         return people

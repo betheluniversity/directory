@@ -15,4 +15,4 @@ from app.views.home import HomeView
 HomeView.register(app, route_base='/')
 
 from app.views.results import ResultsView
-ResultsView.register(app)
+ResultsView.register(app, route_base='/search/')
