@@ -3,6 +3,9 @@ import jinja2
 from flask import Flask, render_template, request
 import datetime
 from app import person, query
+from app.person import Person
+from app.query import Query
+
 app = Flask(__name__)
 
 # Shows the year for the template
@@ -22,20 +25,26 @@ def results():
 @app.route("/search", methods=["POST"])
 def search():
     data = request.form
+    new_person = Person()
     # The Query
     search_for = query.Query(data["firstName"], data['lastName'])
 
     if "Students" in data:
-        search_for.set_student(data['Students'])
-    #TODO FIx the following blocks
+        # search_for.set_student(data['Students'])
+        new_person.student = data['Students']
+    #TODO Fix the following blocks
     if "Pictures" in data:
-        search_for.__set__("picture", data['Students'])
+        # search_for.__set__("picture", data['Students'])
+        new_person.picture = ("picture", data['Student'])
     if "Groups" in data:
-        search_for.__set__("groups", data['Students'])
+        # search_for.__set__("groups", data['Students'])
+        new_person.groups = ("groups", data['Students'])
     if "Home" in data:
-        search_for.__set__("home", data['Students'])
+        # search_for.__set__("home", data['Students'])
+        new_person.home = ("home", data['Students'])
     if "Staff" in data:
-        search_for.set_teacher(data['Staff'])
+        # search_for.set_teacher(data['Staff'])
+        new_person.teacher = data['Staff']
 
     people = make_dummy()
     students = []

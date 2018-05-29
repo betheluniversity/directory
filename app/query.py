@@ -9,11 +9,28 @@ class Query:
         self.picture = picture
         self.groups = groups
 
-    def __set__(self, instance, value):
+    # instance property and setter
+    @property
+    def instance(self):
+        return self.instance
+
+    @instance.setter
+    def instance(self, value):
         self.instance = value
 
-    def set_student(self, value):
+    # student property and setter
+    @property
+    def student(self):
+        return self.student
+
+    @student.setter
+    def student(self, value):
         self.student = value
 
-    def set_teacher(self, value):
+    @property
+    def teacher(self):
+        return self.teacher
+
+    @teacher.setter
+    def teacher(self, value):
         self.teacher = value
