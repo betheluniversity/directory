@@ -14,6 +14,5 @@ app.jinja_env.globals.update(now=datetime.datetime.now())
 from app.views.home import HomeView
 HomeView.register(app, route_base='/')
 
-
 from app.views.results import ResultsView
 ResultsView.register(app)
