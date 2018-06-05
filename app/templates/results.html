@@ -31,109 +31,109 @@
         }
     </style>
     <div class="card-view mx-auto col-lg-8">
-        {% if query.student is equalto "Students" %}
+{#        {% if query.student is equalto "Students" %}#}
             <hr>
             <h2>Students</h2>
 
-            {% for student in students %}
+            {% for row in results %}
                 <div class="card bg-light mb-3" style="margin-top: 1em">
                     <div class="card-block">
                         <div class="card-body">
                             <div class="row">
-                                {% if query.picture is defined %}
-                                    <div class="col-lg-2 col-md-2 col-sm-2 col-4" style="padding-bottom: 1em;">
-                                        <div class="card-text">
-                                            <div class="img-thumbnail rounded float-left" style="min-width: 70px">
-                                                <img src="{{ student.picture }}"
-                                                     style="max-width: inherit; max-height: 100px">
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endif %}
+{#                                {% if query.picture is defined %}#}
+{#                                    <div class="col-lg-2 col-md-2 col-sm-2 col-4" style="padding-bottom: 1em;">#}
+{#                                        <div class="card-text">#}
+{#                                            <div class="img-thumbnail rounded float-left" style="min-width: 70px">#}
+{#                                                <img src="{{ student.picture }}"#}
+{#                                                     style="max-width: inherit; max-height: 100px">#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                {% endif %}#}
                                 <div class="col-lg-3 col-md-3 col-sm-4 col-12 border-edge">
                                     <div class="card-text vertical-padding">
-                                        <p><strong>{{ student.last_name }}, {{ student.first_name }}</strong></p>
-                                        <p><a href="mailto:{{ student.email }}">{{ student.email }}</a></p>
-                                        <p>{{ student.living }}</p>
-                                        <p>PO# {{ student.po }}</p>
+                                        <p><strong>{{ row['last_name'] }}, {{ row['first_name'] }}</strong></p>
+{#                                        <p><a href="mailto:{{ student.email }}">{{ student.email }}</a></p>#}
+{#                                        <p>{{ student.living }}</p>#}
+{#                                        <p>PO# {{ student.po }}</p>#}
                                     </div>
                                 </div>
-                                {% if query.groups|string() != None %}
-                                    <div class="col-lg-4 col-md-4 col-sm-3 col-12 border-edge">
-                                        <div class="card-text vertical-padding">
-                                            <p>Pr.: College [Credit Year]</p>
-                                            <p>Maj.: [Major], [Classification of Degree]</p>
-                                            <p>Min.: [Minor]</p>
-                                            <p>Adv.: [Advisor Name]</p>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                                {% if query.home|string() != None %}
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-12 border-edge">
-                                        <div class="card-text vertical-padding">
-                                            <p>[Address first line]</p>
-                                            <p>[Address second line]</p>
-                                            <p>[Phone number]</p>
-                                        </div>
-                                    </div>
-                                {% endif %}
+{#                                {% if query.groups|string() != None %}#}
+{#                                    <div class="col-lg-4 col-md-4 col-sm-3 col-12 border-edge">#}
+{#                                        <div class="card-text vertical-padding">#}
+{#                                            <p>Pr.: College [Credit Year]</p>#}
+{#                                            <p>Maj.: [Major], [Classification of Degree]</p>#}
+{#                                            <p>Min.: [Minor]</p>#}
+{#                                            <p>Adv.: [Advisor Name]</p>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                {% endif %}#}
+{#                                {% if query.home|string() != None %}#}
+{#                                    <div class="col-lg-3 col-md-3 col-sm-3 col-12 border-edge">#}
+{#                                        <div class="card-text vertical-padding">#}
+{#                                            <p>[Address first line]</p>#}
+{#                                            <p>[Address second line]</p>#}
+{#                                            <p>[Phone number]</p>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                {% endif %}#}
                             </div>
                         </div>
                     </div>
                 </div>
             {% endfor %}
-        {% endif %}
-        {% if query.teacher is equalto "Staff" %}
-            <hr>
-            <h2>Faculty/Staff</h2>
-
-            {% for fac in faculty %}
-                <div class="card bg-light mb-3" style="margin-top: 1em">
-                    <div class="card-block">
-                        <div class="card-body">
-                            <div class="row">
-                                {% if query.picture is defined %}
-                                    <div class="col-lg-2 col-md-2 col-sm-2 col-4" style="padding-bottom: 1em;">
-                                        <div class="card-text">
-                                            <div class="img-thumbnail rounded float-left" style="min-width: 70px">
-                                                <img src="{{ fac.picture }}"
-                                                     style="max-width: inherit; max-height: 100px">
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-12 border-edge">
-                                    <div class="card-text vertical-padding">
-                                        <p><strong>{{ fac.last_name }}, {{ fac.first_name }}</strong></p>
-                                        <p><a href="mailto:{{ fac.email }}">{{ fac.email }}</a></p>
-                                        <p>{{ fac.living }}</p>
-                                        <p>PO# {{ fac.po }}</p>
-                                    </div>
-                                </div>
-                                {% if query.groups|string() != None %}
-                                    <div class="col-lg-4 col-md-4 col-sm-3 col-12 border-edge">
-                                        <div class="card-text vertical-padding">
-                                            <p>Pr.: College [Credit Year]</p>
-                                            <p>Maj.: [Major], [Classification of Degree]</p>
-                                            <p>Min.: [Minor]</p>
-                                            <p>Adv.: [Advisor Name]</p>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                                {% if query.home|string() != None %}
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-12 border-edge">
-                                        <div class="card-text vertical-padding">
-                                            <p>[Address first line]</p>
-                                            <p>[Address second line]</p>
-                                            <p>[Phone number]</p>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        {% endif %}
+{#        {% endif %}#}
+{#        {% if query.teacher is equalto "Staff" %}#}
+{#            <hr>#}
+{#            <h2>Faculty/Staff</h2>#}
+{##}
+{#            {% for fac in faculty %}#}
+{#                <div class="card bg-light mb-3" style="margin-top: 1em">#}
+{#                    <div class="card-block">#}
+{#                        <div class="card-body">#}
+{#                            <div class="row">#}
+{#                                {% if query.picture is defined %}#}
+{#                                    <div class="col-lg-2 col-md-2 col-sm-2 col-4" style="padding-bottom: 1em;">#}
+{#                                        <div class="card-text">#}
+{#                                            <div class="img-thumbnail rounded float-left" style="min-width: 70px">#}
+{#                                                <img src="{{ fac.picture }}"#}
+{#                                                     style="max-width: inherit; max-height: 100px">#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                {% endif %}#}
+{#                                <div class="col-lg-3 col-md-3 col-sm-4 col-12 border-edge">#}
+{#                                    <div class="card-text vertical-padding">#}
+{#                                        <p><strong>{{ fac.last_name }}, {{ fac.first_name }}</strong></p>#}
+{#                                        <p><a href="mailto:{{ fac.email }}">{{ fac.email }}</a></p>#}
+{#                                        <p>{{ fac.living }}</p>#}
+{#                                        <p>PO# {{ fac.po }}</p>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                {% if query.groups|string() != None %}#}
+{#                                    <div class="col-lg-4 col-md-4 col-sm-3 col-12 border-edge">#}
+{#                                        <div class="card-text vertical-padding">#}
+{#                                            <p>Pr.: College [Credit Year]</p>#}
+{#                                            <p>Maj.: [Major], [Classification of Degree]</p>#}
+{#                                            <p>Min.: [Minor]</p>#}
+{#                                            <p>Adv.: [Advisor Name]</p>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                {% endif %}#}
+{#                                {% if query.home|string() != None %}#}
+{#                                    <div class="col-lg-3 col-md-3 col-sm-3 col-12 border-edge">#}
+{#                                        <div class="card-text vertical-padding">#}
+{#                                            <p>[Address first line]</p>#}
+{#                                            <p>[Address second line]</p>#}
+{#                                            <p>[Phone number]</p>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                {% endif %}#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            {% endfor %}#}
+{#        {% endif %}#}
     </div>
 {% endblock %}

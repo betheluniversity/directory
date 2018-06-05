@@ -22,17 +22,17 @@
                                 would find Mike and Michael. "*ara" would find Barbara, Lara, Sara, and Tamara.
                             </p>
                         </div>
-                        <form role="form" action="/search" method="POST">
+                        <form id="searchform" action="{{ url_for('ResultsView:search') }}" method="post">
                             <div class="form-group">
-                                <label for="lastName">Last Name:</label>
-                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="lastName"
-                                       id="lastName"
+                                <label for="last_name">Last Name:</label>
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="last_name"
+                                       id="last_name"
                                        placeholder="Barnes">
                             </div>
                             <div class="form-group">
-                                <label for="firstName">First Name:</label>
+                                <label for="first_name">First Name:</label>
                                 <input type="text" class="form-control col-12 col-md-8 col-lg-10"
-                                       name="firstName" id="firstName"
+                                       name="first_name" id="first_name"
                                        placeholder="Jay">
                             </div>
                             <div class="form-check form-check-inline">
@@ -125,8 +125,8 @@
                             click "Find Department".</p>
                         <form>
                             <div class="form-group">
-                                <label for="deptName">Department Name:</label>
-                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" id="deptName"
+                                <label for="dep_name">Department Name:</label>
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" id="dept_name"
                                        placeholder="Science">
                             </div>
                             <div class="form-group">
@@ -152,9 +152,9 @@
                             Advisor".</p>
                         <form>
                             <div class="form-group">
-                                <label for="advisorName">Advisor:</label>
+                                <label for="advisor_name">Advisor:</label>
                                 <input type="text" class="form-control col-12 col-md-8 col-lg-10"
-                                       id="advisorName"
+                                       id="advisor_name"
                                        placeholder="Advisor Name">
                             </div>
                             <div class="form-group">
@@ -169,4 +169,11 @@
         {% endblock %}
     </div>
     <hr>
+{% endblock %}
+{% block script %}
+{#    <script>#}
+{#        function nameFunction() {#}
+{#            document.getElementsByClassName("form-group")#}
+{#        }#}
+{#    </script>#}
 {% endblock %}

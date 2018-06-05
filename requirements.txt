@@ -1,3 +1,11 @@
 Flask
 requests
-jinja2
+Jinja2
+sqlalchemy
+cx_Oracle
+Flask-Classy
+urllib3
+requests
+fuzzywuzzy
+Flask-Cache
+python-Levenshtein

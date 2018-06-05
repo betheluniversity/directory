@@ -1,0 +1,11 @@
+{% extends 'results.html' %}
+
+<header>The page loaded this far :)</header>
+{% block body %}
+    <ul>
+        {% for item in result %}
+            <li class="search-result">{{ item['last_name'], item['first_name']|safe }}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
