@@ -43,6 +43,8 @@ def directory_search():
     for item in data:
         last_name = data[item]['last_name']
         first_name = data[item]['first_name']
+        image_path = data[item]['image_path']
         results.append({'last_name': last_name,
-                        'first_name': first_name})
+                        'first_name': first_name,
+                        'image_path': image_path})
     return results

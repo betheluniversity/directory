@@ -35,24 +35,24 @@
             <hr>
             <h2>Students</h2>
 
-            {% for row in results %}
+            {% for row in result %}
                 <div class="card bg-light mb-3" style="margin-top: 1em">
                     <div class="card-block">
                         <div class="card-body">
                             <div class="row">
-{#                                {% if query.picture is defined %}#}
-{#                                    <div class="col-lg-2 col-md-2 col-sm-2 col-4" style="padding-bottom: 1em;">#}
-{#                                        <div class="card-text">#}
-{#                                            <div class="img-thumbnail rounded float-left" style="min-width: 70px">#}
-{#                                                <img src="{{ student.picture }}"#}
-{#                                                     style="max-width: inherit; max-height: 100px">#}
-{#                                            </div>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                {% endif %}#}
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-4" style="padding-bottom: 1em;">
+                                    <div class="card-text">
+                                        <div class="img-thumbnail rounded float-left" style="min-width: 70px">
+                                            <img src="{{ row['image_path'] }}"
+                                                 style="max-width: inherit; max-height: 100px">
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="col-lg-3 col-md-3 col-sm-4 col-12 border-edge">
                                     <div class="card-text vertical-padding">
                                         <p><strong>{{ row['last_name'] }}, {{ row['first_name'] }}</strong></p>
+                                        <p><strong>{{ row['ratio'] }}</strong></p>
 {#                                        <p><a href="mailto:{{ student.email }}">{{ student.email }}</a></p>#}
 {#                                        <p>{{ student.living }}</p>#}
 {#                                        <p>PO# {{ student.po }}</p>#}
