@@ -1,4 +1,5 @@
 from flask import Flask
+from flask.ext.classy import FlaskView
 from flask.ext.cache import Cache
 
 app = Flask(__name__)
