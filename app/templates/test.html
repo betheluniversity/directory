@@ -1,13 +1,11 @@
-{% extends 'base.html' %}
-{% block title %}
-    <title>Test Page</title>
-{% endblock %}
+{% extends 'results.html' %}
 
+<header>The page loaded this far :)</header>
 {% block body %}
-    <ol>
+    <ul>
         {% for item in result %}
-            <p class="search-result">{{ item['l_name']|safe }}</p>
+            <li class="search-result">{{ item['last_name'], item['first_name']|safe }}</li>
         {% endfor %}
-    </ol>
+    </ul>
 
 {% endblock %}

@@ -26,7 +26,7 @@ def get_results(result, label="", type=None):
 def portal_profile(username):
     call_cursor_bw = conn_bw.cursor()
     result_cursor_bw = conn_bw.cursor()
-    call_cursor_bw.callproc('bth_portal_channel_api.bu_profile', (username, result_cursor_bw,))
+    call_cursor_bw.callproc('bth_portal_channel_api.bu_profile', (username, result_cursor_bw))
     r = result_cursor_bw.fetchall()
     return get_results(r)
 
@@ -35,8 +35,14 @@ def portal_profile(username):
 def directory_search():
     call_cursor_bw = conn_bw.cursor()
     result_cursor_bw = conn_bw.cursor()
+    data = []
     results = []
 
     call_cursor_bw.callproc('bth_websrv_api.web_directory', (result_cursor_bw,))
-    results = get_results(result_cursor_bw.fetchall())
+    data = get_results(result_cursor_bw.fetchall())
+    for item in data:
+        last_name = data[item]['last_name']
+        first_name = data[item]['first_name']
+        results.append({'last_name': last_name,
+                        'first_name': first_name})
     return results
