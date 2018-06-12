@@ -37,36 +37,42 @@ class ResultsView(FlaskView):
 
         elif first_name != '' and last_name == '':  # will only be called if first name and NOT last name are filled out
             for row in people:
-                f_name = row['first_name']
-                ratio = fuzz.ratio(f_name, first_name)
-
-                if f_name == first_name:
-                    ratio = 120  # if the search matches exactly, it should be first regardless
-
-                if ratio > 50:
+                ratio = self.fuzzy(row['first_name'], row['last_name'], True, last_name)
+                if ratio >= 75:
                     result.append({'first_name': row['first_name'],
                                    'last_name': row['last_name'],
                                    'ratio': ratio,
-                                   'image_path': row['image_path']})
+                                   'image_path': row['image_path'],
+                                   'role': row['role'],
+                                   'po': row['po']})
 
         elif last_name != '' and first_name == '':  # called if last name and NOT first name are filled out
             for row in people:
-                l_name = row['last_name']
-                ratio = fuzz.ratio(l_name, last_name)
-
-                if l_name == last_name:
-                    ratio = 120  # if the search matches exactly, it should be first regardless
-
-                if ratio > 75:
-                    result.append({'last_name': row['last_name'],
-                                   'first_name': row['first_name'],
+                ratio = self.fuzzy(row['first_name'], row['last_name'], False, last_name)
+                if ratio >= 75:
+                    result.append({'first_name': row['first_name'],
+                                   'last_name': row['last_name'],
                                    'ratio': ratio,
-                                   'image_path': row['image_path']})
-            # process.extract(last_name, people['last_name'], limit=25)
+                                   'image_path': row['image_path'],
+                                   'role': row['role'],
+                                   'po': row['po']})
 
         result.sort(key=lambda i: i['ratio'], reverse=True)
 
         return render_template('results.html', **locals())
+
+    def fuzzy(self, first_name, last_name, fl, search):
+        if fl:
+            name = first_name
+        else:
+            name = last_name
+
+        if len(search.decode('utf-8')) < 4:
+            ratio = fuzz.partial_ratio(name, search)
+        else:
+            ratio = fuzz.ratio(name, search)
+
+        return ratio
 
     @route("/test-this")
     def testing_suite(self):
@@ -117,4 +123,3 @@ class ResultsView(FlaskView):
                     if token_sort_c <= 85:
                         token_sort.write("%s, %s, %d" % (row['last_name'], row['first_name'], ratio))
                         token_sort_c += 1
-

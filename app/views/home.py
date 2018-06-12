@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session
-from flask.ext.classy import FlaskView, route
+from flask_classy import FlaskView, route
 
 
 class HomeView(FlaskView):
