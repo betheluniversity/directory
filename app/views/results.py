@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, session
 from flask_classy import FlaskView, route
 
-from fuzzywuzzy import fuzz, process
+from fuzzywuzzy import fuzz
 
 from app.db.db_functions import directory_search
 
