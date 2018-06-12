@@ -14,3 +14,4 @@ app/views/home.pyc
 
 app/views/results.pyc
 *.pyc
+*.pyc
