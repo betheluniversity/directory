@@ -6,7 +6,7 @@ import datetime
 app = Flask(__name__)
 app.config.from_object('config')
 cache = Cache(app, config={'CACHE_TYPE': 'simple'})
-## TODO: Production cache
+# TODO: Production cache
 
 # Shows the year for the template
 app.jinja_env.globals.update(now=datetime.datetime.now())
