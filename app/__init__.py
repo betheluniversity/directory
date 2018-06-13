@@ -1,11 +1,11 @@
 from flask import Flask
-from flask_cache import Cache
+from flask_caching import Cache
 
 import datetime
 
 app = Flask(__name__)
 app.config.from_object('config')
-# cache = Cache(app, config={'CACHE_TYPE': 'simple'})
+cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 # TODO: Production cache
 
 # Shows the year for the template

@@ -1,5 +1,5 @@
 from app.db.db_connection_bw import conn_bw
-# from app import cache
+from app import cache
 
 
 def get_results(result, label="", type=None):
@@ -31,7 +31,7 @@ def portal_profile(username):
     return get_results(r)
 
 
-# @cache.memoize(timeout=78494898989)
+@cache.memoize(timeout=78494898989)
 def directory_search():
     call_cursor_bw = conn_bw.cursor()
     result_cursor_bw = conn_bw.cursor()
