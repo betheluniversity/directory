@@ -51,8 +51,9 @@
                                 <div class="col-lg-3 col-md-3 col-sm-4 col-12 border-edge">
                                     <div class="card-text vertical-padding">
                                         <p><strong>{{ row['last_name'] }}, {{ row['first_name'] }}</strong></p>
+                                        <p><strong>{{ row['role'] }}</strong></p>
                                         {% if row['po'] != '' %}
-                                            <p><strong>{{ row['po'] }}</strong></p>
+                                            <p><strong>PO: {{ row['po'] }}</strong></p>
                                         {% endif %}
                                     </div>
                                 </div>

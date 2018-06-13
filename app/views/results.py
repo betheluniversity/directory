@@ -33,7 +33,7 @@ class ResultsView(FlaskView):
 
         elif first_name != '' and last_name == '':  # will only be called if first name and NOT last name are filled out
             for row in people:
-                ratio = self.fuzzy(row['first_name'], row['last_name'], True, last_name)
+                ratio = self.fuzzy(row['first_name'], row['last_name'], True, first_name)
                 if ratio >= 75:
                     result.append({'first_name': row['first_name'],
                                    'last_name': row['last_name'],
@@ -53,6 +53,7 @@ class ResultsView(FlaskView):
                                    'role': row['role'],
                                    'po': row['po']})
 
+        result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'], reverse=True)
 
         return render_template('results.html', **locals())
@@ -70,7 +71,7 @@ class ResultsView(FlaskView):
 
         if search in name:
             ratio = 101
-        elif search == name:
+        if search == name:
             ratio = 102
 
         return ratio
