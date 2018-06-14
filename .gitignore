@@ -13,3 +13,6 @@ app/views/__init__.pyc
 app/views/home.pyc
 
 app/views/results.pyc
+*.pyc
+*.pyc
+*.dist

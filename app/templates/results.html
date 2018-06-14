@@ -31,7 +31,6 @@
         }
     </style>
     <div class="card-view mx-auto col-lg-8">
-        {% if query.student is equalto "Students" %}
             <hr>
             <h2>Students</h2>
 
@@ -52,14 +51,16 @@
                                 <div class="col-lg-3 col-md-3 col-sm-4 col-12 border-edge">
                                     <div class="card-text vertical-padding">
                                         <p><strong>{{ row['last_name'] }}, {{ row['first_name'] }}</strong></p>
-                                        <p><strong>{{ row['ratio'] }}</strong></p>
-
+                                        <p><strong>{{ row['role'] }}</strong></p>
+                                        {% if row['po'] != '' %}
+                                            <p><strong>PO: {{ row['po'] }}</strong></p>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
+        {% endfor %}
     </div>
 {% endblock %}
