@@ -14,7 +14,12 @@ app.jinja_env.globals.update(now=datetime.datetime.now())
 from app.db import db_functions as db
 
 from app.views.home import HomeView
-HomeView.register(app, route_base='/')
-
 from app.views.results import ResultsView
+
+HomeView.register(app, route_base='/')
 ResultsView.register(app)
+
+
+@app.route('/logout', methods=['GET'])
+def logout(self):
+    pass
