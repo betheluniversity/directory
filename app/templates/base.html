@@ -1,87 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Directory | Bethel University</title>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Directory | Bethel University</title>
 
-    <!-- Bootstrap core CSS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
-            integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
-            crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <!-- Bootstrap core CSS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+                integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+                crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+              integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
-            integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
-            crossorigin="anonymous"></script>
-</head>
-<style>
-    #page-content-wrapper {
-        padding: 1em;
-    }
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+                integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+                crossorigin="anonymous"></script>
+    </head>
+    <style>
+        #page-content-wrapper {
+            padding: 1em;
+        }
 
-    .footer {
-        border-top: 1px solid #eee;
-        padding: 3em 1em;
-    }
+        .footer {
+            border-top: 1px solid #eee;
+            padding: 3em 1em;
+        }
 
-    .btn-primary {
-        color: #fff;
-        background-color: #0056B5;
-        border-color: #0056B5;
-    }
+        .btn-primary {
+            color: #fff;
+            background-color: #0056B5;
+            border-color: #0056B5;
+        }
 
-    a {
-        color: #0069aa;
-    }
-</style>
-<nav class="navbar navbar-light" style="background-color: #0F2C52; max-height: 60px">
-    <a class="navbar-brand" href="/">
-        <img src="{{ url_for('static', filename='src/img/logo-directory.png') }}" height="56"
-             class="d-inline-block align-top" alt="">
-    </a>
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar bar1"></span>
-            <span class="icon-bar bar2"></span>
-            <span class="icon-bar bar3"></span>
-        </button>
-        <label class="navbar-brand">{{ title }}</label>
-    </div>
-    <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a class="btn" href="{{ url_for('logout') }}">
-                    <i class="fa ti-power-off"></i>
-                    <p>Logout</p>
-                </a>
-            </li>
-        </ul>
-    </div>
-</nav>
-<div id="page-content-wrapper">
-    {% block content %}
-        <!-- Where the content of the templates go -->
-    {% endblock %}
-</div>
-<footer class="footer">
-    <div class="inner">
-                <span class="text-muted  u-fs14"><a href="https://www.bethel.edu/about/contact/questions-comments"
-                                                    target="_blank" rel="noopener">Comments &amp; Questions</a> | <a
-                        href="https://confluence.bethel.edu/display/commmarketing/MyBethel+Documentation"
-                        target="_blank" rel="noopener">Need help?</a> | <a href="https://www.bethel.edu" target="_blank"
-                                                                           rel="noopener">www.bethel.edu</a><br>
-                    Copyright © {{ now.strftime('%Y') }} Bethel University
+        a {
+            color: #0069aa;
+        }
+    </style>
+    <nav class="navbar navbar-light" style="background-color: #0F2C52; max-height: 60px">
+        <a class="navbar-brand" href="/">
+            <img src="{{ url_for('static', filename='src/img/logo-directory.png') }}" height="56"
+                 class="d-inline-block align-top" alt="">
+        </a>
+        <span class="fa fa-stack fa-2x">
+                    <i class="fa fa-circle fa-stack-2x" style="color: #bbb;"></i>
+                    <i class="fa fa-user fa-stack-1x fa-inverse"></i>
                 </span>
+                <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #ffffff">
+                    <span class="u-fs14 d-none  d-sm-none  d-md-inline-block">Menu</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" style="right: 0; left: auto;">
+                    <a class="dropdown-item" href="{{ url_for('logout') }}">Log out</a>
+                </div>
+    </nav>
+    <div id="page-content-wrapper">
+        {% block content %}
+            <!-- Where the content of the templates go -->
+        {% endblock %}
     </div>
-</footer>
-</body>
+    <footer class="footer">
+        <div class="inner">
+            <span class="text-muted  u-fs14"><a href="https://www.bethel.edu/about/contact/questions-comments"
+                                                target="_blank" rel="noopener">Comments &amp; Questions</a> | <a
+                    href="https://confluence.bethel.edu/display/commmarketing/MyBethel+Documentation"
+                    target="_blank" rel="noopener">Need help?</a> | <a href="https://www.bethel.edu" target="_blank"
+                                                                       rel="noopener">www.bethel.edu</a><br>
+                Copyright © {{ now.strftime('%Y') }} Bethel University
+            </span>
+        </div>
+    </footer>
 </html>

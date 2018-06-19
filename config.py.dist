@@ -1,0 +1,7 @@
+CONSTR = ''
+
+DB_KEY = ''
+
+SECRET_KEY = ''
+
+LOGOUT_URL = ''
