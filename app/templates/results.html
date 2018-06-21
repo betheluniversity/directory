@@ -21,10 +21,11 @@
                                     <div class="col-lg-3 col-md-3 col-sm-4 col-12 border-edge">
                                         <div class="card-text vertical-padding">
                                             <p><strong>{{ row['last_name'] }}, {{ row['first_name'] }}</strong></p>
-                                            <p>{{ row['role'] }}</p>
+                                            <p>{{ row['role'] }}
                                             {% if row['po'] != '' %}
-                                                <p>PO: {{ row['po'] }}</p>
+                                                <br>PO: {{ row['po'] }}
                                             {% endif %}
+                                            </p>
                                         </div>
                                     </div>
                             </div>
