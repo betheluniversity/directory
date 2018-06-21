@@ -2,15 +2,53 @@
     padding: 1em;
 }
 
+.btn {
+    color: #fff;
+    background-color: #0056B5;
+    border-color: #0056B5;
+}
+
 
 .footer {
     border-top: 1px solid #eee;
     padding: 3em 1em;
 }
 
-a {
-    color: ##0F2C52;
+.text-muted {
+    padding-left: 10px
 }
 
+a {
+    color: #007bff;
+}
 
+/* results.html styling */
 
+@media (max-width: 575px) {
+    .border-edge {
+        border-top: solid #d9dadb;
+    }
+
+    .vertical-padding {
+        padding-top: 1em;
+    }
+}
+
+@media (min-width: 575px) {
+    .border-edge {
+        border-left: solid #d9dadb;
+    }
+}
+
+.card-view {
+    max-width: 1000px;
+    font-size: 65%;
+}
+
+@media (min-width: 992px) {
+    .card-view {
+        overflow: scroll;
+        height: 750px;
+        border: 2px solid #d8d8d8;
+    }
+}
