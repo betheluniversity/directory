@@ -8,6 +8,10 @@
     border-color: #0056B5;
 }
 
+.card {
+    width: 100%
+}
+
 
 .footer {
     border-top: 1px solid #eee;
@@ -24,7 +28,11 @@ a {
 
 /* results.html styling */
 
-@media (max-width: 575px) {
+.h2 {
+    padding-top: 15px;
+}
+
+@media (max-width: 100%) {
     .border-edge {
         border-top: solid #d9dadb;
     }
@@ -41,7 +49,7 @@ a {
 }
 
 .card-view {
-    max-width: 1000px;
+    max-width: 100%;
     font-size: 65%;
 }
 
