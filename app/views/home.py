@@ -61,6 +61,13 @@ class HomeView(FlaskView):
 
         return render_template('results.html', **locals())
 
+    def adv_search(self):
+        data = request.form
+        last_name = data['adv_last_name'].encode('utf-8')
+        first_name = data['adv_first_name'].encode('utf-8')
+        people = directory_search()
+        result = []
+
     def fuzzy(self, first_name, last_name, fl, search):
         if fl:
             name = first_name
