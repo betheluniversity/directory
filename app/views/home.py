@@ -65,6 +65,8 @@ class HomeView(FlaskView):
         data = request.form
         last_name = data['adv_last_name'].encode('utf-8')
         first_name = data['adv_first_name'].encode('utf-8')
+        username = data['username'].encode('utf-8')
+        email = data['email'].encode('utf-8')
         people = directory_search()
         result = []
 
