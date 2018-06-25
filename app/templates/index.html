@@ -8,14 +8,13 @@
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
                            aria-expanded="true" aria-controls="collapseOne">
                             Person Search:
-                            {#                                    Maybe a different name? #}
                         </a>
                     </h5>
                 </div>
 
                 <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
                     <div class="card-body">
-                        <form role="form" action="{{ url_for('ResultsView:search') }}" method="POST">
+                        <form role="form" action="{{ url_for('HomeView:search') }}" method="POST">
                             <div class="form-group">
                                 <label for="first_name">First Name:</label>
                                 <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="first_name"
@@ -32,6 +31,19 @@
                                 <button type="button" class="btn btn-secondary">Clear</button>
                             </div>
                         </form>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" role="tab" id="headingTwo">
+                        <h5 class="collapsed">
+                            <a class="collapsed" data-toggle="collapse" data-parent="accordion" href="#collapseTwo"
+                               aria-expanded="false" aria-controls="collapseTwo"> Advanced Search:</a>
+                        </h5>
+                    </div>
+                </div>
+                <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="card-body">
+                        <p>Test This</p>
                     </div>
                 </div>
             </div>
