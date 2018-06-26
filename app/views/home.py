@@ -13,7 +13,7 @@ class HomeView(FlaskView):
     def index(self):
         return render_template('index.html', **locals())
 
-    @route('/results', methods=['POST'])
+    @route('/search', methods=['POST'])
     def search(self):
         data = request.form
         last_name = data['last_name'].encode('utf-8')
