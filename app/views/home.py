@@ -61,15 +61,6 @@ class HomeView(FlaskView):
 
         return render_template('results.html', **locals())
 
-    def adv_search(self):
-        data = request.form
-        last_name = data['adv_last_name'].encode('utf-8')
-        first_name = data['adv_first_name'].encode('utf-8')
-        username = data['username'].encode('utf-8')
-        email = data['email'].encode('utf-8')
-        people = directory_search()
-        result = []
-
     def fuzzy(self, first_name, last_name, fl, search):
         if fl:
             name = first_name
@@ -84,6 +75,36 @@ class HomeView(FlaskView):
         if search in name:
             ratio = 101
         if search == name:
+            ratio = 102
+
+        return ratio
+
+    @route('/results', methods=['POST'])
+    def adv_search(self):  # The start of advanced searching
+        data = request.form
+        username = data['username'].encode('utf-8')
+        email = data['email'].encode('utf-8')
+        people = directory_search()
+        result = []
+
+        if username != '':
+            for row in people:
+                if self.adv_fuzz(username, row['username']):
+                    result.append(row)
+
+        if email != '':
+            for row in people:
+                if self.adv_fuzz(email, row['email']) > 75:
+                    result.append(row)
+
+        result.sort(key=lambda i: i['last_name'])
+        result.sort(key=lambda i: i['ratio'])
+
+    def adv_fuzz(self, search, key):
+        ratio = fuzz.ratio(search, key)
+        if search in key:
+            ratio = 101
+        if search == key:
             ratio = 102
 
         return ratio
