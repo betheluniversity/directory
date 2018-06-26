@@ -38,13 +38,13 @@
                     <div class="card-header" role="tab" id="headingTwo">
                         <h5 class="collapsed">
                             <a class="collapsed" data-toggle="collapse" data-parent="accordion" href="#collapseTwo"
-                               aria-expanded="false" aria-controls="collapseTwo"> Advanced Search:</a>
+                               aria-expanded="false" aria-controls="collapseTwo"> Advanced Person Search:</a>
                         </h5>
                     </div>
                 </div>
                 <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
                     <div class="card-body">
-                        <form role="form" action="{{ url_for('HomeView:search') }}" method="POST">
+                        <form role="form" action="{{ url_for('HomeView:adv_search') }}" method="POST">
                             <div class="form-group">
                                 <label for="username">Username:</label>
                                 <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="username"
@@ -56,7 +56,30 @@
                                        id="email">
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Search</button>
+                                <button type="submit" class="btn btn-primary">Find Person</button>
+                                <button type="button" class="btn btn-secondary">Clear</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" role="tab" id="headingThree">
+                        <h5 class="collapsed">
+                            <a class="collapsed" data-toggle="collapse" data-parent="accordion" href="#collapseThree"
+                               aria-expanded="false" aria-controls="collapseTwo">Department Search:</a>
+                        </h5>
+                    </div>
+                </div>
+                <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="card-body">
+                        <form role="form" action="{{ url_for('HomeView:dept_search') }}" method="POST">
+                            <div class="form-group">
+                                <label for="department">Department:</label>
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="department"
+                                       id="department">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Find Department</button>
                                 <button type="button" class="btn btn-secondary">Clear</button>
                             </div>
                         </form>
