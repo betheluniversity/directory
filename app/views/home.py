@@ -13,7 +13,7 @@ class HomeView(FlaskView):
     def index(self):
         return render_template('index.html', **locals())
 
-    @route('/results', methods=['POST'])
+    @route('/', methods=['POST'])
     def search(self):
         data = request.form
         last_name = data['last_name'].encode('utf-8')
@@ -79,28 +79,23 @@ class HomeView(FlaskView):
 
         return ratio
 
-    @route('/results', methods=['POST'])
-    def adv_search(self):  # The start of advanced searching
+    # TODO figuring out bringing in the search function to one method rather than 6
+    @route('/', methods=['POST'])
+    def username_search(self):
         data = request.form
         username = data['username'].encode('utf-8')
-        email = data['email'].encode('utf-8')
         people = directory_search()
         result = []
 
         if username != '':
             for row in people:
-                if self.adv_fuzz(username, row['username']):
-                    result.append(row)
-
-        if email != '':
-            for row in people:
-                if self.adv_fuzz(email, row['email']) > 75:
+                if self.misc_fuzz(username, row['username']):
                     result.append(row)
 
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'])
 
-    def adv_fuzz(self, search, key):
+    def misc_fuzz(self, search, key):
         ratio = fuzz.ratio(search, key)
         if search in key:
             ratio = 101

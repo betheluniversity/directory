@@ -5,9 +5,9 @@
             <div class="card">
                 <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <a class="collapsed" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                           Name Search &#9662;
-                        </button>
+                        </a>
                     </h5>
                 </div>
                 <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
@@ -42,9 +42,9 @@
                 <div class="card">
                     <div class="card-header" role="tab" id="headingThree">
                         <h5 class="collapsed">
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                                Department Search &#9662;
-                            </button>
+                            <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                Username Search &#9662;
+                            </a>
                         </h5>
                     </div>
                 </div>
@@ -52,34 +52,18 @@
                     <div class="card-body">
                         <form role="form" action="{{ url_for('HomeView:search') }}" method="POST">
                             <div class="form-group">
-                                <label for="department">Department:</label>
-                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="department"
-                                       id="department">
+                                <label for="username">Username:</label>
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="username"
+                                       id="username">
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Search</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header" role="tab" id="headingFour">
-                        <h5 class="collapsed">
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                Phone Number Search &#9662;
-                            </button>
-                        </h5>
-                    </div>
-                </div>
-                <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour" data-parent="#accordion">
-                    <div class="card-body">
-                        <form role="form" action="{{ url_for('HomeView:search') }}" method="POST">
-                            <div class="form-group">
-                                <label for="department">Phone Number:</label>
-                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="phone"
-                                       id="phone">
-                            </div>
-                            <div class="form-group">
+                                <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseFour"
+                                   aria-expanded="false" aria-controls="collapseFour"> Advanced &#9662;</a>
+                                <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour">
+                                    <div class="card-body">
+                                        Placeholder because I am too lazy to make the checkboxes right now
+                                    </div>
+                                </div>
                                 <button type="submit" class="btn btn-primary">Search</button>
                             </div>
                         </form>
@@ -88,9 +72,9 @@
                 <div class="card">
                     <div class="card-header" role="tab" id="headingFive">
                         <h5 class="collapsed">
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            <a class="collapsed" data-toggle="collapse" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
                                 E-Mail Search &#9662;
-                            </button>
+                            </a>
                         </h5>
                     </div>
                 </div>
@@ -98,11 +82,108 @@
                     <div class="card-body">
                         <form role="form" action="{{ url_for('HomeView:search') }}" method="POST">
                             <div class="form-group">
-                                <label for="department">E-Mail:</label>
-                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="phone"
+                                <label for="email">E-mail:</label>
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="email"
                                        id="email">
                             </div>
                             <div class="form-group">
+                                <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseSix"
+                                   aria-expanded="false" aria-controls="collapseSix"> Advanced &#9662;</a>
+                                <div id="collapseSix" class="collapse" role="tabpanel" aria-labelledby="headingSix">
+                                    <div class="card-body">
+                                        Placeholder because I am too lazy to make the checkboxes right now
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" role="tab" id="headingSeven">
+                        <h5 class="collapsed">
+                            <a class="collapsed" data-toggle="collapse" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                Department Search &#9662;
+                            </a>
+                        </h5>
+                    </div>
+                </div>
+                <div id="collapseSeven" class="collapse" role="tabpanel" aria-labelledby="headingSeven" data-parent="#accordion">
+                    <div class="card-body">
+                        <form role="form" action="{{ url_for('HomeView:search') }}" method="POST">
+                            <div class="form-group">
+                                <label for="department">Department:</label>
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="department"
+                                       id="department">
+                            </div>
+                            <div class="form-group">
+                                <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseEight"
+                                   aria-expanded="false" aria-controls="collapseEight"> Advanced &#9662;</a>
+                                <div id="collapseEight" class="collapse" role="tabpanel" aria-labelledby="headingEight">
+                                    <div class="card-body">
+                                        Placeholder because I am too lazy to make the checkboxes right now
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" role="tab" id="headingNine">
+                        <h5 class="collapsed">
+                            <a class="collapsed" data-toggle="collapse" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                                ID Search &#9662;
+                            </a>
+                        </h5>
+                    </div>
+                </div>
+                <div id="collapseNine" class="collapse" role="tabpanel" aria-labelledby="headingNine" data-parent="#accordion">
+                    <div class="card-body">
+                        <form role="form" action="{{ url_for('HomeView:search') }}" method="POST">
+                            <div class="form-group">
+                                <label for="id">ID:</label>
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="id"
+                                       id="id">
+                            </div>
+                            <div class="form-group">
+                                <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseTen"
+                                   aria-expanded="false" aria-controls="collapseTen"> Advanced &#9662;</a>
+                                <div id="collapseTen" class="collapse" role="tabpanel" aria-labelledby="headingTen">
+                                    <div class="card-body">
+                                        Placeholder because I am too lazy to make the checkboxes right now
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" role="tab" id="headingEleven">
+                        <h5 class="collapsed">
+                            <a class="collapsed" data-toggle="collapse" href="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
+                                Phone Number Search &#9662;
+                            </a>
+                        </h5>
+                    </div>
+                </div>
+                <div id="collapseEleven" class="collapse" role="tabpanel" aria-labelledby="headingEleven" data-parent="#accordion">
+                    <div class="card-body">
+                        <form role="form" action="{{ url_for('HomeView:search') }}" method="POST">
+                            <div class="form-group">
+                                <label for="phone">Phone Number:</label>
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="phone"
+                                       id="phone">
+                            </div>
+                            <div class="form-group">
+                                <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseTwelve"
+                                   aria-expanded="false" aria-controls="collapseTwelve"> Advanced &#9662;</a>
+                                <div id="collapseTwelve" class="collapse" role="tabpanel" aria-labelledby="headingTwelve">
+                                    <div class="card-body">
+                                        Placeholder because I am too lazy to make the checkboxes right now
+                                    </div>
+                                </div>
                                 <button type="submit" class="btn btn-primary">Search</button>
                             </div>
                         </form>
