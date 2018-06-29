@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
 {% block content %}
     <div class="row">
         <div class="search col-lg-4" id="accordion" role="tablist" aria-multiselectable="false">
@@ -159,24 +162,22 @@
                         </form>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-header" role="tab" id="headingEleven">
-                        <h5 class="collapsed">
-                            <a class="collapsed" data-toggle="collapse" href="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
-                                Phone Number Search &#9662;
-                            </a>
-                        </h5>
+                    <div class="card">
+                        <div class="card-header" role="tab" id="headingEleven">
+                            <h5 class="collapsed">
+                                <a class="collapsed" data-toggle="collapse" href="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
+                                    Phone Number Search &#9662;
+                                </a>
+                            </h5>
+                        </div>
                     </div>
-                </div>
-                <div id="collapseEleven" class="collapse" role="tabpanel" aria-labelledby="headingEleven" data-parent="#accordion">
-                    <div class="card-body">
-                        <form role="form" action="{{ url_for('HomeView:search') }}" method="POST">
+                    <div id="collapseEleven" class="collapse" role="tabpanel" aria-labelledby="headingEleven" data-parent="#accordion">
+                        <div class="card-body">
                             <div class="form-group">
                                 <label for="phone">Phone Number:</label>
                                 <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="phone"
                                        id="phone">
                             </div>
-                            <div class="form-group">
                                 <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseTwelve"
                                    aria-expanded="false" aria-controls="collapseTwelve"> Advanced &#9662;</a>
                                 <div id="collapseTwelve" class="collapse" role="tabpanel" aria-labelledby="headingTwelve">
@@ -184,9 +185,8 @@
                                         Placeholder because I am too lazy to make the checkboxes right now
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Search</button>
-                            </div>
-                        </form>
+                                <button type="submit" class="btn btn-primary" onclick="fill_form()">Search</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -195,4 +195,11 @@
         {% endblock %}
     </div>
     <hr>
+{% endblock %}
+{% block script %}
+<script>
+    function fill_form() {
+        alert("This is an alert");
+    }
+</script>
 {% endblock %}
