@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, session, make_response, redirect
 from flask_caching import Cache
 
 import datetime
@@ -19,5 +19,9 @@ HomeView.register(app, route_base='/')
 
 
 @app.route('/logout', methods=['GET'])
-def logout(self):
-    pass
+def logout():
+    session.clear()
+    resp = make_response(redirect(app.config['LOGOUT_URL']))
+    resp.set_cookie('MOD_AUTH_CAS_S', '', expires=0)
+    resp.set_cookie('MOD_AUTH_CAS', '', expires=0)
+    return resp

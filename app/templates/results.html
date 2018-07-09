@@ -1,66 +1,28 @@
 {% extends "index.html" %}
 {% block results %}
-    <style>
-        @media (max-width: 575px) {
-            .border-edge {
-                border-top: solid #d9dadb;
-            }
-
-            .vertical-padding {
-                padding-top: 1em;
-            }
-        }
-
-        @media (min-width: 575px) {
-            .border-edge {
-                border-left: solid #d9dadb;
-            }
-        }
-
-        .card-view {
-            max-width: 1000px;
-            font-size: 80%;
-        }
-
-        @media (min-width: 992px) {
-            .card-view {
-                overflow: scroll;
-                height: 750px;
-                border: 2px solid #d8d8d8;
-            }
-        }
-    </style>
     <div class="card-view mx-auto col-lg-8">
-            <hr>
-            <h2>Students</h2>
-
+        <h2 style="padding-top: 11px;">Results</h2>
+        {% if not result %}
+            <p><strong>We couldn't find anything matching your search</strong></p>
+        {% else %}
             {% for row in result %}
                 <div class="card bg-light mb-3" style="margin-top: 1em">
                     <div class="card-block">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-4" style="padding-bottom: 1em;">
-                                    <div class="card-text">
-                                        <div class="img-thumbnail rounded float-left" style="min-width: 70px">
-                                            <img src="{{ row['image_path'] }}"
-                                                 style="max-width: inherit; max-height: 100px">
+                                    <div class="card-text" style="height: 114px">
+                                        <div class="fa fa-stack fa-2x" style="margin: auto; width: 100%; padding-top: 1em">
+                                            <i class="fa fa-circle fa-stack-2x" style="color: #bbb; "></i>
+                                            <i class="fa fa-user fa-stack-1x fa-inverse" ></i>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-12 border-edge">
-                                    <div class="card-text vertical-padding">
-                                        <p><strong>{{ row['last_name'] }}, {{ row['first_name'] }}</strong></p>
-                                        <p>{{ row['role'] }}</p>
-                                        {% if row['po'] != '' %}
-                                            <p><strong>PO: </strong>{{ row['po'] }}</p>
-                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-        {% endfor %}
+            {% endfor %}
+        {% endif %}
     </div>
 {% endblock %}
