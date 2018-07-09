@@ -14,7 +14,7 @@ class HomeView(FlaskView):
         return render_template('index.html', **locals())
 
     @route('/', methods=['POST'])
-    def search(self):
+    def fl_search(self):
         data = request.form
         last_name = data['last_name'].encode('utf-8')
         first_name = data['first_name'].encode('utf-8')
@@ -79,7 +79,6 @@ class HomeView(FlaskView):
 
         return ratio
 
-    # TODO figuring out bringing in the search function to one method rather than 6
     @route('/', methods=['POST'])
     def username_search(self):
         data = request.form
@@ -89,8 +88,102 @@ class HomeView(FlaskView):
 
         if username != '':
             for row in people:
-                if self.misc_fuzz(username, row['username']):
-                    result.append(row)
+                ratio = self.misc_fuzz(username, row['username'])
+                if ratio > 75:
+                    result.append({'first_name': row['first_name'],
+                                   'last_name': row['last_name'],
+                                   'ratio': ratio,
+                                   'image_path': row['image_path'],
+                                   'role': row['role'],
+                                   'po': row['po']})
+
+        result.sort(key=lambda i: i['last_name'])
+        result.sort(key=lambda i: i['ratio'])
+
+        return render_template('results.html', **locals())
+
+    def email_search(self):
+        data = request.form
+        email = data['email'].encode('utf-8')
+        people = directory_search()
+        result = []
+
+        if email != '':
+            for row in people:
+                ratio = self.misc_fuzz(email, row['email'])
+                if ratio > 75:
+                    result.append({'first_name': row['first_name'],
+                                   'last_name': row['last_name'],
+                                   'ratio': ratio,
+                                   'image_path': row['image_path'],
+                                   'role': row['role'],
+                                   'po': row['po']})
+
+        result.sort(key=lambda i: i['last_name'])
+        result.sort(key=lambda i: i['ratio'])
+
+        return render_template('results.html', **locals())
+
+    def dept_search(self):
+        data = request.form
+        dept = data['department'].encode('utf-8')
+        people = directory_search()
+        result = []
+
+        if dept != '':
+            for row in people:
+                ratio = self.misc_fuzz(dept, row['department'])
+                if ratio > 75:
+                    result.append({'first_name': row['first_name'],
+                                   'last_name': row['last_name'],
+                                   'ratio': ratio,
+                                   'image_path': row['image_path'],
+                                   'role': row['role'],
+                                   'po': row['po']})
+
+        result.sort(key=lambda i: i['last_name'])
+        result.sort(key=lambda i: i['ratio'])
+
+        return render_template('results.html', **locals())
+
+    def id_search(self):
+        data = request.form
+        id = data['id'].encode('utf-8')
+        people = directory_search()
+        result = []
+
+        if id != '':
+            for row in people:
+                ratio = self.misc_fuzz(id, row['id'])
+                if ratio > 75:
+                    result.append({'first_name': row['first_name'],
+                                   'last_name': row['last_name'],
+                                   'ratio': ratio,
+                                   'image_path': row['image_path'],
+                                   'role': row['role'],
+                                   'po': row['po']})
+
+        result.sort(key=lambda i: i['last_name'])
+        result.sort(key=lambda i: i['ratio'])
+
+        return render_template('results.html', **locals())
+
+    def phone_search(self):
+        data = request.form
+        phone = data['phone'].encode('utf-8')
+        people = directory_search()
+        result = []
+
+        if phone != '':
+            for row in people:
+                ratio = self.misc_fuzz(phone, row['phone'])
+                if ratio > 75:
+                    result.append({'first_name': row['first_name'],
+                                   'last_name': row['last_name'],
+                                   'ratio': ratio,
+                                   'image_path': row['image_path'],
+                                   'role': row['role'],
+                                   'po': row['po']})
 
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'])
