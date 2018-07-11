@@ -5,13 +5,13 @@ A pythonic remake of the infamous directory.bethel.edu
 
 #### Search Types:
  - #### First/Last name
-  - Normal first and last name search for students
+    - Normal first and last name search for students
  - #### Username
  - #### E-Mail
  - #### Department
-  - Staff and faculty within a department
+    - Staff and faculty within a department
  - #### ID
-  - Used primarily by admin as students cannot see other students IDs
+    - Used primarily by admin as students cannot see other students IDs
  - #### Phone number
 
 #### Searching For (input):
