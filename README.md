@@ -4,12 +4,15 @@ A pythonic remake of the infamous directory.bethel.edu
 ## Planning Notes:
 
 #### Search Types:
- - ##### Single Search:
- A single search bar would be used to access all data from the database, based on the input parameters specified.
- - ##### Multi-Search:
- There are two possible types for this search:
-      - Multiple search bar inputs, such as: First Name, Last Name, Department Name, Etc.
-      - A single search bar input with accompanying radio buttons.
+ - #### First/Last name
+  - Normal first and last name search for students
+ - #### Username
+ - #### E-Mail
+ - #### Department
+  - Staff and faculty within a department
+ - #### ID
+  - Used primarily by admin as students cannot see other students IDs
+ - #### Phone number
 
 #### Searching For (input):
 All inputs that may be entered into whichever solution are as follows:
