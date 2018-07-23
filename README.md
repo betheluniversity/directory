@@ -4,15 +4,15 @@ A pythonic remake of the infamous directory.bethel.edu
 ## Planning Notes:
 
 #### Search Types:
- - ##### First/Last name
+ - #### First/Last name:
     - Normal first and last name search for students
- - ##### Username
- - ##### E-Mail
- - ##### Department
+ - #### Username
+ - #### E-Mail
+ - #### Department:
     - Staff and faculty within a department
- - ##### ID
-    - Used primarily by admin as students cannot see other students IDs
- - ##### Phone number
+ - #### ID
+    - Used primarily by staff and faculty as students cannot see other students IDs
+ - #### Phone number
 
 #### Searching For (input):
 All inputs that may be entered into whichever solution are as follows:
