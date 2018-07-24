@@ -1,12 +1,13 @@
 {% extends "index.html" %}
+<link rel="stylesheet" href="directory.css">
 {% block results %}
-    <div class="card-view mx-auto col-lg-8">
+    <div class="card-view col-lg-8 results">
         <h2 style="padding-top: 11px;">Results</h2>
         {% if not result %}
             <p><strong>We couldn't find anything matching your search</strong></p>
         {% else %}
             {% for row in result %}
-                <div class="card bg-light mb-3" style="margin-top: 1em">
+                <div class="card bg-light mb-3" style="margin-top: 1em; min-width: 100%;">
                     <div class="card-block">
                         <div class="card-body">
                             <div class="row">

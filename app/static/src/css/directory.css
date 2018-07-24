@@ -18,6 +18,17 @@
     padding: 3em 1em;
 }
 
+.home {
+    margin-right: 100px;
+}
+
+.search {
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+
 .text-muted {
     padding-left: 10px
 }
@@ -27,9 +38,22 @@ a {
 }
 
 /* results.html styling */
-
 .h2 {
     padding-top: 15px;
+}
+
+.spacer {
+    border-left: 3px solid gray;
+    height: 500 px;
+    position: center;
+}
+
+.results {
+    display: block;
+    float: left;
+    min-width: 60%;
+    max-height: 3000px;
+    overflow: auto;
 }
 
 @media (max-width: 100%) {
@@ -48,15 +72,11 @@ a {
     }
 }
 
-.card-view {
-    max-width: 100%;
-    font-size: 65%;
-}
-
-@media (min-width: 992px) {
+@media (min-width: 999px) {
     .card-view {
         overflow: scroll;
         height: 750px;
         border: 2px solid #d8d8d8;
+        max-width: 100%;
     }
 }

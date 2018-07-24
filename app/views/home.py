@@ -34,7 +34,7 @@ class HomeView(FlaskView):
                                    'role': row['role'],
                                    'po': row['po']})
 
-        elif first_name != '' and last_name == '':  # will only be called if first name and NOT last name are filled out
+        elif first_name != '' and last_name == '':  # called if first name and NOT last name are filled out
             for row in people:
                 ratio = self.fuzzy(row['first_name'], row['last_name'], True, first_name)
                 if ratio >= 75:

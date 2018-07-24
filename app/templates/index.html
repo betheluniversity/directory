@@ -1,7 +1,5 @@
 {% extends "base.html" %}
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-</head>
+
 {% block content %}
     <div class="row">
         <div class="search col-lg-4" id="accordion" role="tablist" aria-multiselectable="false">
@@ -33,11 +31,11 @@
                                    aria-expanded="false" aria-controls="collapseTwo"> Advanced &#9662;</a>
                                 <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
                                     <div class="card-body">
-                                        <input type="checkbox" id="home" name="advanced" value="home"/>
-                                        <label for="home">Home</label>
+                                        <input type="checkbox" class="home" name="advanced" value="home"/>
+                                        <label>Home</label>
 
-                                        <input type="checkbox" id="group" name="advanced" value="group"/>
-                                        <label for="group">Groups</label>
+                                        <input type="checkbox" class="group" name="advanced" value="group"/>
+                                        <label>Groups</label>
                                     </div>
                                 </div>
                             </div>
@@ -63,14 +61,18 @@
                                        id="username">
                             </div>
                             <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Search</button>
                                 <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseFour"
-                                   aria-expanded="false" aria-controls="collapseFour"> Advanced &#9662;</a>
-                                <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour">
+                                   aria-expanded="false" aria-controls="collapseTwo"> Advanced &#9662;</a>
+                                <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
                                     <div class="card-body">
-                                        Placeholder because I am too lazy to make the checkboxes right now
+                                        <input type="checkbox" class="home" name="advanced" value="home"/>
+                                        <label>Home</label>
+
+                                        <input type="checkbox" class="group" name="advanced" value="group"/>
+                                        <label>Groups</label>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Search</button>
                             </div>
                         </form>
                     </div>
@@ -94,14 +96,20 @@
                                        id="email">
                             </div>
                             <div class="form-group">
+                                <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Search</button>
                                 <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseSix"
                                    aria-expanded="false" aria-controls="collapseSix"> Advanced &#9662;</a>
                                 <div id="collapseSix" class="collapse" role="tabpanel" aria-labelledby="headingSix">
                                     <div class="card-body">
-                                        Placeholder because I am too lazy to make the checkboxes right now
+                                        <input type="checkbox" class="home" name="advanced" value="home"/>
+                                        <label>Home</label>
+
+                                        <input type="checkbox" class="group" name="advanced" value="group"/>
+                                        <label>Groups</label>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Search</button>
+                            </div>
                             </div>
                         </form>
                     </div>
@@ -125,14 +133,18 @@
                                        id="department">
                             </div>
                             <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Search</button>
                                 <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseEight"
                                    aria-expanded="false" aria-controls="collapseEight"> Advanced &#9662;</a>
                                 <div id="collapseEight" class="collapse" role="tabpanel" aria-labelledby="headingEight">
                                     <div class="card-body">
-                                        Placeholder because I am too lazy to make the checkboxes right now
+                                        <input type="checkbox" class="home" name="advanced" value="home"/>
+                                        <label>Home</label>
+
+                                        <input type="checkbox" class="group" name="advanced" value="group"/>
+                                        <label>Groups</label>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Search</button>
                             </div>
                         </form>
                     </div>
@@ -156,14 +168,18 @@
                                        id="id">
                             </div>
                             <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Search</button>
                                 <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseTen"
                                    aria-expanded="false" aria-controls="collapseTen"> Advanced &#9662;</a>
                                 <div id="collapseTen" class="collapse" role="tabpanel" aria-labelledby="headingTen">
                                     <div class="card-body">
-                                        Placeholder because I am too lazy to make the checkboxes right now
+                                        <input type="checkbox" class="home" name="advanced" value="home"/>
+                                        <label>Home</label>
+
+                                        <input type="checkbox" class="group" name="advanced" value="group"/>
+                                        <label>Groups</label>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Search</button>
                             </div>
                         </form>
                     </div>
@@ -186,23 +202,27 @@
                                 <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="phone"
                                        id="phone">
                             </div>
-                            <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseTwelve"
-                               aria-expanded="false" aria-controls="collapseTwelve"> Advanced &#9662;</a>
-                            <div id="collapseTwelve" class="collapse" role="tabpanel" aria-labelledby="headingTwelve">
-                                <div class="card-body">
-                                    Placeholder because I am too lazy to make the checkboxes right now
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                                <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseTwelve"
+                                   aria-expanded="false" aria-controls="collapseTwelve"> Advanced &#9662;</a>
+                                <div id="collapseTwelve" class="collapse" role="tabpanel" aria-labelledby="headingTwelve">
+                                    <div class="card-body">
+                                        <input type="checkbox" class="home" name="advanced" value="home"/>
+                                        <label>Home</label>
+
+                                        <input type="checkbox" class="group" name="advanced" value="group"/>
+                                        <label>Groups</label>
+                                    </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Search</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+        {% block results %}
+        {% endblock %}
     </div>
-<div>
-    {% block results %}
-    {% endblock %}
-</div>
-    <hr>
+<hr>
 {% endblock %}
