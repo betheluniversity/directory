@@ -38,6 +38,11 @@ a {
 }
 
 /* results.html styling */
+.column {
+    float: left;
+    min-width: 25%;
+}
+
 .h2 {
     padding-top: 15px;
 }

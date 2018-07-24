@@ -46,6 +46,7 @@ def directory_search():
         image_path = data[item]['image_path']
         po = data[item]['po']
         role = data[item]['role_category']
+        # once we get the api put in the rest of the stuff
         results.append({'last_name': last_name,
                         'first_name': first_name,
                         'image_path': image_path,
