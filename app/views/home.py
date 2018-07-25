@@ -20,12 +20,22 @@ class HomeView(FlaskView):
         first_name = data['first_name'].encode('utf-8')
 
         home = False
-        if data['home'] != '':
-            home = True
+        try:
+            if data['home']:
+                home = True
+        except:
+            pass
 
         group = False
-        if data['group'] != '':
-            group = True
+        try:
+            if data['group']:
+                group = True
+        except:
+            pass
+        both = False
+        if home and group:
+            both = True
+
         people = directory_search()
         result = []
 
@@ -93,12 +103,22 @@ class HomeView(FlaskView):
         username = data['username'].encode('utf-8')
 
         home = False
-        if data['home'] != '':
-            home = True
+        try:
+            if data['home']:
+                home = True
+        except:
+            pass
 
         group = False
-        if data['group'] != '':
-            group = True
+        try:
+            if data['group']:
+                group = True
+        except:
+            pass
+
+        both = False
+        if home and group:
+            both = True
 
         people = directory_search()
         result = []
@@ -124,12 +144,22 @@ class HomeView(FlaskView):
         email = data['email'].encode('utf-8')
 
         home = False
-        if data['home'] != '':
-            home = True
+        try:
+            if data['home']:
+                home = True
+        except:
+            pass
 
         group = False
-        if data['group'] != '':
-            group = True
+        try:
+            if data['group']:
+                group = True
+        except:
+            pass
+
+        both = False
+        if home and group:
+            both = True
 
         people = directory_search()
         result = []
@@ -155,12 +185,22 @@ class HomeView(FlaskView):
         dept = data['department'].encode('utf-8')
 
         home = False
-        if data['home'] != '':
-            home = True
+        try:
+            if data['home']:
+                home = True
+        except:
+            pass
 
         group = False
-        if data['group'] != '':
-            group = True
+        try:
+            if data['group']:
+                group = True
+        except:
+            pass
+
+        both = False
+        if home and group:
+            both = True
 
         people = directory_search()
         result = []
@@ -186,12 +226,22 @@ class HomeView(FlaskView):
         id = data['id'].encode('utf-8')
 
         home = False
-        if data['home'] != '':
-            home = True
+        try:
+            if data['home']:
+                home = True
+        except:
+            pass
 
         group = False
-        if data['group'] != '':
-            group = True
+        try:
+            if data['group']:
+                group = True
+        except:
+            pass
+
+        both = False
+        if home and group:
+            both = True
 
         people = directory_search()
         result = []
@@ -217,12 +267,22 @@ class HomeView(FlaskView):
         phone = data['phone'].encode('utf-8')
 
         home = False
-        if data['home'] != '':
-            home = True
+        try:
+            if data['home']:
+                home = True
+        except:
+            pass
 
         group = False
-        if data['group'] != '':
-            group = True
+        try:
+            if data['group']:
+                group = True
+        except:
+            pass
+
+        both = False
+        if home and group:
+            both = True
 
         people = directory_search()
         result = []
