@@ -18,6 +18,14 @@ class HomeView(FlaskView):
         data = request.form
         last_name = data['last_name'].encode('utf-8')
         first_name = data['first_name'].encode('utf-8')
+
+        home = False
+        if data['home'] != '':
+            home = True
+
+        group = False
+        if data['group'] != '':
+            group = True
         people = directory_search()
         result = []
 
@@ -83,6 +91,15 @@ class HomeView(FlaskView):
     def username_search(self):
         data = request.form
         username = data['username'].encode('utf-8')
+
+        home = False
+        if data['home'] != '':
+            home = True
+
+        group = False
+        if data['group'] != '':
+            group = True
+
         people = directory_search()
         result = []
 
@@ -105,6 +122,15 @@ class HomeView(FlaskView):
     def email_search(self):
         data = request.form
         email = data['email'].encode('utf-8')
+
+        home = False
+        if data['home'] != '':
+            home = True
+
+        group = False
+        if data['group'] != '':
+            group = True
+
         people = directory_search()
         result = []
 
@@ -127,6 +153,15 @@ class HomeView(FlaskView):
     def dept_search(self):
         data = request.form
         dept = data['department'].encode('utf-8')
+
+        home = False
+        if data['home'] != '':
+            home = True
+
+        group = False
+        if data['group'] != '':
+            group = True
+
         people = directory_search()
         result = []
 
@@ -149,6 +184,15 @@ class HomeView(FlaskView):
     def id_search(self):
         data = request.form
         id = data['id'].encode('utf-8')
+
+        home = False
+        if data['home'] != '':
+            home = True
+
+        group = False
+        if data['group'] != '':
+            group = True
+
         people = directory_search()
         result = []
 
@@ -171,6 +215,15 @@ class HomeView(FlaskView):
     def phone_search(self):
         data = request.form
         phone = data['phone'].encode('utf-8')
+
+        home = False
+        if data['home'] != '':
+            home = True
+
+        group = False
+        if data['group'] != '':
+            group = True
+
         people = directory_search()
         result = []
 
@@ -196,35 +249,3 @@ class HomeView(FlaskView):
             ratio = 102
 
         return ratio
-
-    @route("/test-this")
-    def testing_suite(self):
-        # This is the testing suite made for writing the files required to test all the searches for fuzzywuzzy
-        people = directory_search()
-        names = open('test_names.txt')
-        ratio = open('fuzzy_ratio.txt', 'w')
-        partial = open('fuzzy_partial_ratio.txt', 'w')
-        # opening the db connection and all the files for the tests
-
-        for item in names:
-            ratio.write("%s\n\n" % item)
-            partial.write("%s\n\n" % item)
-            # Writing names into all the files every loop
-
-            for row in people:
-                fn = row['first_name']
-
-                ratio_c = 0
-                partial_c = 0
-
-                ratio = fuzz.ratio(fn, item)
-                if ratio > 50:
-                    if ratio_c <= 85:
-                        ratio.write("%s, %s, %d" % (row['last_name'], row['first_name'], ratio))
-                        ratio_c += 1
-
-                ratio = fuzz.partial_ratio(fn, item)
-                if ratio > 50:
-                    if partial_c <= 85:
-                        partial.write("%s, %s, %d" % (row['last_name'], row['first_name'], ratio))
-                        partial_c += 1
