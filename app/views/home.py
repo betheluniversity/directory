@@ -32,6 +32,7 @@ class HomeView(FlaskView):
                 group = True
         except:
             pass
+
         both = False
         if home and group:
             both = True
