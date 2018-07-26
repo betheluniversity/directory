@@ -20,15 +20,35 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-4 column" style="padding-bottom: 1em;">
-                                    test
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-4 column" style="padding-bottom: 1em; min-width: 25%">
+                                    <ul>
+                                        <p>Last name, First name</p>
+                                        <p>ID</p>
+                                        <p>Username</p>
+                                        <p>Email</p>
+                                        <p>PO</p>
+                                    </ul>
                                 </div>
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-4 column" style="padding-bottom: 1em;">
-                                    second row test
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-4 column" style="padding-bottom: 1em;">
-                                    final row test
-                                </div>
+
+                                {% if group %}
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-4 column" style="padding-bottom: 1em; min-width: 25%">
+                                        <ul>
+                                            <li>Year</li>
+                                            <li>Major</li>
+                                            <li>Minor (if applicable)</li>
+                                            <li>Advisor</li>
+                                        </ul>
+                                    </div>
+                                {% endif %}
+
+                                {% if home %}
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-4 column" style="padding-bottom: 1em; min-width: 25%">
+                                        <ul>
+                                            <li>Home</li>
+                                            <li>Phone</li>
+                                        </ul>
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

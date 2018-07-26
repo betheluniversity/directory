@@ -46,57 +46,24 @@ class HomeView(FlaskView):
                          self.fuzzy(row['first_name'], row['last_name'], False, last_name))
 
                 if ratio >= 75:
-                    result.append({'first_name': row['first_name'],
-                                   'last_name': row['last_name'],
-                                   'ratio': ratio,
-                                   'image_path': row['image_path'],
-                                   'role': row['role'],
-                                   'po': row['po']})
+                    self.make_results(row, result, group, home, ratio)
 
         elif first_name != '' and last_name == '':  # called if first name and NOT last name are filled out
             for row in people:
                 ratio = self.fuzzy(row['first_name'], row['last_name'], True, first_name)
                 if ratio >= 75:
-                    result.append({'first_name': row['first_name'],
-                                   'last_name': row['last_name'],
-                                   'ratio': ratio,
-                                   'image_path': row['image_path'],
-                                   'role': row['role'],
-                                   'po': row['po']})
+                    self.make_results(row, result, group, home, ratio)
 
         elif last_name != '' and first_name == '':  # called if last name and NOT first name are filled out
             for row in people:
                 ratio = self.fuzzy(row['first_name'], row['last_name'], False, last_name)
                 if ratio >= 75:
-                    result.append({'first_name': row['first_name'],
-                                   'last_name': row['last_name'],
-                                   'ratio': ratio,
-                                   'image_path': row['image_path'],
-                                   'role': row['role'],
-                                   'po': row['po']})
+                    self.make_results(row, result, group, home, ratio)
 
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'], reverse=True)
 
         return render_template('results.html', **locals())
-
-    def fuzzy(self, first_name, last_name, fl, search):
-        if fl:
-            name = first_name
-        else:
-            name = last_name
-
-        if len(search.decode('utf-8')) <= 3:
-            ratio = fuzz.partial_ratio(name, search)
-        else:
-            ratio = fuzz.ratio(name, search)
-
-        if search in name:
-            ratio = 101
-        if search == name:
-            ratio = 102
-
-        return ratio
 
     @route('/', methods=['POST'])
     def username_search(self):
@@ -128,12 +95,7 @@ class HomeView(FlaskView):
             for row in people:
                 ratio = self.misc_fuzz(username, row['username'])
                 if ratio > 75:
-                    result.append({'first_name': row['first_name'],
-                                   'last_name': row['last_name'],
-                                   'ratio': ratio,
-                                   'image_path': row['image_path'],
-                                   'role': row['role'],
-                                   'po': row['po']})
+                    self.make_results(row, result, group, home)
 
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'])
@@ -169,12 +131,7 @@ class HomeView(FlaskView):
             for row in people:
                 ratio = self.misc_fuzz(email, row['email'])
                 if ratio > 75:
-                    result.append({'first_name': row['first_name'],
-                                   'last_name': row['last_name'],
-                                   'ratio': ratio,
-                                   'image_path': row['image_path'],
-                                   'role': row['role'],
-                                   'po': row['po']})
+                    self.make_results(row, result, group, home)
 
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'])
@@ -210,12 +167,7 @@ class HomeView(FlaskView):
             for row in people:
                 ratio = self.misc_fuzz(dept, row['department'])
                 if ratio > 75:
-                    result.append({'first_name': row['first_name'],
-                                   'last_name': row['last_name'],
-                                   'ratio': ratio,
-                                   'image_path': row['image_path'],
-                                   'role': row['role'],
-                                   'po': row['po']})
+                    self.make_results(row, result, group, home)
 
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'])
@@ -251,12 +203,7 @@ class HomeView(FlaskView):
             for row in people:
                 ratio = self.misc_fuzz(id, row['id'])
                 if ratio > 75:
-                    result.append({'first_name': row['first_name'],
-                                   'last_name': row['last_name'],
-                                   'ratio': ratio,
-                                   'image_path': row['image_path'],
-                                   'role': row['role'],
-                                   'po': row['po']})
+                    self.make_results(row, result, group, home)
 
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'])
@@ -281,10 +228,6 @@ class HomeView(FlaskView):
         except:
             pass
 
-        both = False
-        if home and group:
-            both = True
-
         people = directory_search()
         result = []
 
@@ -292,12 +235,7 @@ class HomeView(FlaskView):
             for row in people:
                 ratio = self.misc_fuzz(phone, row['phone'])
                 if ratio > 75:
-                    result.append({'first_name': row['first_name'],
-                                   'last_name': row['last_name'],
-                                   'ratio': ratio,
-                                   'image_path': row['image_path'],
-                                   'role': row['role'],
-                                   'po': row['po']})
+                    self.make_results(row, result, group, home)
 
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'])
@@ -310,3 +248,65 @@ class HomeView(FlaskView):
             ratio = 102
 
         return ratio
+
+    def fuzzy(self, first_name, last_name, fl, search):
+        if fl:
+            name = first_name
+        else:
+            name = last_name
+
+        if len(search.decode('utf-8')) <= 3:
+            ratio = fuzz.partial_ratio(name, search)
+        else:
+            ratio = fuzz.ratio(name, search)
+
+        if search in name:
+            ratio = 101
+        if search == name:
+            ratio = 102
+
+        return ratio
+
+    def make_results(self, row, result, group, home, ratio):
+        result.append({'last_name': row['last_name'],
+                       'ratio': ratio})
+        # if group and home:
+        #     result.append({'first_name': row['first_name'],
+        #                    'last_name': row['last_name'],
+        #                    'id': row['id'],
+        #                    'username': row['username'],
+        #                    'email': row['email'],
+        #                    'po': row['po'],
+        #                    'year': row['year'],
+        #                    'major': row['major'],
+        #                    'minor': row['minor'],
+        #                    'advisor': row['advisor'],
+        #                    'home': row['home'],
+        #                    'phone': row['phone']})
+        # elif group:
+        #     result.append({'first_name': row['first_name'],
+        #                    'last_name': row['last_name'],
+        #                    'id': row['id'],
+        #                    'username': row['username'],
+        #                    'email': row['email'],
+        #                    'po': row['po'],
+        #                    'year': row['year'],
+        #                    'major': row['major'],
+        #                    'minor': row['minor'],
+        #                    'advisor': row['advisor']})
+        # elif home:
+        #     result.append({'first_name': row['first_name'],
+        #                    'last_name': row['last_name'],
+        #                    'id': row['id'],
+        #                    'username': row['username'],
+        #                    'email': row['email'],
+        #                    'po': row['po'],
+        #                    'home': row['home'],
+        #                    'phone': row['phone']})
+        # else:
+        #     result.append({'first_name': row['first_name'],
+        #                    'last_name': row['last_name'],
+        #                    'id': row['id'],
+        #                    'username': row['username'],
+        #                    'email': row['email'],
+        #                    'po': row['po']})
