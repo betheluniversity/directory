@@ -41,15 +41,21 @@ def directory_search():
     call_cursor_bw.callproc('bth_websrv_api.web_directory', (result_cursor_bw,))
     data = get_results(result_cursor_bw.fetchall())
     for item in data:
+
         last_name = data[item]['last_name']
         first_name = data[item]['first_name']
         image_path = data[item]['image_path']
         po = data[item]['po']
         role = data[item]['role_category']
+        bu_id = data[item]['bu_id']
+        phone = data[item]['perm_phone']
         # once we get the api put in the rest of the stuff
+
         results.append({'last_name': last_name,
                         'first_name': first_name,
                         'image_path': image_path,
                         'po': po,
-                        'role': role})
+                        'role': role,
+                        'id': bu_id,
+                        'phone': phone})
     return results

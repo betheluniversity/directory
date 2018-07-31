@@ -22,21 +22,26 @@
 
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-4 column" style="padding-bottom: 1em; min-width: 25%">
                                     <ul>
-                                        <p>Last name, First name</p>
-                                        <p>ID</p>
-                                        <p>Username</p>
-                                        <p>Email</p>
-                                        <p>PO</p>
+                                        <p><strong>{{ row['last_name'] }}, {{ row['first_name'] }}</strong></p>
+                                        <p>{{ row['id'] }}</p>
+                                        <p>Username: {{ row['username'] }}</p>
+                                        <p>Email: {{ row['email'] }}</p>
+                                        {% if row['po'] %}
+                                            <p><strong>PO:</strong> {{ row['po'] }}</p>
+                                        {% endif %}
                                     </ul>
                                 </div>
 
                                 {% if group %}
                                     <div class="col-lg-2 col-md-2 col-sm-2 col-4 column" style="padding-bottom: 1em; min-width: 25%">
                                         <ul>
-                                            <p>Year</p>
-                                            <p>Major</p>
-                                            <p>Minor (if applicable)</p>
-                                            <p>Advisor</p>
+                                            <p>Year: {{ row['year'] }}</p>
+                                            <p>Major: {{ row['major'] }}</p>
+                                            {% if row['minor'] %}
+                                                <p>{{ row['minor'] }}</p>
+                                            {% endif %}
+                                            <p>Advisor: {{ row['advisor'] }}</p>
+                                            <p><strong>{{ row['role'] }}</strong></p>
                                         </ul>
                                     </div>
                                 {% endif %}
@@ -44,8 +49,8 @@
                                 {% if home %}
                                     <div class="col-lg-2 col-md-2 col-sm-2 col-4 column" style="padding-bottom: 1em; min-width: 25%">
                                         <ul>
-                                            <p>Home</p>
-                                            <p>Phone</p>
+                                            <p>Home: {{ row['home'] }}</p>
+                                            <p>{{ row['phone'] }}</p>
                                         </ul>
                                     </div>
                                 {% endif %}

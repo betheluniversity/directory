@@ -268,45 +268,52 @@ class HomeView(FlaskView):
         return ratio
 
     def make_results(self, row, result, group, home, ratio):
-        result.append({'last_name': row['last_name'],
-                       'ratio': ratio})
-        # if group and home:
-        #     result.append({'first_name': row['first_name'],
-        #                    'last_name': row['last_name'],
-        #                    'id': row['id'],
-        #                    'username': row['username'],
-        #                    'email': row['email'],
-        #                    'po': row['po'],
-        #                    'year': row['year'],
-        #                    'major': row['major'],
-        #                    'minor': row['minor'],
-        #                    'advisor': row['advisor'],
-        #                    'home': row['home'],
-        #                    'phone': row['phone']})
-        # elif group:
-        #     result.append({'first_name': row['first_name'],
-        #                    'last_name': row['last_name'],
-        #                    'id': row['id'],
-        #                    'username': row['username'],
-        #                    'email': row['email'],
-        #                    'po': row['po'],
-        #                    'year': row['year'],
-        #                    'major': row['major'],
-        #                    'minor': row['minor'],
-        #                    'advisor': row['advisor']})
-        # elif home:
-        #     result.append({'first_name': row['first_name'],
-        #                    'last_name': row['last_name'],
-        #                    'id': row['id'],
-        #                    'username': row['username'],
-        #                    'email': row['email'],
-        #                    'po': row['po'],
-        #                    'home': row['home'],
-        #                    'phone': row['phone']})
-        # else:
-        #     result.append({'first_name': row['first_name'],
-        #                    'last_name': row['last_name'],
-        #                    'id': row['id'],
-        #                    'username': row['username'],
-        #                    'email': row['email'],
-        #                    'po': row['po']})
+        if group and home:
+            result.append({'ratio': ratio,
+                           'first_name': row['first_name'],
+                           'last_name': row['last_name'],
+                           'id': row['id'],
+                           # 'username': row['username'],
+                           # 'email': row['email'],
+                           'po': row['po'],
+                           'role': row['role'],
+                           # 'year': row['year'],
+                           # 'major': row['major'],
+                           # 'minor': row['minor'],
+                           # 'advisor': row['advisor'],
+                           # 'home': row['home'],
+                           # 'phone': row['phone']
+                           })
+        elif group:
+            result.append({'ratio': ratio,
+                           'first_name': row['first_name'],
+                           'last_name': row['last_name'],
+                           'id': row['id'],
+                           # 'username': row['username'],
+                           # 'email': row['email'],
+                           'po': row['po'],
+                           'role': row['role'],
+                           # 'year': row['year'],
+                           # 'major': row['major'],
+                           # 'minor': row['minor'],
+                           # 'advisor': row['advisor']
+                           })
+        elif home:
+            result.append({'ratio': ratio,
+                           'first_name': row['first_name'],
+                           'last_name': row['last_name'],
+                           'id': row['id'],
+                           # 'username': row['username'],
+                           # 'email': row['email'],
+                           'po': row['po'],
+                           # 'home': row['home'],
+                           # 'phone': row['phone']
+                           })
+        else:
+            result.append({'ratio': ratio,
+                           'first_name': row['first_name'],
+                           'last_name': row['last_name'],
+                           'id': row['id'],
+                           # 'username': row['username'],
+                           # 'email': row['email'],
+                           'po': row['po']})
