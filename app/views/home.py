@@ -282,7 +282,7 @@ class HomeView(FlaskView):
                            # 'minor': row['minor'],
                            # 'advisor': row['advisor'],
                            # 'home': row['home'],
-                           # 'phone': row['phone']
+                           'phone': row['phone']
                            })
         elif group:
             result.append({'ratio': ratio,
@@ -307,7 +307,7 @@ class HomeView(FlaskView):
                            # 'email': row['email'],
                            'po': row['po'],
                            # 'home': row['home'],
-                           # 'phone': row['phone']
+                           'phone': row['phone']
                            })
         else:
             result.append({'ratio': ratio,
