@@ -13,7 +13,7 @@
                 </div>
                 <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                        <form role="form" action="{{ url_for('HomeView:fl_search') }}" method="POST">
+                        <form role="form" action="{{ url_for('HomeView:passage') }}" method="POST">
                             <div class="form-group">
                                 <label for="first_name">First Name:</label>
                                 <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="first_name"
@@ -54,7 +54,7 @@
                 </div>
                 <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
                     <div class="card-body">
-                        <form role="form" action="{{ url_for('HomeView:username_search') }}" method="POST">
+                        <form role="form" action="{{ url_for('HomeView:passage') }}" method="POST">
                             <div class="form-group">
                                 <label for="username">Username:</label>
                                 <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="username"
@@ -89,7 +89,7 @@
                 </div>
                 <div id="collapseFive" class="collapse" role="tabpanel" aria-labelledby="headingFive" data-parent="#accordion">
                     <div class="card-body">
-                        <form role="form" action="{{ url_for('HomeView:email_search') }}" method="POST">
+                        <form role="form" action="{{ url_for('HomeView:passage') }}" method="POST">
                             <div class="form-group">
                                 <label for="email">E-mail:</label>
                                 <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="email"
@@ -126,7 +126,7 @@
                 </div>
                 <div id="collapseSeven" class="collapse" role="tabpanel" aria-labelledby="headingSeven" data-parent="#accordion">
                     <div class="card-body">
-                        <form role="form" action="{{ url_for('HomeView:dept_search') }}" method="POST">
+                        <form role="form" action="{{ url_for('HomeView:passage') }}" method="POST">
                             <div class="form-group">
                                 <label for="department">Department:</label>
                                 <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="department"
@@ -140,9 +140,6 @@
                                     <div class="card-body">
                                         <input type="checkbox" class="home" name="home" value="home"/>
                                         <label>Home</label>
-
-                                        <input type="checkbox" class="group" name="group" value="group"/>
-                                        <label>Groups</label>
                                     </div>
                                 </div>
                             </div>
@@ -161,7 +158,7 @@
                 </div>
                 <div id="collapseNine" class="collapse" role="tabpanel" aria-labelledby="headingNine" data-parent="#accordion">
                     <div class="card-body">
-                        <form role="form" action="{{ url_for('HomeView:id_search') }}" method="POST">
+                        <form role="form" action="{{ url_for('HomeView:passage') }}" method="POST">
                             <div class="form-group">
                                 <label for="id">ID:</label>
                                 <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="id"
@@ -196,7 +193,7 @@
                 </div>
                 <div id="collapseEleven" class="collapse" role="tabpanel" aria-labelledby="headingEleven" data-parent="#accordion">
                     <div class="card-body">
-                        <form role="form" action="{{ url_for('HomeView:phone_search') }}" method="POST">
+                        <form role="form" action="{{ url_for('HomeView:passage') }}" method="POST">
                             <div class="form-group">
                                 <label for="phone">Phone Number:</label>
                                 <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="phone"
@@ -208,9 +205,6 @@
                                    aria-expanded="false" aria-controls="collapseTwelve"> Advanced &#9662;</a>
                                 <div id="collapseTwelve" class="collapse" role="tabpanel" aria-labelledby="headingTwelve">
                                     <div class="card-body">
-                                        <input type="checkbox" class="home" name="home" value="home"/>
-                                        <label>Home</label>
-
                                         <input type="checkbox" class="group" name="group" value="group"/>
                                         <label>Groups</label>
                                     </div>

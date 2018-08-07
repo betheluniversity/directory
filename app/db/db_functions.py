@@ -1,5 +1,6 @@
 from app.db.db_connection_bw import conn_bw
 from app import cache
+import re
 
 
 def get_results(result, label="", type=None):
@@ -23,12 +24,21 @@ def get_results(result, label="", type=None):
     return ret
 
 
+def get_splits(line):
+    rows = []
+
+    for item in line.split('|'):
+        rows.append(item)
+
+    return rows
+
 def portal_profile(username):
     call_cursor_bw = conn_bw.cursor()
     result_cursor_bw = conn_bw.cursor()
     call_cursor_bw.callproc('bth_portal_channel_api.bu_profile', (username, result_cursor_bw))
     r = result_cursor_bw.fetchall()
     return get_results(r)
+
 
 
 @cache.memoize(timeout=78494898989)
@@ -44,18 +54,49 @@ def directory_search():
 
         last_name = data[item]['last_name']
         first_name = data[item]['first_name']
-        image_path = data[item]['image_path']
-        po = data[item]['po']
-        role = data[item]['role_category']
+        housing = data[item]['housing_building_room'].encode('utf-8')
+        email = data[item]['email']
+        username = data[item]['username']
+        bu_po = data[item]['bu_po']
         bu_id = data[item]['bu_id']
-        phone = data[item]['perm_phone']
+        phone = data[item]['home_phone']
+        image_path = data[item]['photo']
+        udc = data[item]['udc_id']
+        addr_city = data[item]['addr_city']
+        addr_state = data[item]['addr_state']
+        addr_street1 = data[item]['addr_street1']
+        addr_street2 = data[item]['addr_street2']
+        addr_zip = data[item]['addr_zip']
+
+        # the next ones potentially have multiple, split by a '|'
+        bu_role = get_splits(data[item]['bu_role'])
+        department = get_splits(data[item]['dept'])
+        major = get_splits(data[item]['stu_majr'])
+        minor = get_splits(data[item]['stu_minr'])
+        college = get_splits(data[item]['stu_coll'])
+        title = get_splits(data[item]['title'])
+
         # once we get the api put in the rest of the stuff
 
         results.append({'last_name': last_name,
                         'first_name': first_name,
-                        'image_path': image_path,
-                        'po': po,
-                        'role': role,
+                        'housing': housing,
+                        'email': email,
+                        'username': username,
+                        'po': bu_po,
                         'id': bu_id,
-                        'phone': phone})
+                        'phone': phone,
+                        'image_path': image_path,
+                        'udc': udc,
+                        'addr_city': addr_city,
+                        'addr_state': addr_state,
+                        'addr_street1': addr_street1,
+                        'addr_street2': addr_street2,
+                        'role': bu_role,
+                        'department': department,
+                        'major': major,
+                        'minor': minor,
+                        'college': college,
+                        'title': title,
+                        'addr_zip': addr_zip})
     return results

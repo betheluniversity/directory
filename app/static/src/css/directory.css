@@ -47,6 +47,15 @@ a {
     padding-top: 15px;
 }
 
+p{
+    float: left;
+}
+
+.photo {
+    margin: center;
+    width: auto;
+}
+
 .spacer {
     border-left: 3px solid gray;
     height: 500 px;
@@ -56,9 +65,14 @@ a {
 .results {
     display: block;
     float: left;
-    min-width: 60%;
+    max-width: 60%;
     max-height: 3000px;
     overflow: auto;
+}
+
+img {
+    width: 100%;
+    height: auto;
 }
 
 @media (max-width: 100%) {
