@@ -38,6 +38,10 @@ a {
 }
 
 /* results.html styling */
+.advanced {
+    margin-right: 25px;
+}
+
 .column {
     float: left;
     min-width: 25%;

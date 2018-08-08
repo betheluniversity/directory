@@ -27,7 +27,11 @@ class HomeView(FlaskView):
 
         home = False
         group = False
+        student = False
+        faculty = False
 
+        # decoding the data from the form to pass into the methods
+        # first part is the checkboxes for advanced settings
         try:
             if data['home'].encode('utf-8') == 'home':
                 home = True
@@ -40,6 +44,19 @@ class HomeView(FlaskView):
         except:
             pass
 
+        try:
+            if data['student'].encode('utf-8') == 'student':
+                student = True
+        except:
+            pass
+
+        try:
+            if data['faculty'].encode('utf-8') == 'faculty':
+                faculty = True
+        except:
+            pass
+
+        # second part is the fields from the forms
         try:
             first_name = data['first_name'].encode('utf-8')
         except:
