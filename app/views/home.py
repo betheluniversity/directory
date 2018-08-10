@@ -92,7 +92,14 @@ class HomeView(FlaskView):
             pass
 
         if first_name != '' or last_name != '':
-            result = self.fl_search(first_name, last_name)
+            if (faculty and student) or (not faculty and not student):
+                option = 'both'
+            elif faculty and not student:
+                option = 'Faculty'
+            elif student and not faculty:
+                option = 'Student'
+
+            result = self.fl_search(first_name, last_name, option)
         elif username != '':
             result = self.username_search(username)
         elif email != '':
@@ -108,29 +115,53 @@ class HomeView(FlaskView):
 
         return render_template('results.html', **locals())
 
-    def fl_search(self, first_name, last_name):
+    def fl_search(self, first_name, last_name, option):  # option is the advanced settings for student/staff
         people = directory_search()
         result = []
 
         if first_name != '' and last_name != '':  # If both boxes are filled out, this will be the loop that is checked
             for row in people:
-                ratio = (self.fuzzy(row['first_name'], row['last_name'], True, first_name) +
-                         self.fuzzy(row['first_name'], row['last_name'], False, last_name))
+                check = False
+                if option == 'both':
+                    check = True
+                else:
+                    for role in row['role']:
+                        if role == option:
+                            check = True
+                if check:
+                    ratio = (self.fuzzy(row['first_name'], row['last_name'], True, first_name) +
+                             self.fuzzy(row['first_name'], row['last_name'], False, last_name))
 
-                if ratio >= 75:
-                    self.make_results(row, result, ratio)
+                    if ratio >= 75:
+                        self.make_results(row, result, ratio)
 
         elif first_name != '' and last_name == '':  # called if first name and NOT last name are filled out
             for row in people:
-                ratio = self.fuzzy(row['first_name'], row['last_name'], True, first_name)
-                if ratio >= 75:
-                    self.make_results(row, result, ratio)
+                check = False
+                if option == 'both':
+                    check = True
+                else:
+                    for role in row['role']:
+                        if role == option:
+                            check = True
+                if check:
+                    ratio = self.fuzzy(row['first_name'], row['last_name'], True, first_name)
+                    if ratio >= 75:
+                        self.make_results(row, result, ratio)
 
         elif last_name != '' and first_name == '':  # called if last name and NOT first name are filled out
             for row in people:
-                ratio = self.fuzzy(row['first_name'], row['last_name'], False, last_name)
-                if ratio >= 75:
-                    self.make_results(row, result, ratio)
+                check = False
+                if option == 'both':
+                    check = True
+                else:
+                    for role in row['role']:
+                        if role == option:
+                            check = True
+                if check:
+                    ratio = self.fuzzy(row['first_name'], row['last_name'], False, last_name)
+                    if ratio >= 75:
+                        self.make_results(row, result, ratio)
 
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'], reverse=True)
@@ -148,7 +179,7 @@ class HomeView(FlaskView):
                     self.make_results(row, result, ratio)
 
         result.sort(key=lambda i: i['last_name'])
-        result.sort(key=lambda i: i['ratio'])
+        result.sort(key=lambda i: i['ratio'], reverse=True)
 
         return result
 
@@ -163,7 +194,7 @@ class HomeView(FlaskView):
                     self.make_results(row, result, ratio)
 
         result.sort(key=lambda i: i['last_name'])
-        result.sort(key=lambda i: i['ratio'])
+        result.sort(key=lambda i: i['ratio'], reverse=True)
 
         return result
 
@@ -178,7 +209,7 @@ class HomeView(FlaskView):
                     self.make_results(row, result, ratio)
 
         result.sort(key=lambda i: i['last_name'])
-        result.sort(key=lambda i: i['ratio'])
+        result.sort(key=lambda i: i['ratio'], reverse=True)
 
         return result
 
@@ -193,7 +224,7 @@ class HomeView(FlaskView):
                     self.make_results(row, result, ratio)
 
         result.sort(key=lambda i: i['last_name'])
-        result.sort(key=lambda i: i['ratio'])
+        result.sort(key=lambda i: i['ratio'], reverse=True)
 
         return result
 
@@ -208,7 +239,7 @@ class HomeView(FlaskView):
                     self.make_results(row, result, ratio)
 
         result.sort(key=lambda i: i['last_name'])
-        result.sort(key=lambda i: i['ratio'])
+        result.sort(key=lambda i: i['ratio'], reverse=True)
 
         return result
 
