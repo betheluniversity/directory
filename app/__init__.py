@@ -12,10 +12,17 @@ cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 app.jinja_env.globals.update(now=datetime.datetime.now())
 
 from app.db import db_functions as db
+from directory_controller import DirectoryController
 
 from app.views.home import HomeView
 
 HomeView.register(app, route_base='/')
+
+
+@app.before_request
+def before_request():
+    base = DirectoryController()
+    base.before_request()
 
 
 @app.route('/logout', methods=['GET'])

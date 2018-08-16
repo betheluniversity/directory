@@ -34,7 +34,7 @@
 }
 
 a {
-    color: #007bff;
+    color: #103461;
 }
 
 /* results.html styling */
@@ -58,12 +58,6 @@ p{
 .photo {
     margin: center;
     width: auto;
-}
-
-.spacer {
-    border-left: 3px solid gray;
-    height: 500 px;
-    position: center;
 }
 
 .results {
