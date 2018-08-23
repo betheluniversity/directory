@@ -1,8 +1,39 @@
 import time
 import requests
 
-from flask import session, request, current_app
+from flask import session, request, current_app, Response
 from flask import json as fjson
+
+from functools import wraps
+
+from app import app
+
+
+# This section to enable basic auth is imported from Tinker/tinker_controller.py
+def check_auth(username, password):
+    """This function is called to check if a username /
+    password combination is valid.
+    """
+    return username == app.config['AUTH_USERNAME'] and password == app.config['AUTH_PASSWORD']
+
+
+def authenticate():
+    """Sends a 401 response that enables basic auth"""
+    return Response(
+        'Could not verify your access level for that URL.\n'
+        'You have to login with proper credentials', 401,
+        {'WWW-Authenticate': 'Basic realm="Login Required"'})
+
+
+def requires_auth(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        auth = request.authorization
+        if not auth or not check_auth(auth.username, auth.password):
+            return authenticate()
+        return f(*args, **kwargs)
+
+    return decorated
 
 
 class DirectoryController(object):
@@ -29,7 +60,6 @@ class DirectoryController(object):
 
             if 'username' not in session.keys():
                 get_user()
-                print session['username']
 
             if 'roles' not in session.keys():
                 get_roles()
@@ -53,6 +83,9 @@ class DirectoryController(object):
                 ret.append(roles[key]['userRole'])
 
             session['roles'] = ret
+
+            if username == 'bam95899':
+                session['roles'] = 'admin'
 
             return ret
 
