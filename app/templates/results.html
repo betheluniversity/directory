@@ -1,5 +1,4 @@
 {% extends "index.html" %}
-<link rel="stylesheet" href="directory.css">
 {% block results %}
     <div class="card-view col-lg-8 results">
         <h2 style="padding-top: 11px;">Results</h2>
@@ -7,124 +6,122 @@
             <p><strong>We couldn't find anything matching your search</strong></p>
         {% else %}
             {% for row in result %}
-                <div class="card bg-light mb-3" style="margin-top: 1em;">
-                    <div class="card-block">
-                        <div class="card-body">
-                            <div class="row">
-                                {% if row['image_path'] == '' %}
-                                    <div class="col-lg-2 col-md-2 col-sm-2 col-4" style="padding-bottom: 1em;">
-                                        <div class="card-text" style="height: 114px">
-                                            <div class="fa fa-stack fa-2x" style="margin: auto; width: 100%; padding-top: 1em">
-                                                <i class="fa fa-circle fa-stack-2x" style="color: #bbb; "></i>
-                                                <i class="fa fa-user fa-stack-1x fa-inverse" ></i>
-                                            </div>
+                <div class="card bg-light mb-3 cards">
+                    <div class="card-block cards">
+                        <div class="card-body cards">
+                            {% if row['image_path'] == '' %}
+                                <div class="photo">
+                                    <div class="card-text" style="height: 114px">
+                                        <div class="fa fa-stack fa-2x" style="margin: auto; width: 100%; padding-top: 1em">
+                                            <i class="fa fa-circle fa-stack-2x" style="color: #bbb; "></i>
+                                            <i class="fa fa-user fa-stack-1x fa-inverse" ></i>
                                         </div>
                                     </div>
-                                {% else %}
-                                    <div class="photo" style="height:216px;">
-                                        <img src="{{ row['image_path'] }}" alt="Profile Photo" height="216" width="193">
-                                    </div>
-                                {% endif %}
+                                </div>
+                            {% else %}
+                                <div class="column">
+                                    <img src="{{ row['image_path'] }}" alt="Profile Photo" id="image_path">
+                                </div>
+                            {% endif %}
 
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-4 column" style="padding-bottom: 1em; min-width: 25%">
+                            <div class="column">
+                                <ul>
+                                    {% if row['last_name'] != '' and row['first_name'] != '' %}
+                                        <p><strong>{{ row['last_name'] }}, {{ row['first_name'] }}</strong></p>
+                                    {% endif %}
+
+                                    {% if row['id'] != '' %}
+                                        <p>{{ row['id'] }}</p>
+                                    {% endif %}
+
+                                    {% if row['username'] != '' %}
+                                        <p>{{ row['username'] }}</p>
+                                    {% endif %}
+
+                                    {% if row['email'] != '' %}
+                                        <p>{{ row['email'] }}</p>
+                                    {% endif %}
+
+                                    {% if row['po'] != '' %}
+                                        <p><strong>PO:</strong> {{ row['po'] }}</p>
+                                    {% endif %}
+                                </ul>
+                            </div>
+
+                            {% if group %}
+                                <div class="column">
                                     <ul>
-                                        {% if row['last_name'] != '' and row['first_name'] != '' %}
-                                            <p><strong>{{ row['last_name'] }}, {{ row['first_name'] }}</strong></p>
+                                        {% if row['college']|length > 0 %}
+                                            <p>
+                                                {% for i in range(0, row['college']|length) %}
+                                                    {% if i != '' %}
+                                                        {{ row['college'][i] }}
+                                                        {% if i < row['college']|length - 1 %}
+                                                            |
+                                                        {% endif %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </p>
                                         {% endif %}
 
-                                        {% if row['id'] != '' %}
-                                            <p>{{ row['id'] }}</p>
+                                        {% if row['major']|length > 0 %}
+                                            <p>
+                                                {% for i in range(0, row['major']|length) %}
+                                                    {% if i != '' %}
+                                                        {{ row['major'][i] }}
+                                                        {% if i < row['major']|length - 1 %}
+                                                            |
+                                                        {% endif %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </p>
                                         {% endif %}
 
-                                        {% if row['usename'] != '' %}
-                                            <p>{{ row['username'] }}</p>
+                                        {% if row['minor']|length > 0 %}
+                                            <p>
+                                                {% for i in range(0, row['minor']|length) %}
+                                                    {% if i != '' %}
+                                                        {{ row['minor'][i] }}
+                                                        {% if i < row['minor']|length - 1 %}
+                                                            |
+                                                        {% endif %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </p>
                                         {% endif %}
 
-                                        {% if row['email'] != '' %}
-                                            <p>{{ row['email'] }}</p>
-                                        {% endif %}
-
-                                        {% if row['po'] != '' %}
-                                            <p><strong>PO:</strong> {{ row['po'] }}</p>
+                                        {% if row['role']|length > 0 %}
+                                            <p>
+                                                {% for i in range(0, row['role']|length) %}
+                                                    {% if i != '' %}
+                                                        <strong>{{ row['role'][i] }}</strong>
+                                                        {% if i < row['role']|length - 1 %}
+                                                            |
+                                                        {% endif %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </p>
                                         {% endif %}
                                     </ul>
                                 </div>
+                            {% endif %}
 
-                                {% if group %}
-                                    <div class="col-lg-2 col-md-2 col-sm-2 col-4 column" style="padding-bottom: 1em; min-width: 25%">
-                                        <ul id="group">
-                                            {% if row['college']|length > 0 %}
-                                                <p>
-                                                    {% for i in range(0, row['college']|length) %}
-                                                        {% if i != '' %}
-                                                            {{ row['college'][i] }}
-                                                            {% if i < row['college']|length - 1 %}
-                                                                |
-                                                            {% endif %}
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                </p>
+                            {% if home %}
+                                <div class="column">
+                                    <ul>
+                                        {% if row['addr_state'] != '' and row['addr_street1'] != '' and row['addr_city'] != '' and row['addr_zip'] != '' %}
+                                            <p>{{ row['addr_street1'] }} {{ row['addr_city'] }}, {{ row['addr_state'] }} {{ row['addr_zip'] }} </p>
+                                            {% if row['addr_street2'] != '' %}
+                                                <p>{{ row['addr_street2'] }}</p>
                                             {% endif %}
+                                        {% endif %}
 
-                                            {% if row['major']|length > 0 %}
-                                                <p>
-                                                    {% for i in range(0, row['major']|length) %}
-                                                        {% if i != '' %}
-                                                            {{ row['major'][i] }}
-                                                            {% if i < row['major']|length - 1 %}
-                                                                |
-                                                            {% endif %}
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                </p>
-                                            {% endif %}
-
-                                            {% if row['minor']|length > 0 %}
-                                                <p>
-                                                    {% for i in range(0, row['minor']|length) %}
-                                                        {% if i != '' %}
-                                                            {{ row['minor'][i] }}
-                                                            {% if i < row['minor']|length - 1 %}
-                                                                |
-                                                            {% endif %}
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                </p>
-                                            {% endif %}
-
-                                            {% if row['role']|length > 0 %}
-                                                <p>
-                                                    {% for i in range(0, row['role']|length) %}
-                                                        {% if i != '' %}
-                                                            <strong>{{ row['role'][i] }}</strong>
-                                                            {% if i < row['role']|length - 1 %}
-                                                                |
-                                                            {% endif %}
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                </p>
-                                            {% endif %}
-                                        </ul>
-                                    </div>
-                                {% endif %}
-
-                                {% if home %}
-                                    <div class="col-lg-2 col-md-2 col-sm-2 col-4 column" style="padding-bottom: 1em; min-width: 25%">
-                                        <ul>
-                                            {% if row['addr_state'] != '' and row['addr_street1'] != '' and row['addr_city'] != '' and row['addr_zip'] != '' %}
-                                                <p>{{ row['addr_street1'] }} {{ row['addr_city'] }}, {{ row['addr_state'] }} {{ row['addr_zip'] }} </p>
-                                                {% if row['addr_street2'] != '' %}
-                                                    <p>{{ row['addr_street2'] }}</p>
-                                                {% endif %}
-                                            {% endif %}
-
-                                            {% if row['phone'] != '' %}
-                                                <p>{{ row['phone'] }}</p>
-                                            {% endif %}
-                                        </ul>
-                                    </div>
-                                {% endif %}
-                            </div>
+                                        {% if row['phone'] != '' %}
+                                            <p>{{ row['phone'] }}</p>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

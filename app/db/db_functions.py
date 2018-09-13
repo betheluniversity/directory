@@ -32,13 +32,13 @@ def get_splits(line):
 
     return rows
 
+
 def portal_profile(username):
     call_cursor_bw = conn_bw.cursor()
     result_cursor_bw = conn_bw.cursor()
     call_cursor_bw.callproc('bth_portal_channel_api.bu_profile', (username, result_cursor_bw))
     r = result_cursor_bw.fetchall()
     return get_results(r)
-
 
 
 @cache.memoize(timeout=78494898989)
@@ -75,8 +75,6 @@ def directory_search():
         minor = get_splits(data[item]['stu_minr'])
         college = get_splits(data[item]['stu_coll'])
         title = get_splits(data[item]['title'])
-
-        # once we get the api put in the rest of the stuff
 
         results.append({'last_name': last_name,
                         'first_name': first_name,

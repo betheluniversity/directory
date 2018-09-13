@@ -91,7 +91,7 @@ class HomeView(FlaskView):
         except:
             pass
 
-        if first_name != '' or last_name != '':
+        if first_name != '' or last_name != '':  # checking which people to show for name search
             if (faculty and student) or (not faculty and not student):
                 option = 'both'
             elif faculty and not student:
@@ -100,18 +100,29 @@ class HomeView(FlaskView):
                 option = 'Student'
 
             result = self.fl_search(first_name, last_name, option)
+
         elif username != '':
             result = self.username_search(username)
+
         elif email != '':
             result = self.email_search(email)
+
         elif department != '':
             result = self.dept_search(department)
+
         elif bu_id != '':
             group = True
             result = self.id_search(bu_id)
-        elif phone != '':
-            result = self.phone_search(phone)
-            home = True
+
+        show_all = False
+        for role in session['roles']:
+            if role == 'STAFF' or 'FACULTY':
+                show_all = True
+
+        if not show_all:
+            for row in result:
+                if session['username'] != row['username']:
+                    row['id'] = ''
 
         return render_template('results.html', **locals())
 
@@ -220,21 +231,6 @@ class HomeView(FlaskView):
         if bu_id != '':
             for row in people:
                 ratio = self.misc_fuzz(bu_id, row['id'])
-                if ratio > 75:
-                    self.make_results(row, result, ratio)
-
-        result.sort(key=lambda i: i['last_name'])
-        result.sort(key=lambda i: i['ratio'], reverse=True)
-
-        return result
-
-    def phone_search(self, phone):
-        people = directory_search()
-        result = []
-
-        if phone != '':
-            for row in people:
-                ratio = self.misc_fuzz(phone, row['phone'])
                 if ratio > 75:
                     self.make_results(row, result, ratio)
 

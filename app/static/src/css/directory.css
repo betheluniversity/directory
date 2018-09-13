@@ -15,15 +15,16 @@
 
 .footer {
     border-top: 1px solid #eee;
-    padding: 3em 1em;
 }
 
 .home {
-    margin-right: 100px;
+}
+
+.row {
+    margin-right: 0px;
 }
 
 .search {
-    position: fixed;
     padding: 0;
     margin: 0;
     display: block;
@@ -38,39 +39,35 @@ a {
 }
 
 /* results.html styling */
+#image_path {
+    width: auto;
+    height: 215px;
+    margin-top: -117px;
+}
 .advanced {
     margin-right: 25px;
 }
 
+.cards {
+    max-height: 300px;
+}
+
 .column {
-    float: left;
-    min-width: 25%;
+    margin-left: 1em;
+    margin-right: 1em;
+    display: inline-block;
 }
 
 .h2 {
     padding-top: 15px;
 }
 
-p{
-    float: left;
-}
-
-.photo {
-    margin: center;
-    width: auto;
-}
-
 .results {
     display: block;
     float: left;
-    max-width: 60%;
+    width: auto;
     max-height: 3000px;
     overflow: auto;
-}
-
-img {
-    width: 100%;
-    height: auto;
 }
 
 @media (max-width: 100%) {
