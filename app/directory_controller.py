@@ -33,6 +33,9 @@ class DirectoryController(object):
             if 'roles' not in session.keys():
                 get_roles()
 
+            if 'all_id' not in session.keys():
+                get_all_id()
+
         def get_user():
             if current_app.config['ENVIRON'] == 'prod':
                 username = request.environ.get('REMOTE_USER')
@@ -57,5 +60,11 @@ class DirectoryController(object):
                 session['roles'] = 'admin'
 
             return ret
+
+        def get_all_id():
+            session['all_id'] = 'false'
+            for role in session['roles']:
+                if role == 'staff' or role == 'faculty':
+                    session['all_id'] = 'true'
 
         init_user()

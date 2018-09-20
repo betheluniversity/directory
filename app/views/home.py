@@ -30,7 +30,7 @@ class HomeView(FlaskView):
         student = False
         faculty = False
 
-        # decoding the data from the form to pass into the methods
+        # changing the data from unicode to strings to compare
         # first part is the checkboxes for advanced settings
         try:
             if data['home'].encode('utf-8') == 'home':

@@ -30,8 +30,14 @@
                                         <p><strong>{{ row['last_name'] }}, {{ row['first_name'] }}</strong></p>
                                     {% endif %}
 
-                                    {% if row['id'] != '' %}
-                                        <p>{{ row['id'] }}</p>
+                                    {% if session['all_id'] == 'true' %}
+                                        {% if row['id'] != '' %}
+                                    <p><strong>ID: </strong>{{ row['id'] }}</p>
+                                        {% endif %}
+                                    {% elif row['username'] == session['username'] %}
+                                        {% if row['id'] != '' %}
+                                            <p><strong>ID: </strong>{{ row['id'] }}</p>
+                                        {% endif %}
                                     {% endif %}
 
                                     {% if row['username'] != '' %}
