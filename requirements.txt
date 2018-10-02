@@ -9,3 +9,4 @@ requests
 fuzzywuzzy
 Flask-Caching
 python-Levenshtein 
+werkzeug

@@ -2,130 +2,101 @@ from flask import Flask, render_template, request, session
 from flask_classy import FlaskView, route
 
 from fuzzywuzzy import fuzz
+from werkzeug.exceptions import BadRequestKeyError
 
 from app.db.db_functions import directory_search
 
 
-class HomeView(FlaskView):
+class View(FlaskView):
     def __init__(self):
         pass
 
     def index(self):
         return render_template('index.html', **locals())
 
+    @route('/profile', methods=['GET'])
+    def make_profile(self):
+        # profile is in the session keys
+        return render_template('profile.html', **locals())
+
     @route('/', methods=['POST'])
     def passage(self):
-        data = request.form
+        data = self.encode_data(request.form.to_dict())
 
-        first_name = ''
-        last_name = ''
-        username = ''
-        email = ''
-        department = ''
-        bu_id = ''
-        phone = ''
+        if data['first_name'] != '' or data['last_name'] != '':  # checking which people to show for name search
+            if data['faculty'] != '' and data['student'] == '':
+                option = 'faculty'  # showing just staff/faculty results
+            elif data['student'] != '' and data['faculty'] == '':
+                option = 'student'  # showing just student results
+            else:
+                option = 'both'  # showing all results
 
-        home = False
-        group = False
-        student = False
-        faculty = False
+            result = self.fl_search(data['first_name'], data['last_name'], option)
 
-        # changing the data from unicode to strings to compare
-        # first part is the checkboxes for advanced settings
-        try:
-            if data['home'].encode('utf-8') == 'home':
-                home = True
-        except:
-            pass
+        elif data['username'] != '':
+            result = self.username_search(data['username'])
 
-        try:
-            if data['group'].encode('utf-8') == 'group':
-                group = True
-        except:
-            pass
+        elif data['email'] != '':
+            result = self.email_search(data['email'])
 
-        try:
-            if data['student'].encode('utf-8') == 'student':
-                student = True
-        except:
-            pass
+        elif data['department'] != '':
+            result = self.dept_search(data['department'])
 
-        try:
-            if data['faculty'].encode('utf-8') == 'faculty':
-                faculty = True
-        except:
-            pass
-
-        # second part is the fields from the forms
-        try:
-            first_name = data['first_name'].encode('utf-8')
-        except:
-            pass
-        try:
-            last_name = data['last_name'].encode('utf-8')
-        except:
-            pass
-
-        try:
-            username = data['username'].encode('utf-8')
-        except:
-            pass
-
-        try:
-            email = data['email'].encode('utf-8')
-        except:
-            pass
-
-        try:
-            department = data['department'].encode('utf-8')
-        except:
-            pass
-
-        try:
-            bu_id = data['id'].encode('utf-8')
-        except:
-            pass
-
-        try:
-            phone = data['phone'].encode('utf-8')
-        except:
-            pass
-
-        if first_name != '' or last_name != '':  # checking which people to show for name search
-            if (faculty and student) or (not faculty and not student):
-                option = 'both'
-            elif faculty and not student:
-                option = 'Faculty'
-            elif student and not faculty:
-                option = 'Student'
-
-            result = self.fl_search(first_name, last_name, option)
-
-        elif username != '':
-            result = self.username_search(username)
-
-        elif email != '':
-            result = self.email_search(email)
-
-        elif department != '':
-            result = self.dept_search(department)
-
-        elif bu_id != '':
+        elif data['bu_id'] != '':
             group = True
-            result = self.id_search(bu_id)
-
-        show_all = False
-        for role in session['roles']:
-            if role == 'STAFF' or 'FACULTY':
-                show_all = True
-
-        if not show_all:
-            for row in result:
-                if session['username'] != row['username']:
-                    row['id'] = ''
+            result = self.id_search(data['bu_id'])
 
         return render_template('results.html', **locals())
 
+    def encode_data(self, data):  # method to encode unicode to standard utf-8 charset
+        # Bruteforcing this because I HAVE to try every. single. line.
+        # If BadRequestKeyErrors can be mass checked, I don't know how
+        try:
+            data['home'] = data['home'].encode('utf-8')
+        except (BadRequestKeyError, KeyError):
+            pass
+        try:
+            data['group'] = data['group'].encode('utf-8')
+        except (BadRequestKeyError, KeyError):
+            pass
+        try:
+            data['student'] = data['student'].encode('utf-8')
+        except (BadRequestKeyError, KeyError):
+            data['student'] = ''
+        try:
+            data['faculty'] = data['faculty'].encode('utf-8')
+        except (BadRequestKeyError, KeyError):
+            data['faculty'] = ''
+
+        # second part is the fields from the forms
+        try:
+            data['first_name'] = data['first_name'].encode('utf-8')
+        except (BadRequestKeyError, KeyError):
+            pass
+        try:
+            data['last_name'] = data['last_name'].encode('utf-8')
+        except (BadRequestKeyError, KeyError):
+            pass
+        try:
+            data['username'] = data['username'].encode('utf-8')
+        except (BadRequestKeyError, KeyError):
+            pass
+        try:
+            data['email'] = data['email'].encode('utf-8')
+        except (BadRequestKeyError, KeyError):
+            pass
+        try:
+            data['department'] = data['department'].encode('utf-8')
+        except (BadRequestKeyError, KeyError):
+            pass
+        try:
+            data['bu_id'] = data['bu_id'].encode('utf-8')
+        except (BadRequestKeyError, KeyError):
+            pass
+
+        return data
+
+    # first and last name search. Holds the details and logic surrounding the first and last name searches
     def fl_search(self, first_name, last_name, option):  # option is the advanced settings for student/staff
         people = directory_search()
         result = []
@@ -140,8 +111,8 @@ class HomeView(FlaskView):
                         if role == option:
                             check = True
                 if check:
-                    ratio = (self.fuzzy(row['first_name'], row['last_name'], True, first_name) +
-                             self.fuzzy(row['first_name'], row['last_name'], False, last_name))
+                    ratio = (self.fl_fuzzy(row['first_name'], row['last_name'], True, first_name) +
+                             self.fl_fuzzy(row['first_name'], row['last_name'], False, last_name))
 
                     if ratio >= 75:
                         self.make_results(row, result, ratio)
@@ -156,7 +127,7 @@ class HomeView(FlaskView):
                         if role == option:
                             check = True
                 if check:
-                    ratio = self.fuzzy(row['first_name'], row['last_name'], True, first_name)
+                    ratio = self.fl_fuzzy(row['first_name'], row['last_name'], True, first_name)
                     if ratio >= 75:
                         self.make_results(row, result, ratio)
 
@@ -170,7 +141,7 @@ class HomeView(FlaskView):
                         if role == option:
                             check = True
                 if check:
-                    ratio = self.fuzzy(row['first_name'], row['last_name'], False, last_name)
+                    ratio = self.fl_fuzzy(row['first_name'], row['last_name'], False, last_name)
                     if ratio >= 75:
                         self.make_results(row, result, ratio)
 
@@ -179,13 +150,14 @@ class HomeView(FlaskView):
 
         return result
 
+    # Username search executes, creates, and formats the username searches
     def username_search(self, username):
         people = directory_search()
         result = []
 
         if username != '':
             for row in people:
-                ratio = self.misc_fuzz(username, row['username'])
+                ratio = self.other_fuzzy(username, row['username'])
                 if ratio > 75:
                     self.make_results(row, result, ratio)
 
@@ -194,13 +166,14 @@ class HomeView(FlaskView):
 
         return result
 
+    # Email search, executes, creates, and formats the email search and results
     def email_search(self, email):
         people = directory_search()
         result = []
 
         if email != '':
             for row in people:
-                ratio = self.misc_fuzz(email, row['email'])
+                ratio = self.other_fuzzy(email, row['email'])
                 if ratio > 75:
                     self.make_results(row, result, ratio)
 
@@ -209,13 +182,14 @@ class HomeView(FlaskView):
 
         return result
 
+    # department search, subject to change
     def dept_search(self, department):
         people = directory_search()
         result = []
 
         if department != '':
             for row in people:
-                ratio = self.misc_fuzz(department, row['department'])
+                ratio = self.other_fuzzy(department, row['department'])
                 if ratio > 75:
                     self.make_results(row, result, ratio)
 
@@ -224,13 +198,15 @@ class HomeView(FlaskView):
 
         return result
 
+    # id search, only visible to those whose roles allow it
+    # does the same as the other search functions
     def id_search(self, bu_id):
         people = directory_search()
         result = []
 
         if bu_id != '':
             for row in people:
-                ratio = self.misc_fuzz(bu_id, row['id'])
+                ratio = self.other_fuzzy(bu_id, row['id'])
                 if ratio > 75:
                     self.make_results(row, result, ratio)
 
@@ -239,14 +215,15 @@ class HomeView(FlaskView):
 
         return result
 
-    def fuzzy(self, first_name, last_name, fl, search):
-        if fl:
+    # Fuzzy method for first and last names, contains some extra logic
+    def fl_fuzzy(self, first_name, last_name, fl, search):
+        if fl:  # simpler logic to decide which name is being searched, first or last
             name = first_name
         else:
             name = last_name
 
-        if len(search.decode('utf-8')) <= 3:
-            ratio = fuzz.partial_ratio(name, search)
+        if len(search.decode('utf-8')) <= 3:  # above logic is so this can blanket the rest of the fuzzy comparison
+            ratio = fuzz.partial_ratio(name, search)  # also utilizes partial ratio instead of just fuzz.ratio
         else:
             ratio = fuzz.ratio(name, search)
 
@@ -257,7 +234,7 @@ class HomeView(FlaskView):
 
         return ratio
 
-    def misc_fuzz(self, search, key):
+    def other_fuzzy(self, search, key):  # much simpler fuzz method to use for things other than first or last name
         ratio = fuzz.ratio(search, key)
         if search in key:
             ratio = 101
@@ -266,6 +243,7 @@ class HomeView(FlaskView):
 
         return ratio
 
-    def make_results(self, row, result, ratio):
+    # only called if the fuzz ratio surpasses a certain threshold
+    def make_results(self, row, result, ratio):  # just creates a dictionary for ratio
         row['ratio'] = ratio
         result.append(row)

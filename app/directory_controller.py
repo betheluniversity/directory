@@ -4,6 +4,8 @@ import requests
 from flask import session, request, current_app
 from flask import json as fjson
 
+from app.db.db_functions import portal_profile
+
 
 class DirectoryController(object):
     def __init__(self):
@@ -21,20 +23,17 @@ class DirectoryController(object):
                 day_is_passed = True
                 session['session_time'] = time.time()
 
-            # if not production, then clear our session variables on each call
-            if (not session.get('admin_viewer', False)) and (dev or day_is_passed):
-                for key in ['username', 'groups', 'roles', 'top_nav', 'user_email', 'name']:
-                    if key in session.keys():
-                        session.pop(key, None)
-
             if 'username' not in session.keys():
                 get_user()
 
             if 'roles' not in session.keys():
                 get_roles()
 
+            if 'profile' not in session.keys():
+                session['profile'] = portal_profile(session['username'])
+
             if 'all_id' not in session.keys():
-                get_all_id()
+                show_all_id()
 
         def get_user():
             if current_app.config['ENVIRON'] == 'prod':
@@ -61,7 +60,7 @@ class DirectoryController(object):
 
             return ret
 
-        def get_all_id():
+        def show_all_id():
             session['all_id'] = 'false'
             for role in session['roles']:
                 if role == 'staff' or role == 'faculty':

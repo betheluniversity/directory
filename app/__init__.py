@@ -14,9 +14,9 @@ app.jinja_env.globals.update(now=datetime.datetime.now())
 from app.db import db_functions as db
 from directory_controller import DirectoryController
 
-from app.views.home import HomeView
+from app.views.home import View
 
-HomeView.register(app, route_base='/')
+View.register(app, route_base='/')
 
 
 @app.before_request

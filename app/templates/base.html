@@ -23,10 +23,10 @@
                 <i class="fa fa-user fa-stack-1x fa-inverse"></i>
             </span>
             <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #ffffff">
-                <span class="u-fs14 d-none  d-sm-none  d-md-inline-block">Menu</span>
+                <span class="u-fs14 d-none  d-sm-none  d-md-inline-block">MENU</span>
             </a>
             <div class="dropdown-menu  dropdown-menu-right" style="right:0;left:auto;">
-                <a class="dropdown-item" href="bethel.edu">Profile</a>
+                <a class="dropdown-item" href="{{ url_for('View:make_profile') }}">Profile</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ url_for('logout') }}">Log out</a>
             </div>
