@@ -1,7 +1,7 @@
 {% extends "index.html" %}
 {% block results %}
     <div class="card-view col-lg-8 results">
-        <h2 style="padding-top: 11px;">Results</h2>
+        <h2 id="results_header">Results</h2>
         {% if not result %}
             <p><strong>We couldn't find anything matching your search</strong></p>
         {% else %}

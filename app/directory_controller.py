@@ -63,7 +63,7 @@ class DirectoryController(object):
         def show_all_id():
             session['all_id'] = 'false'
             for role in session['roles']:
-                if role == 'staff' or role == 'faculty':
+                if 'staff' in role or 'staff' in role:
                     session['all_id'] = 'true'
 
         init_user()

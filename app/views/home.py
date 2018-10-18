@@ -23,6 +23,11 @@ class View(FlaskView):
     def passage(self):
         data = self.encode_data(request.form.to_dict())
 
+        if data['home'] == 'home':
+            home = True
+        if data['group'] == 'group':
+            group = True
+
         if data['first_name'] != '' or data['last_name'] != '':  # checking which people to show for name search
             if data['faculty'] != '' and data['student'] == '':
                 option = 'faculty'  # showing just staff/faculty results
@@ -49,15 +54,17 @@ class View(FlaskView):
         return render_template('results.html', **locals())
 
     def encode_data(self, data):  # method to encode unicode to standard utf-8 charset
-        # Bruteforcing this because I HAVE to try every. single. line.
+        # Bruteforcing this because I HAVE to try/except every. single. line.
         # If BadRequestKeyErrors can be mass checked, I don't know how
         try:
             data['home'] = data['home'].encode('utf-8')
         except (BadRequestKeyError, KeyError):
+            data['home'] = ''
             pass
         try:
             data['group'] = data['group'].encode('utf-8')
         except (BadRequestKeyError, KeyError):
+            data['group'] = ''
             pass
         try:
             data['student'] = data['student'].encode('utf-8')
