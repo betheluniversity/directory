@@ -39,13 +39,11 @@ a {
 }
 
 /* results.html styling */
-/*
-#image_path {
-    width: auto;
-    height: 215px;
-    margin-top: -117px;
+
+p{
+    margin-bottom: 0.3rem
 }
-*/
+
 .advanced {
     margin-right: 25px;
 }
@@ -58,6 +56,14 @@ a {
     margin-left: 1em;
     margin-right: 1em;
     display: inline-block;
+    vertical-align:  top;
+
+}
+
+.somethinglikeborderleftorsomthing {
+    border-left: 6px solid green;
+    padding-left: 1em;
+    height: 100%
 }
 
 .h2 {
@@ -66,16 +72,6 @@ a {
 
 #results_header {
     padding-top: 11px;
-}
-
-@media (max-width: 100%) {
-    .border-edge {
-        border-top: solid #d9dadb;
-    }
-
-    .vertical-padding {
-        padding-top: 1em;
-    }
 }
 
 @media (min-width: 575px) {
@@ -90,4 +86,12 @@ a {
         height: 750px;
         max-width: 100%;
     }
+}
+
+.idkdirectorypicturesidksomethinglikethat{
+    height: 170px;
+    width: 150px;
+    object-fit:cover;
+    overflow:hidden;
+    vertical-align: unset;
 }

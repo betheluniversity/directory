@@ -84,7 +84,7 @@ def directory_search():
                         'po': bu_po,
                         'id': bu_id,
                         'phone': phone,
-                        # 'image_path': image_path,
+                        'image_path': image_path,
                         'udc': udc,
                         'addr_city': addr_city,
                         'addr_state': addr_state,
