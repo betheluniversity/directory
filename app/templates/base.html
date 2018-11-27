@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="directory.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+        <link rel="stylesheet" href="/static/src/css/directory.css">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
@@ -17,13 +17,19 @@
             <img src="{{ url_for('static', filename='src/img/logo-directory.png') }}" height="56"
                  class="d-inline-block align-top" alt="">
         </a>
+
+        <div class="navbar__profile-group  ml-auto">
+            <span class="fa fa-stack fa-2x">
+                <i class="fa fa-user fa-stack-1x fa-inverse"></i>
+            </span>
             <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #ffffff">
-                <span class="u-fs14 d-none  d-sm-none  d-md-inline-block">Menu</i>
-                </span>
+                <span class="u-fs14 d-none  d-sm-none  d-md-inline-block">{{ session['profile']['pref_first_name'] }}</span>
             </a>
-        <div class="dropdown-menu dropdown-menu-right" style="right: 0; left: auto;">
-            <a class="dropdown-item" href="www.bethel.edu">Profile</a>
-            <a class="dropdown-item" href="{{ url_for('logout') }}">Log out</a>
+            <div class="dropdown-menu  dropdown-menu-right" style="right:0;left:auto;">
+                <a class="dropdown-item" href="{{ url_for('View:make_profile') }}">Profile</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{{ url_for('logout') }}">Log out</a>
+            </div>
         </div>
     </nav>
     <body>

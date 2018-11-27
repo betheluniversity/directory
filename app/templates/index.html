@@ -1,20 +1,19 @@
 {% extends "base.html" %}
+
 {% block content %}
     <div class="row">
-        <div class="search col-lg-4" id="accordion" role="tablist" aria-multiselectable="true">
-            <div class="card" style="max-width: 100%;">
-                <div class="card-header" role="tab" id="headingOne">
+        <div class="search col-lg-4" id="accordion" role="tablist" aria-multiselectable="false">
+            <div class="card">
+                <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
-                           aria-expanded="true" aria-controls="collapseOne">
-                            Person Search:
+                        <a class="collapsed" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          Search by Name &#9662;
                         </a>
                     </h5>
                 </div>
-
-                <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                        <form role="form" action="{{ url_for('HomeView:search') }}" method="POST">
+                        <form role="form" action="{{ url_for('View:passage') }}" method="POST">
                             <div class="form-group">
                                 <label for="first_name">First Name:</label>
                                 <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="first_name"
@@ -27,23 +26,166 @@
                             </div>
 
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Find Name</button>
-                                <button type="button" class="btn btn-secondary">Clear</button>
+                                <button type="submit" class="btn btn-primary">Search</button>
+                                <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseTwo"
+                                   aria-expanded="false" aria-controls="collapseTwo"> Advanced &#9662;</a>
+                                <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="card-body">
+                                        <input type="checkbox" class="home" name="home" value="home"/>
+                                        <label class="advanced">Home</label>
+
+                                        <input type="checkbox" class="groups" name="group" value="group"/>
+                                        <label class="advanced">Groups</label>
+
+                                        <input type="checkbox" class="student" name="student" value="student"/>
+                                        <label class="advanced">Student</label>
+
+                                        <!--Just says faculty for the class and stuff but this will show both faculty and staff-->
+                                        <input type="checkbox" class="faculty" name="faculty" value="faculty"/>
+                                        <label class="advanced">Faculty/Staff</label>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
                 </div>
+
                 <div class="card">
-                    <div class="card-header" role="tab" id="headingTwo">
+                    <div class="card-header" role="tab" id="headingThree">
                         <h5 class="collapsed">
-                            <a class="collapsed" data-toggle="collapse" data-parent="accordion" href="#collapseTwo"
-                               aria-expanded="false" aria-controls="collapseTwo"> Advanced Search:</a>
+                            <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                Search by Username &#9662;
+                            </a>
                         </h5>
                     </div>
                 </div>
-                <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
                     <div class="card-body">
-                        <p>Test This</p>
+                        <form role="form" action="{{ url_for('View:passage') }}" method="POST">
+                            <div class="form-group">
+                                <label for="username">Username:</label>
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="username"
+                                       id="username">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                                <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseFour"
+                                   aria-expanded="false" aria-controls="collapseTwo"> Advanced &#9662;</a>
+                                <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="card-body">
+                                        <input type="checkbox" class="home" name="home" value="home"/>
+                                        <label class="advanced">Home</label>
+
+                                        <input type="checkbox" class="group" name="group" value="group"/>
+                                        <label class="advanced">Groups</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" role="tab" id="headingFive">
+                        <h5 class="collapsed">
+                            <a class="collapsed" data-toggle="collapse" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                Search by Email &#9662;
+                            </a>
+                        </h5>
+                    </div>
+                </div>
+                <div id="collapseFive" class="collapse" role="tabpanel" aria-labelledby="headingFive" data-parent="#accordion">
+                    <div class="card-body">
+                        <form role="form" action="{{ url_for('View:passage') }}" method="POST">
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="email"
+                                       id="email">
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                                <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseSix"
+                                   aria-expanded="false" aria-controls="collapseSix"> Advanced &#9662;</a>
+                                <div id="collapseSix" class="collapse" role="tabpanel" aria-labelledby="headingSix">
+                                    <div class="card-body">
+                                        <input type="checkbox" class="home" name="home" value="home"/>
+                                        <label>Home</label>
+
+                                        <input type="checkbox" class="group" name="group" value="group"/>
+                                        <label class="advanced">Groups</label>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" role="tab" id="headingSeven">
+                        <h5 class="collapsed">
+                            <a class="collapsed" data-toggle="collapse" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                Search by Department &#9662;
+                            </a>
+                        </h5>
+                    </div>
+                </div>
+                <div id="collapseSeven" class="collapse" role="tabpanel" aria-labelledby="headingSeven" data-parent="#accordion">
+                    <div class="card-body">
+                        <form role="form" action="{{ url_for('View:passage') }}" method="POST">
+                            <div class="form-group">
+                                <label for="department">Department:</label>
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="department"
+                                       id="department">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                                <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseEight"
+                                   aria-expanded="false" aria-controls="collapseEight"> Advanced &#9662;</a>
+                                <div id="collapseEight" class="collapse" role="tabpanel" aria-labelledby="headingEight">
+                                    <div class="card-body">
+                                        <input type="checkbox" class="home" name="home" value="home"/>
+                                        <label class="advanced">Home</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" role="tab" id="headingNine">
+                        <h5 class="collapsed">
+                            <a class="collapsed" data-toggle="collapse" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                                Search by ID &#9662;
+                            </a>
+                        </h5>
+                    </div>
+                </div>
+                <div id="collapseNine" class="collapse" role="tabpanel" aria-labelledby="headingNine" data-parent="#accordion">
+                    <div class="card-body">
+                        <form role="form" action="{{ url_for('View:passage') }}" method="POST">
+                            <div class="form-group">
+                                <label for="id">ID:</label>
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="id"
+                                       id="id">
+                            </div>
+                            <div class="form-group">
+                                <a type="submit" class="btn btn-primary">Search</a>
+                                <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseTen"
+                                   aria-expanded="false" aria-controls="collapseTen"> Advanced &#9662;</a>
+                                <div id="collapseTen" class="collapse" role="tabpanel" aria-labelledby="headingTen">
+                                    <div class="card-body">
+                                        <input type="checkbox" class="home" name="home" value="home"/>
+                                        <label class="advanced">Home</label>
+
+                                        <input type="checkbox" class="group" name="group" value="group"/>
+                                        <label class="advanced">Groups</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -51,5 +193,5 @@
         {% block results %}
         {% endblock %}
     </div>
-    <hr>
+<hr>
 {% endblock %}
