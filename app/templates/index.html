@@ -195,3 +195,11 @@
     </div>
 <hr>
 {% endblock %}
+
+{% block scripts %}
+<script>
+    $(function() {
+        $('#department').autocompleter({cache: true, source: 'bth_websrv_api.web_directory'});
+    });
+</script>
+{% endblock %}
