@@ -137,7 +137,7 @@
                             <div class="form-group">
                                 <label for="department">Department:</label>
                                 <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="department"
-                                       id="department">
+                                       id="department" onchange="autocomplete">
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Search</button>
@@ -172,7 +172,7 @@
                                        id="id">
                             </div>
                             <div class="form-group">
-                                <a type="submit" class="btn btn-primary">Search</a>
+                                <button type="submit" class="btn btn-primary">Search</button>
                                 <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseTen"
                                    aria-expanded="false" aria-controls="collapseTen"> Advanced &#9662;</a>
                                 <div id="collapseTen" class="collapse" role="tabpanel" aria-labelledby="headingTen">
@@ -198,8 +198,8 @@
 
 {% block scripts %}
 <script>
-    $(function() {
-        $('#department').autocompleter({cache: true, source: 'bth_websrv_api.web_directory'});
+    $(function autocomplete() {
+        $('#department').autocompleter({cache: true, source:'{{ url_for("get_departments") }}'});
     });
 </script>
 {% endblock %}

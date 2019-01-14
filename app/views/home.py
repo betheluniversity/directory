@@ -45,6 +45,7 @@ class View(FlaskView):
             result = self.email_search(data['email'])
 
         elif data['department'] != '':
+            group = True
             result = self.dept_search(data['department'])
 
         elif data['bu_id'] != '':
@@ -60,12 +61,10 @@ class View(FlaskView):
             data['home'] = data['home'].encode('utf-8')
         except (BadRequestKeyError, KeyError):
             data['home'] = ''
-            pass
         try:
             data['group'] = data['group'].encode('utf-8')
         except (BadRequestKeyError, KeyError):
             data['group'] = ''
-            pass
         try:
             data['student'] = data['student'].encode('utf-8')
         except (BadRequestKeyError, KeyError):
@@ -79,27 +78,27 @@ class View(FlaskView):
         try:
             data['first_name'] = data['first_name'].encode('utf-8')
         except (BadRequestKeyError, KeyError):
-            pass
+            data['first_name'] = ''
         try:
             data['last_name'] = data['last_name'].encode('utf-8')
         except (BadRequestKeyError, KeyError):
-            pass
+            data['last_name'] = ''
         try:
             data['username'] = data['username'].encode('utf-8')
         except (BadRequestKeyError, KeyError):
-            pass
+            data['username'] = ''
         try:
             data['email'] = data['email'].encode('utf-8')
         except (BadRequestKeyError, KeyError):
-            pass
+            data['email'] = ''
         try:
             data['department'] = data['department'].encode('utf-8')
         except (BadRequestKeyError, KeyError):
-            pass
+            data['department'] = ''
         try:
             data['bu_id'] = data['bu_id'].encode('utf-8')
         except (BadRequestKeyError, KeyError):
-            pass
+            data['bu_id'] = ''
 
         return data
 
@@ -196,12 +195,12 @@ class View(FlaskView):
 
         if department != '':
             for row in people:
-                ratio = self.other_fuzzy(department, row['department'])
-                if ratio > 75:
-                    self.make_results(row, result, ratio)
+                for item in row['department']:
+                    if department in item:
+                        result.append(row)
 
         result.sort(key=lambda i: i['last_name'])
-        result.sort(key=lambda i: i['ratio'], reverse=True)
+        result.sort(key=lambda i: i['id'])
 
         return result
 
