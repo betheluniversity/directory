@@ -57,49 +57,49 @@ class View(FlaskView):
         # Bruteforcing this because I HAVE to try/except every. single. line.
         # If BadRequestKeyErrors can be mass checked, I don't know how
         try:
-            data['home'] = data['home'].encode('utf-8')
+            data['home'] = data['home']  #.encode('utf-8')
         except (BadRequestKeyError, KeyError):
             data['home'] = ''
             pass
         try:
-            data['group'] = data['group'].encode('utf-8')
+            data['group'] = data['group']  # .encode('utf-8')
         except (BadRequestKeyError, KeyError):
             data['group'] = ''
             pass
         try:
-            data['student'] = data['student'].encode('utf-8')
+            data['student'] = data['student']  #.encode('utf-8')
         except (BadRequestKeyError, KeyError):
             data['student'] = ''
         try:
-            data['faculty'] = data['faculty'].encode('utf-8')
+            data['faculty'] = data['faculty']  #.encode('utf-8')
         except (BadRequestKeyError, KeyError):
             data['faculty'] = ''
 
-        # second part is the fields from the forms
-        try:
-            data['first_name'] = data['first_name'].encode('utf-8')
-        except (BadRequestKeyError, KeyError):
-            pass
-        try:
-            data['last_name'] = data['last_name'].encode('utf-8')
-        except (BadRequestKeyError, KeyError):
-            pass
-        try:
-            data['username'] = data['username'].encode('utf-8')
-        except (BadRequestKeyError, KeyError):
-            pass
-        try:
-            data['email'] = data['email'].encode('utf-8')
-        except (BadRequestKeyError, KeyError):
-            pass
-        try:
-            data['department'] = data['department'].encode('utf-8')
-        except (BadRequestKeyError, KeyError):
-            pass
-        try:
-            data['bu_id'] = data['bu_id'].encode('utf-8')
-        except (BadRequestKeyError, KeyError):
-            pass
+        # # second part is the fields from the forms
+        # try:
+        #     data['first_name'] = data['first_name'].encode('utf-8')
+        # except (BadRequestKeyError, KeyError):
+        #     pass
+        # try:
+        #     data['last_name'] = data['last_name'].encode('utf-8')
+        # except (BadRequestKeyError, KeyError):
+        #     pass
+        # try:
+        #     data['username'] = data['username'].encode('utf-8')
+        # except (BadRequestKeyError, KeyError):
+        #     pass
+        # try:
+        #     data['email'] = data['email'].encode('utf-8')
+        # except (BadRequestKeyError, KeyError):
+        #     pass
+        # try:
+        #     data['department'] = data['department'].encode('utf-8')
+        # except (BadRequestKeyError, KeyError):
+        #     pass
+        # try:
+        #     data['bu_id'] = data['bu_id'].encode('utf-8')
+        # except (BadRequestKeyError, KeyError):
+        #     pass
 
         return data
 
@@ -229,7 +229,8 @@ class View(FlaskView):
         else:
             name = last_name
 
-        if len(search.decode('utf-8')) <= 3:  # above logic is so this can blanket the rest of the fuzzy comparison
+        # if len(search.decode('utf-8')) <= 3:  # above logic is so this can blanket the rest of the fuzzy comparison
+        if len(search) <= 3:  # above logic is so this can blanket the rest of the fuzzy comparison
             ratio = fuzz.partial_ratio(name, search)  # also utilizes partial ratio instead of just fuzz.ratio
         else:
             ratio = fuzz.ratio(name, search)
