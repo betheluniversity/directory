@@ -8,7 +8,7 @@ def get_results(result, label="", type=None):
     for i, row in enumerate(result):
         row_dict = {}
         for item in row:
-            if isinstance(item, str) or isinstance(item, unicode):
+            if isinstance(item, str):
                 item = item.split(":", 1)
             else:
                 # blob
