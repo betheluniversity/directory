@@ -1,1 +1,1 @@
-from home import View
+from app.views.home import View

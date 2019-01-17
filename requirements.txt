@@ -7,6 +7,6 @@ Flask-Classy
 urllib3
 requests
 fuzzywuzzy
-Flask-Caching
-python-Levenshtein 
+flask-caching
+python-Levenshtein
 werkzeug
