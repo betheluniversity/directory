@@ -6,9 +6,9 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
         <link rel="stylesheet" href="/static/src/css/directory.css">
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <link rel="stylesheet" href="css/jquery.autocompleter.css">
-        <script src="js/jquery.autocompleter.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="/static/src/js/jquery.easy-autocomplete.min.js"></script>
+        <link rel="stylesheet" href="/static/src/css/easy-autocomplete.min.css">
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -28,7 +28,7 @@
                 <i class="fa fa-user fa-stack-1x fa-inverse"></i>
             </span>
             <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #ffffff">
-                <span class="u-fs14 d-none  d-sm-none  d-md-inline-block">NAME</span>
+                <span class="u-fs14 d-none  d-sm-none  d-md-inline-block">{{ session['pref_first_name'] }}</span>
             </a>
             <div class="dropdown-menu  dropdown-menu-right" style="right:0;left:auto;">
                 <a class="dropdown-item" href="{{ url_for('View:make_profile') }}">Profile</a>

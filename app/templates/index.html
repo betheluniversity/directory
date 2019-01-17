@@ -137,7 +137,7 @@
                             <div class="form-group">
                                 <label for="department">Department:</label>
                                 <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="department"
-                                       id="department" onchange="autocomplete">
+                                       id="department">
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Search</button>
@@ -194,12 +194,20 @@
         {% endblock %}
     </div>
 <hr>
-{% endblock %}
-
-{% block scripts %}
 <script>
-    $(function autocomplete() {
-        $('#department').autocompleter({cache: true, source:'{{ url_for("get_departments") }}'});
-    });
+    var options = {
+        data: {{ depts|safe }},
+        list: {
+            maxNumberOfElements: 100,
+            requestDelay: 500,
+            match: {
+                enabled: true
+            },
+            sort: {
+                enabled: true
+            }
+        }
+	};
+    $('#department').easyAutocomplete(options);
 </script>
 {% endblock %}

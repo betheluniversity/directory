@@ -4,7 +4,7 @@ from flask_classy import FlaskView, route
 from fuzzywuzzy import fuzz
 from werkzeug.exceptions import BadRequestKeyError
 
-from app.db.db_functions import directory_search
+from app.db.db_functions import directory_search, departments
 
 
 class View(FlaskView):
@@ -12,6 +12,7 @@ class View(FlaskView):
         pass
 
     def index(self):
+        depts = departments()
         return render_template('index.html', **locals())
 
     @route('/profile', methods=['GET'])
@@ -52,6 +53,7 @@ class View(FlaskView):
             group = True
             result = self.id_search(data['bu_id'])
 
+        depts = departments()
         return render_template('results.html', **locals())
 
     def encode_data(self, data):  # method to encode unicode to standard utf-8 charset

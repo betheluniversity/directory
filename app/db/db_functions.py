@@ -41,7 +41,7 @@ def portal_profile(username):
     return get_results(r)
 
 
-@cache.memoize(timeout=78494898989)
+@cache.memoize(timeout=78494898989)  # cache this for less time too
 def directory_search():
     call_cursor_bw = conn_bw.cursor()
     result_cursor_bw = conn_bw.cursor()
@@ -100,14 +100,18 @@ def directory_search():
                             'addr_zip': addr_zip})
     return results
 
-@cache.memoize(timeout=78494898989)
-def get_departments():
+
+@cache.memoize(timeout=78494898989)  # make this cache for less time on launch
+def departments():
     call_cursor_bw = conn_bw.cursor()
     result_cursor_bw = conn_bw.cursor()
     data = []
     results = []
-    #
-    call_cursor_bw.callproc('bth_websrv_api.web_directory', (result_cursor_bw,))
+
+    call_cursor_bw.callproc('bth_websrv_api.web_directory_dept', (result_cursor_bw,))
     data = get_results(result_cursor_bw.fetchall())
+
+    for item in data:
+        results.append(data[item]['dept'])
 
     return results
