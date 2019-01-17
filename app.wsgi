@@ -1,5 +1,5 @@
 activate_this = '/opt/directory/env/bin/activate_this.py'
-execfile(activate_this, dict(__file__=activate_this))
+exec(compile(open(activate_this, "rb").read(), activate_this, 'exec'), globals, locals)
 
 import sys
 import os
