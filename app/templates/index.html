@@ -172,7 +172,7 @@
                                        id="id">
                             </div>
                             <div class="form-group">
-                                <a type="submit" class="btn btn-primary">Search</a>
+                                <button type="submit" class="btn btn-primary">Search</button>
                                 <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseTen"
                                    aria-expanded="false" aria-controls="collapseTen"> Advanced &#9662;</a>
                                 <div id="collapseTen" class="collapse" role="tabpanel" aria-labelledby="headingTen">
@@ -194,4 +194,20 @@
         {% endblock %}
     </div>
 <hr>
+<script>
+    var options = {
+        data: {{ depts|safe }},
+        list: {
+            maxNumberOfElements: 100,
+            requestDelay: 500,
+            match: {
+                enabled: true
+            },
+            sort: {
+                enabled: true
+            }
+        }
+	};
+    $('#department').easyAutocomplete(options);
+</script>
 {% endblock %}

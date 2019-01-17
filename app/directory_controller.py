@@ -55,15 +55,13 @@ class DirectoryController(object):
 
             session['roles'] = ret
 
-            if username == 'bam95899':
-                session['roles'] = 'admin'
-
             return ret
 
         def show_all_id():
             session['all_id'] = 'false'
             for role in session['roles']:
-                if 'staff' in role or 'staff' in role:
+                if 'staff' in role:
                     session['all_id'] = 'true'
+                # here is the place for the ITS role check
 
         init_user()

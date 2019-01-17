@@ -104,6 +104,19 @@
                                             {% endfor %}
                                         </p>
                                     {% endif %}
+
+                                    {% if row['department']|length > 0 %}
+                                        <p>
+                                            {% for i in range(0, row['department']|length) %}
+                                                {% if i != '' %}
+                                                    {{ row['department'][i] }}
+                                                    {% if i < row['department']|length - 1 %}
+                                                        |
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </p>
+                                    {% endif %}
                                 </div>
                             {% endif %}
 

@@ -4,7 +4,7 @@ from flask_classy import FlaskView, route
 from fuzzywuzzy import fuzz
 from werkzeug.exceptions import BadRequestKeyError
 
-from app.db.db_functions import directory_search
+from app.db.db_functions import directory_search, departments
 
 
 class View(FlaskView):
@@ -12,6 +12,7 @@ class View(FlaskView):
         pass
 
     def index(self):
+        depts = departments()
         return render_template('index.html', **locals())
 
     @route('/profile', methods=['GET'])
@@ -45,62 +46,37 @@ class View(FlaskView):
             result = self.email_search(data['email'])
 
         elif data['department'] != '':
+            group = True
             result = self.dept_search(data['department'])
 
         elif data['bu_id'] != '':
             group = True
             result = self.id_search(data['bu_id'])
 
+        depts = departments()
         return render_template('results.html', **locals())
 
     def encode_data(self, data):  # method to encode unicode to standard utf-8 charset
         # Bruteforcing this because I HAVE to try/except every. single. line.
         # If BadRequestKeyErrors can be mass checked, I don't know how
         try:
-            data['home'] = data['home']  #.encode('utf-8')
+            data['home'] = data['home']
         except (BadRequestKeyError, KeyError):
             data['home'] = ''
-            pass
         try:
-            data['group'] = data['group']  # .encode('utf-8')
+            data['group'] = data['group']
         except (BadRequestKeyError, KeyError):
             data['group'] = ''
-            pass
         try:
-            data['student'] = data['student']  #.encode('utf-8')
+            data['student'] = data['student']
         except (BadRequestKeyError, KeyError):
             data['student'] = ''
         try:
-            data['faculty'] = data['faculty']  #.encode('utf-8')
+            data['faculty'] = data['faculty']
         except (BadRequestKeyError, KeyError):
             data['faculty'] = ''
 
-        # # second part is the fields from the forms
-        # try:
-        #     data['first_name'] = data['first_name'].encode('utf-8')
-        # except (BadRequestKeyError, KeyError):
-        #     pass
-        # try:
-        #     data['last_name'] = data['last_name'].encode('utf-8')
-        # except (BadRequestKeyError, KeyError):
-        #     pass
-        # try:
-        #     data['username'] = data['username'].encode('utf-8')
-        # except (BadRequestKeyError, KeyError):
-        #     pass
-        # try:
-        #     data['email'] = data['email'].encode('utf-8')
-        # except (BadRequestKeyError, KeyError):
-        #     pass
-        # try:
-        #     data['department'] = data['department'].encode('utf-8')
-        # except (BadRequestKeyError, KeyError):
-        #     pass
-        # try:
-        #     data['bu_id'] = data['bu_id'].encode('utf-8')
-        # except (BadRequestKeyError, KeyError):
-        #     pass
-
+        # also check first, last, dept, id, etc.
         return data
 
     # first and last name search. Holds the details and logic surrounding the first and last name searches
@@ -196,12 +172,12 @@ class View(FlaskView):
 
         if department != '':
             for row in people:
-                ratio = self.other_fuzzy(department, row['department'])
-                if ratio > 75:
-                    self.make_results(row, result, ratio)
+                for item in row['department']:
+                    if department in item:
+                        result.append(row)
 
         result.sort(key=lambda i: i['last_name'])
-        result.sort(key=lambda i: i['ratio'], reverse=True)
+        result.sort(key=lambda i: i['id'])
 
         return result
 

@@ -12,6 +12,22 @@
     width: 100%
 }
 
+/* this is so that the autocomplete textbox fills the width of the card */
+.easy-autocomplete {
+    width: 100% !important
+}
+
+/* adds a scrollbar to the results box and fixes border issues */
+.easy-autocomplete-container > ul{
+    max-height: 162px;
+    overflow: scroll;
+    border: 1px solid #ccc !important;
+}
+
+/* removes list item border to make all 4 sides uniform */
+.easy-autocomplete-container > ul > li {
+    border: none !important
+}
 
 .footer {
     border-top: 1px solid #eee;
