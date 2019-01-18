@@ -22,7 +22,7 @@ class View(FlaskView):
 
     @route('/', methods=['POST'])
     def passage(self):
-        data = self.encode_data(request.form.to_dict())
+        data = self.get_data(request.form.to_dict())
 
         if data['home'] == 'home':
             home = True
@@ -53,10 +53,10 @@ class View(FlaskView):
             group = True
             result = self.id_search(data['bu_id'])
 
-        depts = departments()
+        depts = departments() # so we can use the autocompleter in the department search after reloading the page
         return render_template('results.html', **locals())
 
-    def encode_data(self, data):  # method to encode unicode to standard utf-8 charset
+    def get_data(self, data):  # method to ensure we have data in all variables
         # Bruteforcing this because I HAVE to try/except every. single. line.
         # If BadRequestKeyErrors can be mass checked, I don't know how
         try:
@@ -76,7 +76,32 @@ class View(FlaskView):
         except (BadRequestKeyError, KeyError):
             data['faculty'] = ''
 
-        # also check first, last, dept, id, etc.
+        # second part is the fields from the forms
+        try:
+            data['first_name'] = data['first_name']
+        except (BadRequestKeyError, KeyError):
+            data['first_name'] = ''
+        try:
+            data['last_name'] = data['last_name']
+        except (BadRequestKeyError, KeyError):
+            data['last_name'] = ''
+        try:
+            data['username'] = data['username']
+        except (BadRequestKeyError, KeyError):
+            data['username'] = ''
+        try:
+            data['email'] = data['email']
+        except (BadRequestKeyError, KeyError):
+            data['email'] = ''
+        try:
+            data['department'] = data['department']
+        except (BadRequestKeyError, KeyError):
+            data['department'] = ''
+        try:
+            data['bu_id'] = data['bu_id']
+        except (BadRequestKeyError, KeyError):
+            data['bu_id'] = ''
+
         return data
 
     # first and last name search. Holds the details and logic surrounding the first and last name searches
