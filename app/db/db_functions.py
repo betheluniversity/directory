@@ -76,28 +76,27 @@ def directory_search():
         college = get_splits(data[item]['stu_coll'])
         title = get_splits(data[item]['title'])
 
-        if data[item]['dept'] != '':
-            results.append({'last_name': last_name,
-                            'first_name': first_name,
-                            'housing': housing,
-                            'email': email,
-                            'username': username,
-                            'po': bu_po,
-                            'id': bu_id,
-                            'phone': phone,
-                            'image_path': image_path,
-                            'udc': udc,
-                            'addr_city': addr_city,
-                            'addr_state': addr_state,
-                            'addr_street1': addr_street1,
-                            'addr_street2': addr_street2,
-                            'role': bu_role,
-                            'department': department,
-                            'major': major,
-                            'minor': minor,
-                            'college': college,
-                            'title': title,
-                            'addr_zip': addr_zip})
+        results.append({'last_name': last_name,
+                        'first_name': first_name,
+                        'housing': housing,
+                        'email': email,
+                        'username': username,
+                        'po': bu_po,
+                        'id': bu_id,
+                        'phone': phone,
+                        'image_path': image_path,
+                        'udc': udc,
+                        'addr_city': addr_city,
+                        'addr_state': addr_state,
+                        'addr_street1': addr_street1,
+                        'addr_street2': addr_street2,
+                        'role': bu_role,
+                        'department': department,
+                        'major': major,
+                        'minor': minor,
+                        'college': college,
+                        'title': title,
+                        'addr_zip': addr_zip})
     return results
 
 

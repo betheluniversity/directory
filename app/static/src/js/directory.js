@@ -14,10 +14,10 @@ $(document).ready(function () {
             'email': $('#email').val(),
             'department': $('#department').val(),
             'bu_id': $('#bu_id').val(),
-            'home': $form.find('.home').is(':checked'),
-            'group': $form.find('.group').is(':checked'),
-            'student': $form.find('.student').is(':checked'),
-            'faculty': $form.find('.faculty').is(':checked')
+            'home': $form.find('.home').is(':checked') || 'false',
+            'group': $form.find('.group').is(':checked') || 'false',
+            'student': $form.find('.student').is(':checked') || 'false',
+            'faculty': $form.find('.faculty').is(':checked') || 'false'
         };
 
         /* Send the data using post */
