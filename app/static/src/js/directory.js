@@ -14,6 +14,7 @@ $(document).ready(function () {
             'email': $('#email').val(),
             'department': $('#department').val(),
             'bu_id': $('#bu_id').val(),
+            'view_ids': $form.find('.view_ids').is(':checked') || 'false',
             'home': $form.find('.home').is(':checked') || 'false',
             'group': $form.find('.group').is(':checked') || 'false',
             'student': $form.find('.student').is(':checked') || 'false',

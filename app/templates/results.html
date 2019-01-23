@@ -25,9 +25,12 @@
                             <p><strong>{{ row['last_name'] }}, {{ row['first_name'] }}</strong></p>
                         {% endif %}
 
-                        {% if session['ITS_view'] == True %}
+                        {% if session['ITS_view'] == True and data['view_ids'] == 'true' %}
                             {% if row['id'] != '' %}
-                        <p><strong>ID: </strong>{{ row['id'] }}</p>
+                                <p><strong>ID: </strong>{{ row['id'] }}</p>
+                            {% endif %}
+                            {% if row['udc'] != '' %}
+                                <p><strong>UDC: </strong>{{ row['udc'] }}</p>
                             {% endif %}
                         {% elif row['username'] == session['username'] %}
                             {% if row['id'] != '' %}
@@ -49,7 +52,20 @@
                     </div>
 
                     {% if data['group'] == 'true' %}
-                        <div class="column somethinglikeborderleftorsomthing">
+                        <div class="column somethinglikeborderleftorsomthing">\
+                            {% if row['role']|length > 0 %}
+                                <p>
+                                    {% for i in range(0, row['role']|length) %}
+                                        {% if i != '' %}
+                                            <strong>{{ row['role'][i] }}</strong>
+                                            {% if i < row['role']|length - 1 %}
+                                                |
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </p>
+                            {% endif %}
+
                             {% if row['college']|length > 0 %}
                                 <p>
                                     {% for i in range(0, row['college']|length) %}
@@ -82,19 +98,6 @@
                                         {% if i != '' %}
                                             {{ row['minor'][i] }}
                                             {% if i < row['minor']|length - 1 %}
-                                                |
-                                            {% endif %}
-                                        {% endif %}
-                                    {% endfor %}
-                                </p>
-                            {% endif %}
-
-                            {% if row['role']|length > 0 %}
-                                <p>
-                                    {% for i in range(0, row['role']|length) %}
-                                        {% if i != '' %}
-                                            <strong>{{ row['role'][i] }}</strong>
-                                            {% if i < row['role']|length - 1 %}
                                                 |
                                             {% endif %}
                                         {% endif %}
