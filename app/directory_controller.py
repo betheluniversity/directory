@@ -23,10 +23,8 @@ class DirectoryController(object):
             else:
                 reset_session = True
 
-            dev = current_app.config['ENVIRON'] != 'prod'
-
             # if not production or 12 hours have past, then clear our session variables on each call
-            if dev or reset_session:
+            if reset_session:
                 session.clear()
                 seconds_in_12_hours = 60 * 60 * 12
                 session['session_time'] = time.time() + seconds_in_12_hours

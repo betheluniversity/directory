@@ -20,16 +20,6 @@ class View(FlaskView):
         # profile is in the session keys
         return render_template('profile.html', **locals())
 
-    def get_option(self, data):
-        if hasattr(data, 'faculty') and hasattr(data, 'student'):
-            return 'both'  # showing all results
-        elif hasattr(data, 'faculty'):
-            return 'faculty'  # showing just staff/faculty results
-        elif hasattr(data, 'student'):
-            return 'student'  # showing just student results
-        else:
-            return 'both'  # defaults to showing all results
-
     # first and last name search. Holds the details and logic surrounding the first and last name searches
     @route('/fl_search', methods=['POST'])
     def fl_search(self):  # option is the advanced settings for student/staff
@@ -41,17 +31,21 @@ class View(FlaskView):
 
         if data['first_name'] != '' and data['last_name'] != '':  # If both boxes are filled out, this will be the loop that is checked
             for row in people:
-                if self.match_option(row, option):
-                    ratio = (self.fl_fuzzy(row['first_name'], row['last_name'], True, data['first_name']) +
-                             self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name']))
+                if self._match_option(row, option):
+                    ratio = (self._fl_fuzzy(row['first_name'], row['last_name'], True, data['first_name']) +
+                             self._fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name']))
+                    if ratio >= 75:
+                        self._make_results(row, result, ratio)
         elif data['first_name'] != '' and data['last_name'] == '':  # called if first name and NOT last name are filled out
             for row in people:
-                if self.match_option(row, option):
-                    ratio = self.fl_fuzzy(row['first_name'], row['last_name'], True, data['first_name'])
+                if self._match_option(row, option):
+                    ratio = self._fl_fuzzy(row['first_name'], row['last_name'], True, data['first_name'])
+                    if ratio >= 75:
+                        self._make_results(row, result, ratio)
         elif data['last_name'] != '' and data['first_name'] == '':  # called if last name and NOT first name are filled out
             for row in people:
-                if self.match_option(row, option):  # if its true, check the person
-                    ratio = self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name'])
+                if self._match_option(row, option):  # if its true, check the person
+                    ratio = self._fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name'])
                     if ratio >= 75:
                         self._make_results(row, result, ratio)
 
@@ -76,10 +70,10 @@ class View(FlaskView):
 
         if data['username'] != '':  # put in the student/staff filters
             for row in people:
-                if self.match_option(row, option):
-                    ratio = self.misc_fuzzy(data['username'], row['username'])
+                if self._match_option(row, option):
+                    ratio = self._misc_fuzzy(data['username'], row['username'])
                     if ratio > 75:
-                        self.make_results(row, result, ratio)
+                        self._make_results(row, result, ratio)
 
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'], reverse=True)
@@ -98,10 +92,10 @@ class View(FlaskView):
 
         if data['email'] != '':  # put in the student/staff filters
             for row in people:
-                if self.match_option(row, option):
-                    ratio = self.misc_fuzzy(data['email'], row['email'])
+                if self._match_option(row, option):
+                    ratio = self._misc_fuzzy(data['email'], row['email'])
                     if ratio > 75:
-                        self.make_results(row, result, ratio)
+                        self._make_results(row, result, ratio)
         else:
             result = people
             return render_template('results.html', **locals())
@@ -123,10 +117,11 @@ class View(FlaskView):
 
         if data['department'] != '':
             for row in people:
-                if self.match_option(row, option):
+                if self._match_option(row, option):
                     for item in row['department']:
                         if data['department'] in item:
                             result.append(row)
+                            break
 
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['id'])
@@ -146,10 +141,10 @@ class View(FlaskView):
 
         if data['id'] != '':
             for row in people:
-                if self.match_option(row, option):
-                    ratio = self.misc_fuzzy(data['id'], row['id'])
+                if self._match_option(row, option):
+                    ratio = self._misc_fuzzy(data['id'], row['id'])
                     if ratio > 75:
-                        self.make_results(row, result, ratio)
+                        self._make_results(row, result, ratio)
 
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'], reverse=True)
@@ -157,20 +152,29 @@ class View(FlaskView):
         depts = departments()  # necessary until we build the ajax call for this
         return render_template('results.html', **locals())
 
+    def _get_option(self, data):
+        if data.get('faculty') == 'true' and data.get('student') == 'true':
+            return 'both'  # showing all results
+        elif data.get('faculty') == 'true':
+            return 'faculty'  # showing just staff/faculty results
+        elif data.get('student') == 'true':
+            return 'student'  # showing just student results
+        else:
+            return 'both'  # defaults to showing all results
+
     def _match_option(self, row, option, ):
-        match_option = False  # does the selected option match the role of the person?
         if option == 'both':
-            match_option = True  # if option is both, set to true by default
+            return True
         else:
             for role in row['role']:
-                if role == option:
-                    match_option = True  # if the role of the person matches the selected option, set true
-        if match_option:  # if its true, check the person
-            return True
+                if role.lower() == option:
+                    return True
         return False
 
     # Fuzzy method for first and last names, contains some extra logic
     def _fl_fuzzy(self, first_name, last_name, fl, search):
+        if first_name == 'Boston':
+            pass
         if fl:  # simpler logic to decide which name is being searched, first or last
             name = first_name
         else:
