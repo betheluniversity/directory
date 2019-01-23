@@ -56,7 +56,6 @@ class View(FlaskView):
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'], reverse=True)
 
-        depts = departments()  # this will be removed once the ajax is implemented
         return render_template('results.html', **locals())
 
     # Username search executes, creates, and formats the username searches
@@ -74,11 +73,13 @@ class View(FlaskView):
                     ratio = self._misc_fuzzy(data['username'], row['username'])
                     if ratio > 75:
                         self._make_results(row, result, ratio)
+        else:
+            result = people
+            return render_template('results.html', **locals())
 
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'], reverse=True)
 
-        depts = departments()  # this will be removed once the ajax is implemented
         return render_template('results.html', **locals())
 
     # Email search, executes, creates, and formats the email search and results
@@ -103,7 +104,6 @@ class View(FlaskView):
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'], reverse=True)
 
-        depts = departments()  # necessary until we build the ajax call for this
         return render_template('results.html', **locals())
 
     # department search, subject to change
@@ -122,11 +122,13 @@ class View(FlaskView):
                         if data['department'] in item:
                             result.append(row)
                             break
+        else:
+            result = people
+            return render_template('results.html', **locals())
 
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['id'])
 
-        depts = departments()  # necessary until we build the ajax call for this
         return render_template('results.html', **locals())
 
     # id search, only visible to those whose roles allow it
@@ -139,17 +141,19 @@ class View(FlaskView):
         people = directory_search()
         result = []
 
-        if data['id'] != '':
+        if data['bu_id'] != '':
             for row in people:
                 if self._match_option(row, option):
-                    ratio = self._misc_fuzzy(data['id'], row['id'])
+                    ratio = self._misc_fuzzy(data['bu_id'], row['id'])
                     if ratio > 75:
                         self._make_results(row, result, ratio)
+        else:
+            result = people
+            return render_template('results.html', **locals())
 
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'], reverse=True)
 
-        depts = departments()  # necessary until we build the ajax call for this
         return render_template('results.html', **locals())
 
     def _get_option(self, data):
