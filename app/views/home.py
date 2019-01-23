@@ -74,6 +74,7 @@ class View(FlaskView):
         return render_template('results.html', **locals())
 
     # Username search executes, creates, and formats the username searches
+    @route('/', methods=['POST'])
     def username_search(self):
         data = request.form.to_dict()
         option = self.get_option(data)
@@ -95,6 +96,7 @@ class View(FlaskView):
         return render_template('results.html', **locals())
 
     # Email search, executes, creates, and formats the email search and results
+    @route('/', methods=['POST'])
     def email_search(self):
         data = request.form.to_dict()
         option = self.get_option(data)
@@ -119,6 +121,7 @@ class View(FlaskView):
         return render_template('results.html', **locals())
 
     # department search, subject to change
+    @route('/', methods=['POST'])
     def dept_search(self):
         data = request.form.to_dict()
         option = self.get_option(data)
@@ -141,6 +144,7 @@ class View(FlaskView):
 
     # id search, only visible to those whose roles allow it
     # does the same as the other search functions
+    @route('/', methods=['POST'])
     def id_search(self):
         data = request.form.to_dict()
         option = self.get_option(data)
