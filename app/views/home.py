@@ -200,6 +200,7 @@ class View(FlaskView):
                 for item in row['department']:
                     if department in item:
                         result.append(row)
+                        break
 
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['id'])
