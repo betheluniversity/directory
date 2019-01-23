@@ -41,7 +41,8 @@ def portal_profile(username):
     return get_results(r)
 
 
-@cache.memoize(timeout=78494898989)  # cache this for less time too
+# 4 hour cache = 14400
+@cache.memoize(timeout=14400)
 def directory_search():
     call_cursor_bw = conn_bw.cursor()
     result_cursor_bw = conn_bw.cursor()
@@ -100,7 +101,8 @@ def directory_search():
     return results
 
 
-@cache.memoize(timeout=78494898989)  # make this cache for less time on launch
+# 4 hour cache = 14400
+@cache.memoize(timeout=14400)
 def departments():
     call_cursor_bw = conn_bw.cursor()
     result_cursor_bw = conn_bw.cursor()
