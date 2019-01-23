@@ -10,3 +10,4 @@ fuzzywuzzy
 flask-caching
 python-Levenshtein
 werkzeug
+python-ldap

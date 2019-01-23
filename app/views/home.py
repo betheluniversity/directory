@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, session
 from flask_classy import FlaskView, route
 
 from fuzzywuzzy import fuzz
-from werkzeug.exceptions import BadRequestKeyError
 
 from app.db.db_functions import directory_search, departments
 
@@ -20,7 +19,6 @@ class View(FlaskView):
         # profile is in the session keys
         return render_template('profile.html', **locals())
 
-    @route('/', methods=['POST'])
     def get_option(self, data):
         if hasattr(data, 'faculty') and hasattr(data, 'student'):
             return 'both'  # showing all results
@@ -45,23 +43,16 @@ class View(FlaskView):
                 if self.match_option(row, option):
                     ratio = (self.fl_fuzzy(row['first_name'], row['last_name'], True, data['first_name']) +
                              self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name']))
-
-                    if ratio >= 75:
-                        self.make_results(row, result, ratio)
-
         elif data['first_name'] != '' and data['last_name'] == '':  # called if first name and NOT last name are filled out
             for row in people:
                 if self.match_option(row, option):
                     ratio = self.fl_fuzzy(row['first_name'], row['last_name'], True, data['first_name'])
-                    if ratio >= 75:
-                        self.make_results(row, result, ratio)
-
         elif data['last_name'] != '' and data['first_name'] == '':  # called if last name and NOT first name are filled out
             for row in people:
                 if self.match_option(row, option):  # if its true, check the person
                     ratio = self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name'])
                     if ratio >= 75:
-                        self.make_results(row, result, ratio)
+                        self._make_results(row, result, ratio)
 
         elif data['last_name'] == '' and data['first_name'] == '':  # if both are empty, return everyone
             result = people
@@ -178,7 +169,7 @@ class View(FlaskView):
         return False
 
     # Fuzzy method for first and last names, contains some extra logic
-    def fl_fuzzy(self, first_name, last_name, fl, search):
+    def _fl_fuzzy(self, first_name, last_name, fl, search):
         if fl:  # simpler logic to decide which name is being searched, first or last
             name = first_name
         else:
@@ -207,6 +198,6 @@ class View(FlaskView):
         return ratio
 
     # only called if the fuzz ratio surpasses a certain threshold
-    def make_results(self, row, result, ratio):  # just creates a dictionary for ratio
+    def _make_results(self, row, result, ratio):  # just creates a dictionary for ratio
         row['ratio'] = ratio
         result.append(row)
