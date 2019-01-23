@@ -10,6 +10,7 @@ class View(FlaskView):
     def __init__(self):
         pass
 
+    @route('/', methods=['GET'])
     def index(self):
         depts = departments()
         return render_template('index.html', **locals())
@@ -30,10 +31,10 @@ class View(FlaskView):
             return 'both'  # defaults to showing all results
 
     # first and last name search. Holds the details and logic surrounding the first and last name searches
-    @route('/', methods=['POST'])
+    @route('/fl_search', methods=['POST'])
     def fl_search(self):  # option is the advanced settings for student/staff
         data = request.form.to_dict()
-        option = self.get_option(data)
+        option = self._get_option(data)
 
         people = directory_search()
         result = []
@@ -65,10 +66,10 @@ class View(FlaskView):
         return render_template('results.html', **locals())
 
     # Username search executes, creates, and formats the username searches
-    @route('/', methods=['POST'])
+    @route('/username_search', methods=['POST'])
     def username_search(self):
         data = request.form.to_dict()
-        option = self.get_option(data)
+        option = self._get_option(data)
 
         people = directory_search()
         result = []
@@ -87,10 +88,10 @@ class View(FlaskView):
         return render_template('results.html', **locals())
 
     # Email search, executes, creates, and formats the email search and results
-    @route('/', methods=['POST'])
+    @route('/email_search', methods=['POST'])
     def email_search(self):
         data = request.form.to_dict()
-        option = self.get_option(data)
+        option = self._get_option(data)
 
         people = directory_search()
         result = []
@@ -112,10 +113,10 @@ class View(FlaskView):
         return render_template('results.html', **locals())
 
     # department search, subject to change
-    @route('/', methods=['POST'])
+    @route('/dept_search', methods=['POST'])
     def dept_search(self):
         data = request.form.to_dict()
-        option = self.get_option(data)
+        option = self._get_option(data)
 
         people = directory_search()
         result = []
@@ -135,10 +136,10 @@ class View(FlaskView):
 
     # id search, only visible to those whose roles allow it
     # does the same as the other search functions
-    @route('/', methods=['POST'])
+    @route('/id_search', methods=['POST'])
     def id_search(self):
         data = request.form.to_dict()
-        option = self.get_option(data)
+        option = self._get_option(data)
 
         people = directory_search()
         result = []
@@ -156,7 +157,7 @@ class View(FlaskView):
         depts = departments()  # necessary until we build the ajax call for this
         return render_template('results.html', **locals())
 
-    def match_option(self, row, option, ):
+    def _match_option(self, row, option, ):
         match_option = False  # does the selected option match the role of the person?
         if option == 'both':
             match_option = True  # if option is both, set to true by default
@@ -188,7 +189,7 @@ class View(FlaskView):
 
         return ratio
 
-    def misc_fuzzy(self, search, key):  # much simpler fuzz method to use for things other than first or last name
+    def _misc_fuzzy(self, search, key):  # much simpler fuzz method to use for things other than first or last name
         ratio = fuzz.ratio(search, key)
         if search in key:
             ratio = 101
