@@ -48,7 +48,7 @@
                         {% endif %}
                     </div>
 
-                    {% if group %}
+                    {% if data['group'] == 'true' %}
                         <div class="column somethinglikeborderleftorsomthing">
                             {% if row['college']|length > 0 %}
                                 <p>
@@ -117,7 +117,7 @@
                         </div>
                     {% endif %}
 
-                    {% if home %}
+                    {% if data['home'] == 'true' %}
                         <div class="column somethinglikeborderleftorsomthing">
                             {% if row['addr_state'] != '' and row['addr_street1'] != '' and row['addr_city'] != '' and row['addr_zip'] != '' %}
                                 <p>{{ row['addr_street1'] }}</p>

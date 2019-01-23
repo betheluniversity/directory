@@ -15,10 +15,11 @@ class View(FlaskView):
         depts = departments()
         return render_template('index.html', **locals())
 
-    @route('/profile', methods=['GET'])
-    def make_profile(self):
-        # profile is in the session keys
-        return render_template('profile.html', **locals())
+    # Todo: someday we can add in a profile view
+    # @route('/profile', methods=['GET'])
+    # def make_profile(self):
+    #     # profile is in the session keys
+    #     return render_template('profile.html', **locals())
 
     # first and last name search. Holds the details and logic surrounding the first and last name searches
     @route('/fl_search', methods=['POST'])
