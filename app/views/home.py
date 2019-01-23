@@ -11,6 +11,7 @@ class View(FlaskView):
     def __init__(self):
         pass
 
+    @route('/', methods=['GET'])
     def index(self):
         depts = departments()
         return render_template('index.html', **locals())
@@ -20,19 +21,23 @@ class View(FlaskView):
         # profile is in the session keys
         return render_template('profile.html', **locals())
 
-    @route('/', methods=['POST'])
-    def passage(self):
+    @route('/search', methods=['POST'])
+    def search(self):
         data = self._get_data(request.form.to_dict())
 
-        if data['home'] == 'home':
+        if data['home'] == 'true':
             home = True
-        if data['group'] == 'group':
+        else:
+            home = False
+        if data['group'] == 'true':
             group = True
+        else:
+            group = False
 
         if data['first_name'] != '' or data['last_name'] != '':  # checking which people to show for name search
-            if data['faculty'] != '' and data['student'] == '':
+            if data['faculty'] == 'true' and data['student'] == 'false':
                 option = 'faculty'  # showing just staff/faculty results
-            elif data['student'] != '' and data['faculty'] == '':
+            elif data['faculty'] == 'false' and data['student'] == 'true':
                 option = 'student'  # showing just student results
             else:
                 option = 'both'  # showing all results
@@ -46,14 +51,11 @@ class View(FlaskView):
             result = self._email_search(data['email'])
 
         elif data['department'] != '':
-            group = True
             result = self._dept_search(data['department'])
 
         elif data['bu_id'] != '':
-            group = True
             result = self._id_search(data['bu_id'])
 
-        depts = departments() # so we can use the autocompleter in the department search after reloading the page
         return render_template('results.html', **locals())
 
     def _get_data(self, data):  # method to ensure we have data in all variables
