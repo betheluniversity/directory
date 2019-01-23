@@ -13,7 +13,7 @@
                 </div>
                 <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                        <form role="form" action="{{ url_for('View:passage') }}" method="POST">
+                        <form role="form" action="{{ url_for('View:fl_search') }}" method="POST">
                             <div class="form-group">
                                 <label for="first_name">First Name:</label>
                                 <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="first_name"
@@ -69,7 +69,7 @@
                 </div>
                 <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
                     <div class="card-body">
-                        <form role="form" action="{{ url_for('View:passage') }}" method="POST">
+                        <form role="form" action="{{ url_for('View:username_search') }}" method="POST">
                             <div class="form-group">
                                 <label for="username">Username:</label>
                                 <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="username"
@@ -108,7 +108,7 @@
                 </div>
                 <div id="collapseFive" class="collapse" role="tabpanel" aria-labelledby="headingFive" data-parent="#accordion">
                     <div class="card-body">
-                        <form role="form" action="{{ url_for('View:passage') }}" method="POST">
+                        <form role="form" action="{{ url_for('View:email_search') }}" method="POST">
                             <div class="form-group">
                                 <label for="email">Email:</label>
                                 <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="email"
@@ -149,7 +149,7 @@
                 </div>
                 <div id="collapseSeven" class="collapse" role="tabpanel" aria-labelledby="headingSeven" data-parent="#accordion">
                     <div class="card-body">
-                        <form role="form" action="{{ url_for('View:passage') }}" method="POST">
+                        <form role="form" action="{{ url_for('View:dept_search') }}" method="POST">
                             <div class="form-group">
                                 <label for="department">Department:</label>
                                 <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="department"
@@ -183,9 +183,9 @@
                 </div>
                 <div id="collapseNine" class="collapse" role="tabpanel" aria-labelledby="headingNine" data-parent="#accordion">
                     <div class="card-body">
-                        <form role="form" action="{{ url_for('View:passage') }}" method="POST">
+                        <form role="form" action="{{ url_for('View:id_search') }}" method="POST">
                             <div class="form-group">
-                                <label for="bu_id">ID:</label>
+                                <label for="id">ID:</label>
                                 <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="bu_id"
                                        id="id">
                             </div>
