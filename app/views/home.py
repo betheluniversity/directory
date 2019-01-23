@@ -22,7 +22,7 @@ class View(FlaskView):
 
     @route('/', methods=['POST'])
     def passage(self):
-        data = self.get_data(request.form.to_dict())
+        data = self._get_data(request.form.to_dict())
 
         if data['home'] == 'home':
             home = True
@@ -37,26 +37,26 @@ class View(FlaskView):
             else:
                 option = 'both'  # showing all results
 
-            result = self.fl_search(data['first_name'], data['last_name'], option)
+            result = self._fl_search(data['first_name'], data['last_name'], option)
 
         elif data['username'] != '':
-            result = self.username_search(data['username'])
+            result = self._username_search(data['username'])
 
         elif data['email'] != '':
-            result = self.email_search(data['email'])
+            result = self._email_search(data['email'])
 
         elif data['department'] != '':
             group = True
-            result = self.dept_search(data['department'])
+            result = self._dept_search(data['department'])
 
         elif data['bu_id'] != '':
             group = True
-            result = self.id_search(data['bu_id'])
+            result = self._id_search(data['bu_id'])
 
         depts = departments() # so we can use the autocompleter in the department search after reloading the page
         return render_template('results.html', **locals())
 
-    def get_data(self, data):  # method to ensure we have data in all variables
+    def _get_data(self, data):  # method to ensure we have data in all variables
         # Bruteforcing this because I HAVE to try/except every. single. line.
         # If BadRequestKeyErrors can be mass checked, I don't know how
         try:
@@ -105,53 +105,53 @@ class View(FlaskView):
         return data
 
     # first and last name search. Holds the details and logic surrounding the first and last name searches
-    def fl_search(self, first_name, last_name, option):  # option is the advanced settings for student/staff
+    def _fl_search(self, first_name, last_name, option):  # option is the advanced settings for student/staff
         people = directory_search()
         result = []
 
         if first_name != '' and last_name != '':  # If both boxes are filled out, this will be the loop that is checked
-            for row in people:
+            for person in people:
                 check = False
                 if option == 'both':
                     check = True
                 else:
-                    for role in row['role']:
+                    for role in person['role']:
                         if role == option:
                             check = True
                 if check:
-                    ratio = (self.fl_fuzzy(row['first_name'], row['last_name'], True, first_name) +
-                             self.fl_fuzzy(row['first_name'], row['last_name'], False, last_name))
+                    ratio = (self._fl_fuzzy(person['first_name'], person['last_name'], True, first_name) +
+                             self._fl_fuzzy(person['first_name'], person['last_name'], False, last_name))
 
                     if ratio >= 75:
-                        self.make_results(row, result, ratio)
+                        self._make_results(person, result, ratio)
 
         elif first_name != '' and last_name == '':  # called if first name and NOT last name are filled out
-            for row in people:
+            for person in people:
                 check = False
                 if option == 'both':
                     check = True
                 else:
-                    for role in row['role']:
+                    for role in person['role']:
                         if role == option:
                             check = True
                 if check:
-                    ratio = self.fl_fuzzy(row['first_name'], row['last_name'], True, first_name)
+                    ratio = self._fl_fuzzy(person['first_name'], person['last_name'], True, first_name)
                     if ratio >= 75:
-                        self.make_results(row, result, ratio)
+                        self._make_results(person, result, ratio)
 
         elif last_name != '' and first_name == '':  # called if last name and NOT first name are filled out
-            for row in people:
+            for person in people:
                 check = False
                 if option == 'both':
                     check = True
                 else:
-                    for role in row['role']:
+                    for role in person['role']:
                         if role == option:
                             check = True
                 if check:
-                    ratio = self.fl_fuzzy(row['first_name'], row['last_name'], False, last_name)
+                    ratio = self._fl_fuzzy(person['first_name'], person['last_name'], False, last_name)
                     if ratio >= 75:
-                        self.make_results(row, result, ratio)
+                        self._make_results(person, result, ratio)
 
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'], reverse=True)
@@ -159,15 +159,15 @@ class View(FlaskView):
         return result
 
     # Username search executes, creates, and formats the username searches
-    def username_search(self, username):
+    def _username_search(self, username):
         people = directory_search()
         result = []
 
         if username != '':
-            for row in people:
-                ratio = self.other_fuzzy(username, row['username'])
+            for person in people:
+                ratio = self._other_fuzzy(username, person['username'])
                 if ratio > 75:
-                    self.make_results(row, result, ratio)
+                    self._make_results(person, result, ratio)
 
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'], reverse=True)
@@ -175,15 +175,15 @@ class View(FlaskView):
         return result
 
     # Email search, executes, creates, and formats the email search and results
-    def email_search(self, email):
+    def _email_search(self, email):
         people = directory_search()
         result = []
 
         if email != '':
-            for row in people:
-                ratio = self.other_fuzzy(email, row['email'])
+            for person in people:
+                ratio = self._other_fuzzy(email, person['email'])
                 if ratio > 75:
-                    self.make_results(row, result, ratio)
+                    self._make_results(person, result, ratio)
 
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'], reverse=True)
@@ -191,15 +191,15 @@ class View(FlaskView):
         return result
 
     # department search, subject to change
-    def dept_search(self, department):
+    def _dept_search(self, department):
         people = directory_search()
         result = []
 
         if department != '':
-            for row in people:
-                for item in row['department']:
+            for person in people:
+                for item in person['department']:
                     if department in item:
-                        result.append(row)
+                        result.append(person)
                         break
 
         result.sort(key=lambda i: i['last_name'])
@@ -209,23 +209,19 @@ class View(FlaskView):
 
     # id search, only visible to those whose roles allow it
     # does the same as the other search functions
-    def id_search(self, bu_id):
+    def _id_search(self, bu_id):
         people = directory_search()
         result = []
 
         if bu_id != '':
-            for row in people:
-                ratio = self.other_fuzzy(bu_id, row['id'])
-                if ratio > 75:
-                    self.make_results(row, result, ratio)
-
-        result.sort(key=lambda i: i['last_name'])
-        result.sort(key=lambda i: i['ratio'], reverse=True)
+            for person in people:
+                if bu_id in person['id']:
+                    result.append(person)
 
         return result
 
     # Fuzzy method for first and last names, contains some extra logic
-    def fl_fuzzy(self, first_name, last_name, fl, search):
+    def _fl_fuzzy(self, first_name, last_name, fl, search):
         if fl:  # simpler logic to decide which name is being searched, first or last
             name = first_name
         else:
@@ -244,7 +240,7 @@ class View(FlaskView):
 
         return ratio
 
-    def other_fuzzy(self, search, key):  # much simpler fuzz method to use for things other than first or last name
+    def _other_fuzzy(self, search, key):  # much simpler fuzz method to use for things other than first or last name
         ratio = fuzz.ratio(search, key)
         if search in key:
             ratio = 101
@@ -254,6 +250,6 @@ class View(FlaskView):
         return ratio
 
     # only called if the fuzz ratio surpasses a certain threshold
-    def make_results(self, row, result, ratio):  # just creates a dictionary for ratio
+    def _make_results(self, row, result, ratio):  # just creates a dictionary for ratio
         row['ratio'] = ratio
         result.append(row)
