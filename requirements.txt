@@ -11,3 +11,4 @@ flask-caching
 python-Levenshtein
 werkzeug
 python-ldap
+redis
