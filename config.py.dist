@@ -1,7 +1,20 @@
-CONSTR = ''
+CONSTR = ""
 
 DB_KEY = ''
 
 SECRET_KEY = ''
 
 LOGOUT_URL = ''
+
+ENVIRON = 'test'
+
+# TEST_USER = ''
+
+SENTRY_URL = ''
+
+API_USERNAME = ''
+API_PASSWORD = ''
+API_URL = ''
+
+LDAP_SVC_TINKER_PASSWORD = ''
+LDAP_CONNECTION_INFO = ''

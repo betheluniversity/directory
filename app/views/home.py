@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, abort
 from flask_classy import FlaskView, route
 
 from fuzzywuzzy import fuzz
@@ -12,6 +12,7 @@ class View(FlaskView):
 
     @route('/', methods=['GET'])
     def index(self):
+        abort(404)
         depts = departments()
         return render_template('index.html', **locals())
 
