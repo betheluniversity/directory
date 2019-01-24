@@ -17,10 +17,10 @@
                         </div>
                     {% else %}
                         <div class="column">
-                                <img src="{{ row['image_path'] }}" alt="Profile Photo" id="image_path" class="idkdirectorypicturesidksomethinglikethat">
+                                <img src="{{ row['image_path'] }}" alt="Profile Photo" id="image_path" class="directory-picture">
                         </div>
                     {% endif %}
-                    <div class="column somethinglikeborderleftorsomthing">
+                    <div class="column border-left">
                         {% if row['last_name'] != '' and row['first_name'] != '' %}
                             <p><strong>{{ row['last_name'] }}, {{ row['first_name'] }}</strong></p>
                         {% endif %}
@@ -52,7 +52,7 @@
                     </div>
 
                     {% if data['group'] == 'true' %}
-                        <div class="column somethinglikeborderleftorsomthing">\
+                        <div class="column border-left">\
                             {% if row['role']|length > 0 %}
                                 <p>
                                     {% for i in range(0, row['role']|length) %}
@@ -121,7 +121,7 @@
                     {% endif %}
 
                     {% if data['home'] == 'true' %}
-                        <div class="column somethinglikeborderleftorsomthing">
+                        <div class="column border-left">
                             {% if row['addr_state'] != '' and row['addr_street1'] != '' and row['addr_city'] != '' and row['addr_zip'] != '' %}
                                 <p>{{ row['addr_street1'] }}</p>
                                 {% if row['addr_street2'] != '' %}
