@@ -1,10 +1,14 @@
+import datetime
+
 from flask import Flask, session, make_response, redirect
 from flask_caching import Cache
 
-import datetime
-
 app = Flask(__name__)
 app.config.from_object('config')
+
+if app.config['SENTRY_URL']:
+    from raven import Client
+    client = Client(app.config['SENTRY_URL'])
 
 if app.config['ENVIRON'] != 'prod':
     cache = Cache(app, config={'CACHE_TYPE': 'simple'})
@@ -25,6 +29,11 @@ else:
         # finicky and should have a prefix so that .clear() knows which values to remove.
         'CACHE_KEY_PREFIX': 'directory-'
     })
+
+from raven.contrib.flask import Sentry
+sentry = Sentry(app, dsn=app.config['SENTRY_URL'])
+
+from app.views import error
 
 # Shows the year for the template
 app.jinja_env.globals.update(now=datetime.datetime.now())
