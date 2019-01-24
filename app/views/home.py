@@ -12,7 +12,6 @@ class View(FlaskView):
 
     @route('/', methods=['GET'])
     def index(self):
-        abort(404)
         depts = departments()
         return render_template('index.html', **locals())
 
