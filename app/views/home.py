@@ -145,15 +145,13 @@ class View(FlaskView):
         if data['bu_id'] != '':
             for row in people:
                 if self._match_option(row, option):
-                    ratio = self._misc_fuzzy(data['bu_id'], row['id'])
-                    if ratio > 75:
-                        self._make_results(row, result, ratio)
+                    if data['bu_id'] in row['id']:
+                        result.append(row)
         else:
             result = people
             return render_template('results.html', **locals())
 
         result.sort(key=lambda i: i['last_name'])
-        result.sort(key=lambda i: i['ratio'], reverse=True)
 
         return render_template('results.html', **locals())
 

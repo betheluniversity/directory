@@ -228,62 +228,63 @@
                         </form>
                     </div>
                 </div>
-
-                <div class="card">
-                    <div class="card-header" role="tab" id="headingNine">
-                        <h5 class="collapsed">
-                            <a class="collapsed" data-toggle="collapse" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
-                                Search by ID &#9662;
-                            </a>
-                        </h5>
+                {% if session['ITS_view'] == True %}
+                    <div class="card">
+                        <div class="card-header" role="tab" id="headingNine">
+                            <h5 class="collapsed">
+                                <a class="collapsed" data-toggle="collapse" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                                    Search by ID &#9662;
+                                </a>
+                            </h5>
+                        </div>
                     </div>
-                </div>
-                <div id="collapseNine" class="collapse" role="tabpanel" aria-labelledby="headingNine" data-parent="#accordion">
-                    <div class="card-body">
-                        <form role="form" action="{{ url_for('View:id_search') }}" class="directory-form" method="POST">
-                            <div class="form-group">
-                                <label for="id">ID:</label>
-                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="bu_id"
-                                       id="bu_id">
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Search</button>
-                                <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseTen"
-                                   aria-expanded="false" aria-controls="collapseTen"> Advanced &#9662;</a>
-                                <div id="collapseTen" class="collapse" role="tabpanel" aria-labelledby="headingTen">
-                                    <div class="card-body">
-                                        {% if session['ITS_view'] %}
+                    <div id="collapseNine" class="collapse" role="tabpanel" aria-labelledby="headingNine" data-parent="#accordion">
+                        <div class="card-body">
+                            <form role="form" action="{{ url_for('View:id_search') }}" class="directory-form" method="POST">
+                                <div class="form-group">
+                                    <label for="id">ID:</label>
+                                    <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="bu_id"
+                                           id="bu_id">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Search</button>
+                                    <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseTen"
+                                       aria-expanded="false" aria-controls="collapseTen"> Advanced &#9662;</a>
+                                    <div id="collapseTen" class="collapse" role="tabpanel" aria-labelledby="headingTen">
+                                        <div class="card-body">
+                                            {% if session['ITS_view'] %}
+                                                <label class="advanced">
+                                                    <input type="checkbox" class="view_ids" name="view_ids" value="view_ids" checked />
+                                                    Display ID's (ITS Staff)
+                                                </label>
+                                            {% endif %}
+
                                             <label class="advanced">
-                                                <input type="checkbox" class="view_ids" name="view_ids" value="view_ids"/>
-                                                Display ID's (ITS Staff)
+                                                <input type="checkbox" class="home" name="home" value="home"/>
+                                                Home
                                             </label>
-                                        {% endif %}
 
-                                        <label class="advanced">
-                                            <input type="checkbox" class="home" name="home" value="home"/>
-                                            Home
-                                        </label>
+                                            <label class="advanced">
+                                                <input type="checkbox" class="group" name="group" value="group"/>
+                                                Groups
+                                            </label>
 
-                                        <label class="advanced">
-                                            <input type="checkbox" class="group" name="group" value="group"/>
-                                            Groups
-                                        </label>
+                                            <label class="advanced">
+                                                <input type="checkbox" class="student" name="student" value="student" checked />
+                                                Student
+                                            </label>
 
-                                        <label class="advanced">
-                                            <input type="checkbox" class="student" name="student" value="student" checked />
-                                            Student
-                                        </label>
-
-                                        <label class="advanced">
-                                            <input type="checkbox" class="faculty" name="faculty" value="faculty" checked />
-                                            Faculty/Staff
-                                        </label>
+                                            <label class="advanced">
+                                                <input type="checkbox" class="faculty" name="faculty" value="faculty" checked />
+                                                Faculty/Staff
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                {% endif %}
             </div>
         </div>
 
