@@ -178,12 +178,13 @@ class View(FlaskView):
 
     # Fuzzy method for first and last names, contains some extra logic
     def _fl_fuzzy(self, first_name, last_name, fl, search):
-        if first_name == 'Boston':
-            pass
         if fl:  # simpler logic to decide which name is being searched, first or last
             name = first_name
         else:
             name = last_name
+
+        name = self._clean_search_text(name)
+        search = self._clean_search_text(search)
 
         # if len(search.decode('utf-8')) <= 3:  # above logic is so this can blanket the rest of the fuzzy comparison
         if len(search) <= 3:  # above logic is so this can blanket the rest of the fuzzy comparison
@@ -199,6 +200,9 @@ class View(FlaskView):
         return ratio
 
     def _misc_fuzzy(self, search, key):  # much simpler fuzz method to use for things other than first or last name
+        search = self._clean_search_text(search)
+        key = self._clean_search_text(key)
+
         ratio = fuzz.ratio(search, key)
         if search in key:
             ratio = 101
@@ -211,3 +215,6 @@ class View(FlaskView):
     def _make_results(self, row, result, ratio):  # just creates a dictionary for ratio
         row['ratio'] = ratio
         result.append(row)
+
+    def _clean_search_text(self, text):
+        return text.lower().strip()
