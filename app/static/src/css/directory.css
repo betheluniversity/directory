@@ -1,5 +1,6 @@
 #page-content-wrapper {
     padding: 1em;
+    height: calc(100vh - 185px);
 }
 
 .btn {
