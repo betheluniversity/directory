@@ -91,6 +91,7 @@ class View(FlaskView):
     @route('search', methods=['POST'])
     def search(self):
         data = request.form.to_dict()
+
         # option is the advanced settings for student/staff
         viewing_role = self.base.get_viewing_role(data)
 
