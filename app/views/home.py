@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, abort
+from flask import Flask, render_template, request, session, abort, redirect
 from flask_classy import FlaskView, route
 
 from fuzzywuzzy import fuzz
@@ -154,6 +154,10 @@ class View(FlaskView):
         result.sort(key=lambda i: i['last_name'])
 
         return render_template('results.html', **locals())
+
+    @route('/favicon.ico')
+    def favicon(self):
+        return redirect('/static/dist/favicons/favicon.ico')
 
     def _get_option(self, data):
         if data.get('faculty') == 'true' and data.get('student') == 'true':
