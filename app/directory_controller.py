@@ -1,85 +1,195 @@
-import ldap
-import re
-import requests
-import time
-
-
-from flask import session, request, current_app
-from flask import json as fjson
+from flask import render_template
+from fuzzywuzzy import fuzz
 
 from app import app
-from app.db.db_functions import portal_profile
+from app.db.db_functions import directory_search
 
 
 class DirectoryController(object):
     def __init__(self):
         pass
 
-    def before_request(self):
-        def init_user():
-            if 'session_time' in session.keys():
-                seconds_in_12_hours = 60 * 60 * 12  # equates to 12 hours
-                reset_session = time.time() - session['session_time'] >= seconds_in_12_hours
-            else:
-                reset_session = True
+    # first and last name search. Holds the details and logic surrounding the first and last name searches
+    def fl_search(self, data, viewing_role):
+        people = directory_search()
+        result = []
 
-            # if not production or 12 hours have past, then clear our session variables on each call
-            if reset_session:
-                session.clear()
-                seconds_in_12_hours = 60 * 60 * 12
-                session['session_time'] = time.time() + seconds_in_12_hours
+        if data['first_name'] != '' and data[
+            'last_name'] != '':  # If both boxes are filled out, this will be the loop that is checked
+            for row in people:
+                if self.match_option(row, viewing_role):
+                    ratio = (self.fl_fuzzy(row['first_name'], row['last_name'], True, data['first_name']) +
+                             self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name']))
+                    if ratio >= 120:
+                        self.make_results(row, result, ratio)
+        elif data['first_name'] != '' and data[
+            'last_name'] == '':  # called if first name and NOT last name are filled out
+            for row in people:
+                if self.match_option(row, viewing_role):
+                    ratio = self.fl_fuzzy(row['first_name'], row['last_name'], True, data['first_name'])
+                    if ratio >= 75:
+                        self.make_results(row, result, ratio)
+        elif data['last_name'] != '' and data[
+            'first_name'] == '':  # called if last name and NOT first name are filled out
+            for row in people:
+                if self.match_option(row, viewing_role):  # if its true, check the person
+                    ratio = self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name'])
+                    if ratio >= 75:
+                        self.make_results(row, result, ratio)
 
-            if 'username' not in session.keys():
-                get_user()
+        elif data['last_name'] == '' and data['first_name'] == '':  # if both are empty, return everyone
+            result = people
+            return render_template('results.html', **locals())
 
-            if 'roles' not in session.keys():
-                get_roles()
+        result.sort(key=lambda i: i['last_name'])
+        result.sort(key=lambda i: i['ratio'], reverse=True)
 
-            if 'profile' not in session.keys():
-                session['profile'] = portal_profile(session['username'])
+        return render_template('results.html', **locals())
 
-            if 'ITS_view' not in session.keys():
-                get_its_view()
+    # Username search executes, creates, and formats the username searches
+    def username_search(self, data, viewing_role):
+        people = directory_search()
+        result = []
 
-        def get_user():
-            if current_app.config['ENVIRON'] == 'prod':
-                username = request.environ.get('REMOTE_USER')
-            else:
-                username = current_app.config['TEST_USER']
+        if data['username'] != '':  # put in the student/staff filters
+            for row in people:
+                if self.match_option(row, viewing_role):
+                    ratio = self.misc_fuzzy(data['username'], row['username'])
+                    if ratio > 75:
+                        self.make_results(row, result, ratio)
+        else:
+            result = people
+            return render_template('results.html', **locals())
 
-            session['username'] = username
+        result.sort(key=lambda i: i['last_name'])
+        result.sort(key=lambda i: i['ratio'], reverse=True)
 
-        def get_roles(username=None):
-            if not username:
-                username = session['username']
-            url = current_app.config['API_URL'] + "/username/%s/roles" % username
-            r = requests.get(url, auth=(current_app.config['API_USERNAME'], current_app.config['API_PASSWORD']))
-            roles = fjson.loads(r.content)
-            ret = []
-            for key in roles.keys():
-                ret.append(roles[key]['userRole'])
+        return render_template('results.html', **locals())
 
-            session['roles'] = ret
+    # Email search, executes, creates, and formats the email search and results
+    def email_search(self, data, viewing_role):
+        people = directory_search()
+        result = []
 
-            return ret
+        if data['email'] != '':  # put in the student/staff filters
+            for row in people:
+                if self.match_option(row, viewing_role):
+                    ratio = self.misc_fuzzy(data['email'], row['email'])
+                    if ratio > 75:
+                        self.make_results(row, result, ratio)
+        else:
+            result = people
+            return render_template('results.html', **locals())
 
-        def get_its_view():
-            try:
-                session['ITS_view'] = False
-                con = ldap.initialize(app.config['LDAP_CONNECTION_INFO'])
-                con.simple_bind_s('BU\svc-tinker', app.config['LDAP_SVC_TINKER_PASSWORD'])
+        result.sort(key=lambda i: i['last_name'])
+        result.sort(key=lambda i: i['ratio'], reverse=True)
 
-                # code to get all users in a group
-                results = con.search_s('ou=Bethel Users,dc=bu,dc=ac,dc=bethel,dc=edu', ldap.SCOPE_SUBTREE,
-                                       "(|(&(sAMAccountName=%s)))" % session['username'])
+        return render_template('results.html', **locals())
 
-                for result in results:
-                    for ldap_string in result[1]['memberOf']:
-                        user_iam_group = re.search('CN=([^,]*)', str(ldap_string)).group(1)
-                        if user_iam_group == 'ITS - Employees':
-                            session['ITS_view'] = True
-            except:
-                session['ITS_view'] = False
+    # department search, subject to change
+    def dept_search(self, data, viewing_role):
+        people = directory_search()
+        result = []
 
+        if data['department'] != '':
+            for row in people:
+                if self.match_option(row, viewing_role):
+                    for item in row['department']:
+                        if data['department'] in item:
+                            result.append(row)
+                            break
+        else:
+            result = people
+            return render_template('results.html', **locals())
 
-        init_user()
+        result.sort(key=lambda i: i['last_name'])
+        result.sort(key=lambda i: i['id'])
+
+        return render_template('results.html', **locals())
+
+    # id search, only visible to those whose roles allow it
+    # does the same as the other search functions
+    def id_search(self, data, viewing_role):
+        people = directory_search()
+        result = []
+
+        if data['bu_id'] != '':
+            for row in people:
+                if self.match_option(row, viewing_role):
+                    if data['bu_id'] in row['id']:
+                        result.append(row)
+        else:
+            result = people
+            return render_template('results.html', **locals())
+
+        result.sort(key=lambda i: i['last_name'])
+
+        return render_template('results.html', **locals())
+
+    def get_viewing_role(self, data):
+        if data.get('faculty') == 'true' and data.get('student') == 'true':
+            return 'both'  # showing all results
+        elif data.get('faculty') == 'true':
+            return 'faculty'  # showing just staff/faculty results
+        elif data.get('student') == 'true':
+            return 'student'  # showing just student results
+        else:
+            return 'both'  # defaults to showing all results
+
+    def match_option(self, row, option, ):
+        if option == 'both':
+            return True
+        else:
+            for role in row['role']:
+                if role.lower() == option:
+                    return True
+        return False
+
+    # Fuzzy method for first and last names, contains some extra logic
+    def fl_fuzzy(self, first_name, last_name, fl, search):
+        if fl:  # simpler logic to decide which name is being searched, first or last
+            name = first_name
+        else:
+            name = last_name
+
+        name = self.clean_search_text(name)
+        search = self.clean_search_text(search)
+
+        # if len(search.decode('utf-8')) <= 3:  # above logic is so this can blanket the rest of the fuzzy comparison
+        if len(search) <= 3:  # above logic is so this can blanket the rest of the fuzzy comparison
+            ratio = fuzz.partial_ratio(name, search)  # also utilizes partial ratio instead of just fuzz.ratio
+        else:
+            ratio = fuzz.ratio(name, search)
+
+        # if the text is an exact match, prioritize it.
+        if search == name:
+            ratio = 140
+        elif name.startswith(search):
+            ratio = 120
+        elif search in name:
+            ratio = 101
+
+        return ratio
+
+    def misc_fuzzy(self, search, key):  # much simpler fuzz method to use for things other than first or last name
+        search = self.clean_search_text(search)
+        key = self.clean_search_text(key)
+
+        ratio = fuzz.ratio(search, key)
+        # if the text is an exact match, prioritize it.
+        if search == key:
+            ratio = 140
+        elif key.startswith(search):
+            ratio = 120
+        elif search in key:
+            ratio = 101
+
+        return ratio
+
+    # only called if the fuzz ratio surpasses a certain threshold
+    def make_results(self, row, result, ratio):  # just creates a dictionary for ratio
+        row['ratio'] = ratio
+        result.append(row)
+
+    def clean_search_text(self, text):
+        return text.lower().strip()

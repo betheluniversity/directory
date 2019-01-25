@@ -1,6 +1,6 @@
 import datetime
 
-from flask import Flask, session, make_response, redirect
+from flask import Flask
 from flask_caching import Cache
 
 app = Flask(__name__)
@@ -38,23 +38,6 @@ from app.views import error
 # Shows the year for the template
 app.jinja_env.globals.update(now=datetime.datetime.now())
 
-from app.db import db_functions as db
-from app.directory_controller import  DirectoryController
 from app.views.home import View
 
 View.register(app, route_base='/')
-
-
-@app.before_request
-def before_request():
-    base = DirectoryController()
-    base.before_request()
-
-
-@app.route('/logout', methods=['GET'])
-def logout():
-    session.clear()
-    resp = make_response(redirect(app.config['LOGOUT_URL']))
-    resp.set_cookie('MOD_AUTH_CAS_S', '', expires=0)
-    resp.set_cookie('MOD_AUTH_CAS', '', expires=0)
-    return resp
