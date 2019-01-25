@@ -4,30 +4,88 @@
     <div class="row">
         <div class="search col-lg-4" id="accordion" role="tablist" aria-multiselectable="false">
             <div class="card">
-                <div class="card-header" id="headingOne">
+
+                <div class="card-header">
                     <h5 class="mb-0">
-                        <a class="collapsed" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                          Search by Name &#9662;
-                        </a>
+                        Search
                     </h5>
                 </div>
-                <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                <div role="tabpanel">
                     <div class="card-body">
-                        <form role="form" action="{{ url_for('View:fl_search') }}" class="directory-form" method="POST">
-                            <div class="form-group">
+                        <form role="form" action="{{ url_for('View:search') }}" class="directory-form" method="POST">
+{#                            <div class="form-group">#}
+{#                                <label for="search_type">Search type:#}
+{#                                    <select id="search_type" class="form-control">#}
+{#                                        <option value="name_search">Name</option>#}
+{#                                        <option value="username_search">Username</option>#}
+{#                                        <option value="email_search">Email</option>#}
+{#                                        <option value="dept_search">Department</option>#}
+{#                                        {% if 'STAFF' in session['roles'] or 'FACULTY' in session['roles'] %}#}
+{#                                            <option value="id_search">ID</option>#}
+{#                                        {% endif %}#}
+{#                                    </select>#}
+{#                                </label>#}
+{#                            </div>#}
+                            <div id="search_type">
+                                <p><strong>Search Types:</strong></p>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="search_type" id="name_search" value="name_search" checked>
+                                    <label for="name_search">Name</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="search_type" id="username_search" value="username_search">
+                                    <label for="username_search">Username</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="search_type" id="email_search" value="email_search">
+                                    <label for="email_search">Email</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="search_type" id="dept_search" value="dept_search">
+                                    <label for="dept_search">Department</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="search_type" id="id_search" value="id_search">
+                                    <label for="id_search">ID</label>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="form-group name_search">
                                 <label for="first_name">First Name:</label>
-                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="first_name"
-                                       id="first_name">
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" id="first_name">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group name_search">
                                 <label for="last_name">Last Name:</label>
-                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="last_name"
-                                       id="last_name">
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" id="last_name">
                             </div>
+
+                            <div class="form-group username_search d-none">
+                                <label for="username">Username:</label>
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" id="username">
+                            </div>
+
+                            <div class="form-group email_search d-none">
+                                <label for="email">Email:</label>
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" id="email">
+                            </div>
+
+                            <div class="form-group dept_search d-none">
+                                <label for="department">Department:</label>
+                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" id="department">
+                            </div>
+
+                            {% if session['ITS_view'] %}
+                                <div class="form-group id_search d-none">
+                                    <label for="id">ID:</label>
+                                    <input type="text" class="form-control col-12 col-md-8 col-lg-10" id="bu_id">
+                                </div>
+                            {% endif %}
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Search</button>
-                                <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseTwo"
+                                <a class="btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseTwo"
                                    aria-expanded="false" aria-controls="collapseTwo"> Advanced &#9662;</a>
                                 <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
                                     <div class="card-body">
@@ -60,235 +118,29 @@
                                     </div>
                                 </div>
                             </div>
+                            <small>Go to <a href="{{ url_for('View:index') }}">Instructions</a>.</small>
                         </form>
                     </div>
                 </div>
-
-                <div class="card">
-                    <div class="card-header" role="tab" id="headingThree">
-                        <h5 class="collapsed">
-                            <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                                Search by Username &#9662;
-                            </a>
-                        </h5>
-                    </div>
-                </div>
-                <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
-                    <div class="card-body">
-                        <form role="form" action="{{ url_for('View:username_search') }}" class="directory-form" method="POST">
-                            <div class="form-group">
-                                <label for="username">Username:</label>
-                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="username"
-                                       id="username">
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Search</button>
-                                <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseFour"
-                                   aria-expanded="false" aria-controls="collapseTwo"> Advanced &#9662;</a>
-                                <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                    <div class="card-body">
-                                        {% if session['ITS_view'] %}
-                                            <label class="advanced">
-                                                <input type="checkbox" class="view_ids" name="view_ids" value="view_ids"/>
-                                                Display ID's (ITS Staff)
-                                            </label>
-                                        {% endif %}
-
-                                        <label class="advanced">
-                                            <input type="checkbox" class="home" name="home" value="home"/>
-                                            Home
-                                        </label>
-
-                                        <label class="advanced">
-                                            <input type="checkbox" class="group" name="group" value="group"/>
-                                            Groups
-                                        </label>
-
-                                        <label class="advanced">
-                                            <input type="checkbox" class="student" name="student" value="student" checked />
-                                            Student
-                                        </label>
-
-                                        <label class="advanced">
-                                            <input type="checkbox" class="faculty" name="faculty" value="faculty" checked />
-                                            Faculty/Staff
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header" role="tab" id="headingFive">
-                        <h5 class="collapsed">
-                            <a class="collapsed" data-toggle="collapse" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                Search by Email &#9662;
-                            </a>
-                        </h5>
-                    </div>
-                </div>
-                <div id="collapseFive" class="collapse" role="tabpanel" aria-labelledby="headingFive" data-parent="#accordion">
-                    <div class="card-body">
-                        <form role="form" action="{{ url_for('View:email_search') }}" class="directory-form" method="POST">
-                            <div class="form-group">
-                                <label for="email">Email:</label>
-                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="email"
-                                       id="email">
-                            </div>
-                            <div class="form-group">
-                                <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Search</button>
-                                <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseSix"
-                                   aria-expanded="false" aria-controls="collapseSix"> Advanced &#9662;</a>
-                                <div id="collapseSix" class="collapse" role="tabpanel" aria-labelledby="headingSix">
-                                    <div class="card-body">
-                                        {% if session['ITS_view'] %}
-                                            <label class="advanced">
-                                                <input type="checkbox" class="view_ids" name="view_ids" value="view_ids"/>
-                                                Display ID's (ITS Staff)
-                                            </label>
-                                        {% endif %}
-
-                                        <label class="advanced">
-                                            <input type="checkbox" class="home" name="home" value="home"/>
-                                            Home
-                                        </label>
-
-                                        <label class="advanced">
-                                            <input type="checkbox" class="group" name="group" value="group"/>
-                                            Groups
-                                        </label>
-
-                                        <label class="advanced">
-                                            <input type="checkbox" class="student" name="student" value="student" checked />
-                                            Student
-                                        </label>
-
-                                        <label class="advanced">
-                                            <input type="checkbox" class="faculty" name="faculty" value="faculty" checked />
-                                            Faculty/Staff
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header" role="tab" id="headingSeven">
-                        <h5 class="collapsed">
-                            <a class="collapsed" data-toggle="collapse" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                                Search by Department &#9662;
-                            </a>
-                        </h5>
-                    </div>
-                </div>
-                <div id="collapseSeven" class="collapse" role="tabpanel" aria-labelledby="headingSeven" data-parent="#accordion">
-                    <div class="card-body">
-                        <form role="form" action="{{ url_for('View:dept_search') }}" class="directory-form" method="POST">
-                            <div class="form-group">
-                                <label for="department">Department:</label>
-                                <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="department"
-                                       id="department">
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Search</button>
-                                <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseEight"
-                                   aria-expanded="false" aria-controls="collapseEight"> Advanced &#9662;</a>
-                                <div id="collapseEight" class="collapse" role="tabpanel" aria-labelledby="headingEight">
-                                    <div class="card-body">
-                                        {% if session['ITS_view'] %}
-                                            <label class="advanced">
-                                                <input type="checkbox" class="view_ids" name="view_ids" value="view_ids"/>
-                                                Display ID's (ITS Staff)
-                                            </label>
-                                        {% endif %}
-
-                                        <label class="advanced">
-                                            <input type="checkbox" class="home" name="home" value="home"/>
-                                            Home
-                                        </label>
-
-                                        <label class="advanced">
-                                            <input type="checkbox" class="group" name="group" value="group" checked />
-                                            Groups
-                                        </label>
-
-                                        <label class="advanced">
-                                            <input type="checkbox" class="faculty" name="faculty" value="faculty" checked />
-                                            Faculty/Staff
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                {% if session['ITS_view'] == True %}
-                    <div class="card">
-                        <div class="card-header" role="tab" id="headingNine">
-                            <h5 class="collapsed">
-                                <a class="collapsed" data-toggle="collapse" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
-                                    Search by ID &#9662;
-                                </a>
-                            </h5>
-                        </div>
-                    </div>
-                    <div id="collapseNine" class="collapse" role="tabpanel" aria-labelledby="headingNine" data-parent="#accordion">
-                        <div class="card-body">
-                            <form role="form" action="{{ url_for('View:id_search') }}" class="directory-form" method="POST">
-                                <div class="form-group">
-                                    <label for="id">ID:</label>
-                                    <input type="text" class="form-control col-12 col-md-8 col-lg-10" name="bu_id"
-                                           id="bu_id">
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Search</button>
-                                    <a class="collapsed btn btn-secondary" data-toggle="collapse" data-parent="accordion" href="#collapseTen"
-                                       aria-expanded="false" aria-controls="collapseTen"> Advanced &#9662;</a>
-                                    <div id="collapseTen" class="collapse" role="tabpanel" aria-labelledby="headingTen">
-                                        <div class="card-body">
-                                            {% if session['ITS_view'] %}
-                                                <label class="advanced">
-                                                    <input type="checkbox" class="view_ids" name="view_ids" value="view_ids" checked />
-                                                    Display ID's (ITS Staff)
-                                                </label>
-                                            {% endif %}
-
-                                            <label class="advanced">
-                                                <input type="checkbox" class="home" name="home" value="home"/>
-                                                Home
-                                            </label>
-
-                                            <label class="advanced">
-                                                <input type="checkbox" class="group" name="group" value="group"/>
-                                                Groups
-                                            </label>
-
-                                            <label class="advanced">
-                                                <input type="checkbox" class="student" name="student" value="student" checked />
-                                                Student
-                                            </label>
-
-                                            <label class="advanced">
-                                                <input type="checkbox" class="faculty" name="faculty" value="faculty" checked />
-                                                Faculty/Staff
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                {% endif %}
             </div>
         </div>
+        <div id="results" class="card-view col-lg-8">
+            <h2 id="results_header">Welcome!</h2>
+            <hr>
+            <p>Welcome to the Bethel Directory. In the search box, you will find a variety of options to search by:</p>
+            <ul>
+                <li>Name Search</li>
+                <li>Username Search</li>
+                <li>Email Search</li>
+                <li>Department Search</li>
+                {% if session['ITS_view'] %}
+                    <li>ID Search</li>
+                {% endif %}
+            </ul>
 
-        <div id="results" class="card-view col-lg-8"></div>
+            <p>The Bethel Directory search is designed to find results that are exact matches, as well matches that are similar to
+            what you searched for. </p>
+        </div>
     </div>
 
 {# TODO: this is kind of random. Should probably be moved somewhere or something. Definitely needs comments #}

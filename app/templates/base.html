@@ -53,9 +53,7 @@
                 <span class="u-fs14 d-none  d-sm-none  d-md-inline-block">{{ session['pref_first_name'] }}</span>
             </a>
             <div class="dropdown-menu  dropdown-menu-right" style="right:0;left:auto;">
-{#                <a class="dropdown-item" href="{{ url_for('View:make_profile') }}">Profile</a>#}
-{#                <div class="dropdown-divider"></div>#}
-                <a class="dropdown-item" href="{{ url_for('logout') }}">Log out</a>
+                <a class="dropdown-item" href="{{ url_for('View:logout') }}">Log out</a>
             </div>
         </div>
     </nav>
