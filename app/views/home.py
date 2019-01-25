@@ -157,7 +157,7 @@ class View(FlaskView):
 
     @route('/favicon.ico')
     def favicon(self):
-        return redirect('/static/dist/favicons/favicon.ico')
+        return redirect('/static/src/favicons/favicon.ico')
 
     def _get_option(self, data):
         if data.get('faculty') == 'true' and data.get('student') == 'true':
