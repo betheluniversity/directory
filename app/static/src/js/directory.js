@@ -21,7 +21,7 @@ $(document).ready(function () {
             'home': $form.find('.home').is(':checked') || 'false',
             'group': $form.find('.group').is(':checked') || 'false',
             'student': $form.find('.student').is(':checked') || 'false',
-            'faculty': $form.find('.faculty').is(':checked') || 'false'
+            'faculty_or_staff': $form.find('.faculty_or_staff').is(':checked') || 'false'
         };
 
         /* Send the data using post */

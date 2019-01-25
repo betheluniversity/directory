@@ -14,23 +14,25 @@ class DirectoryController(object):
         people = directory_search()
         result = []
 
-        if data['first_name'] != '' and data[
-            'last_name'] != '':  # If both boxes are filled out, this will be the loop that is checked
+        # first and last name search
+        if data['first_name'] != '' and data['last_name'] != '':
             for row in people:
                 if self.match_option(row, viewing_role):
                     ratio = (self.fl_fuzzy(row['first_name'], row['last_name'], True, data['first_name']) +
                              self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name']))
                     if ratio >= 120:
                         self.make_results(row, result, ratio)
-        elif data['first_name'] != '' and data[
-            'last_name'] == '':  # called if first name and NOT last name are filled out
+        # first name search
+        elif data['first_name'] != '' and data['last_name'] == '':
             for row in people:
+                # print(row['first_name'] + ' ' + row['last_name'])
                 if self.match_option(row, viewing_role):
+                    # print(row['first_name'] + ' ' + row['last_name'])
                     ratio = self.fl_fuzzy(row['first_name'], row['last_name'], True, data['first_name'])
                     if ratio >= 75:
                         self.make_results(row, result, ratio)
-        elif data['last_name'] != '' and data[
-            'first_name'] == '':  # called if last name and NOT first name are filled out
+        # last name search
+        elif data['last_name'] != '' and data['first_name'] == '':
             for row in people:
                 if self.match_option(row, viewing_role):  # if its true, check the person
                     ratio = self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name'])
@@ -38,7 +40,9 @@ class DirectoryController(object):
                         self.make_results(row, result, ratio)
 
         elif data['last_name'] == '' and data['first_name'] == '':  # if both are empty, return everyone
-            result = people
+            for row in people:
+                if self.match_option(row, viewing_role):  # if its true, check the person
+                    result.append(row)
             return render_template('results.html', **locals())
 
         result.sort(key=lambda i: i['last_name'])
@@ -129,14 +133,14 @@ class DirectoryController(object):
     def get_viewing_role(self, data):
         if data.get('faculty') == 'true' and data.get('student') == 'true':
             return 'both'  # showing all results
-        elif data.get('faculty') == 'true':
-            return 'faculty'  # showing just staff/faculty results
+        elif data.get('faculty_or_staff') == 'true':
+            return 'faculty_or_staff'  # showing just staff/faculty results
         elif data.get('student') == 'true':
             return 'student'  # showing just student results
         else:
             return 'both'  # defaults to showing all results
 
-    def match_option(self, row, option, ):
+    def match_option(self, row, option):
         if option == 'both':
             return True
         else:
