@@ -35,7 +35,7 @@ class View(FlaskView):
                 if self._match_option(row, option):
                     ratio = (self._fl_fuzzy(row['first_name'], row['last_name'], True, data['first_name']) +
                              self._fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name']))
-                    if ratio >= 75:
+                    if ratio >= 120:
                         self._make_results(row, result, ratio)
         elif data['first_name'] != '' and data['last_name'] == '':  # called if first name and NOT last name are filled out
             for row in people:
@@ -190,10 +190,13 @@ class View(FlaskView):
         else:
             ratio = fuzz.ratio(name, search)
 
-        if search in name:
-            ratio = 101
+        # if the text is an exact match, prioritize it.
         if search == name:
-            ratio = 102
+            ratio = 140
+        elif name.startswith(search):
+            ratio = 120
+        elif search in name:
+            ratio = 101
 
         return ratio
 
@@ -202,10 +205,13 @@ class View(FlaskView):
         key = self._clean_search_text(key)
 
         ratio = fuzz.ratio(search, key)
-        if search in key:
-            ratio = 101
+        # if the text is an exact match, prioritize it.
         if search == key:
-            ratio = 102
+            ratio = 140
+        elif key.startswith(search):
+            ratio = 120
+        elif search in key:
+            ratio = 101
 
         return ratio
 
