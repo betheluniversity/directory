@@ -89,20 +89,13 @@
                                    aria-expanded="false" aria-controls="collapseTwo"> Advanced &#9662;</a>
                                 <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
                                     <div class="card-body">
-                                        {% if session['ITS_view'] %}
-                                            <label class="advanced">
-                                                <input type="checkbox" class="view_ids" name="view_ids" value="view_ids"/>
-                                                Display ID's (ITS Staff)
-                                            </label>
-                                        {% endif %}
-
                                         <label class="advanced">
-                                            <input type="checkbox" class="home" name="home" value="home"/>
+                                            <input type="checkbox" class="home" name="home" value="home" />
                                             Home
                                         </label>
 
                                         <label class="advanced">
-                                            <input type="checkbox" class="group" name="group" value="group"/>
+                                            <input type="checkbox" class="group" name="group" value="group" />
                                             Groups
                                         </label>
 
@@ -115,6 +108,13 @@
                                             <input type="checkbox" class="faculty" name="faculty" value="faculty" checked />
                                             Faculty/Staff
                                         </label>
+                                        
+                                        {% if session['ITS_view'] %}
+                                            <label class="advanced">
+                                                <input type="checkbox" class="view_ids" name="view_ids" value="view_ids" />
+                                                Display ID's (ITS Staff)
+                                            </label>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -142,16 +142,16 @@
                 {% endif %}
             </ul>
 
-            {% if True or 'FACULTY' in session['roles'] or 'STUDENT' in session['roles'] %}
+            {% if 'FACULTY' in session['roles'] or 'STUDENT' in session['roles'] %}
                 <p>If you are looking for additional searching capabilities, try:</p>
                 <ul>
-                    {% if True or 'FACULTY' in session['roles'] or 'STUDENT' in session['roles'] %}
+                    {% if 'FACULTY' in session['roles'] or 'STUDENT' in session['roles'] %}
                         <li><a href="https://banner.bethel.edu/StudentSelfService/ssb/adviseeList/adviseeList">Advisor searching</a></li>
                     {% endif %}
-                    {% if True or 'FACULTY' in session['roles'] %}
+                    {% if 'FACULTY' in session['roles'] %}
                         <li><a href="https://my.bethel.edu/faculty-academics?channel=c0c4aaac8c586513543f13a67cc51824">Faculty Courses</a></li>
                     {% endif %}
-                    {% if True or 'STUDENT' in session['roles'] %}
+                    {% if 'STUDENT' in session['roles'] %}
                         <li><a href="https://my.bethel.edu/student-academics?channel=c0af22cb8c586513543f13a693f6a8b9">Student Courses</a></li>
                     {% endif %}
                 </ul>
