@@ -39,6 +39,7 @@
 
 .row {
     margin-right: 0px;
+    margin-left: 0px;
 }
 
 .search {
@@ -97,6 +98,13 @@ p{
         overflow: scroll;
         height: 750px;
         max-width: 100%;
+    }
+}
+
+@media (max-width: 991px) {
+    #page-content-wrapper {
+        max-width: 700px;
+        margin: 0 auto;
     }
 }
 
