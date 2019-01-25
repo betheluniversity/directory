@@ -105,10 +105,10 @@
                                         </label>
 
                                         <label class="advanced">
-                                            <input type="checkbox" class="faculty" name="faculty" value="faculty" checked />
+                                            <input type="checkbox" class="faculty" name="faculty_or_staff" value="faculty_or_staff" checked />
                                             Faculty/Staff
                                         </label>
-                                        
+
                                         {% if session['ITS_view'] %}
                                             <label class="advanced">
                                                 <input type="checkbox" class="view_ids" name="view_ids" value="view_ids" />
@@ -127,7 +127,7 @@
         <div id="results" class="card-view col-lg-8">
             <h2 id="results_header">Welcome!</h2>
             <hr>
-            <p>Welcome to the Bethel Directory. The Bethel Directory search is designed to find results that are exact matches, as well matches that are similar to
+            <p>The Bethel Directory search is designed to find results that are exact matches, as well matches that are similar to
             what you searched for.
             </p>
             <br/>
@@ -141,6 +141,8 @@
                     <li>ID Search</li>
                 {% endif %}
             </ul>
+            <p>More filter options can be found by clicking the "Advanced" button.</p>
+            <br/>
 
             {% if 'FACULTY' in session['roles'] or 'STUDENT' in session['roles'] %}
                 <p>If you are looking for additional searching capabilities, try:</p>

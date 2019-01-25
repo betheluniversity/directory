@@ -28,7 +28,7 @@ def get_splits(line):
     rows = []
 
     for item in line.split('|'):
-        rows.append(item)
+        rows.append(item.lower())
 
     return rows
 
