@@ -131,7 +131,7 @@ class DirectoryController(object):
         return render_template('results.html', **locals())
 
     def get_viewing_role(self, data):
-        if data.get('faculty') == 'true' and data.get('student') == 'true':
+        if data.get('faculty_or_staff') == 'true' and data.get('student') == 'true':
             return 'both'  # showing all results
         elif data.get('faculty_or_staff') == 'true':
             return 'faculty_or_staff'  # showing just staff/faculty results
@@ -145,7 +145,7 @@ class DirectoryController(object):
             return True
         else:
             for role in row['role']:
-                if role.lower() == option:
+                if role.lower() in option:
                     return True
         return False
 
