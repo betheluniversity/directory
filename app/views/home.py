@@ -1,4 +1,5 @@
 import ldap
+import re
 import requests
 import time
 
