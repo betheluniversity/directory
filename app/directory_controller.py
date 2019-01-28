@@ -43,6 +43,7 @@ class DirectoryController(object):
             for row in people:
                 if self.match_option(row, viewing_role):  # if its true, check the person
                     result.append(row)
+            result.sort(key=lambda i: i['last_name'])
             return render_template('results.html', **locals())
 
         result.sort(key=lambda i: i['last_name'])
@@ -63,6 +64,7 @@ class DirectoryController(object):
                         self.make_results(row, result, ratio)
         else:
             result = people
+            result.sort(key=lambda i: i['last_name'])
             return render_template('results.html', **locals())
 
         result.sort(key=lambda i: i['last_name'])
@@ -83,6 +85,7 @@ class DirectoryController(object):
                         self.make_results(row, result, ratio)
         else:
             result = people
+            result.sort(key=lambda i: i['last_name'])
             return render_template('results.html', **locals())
 
         result.sort(key=lambda i: i['last_name'])
@@ -104,6 +107,7 @@ class DirectoryController(object):
                             break
         else:
             result = people
+            result.sort(key=lambda i: i['last_name'])
             return render_template('results.html', **locals())
 
         result.sort(key=lambda i: i['last_name'])
@@ -124,6 +128,7 @@ class DirectoryController(object):
                         result.append(row)
         else:
             result = people
+            result.sort(key=lambda i: i['last_name'])
             return render_template('results.html', **locals())
 
         result.sort(key=lambda i: i['last_name'])
