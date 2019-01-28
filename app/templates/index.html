@@ -44,10 +44,12 @@
                                     <input type="radio" name="search_type" id="dept_search" value="dept_search">
                                     <label for="dept_search">Department</label>
                                 </div>
-                                <div class="form-check form-check-inline">
-                                    <input type="radio" name="search_type" id="id_search" value="id_search">
-                                    <label for="id_search">ID</label>
-                                </div>
+                                {% if session['ITS_view'] %}
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" name="search_type" id="id_search" value="id_search">
+                                        <label for="id_search">ID</label>
+                                    </div>
+                                {% endif %}
                             </div>
 
                             <hr>
@@ -78,7 +80,7 @@
 
                             {% if session['ITS_view'] %}
                                 <div class="form-group id_search d-none">
-                                    <label for="id">ID:</label>
+                                    <label for="bu_id">ID:</label>
                                     <input type="text" class="form-control col-12 col-lg-10" id="bu_id">
                                 </div>
                             {% endif %}
