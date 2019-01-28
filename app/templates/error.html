@@ -6,7 +6,7 @@
     {% if code == 403 %}
         <h1 class="my-4">No permission</h1>
         <p>Sorry, it looks like you don’t have permission to visit this page! Try returning to the
-            <a href="{{ url_for('Home:index') }}">Directory</a>, or contact the Help Desk at <a href="mailto:helpdesk@bethel.edu">helpdesk@bethel.edu</a>
+            <a href="{{ url_for('View:index') }}">Directory</a>, or contact the Help Desk at <a href="mailto:helpdesk@bethel.edu">helpdesk@bethel.edu</a>
             if you think this is an error. </p>
     {% elif code == 404 %}
         <h1 class="my-4">Doesn't exist</h1>
