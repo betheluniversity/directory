@@ -51,6 +51,7 @@ def directory_search():
     #
     call_cursor_bw.callproc('bth_websrv_api.web_directory', (result_cursor_bw,))
     data = get_results(result_cursor_bw.fetchall())
+    # todo: change data[item] to be able to use item? Use .items() or something
     for item in data:
 
         last_name = data[item]['last_name']
@@ -68,6 +69,7 @@ def directory_search():
         addr_street1 = data[item]['addr_street1']
         addr_street2 = data[item]['addr_street2']
         addr_zip = data[item]['addr_zip']
+        phone_ext = data[item]['phone_ext']
 
         # the next ones potentially have multiple, split by a '|'
         bu_role = get_splits(data[item]['bu_role'])
@@ -97,7 +99,9 @@ def directory_search():
                         'minor': minor,
                         'college': college,
                         'title': title,
-                        'addr_zip': addr_zip})
+                        'addr_zip': addr_zip,
+                        'phone_ext': phone_ext
+                        })
     return results
 
 

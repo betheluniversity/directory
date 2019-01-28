@@ -117,6 +117,10 @@
                                     {% endfor %}
                                 </p>
                             {% endif %}
+
+                            {% if row['phone_ext'] != '' %}
+                                <p><strong>Ext. {{ row['phone_ext'] }}</strong></p>
+                            {% endif %}
                         </div>
                     {% endif %}
 
