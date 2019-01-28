@@ -51,78 +51,78 @@
                         {% endif %}
                     </div>
 
-                    {% if data['group'] == 'true' %}
-                        <div class="column border-left">
-                            {% if row['role']|length > 0 %}
-                                <p>
-                                    {% for i in range(0, row['role']|length) %}
-                                        {% if i != '' %}
-                                            <strong>{{ row['role'][i] }}</strong>
-                                            {% if i < row['role']|length - 1 %}
-                                                |
-                                            {% endif %}
+{#                    {% if data['group'] == 'true' %}#}
+                    <div class="column border-left">
+                        {% if row['role']|length > 0 %}
+                            <p>
+                                {% for i in range(0, row['role']|length) %}
+                                    {% if i != '' %}
+                                        <strong>{{ row['role'][i] }}</strong>
+                                        {% if i < row['role']|length - 1 %}
+                                            |
                                         {% endif %}
-                                    {% endfor %}
-                                </p>
-                            {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </p>
+                        {% endif %}
 
-                            {% if row['college']|length > 0 %}
-                                <p>
-                                    {% for i in range(0, row['college']|length) %}
-                                        {% if i != '' %}
-                                            {{ row['college'][i] }}
-                                            {% if i < row['college']|length - 1 %}
-                                                |
-                                            {% endif %}
+                        {% if row['college']|length > 0 %}
+                            <p>
+                                {% for i in range(0, row['college']|length) %}
+                                    {% if i != '' %}
+                                        {{ row['college'][i] }}
+                                        {% if i < row['college']|length - 1 %}
+                                            |
                                         {% endif %}
-                                    {% endfor %}
-                                </p>
-                            {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </p>
+                        {% endif %}
 
-                            {% if row['major']|length > 0 %}
-                                <p>
-                                    {% for i in range(0, row['major']|length) %}
-                                        {% if i != '' %}
-                                            {{ row['major'][i] }}
-                                            {% if i < row['major']|length - 1 %}
-                                                |
-                                            {% endif %}
+                        {% if row['major']|length > 0 %}
+                            <p>
+                                {% for i in range(0, row['major']|length) %}
+                                    {% if i != '' %}
+                                        {{ row['major'][i] }}
+                                        {% if i < row['major']|length - 1 %}
+                                            |
                                         {% endif %}
-                                    {% endfor %}
-                                </p>
-                            {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </p>
+                        {% endif %}
 
-                            {% if row['minor']|length > 0 %}
-                                <p>
-                                    {% for i in range(0, row['minor']|length) %}
-                                        {% if i != '' %}
-                                            {{ row['minor'][i] }}
-                                            {% if i < row['minor']|length - 1 %}
-                                                |
-                                            {% endif %}
+                        {% if row['minor']|length > 0 %}
+                            <p>
+                                {% for i in range(0, row['minor']|length) %}
+                                    {% if i != '' %}
+                                        {{ row['minor'][i] }}
+                                        {% if i < row['minor']|length - 1 %}
+                                            |
                                         {% endif %}
-                                    {% endfor %}
-                                </p>
-                            {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </p>
+                        {% endif %}
 
-                            {% if row['department']|length > 0 %}
-                                <p>
-                                    {% for i in range(0, row['department']|length) %}
-                                        {% if i != '' %}
-                                            {{ row['department'][i] }}
-                                            {% if i < row['department']|length - 1 %}
-                                                |
-                                            {% endif %}
+                        {% if row['department']|length > 0 %}
+                            <p>
+                                {% for i in range(0, row['department']|length) %}
+                                    {% if i != '' %}
+                                        {{ row['department'][i] }}
+                                        {% if i < row['department']|length - 1 %}
+                                            |
                                         {% endif %}
-                                    {% endfor %}
-                                </p>
-                            {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </p>
+                        {% endif %}
 
-                            {% if row['phone_ext'] != '' %}
-                                <p><strong>Ext. {{ row['phone_ext'] }}</strong></p>
-                            {% endif %}
-                        </div>
-                    {% endif %}
+                        {% if row['phone_ext'] != '' %}
+                            <p><strong>Ext. {{ row['phone_ext'] }}</strong></p>
+                        {% endif %}
+                    </div>
+{#                    {% endif %}#}
 
                     {% if data['home'] == 'true' %}
                         <div class="column border-left">

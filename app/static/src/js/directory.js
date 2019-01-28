@@ -19,7 +19,7 @@ $(document).ready(function () {
             'bu_id': $('#bu_id').val(),
             'view_ids': $('.view_ids').is(':checked') || 'false',
             'home': $('.home').is(':checked') || 'false',
-            'group': $('.group').is(':checked') || 'false',
+            // 'group': $('.group').is(':checked') || 'false',
             'student': $('.student').is(':checked') || 'false',
             'faculty_or_staff': $('.faculty_or_staff').is(':checked') || 'false'
         };
