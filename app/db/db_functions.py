@@ -28,7 +28,7 @@ def get_splits(line):
     rows = []
 
     for item in line.split('|'):
-        rows.append(item.lower())
+        rows.append(item)
 
     return rows
 
@@ -106,7 +106,6 @@ def directory_search():
 def departments():
     call_cursor_bw = conn_bw.cursor()
     result_cursor_bw = conn_bw.cursor()
-    data = []
     results = []
 
     call_cursor_bw.callproc('bth_websrv_api.web_directory_dept', (result_cursor_bw,))

@@ -134,9 +134,9 @@ class DirectoryController(object):
         if data.get('faculty_or_staff') == 'true' and data.get('student') == 'true':
             return 'both'  # showing all results
         elif data.get('faculty_or_staff') == 'true':
-            return 'faculty_or_staff'  # showing just staff/faculty results
+            return 'Faculty_or_Staff'  # showing just staff/faculty results
         elif data.get('student') == 'true':
-            return 'student'  # showing just student results
+            return 'Student'  # showing just student results
         else:
             return 'both'  # defaults to showing all results
 
@@ -145,7 +145,7 @@ class DirectoryController(object):
             return True
         else:
             for role in row['role']:
-                if role.lower() in option:
+                if role in option:
                     return True
         return False
 
