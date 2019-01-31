@@ -1,6 +1,8 @@
+from flask import abort
+
 from app.db.db_connection_bw import conn_bw
 from app import cache
-import re
+
 
 
 def get_results(result, label="", type=None):
@@ -34,88 +36,97 @@ def get_splits(line):
 
 
 def portal_profile(username):
-    call_cursor_bw = conn_bw.cursor()
-    result_cursor_bw = conn_bw.cursor()
-    call_cursor_bw.callproc('bth_portal_channel_api.bu_profile', (username, result_cursor_bw))
-    r = result_cursor_bw.fetchall()
-    return get_results(r)
+    try:
+        call_cursor_bw = conn_bw.cursor()
+        result_cursor_bw = conn_bw.cursor()
+        call_cursor_bw.callproc('bth_portal_channel_api.bu_profile', (username, result_cursor_bw))
+        r = result_cursor_bw.fetchall()
+        return get_results(r)
+    except:
+        return abort(503)
 
 
 # 4 hour cache = 14400
 @cache.memoize(timeout=14400)
 def directory_search():
-    call_cursor_bw = conn_bw.cursor()
-    result_cursor_bw = conn_bw.cursor()
-    data = []
-    results = []
-    #
-    call_cursor_bw.callproc('bth_websrv_api.web_directory', (result_cursor_bw,))
-    data = get_results(result_cursor_bw.fetchall())
-    # todo: change data[item] to be able to use item? Use .items() or something
-    for item in data:
+    try:
+        call_cursor_bw = conn_bw.cursor()
+        result_cursor_bw = conn_bw.cursor()
+        data = []
+        results = []
+        #
+        call_cursor_bw.callproc('bth_websrv_api.web_directory', (result_cursor_bw,))
+        data = get_results(result_cursor_bw.fetchall())
+        # todo: change data[item] to be able to use item? Use .items() or something
+        for item in data:
 
-        last_name = data[item]['last_name']
-        first_name = data[item]['first_name']
-        housing = data[item]['housing_building_room'].encode('utf-8')
-        email = data[item]['email']
-        username = data[item]['username']
-        bu_po = data[item]['bu_po']
-        bu_id = data[item]['bu_id']
-        phone = data[item]['home_phone']
-        image_path = data[item]['photo']
-        udc = data[item]['udc_id']
-        addr_city = data[item]['addr_city']
-        addr_state = data[item]['addr_state']
-        addr_street1 = data[item]['addr_street1']
-        addr_street2 = data[item]['addr_street2']
-        addr_zip = data[item]['addr_zip']
-        phone_ext = data[item]['phone_ext']
+            last_name = data[item]['last_name']
+            first_name = data[item]['first_name']
+            housing = data[item]['housing_building_room'].encode('utf-8')
+            email = data[item]['email']
+            username = data[item]['username']
+            bu_po = data[item]['bu_po']
+            bu_id = data[item]['bu_id']
+            phone = data[item]['home_phone']
+            image_path = data[item]['photo']
+            udc = data[item]['udc_id']
+            addr_city = data[item]['addr_city']
+            addr_state = data[item]['addr_state']
+            addr_street1 = data[item]['addr_street1']
+            addr_street2 = data[item]['addr_street2']
+            addr_zip = data[item]['addr_zip']
+            phone_ext = data[item]['phone_ext']
 
-        # the next ones potentially have multiple, split by a '|'
-        bu_role = get_splits(data[item]['bu_role'])
-        department = get_splits(data[item]['dept'])
-        major = get_splits(data[item]['stu_majr'])
-        minor = get_splits(data[item]['stu_minr'])
-        college = get_splits(data[item]['stu_coll'])
-        title = get_splits(data[item]['title'])
+            # the next ones potentially have multiple, split by a '|'
+            bu_role = get_splits(data[item]['bu_role'])
+            department = get_splits(data[item]['dept'])
+            major = get_splits(data[item]['stu_majr'])
+            minor = get_splits(data[item]['stu_minr'])
+            college = get_splits(data[item]['stu_coll'])
+            title = get_splits(data[item]['title'])
 
-        results.append({'last_name': last_name,
-                        'first_name': first_name,
-                        'housing': housing,
-                        'email': email,
-                        'username': username,
-                        'po': bu_po,
-                        'id': bu_id,
-                        'phone': phone,
-                        'image_path': image_path,
-                        'udc': udc,
-                        'addr_city': addr_city,
-                        'addr_state': addr_state,
-                        'addr_street1': addr_street1,
-                        'addr_street2': addr_street2,
-                        'role': bu_role,
-                        'department': department,
-                        'major': major,
-                        'minor': minor,
-                        'college': college,
-                        'title': title,
-                        'addr_zip': addr_zip,
-                        'phone_ext': phone_ext
-                        })
-    return results
+            results.append({'last_name': last_name,
+                            'first_name': first_name,
+                            'housing': housing,
+                            'email': email,
+                            'username': username,
+                            'po': bu_po,
+                            'id': bu_id,
+                            'phone': phone,
+                            'image_path': image_path,
+                            'udc': udc,
+                            'addr_city': addr_city,
+                            'addr_state': addr_state,
+                            'addr_street1': addr_street1,
+                            'addr_street2': addr_street2,
+                            'role': bu_role,
+                            'department': department,
+                            'major': major,
+                            'minor': minor,
+                            'college': college,
+                            'title': title,
+                            'addr_zip': addr_zip,
+                            'phone_ext': phone_ext
+                            })
+        return results
+    except:
+        return abort(503)
 
 
 # 4 hour cache = 14400
 @cache.memoize(timeout=14400)
 def departments():
-    call_cursor_bw = conn_bw.cursor()
-    result_cursor_bw = conn_bw.cursor()
-    results = []
+    try:
+        call_cursor_bw = conn_bw.cursor()
+        result_cursor_bw = conn_bw.cursor()
+        results = []
 
-    call_cursor_bw.callproc('bth_websrv_api.web_directory_dept', (result_cursor_bw,))
-    data = get_results(result_cursor_bw.fetchall())
+        call_cursor_bw.callproc('bth_websrv_api.web_directory_dept', (result_cursor_bw,))
+        data = get_results(result_cursor_bw.fetchall())
 
-    for item in data:
-        results.append(data[item]['dept'])
+        for item in data:
+            results.append(data[item]['dept'])
 
-    return results
+        return results
+    except:
+        return abort(503)

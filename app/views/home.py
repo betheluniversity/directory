@@ -7,7 +7,7 @@ from flask import render_template, request, session, abort, make_response, redir
 from flask import json as fjson
 from flask_classy import FlaskView, route
 
-from app import app
+from app import app, sentry
 from app.db.db_functions import departments, portal_profile
 from app.directory_controller import DirectoryController
 
@@ -37,7 +37,7 @@ class View(FlaskView):
                 get_roles()
 
             if 'profile' not in session.keys():
-                session['profile'] = portal_profile(session['username'])
+                session['profile'] = get_profile(session['username'])
 
             if 'ITS_view' not in session.keys():
                 get_its_view()
@@ -63,6 +63,32 @@ class View(FlaskView):
             session['roles'] = ret
 
             return ret
+
+        def get_profile(username):
+            try:
+                common_profile = portal_profile(username)
+                if len(common_profile) > 0:
+                    common_profile = common_profile[0]
+                    if 'photo' in common_profile.keys() and common_profile['photo'] == 'https://bsp-nas-dav.bethel.edu':
+                        # This way, if the user has a profile but doesn't have a picture, the template will put in a default
+                        # picture
+                        common_profile.pop('photo')
+                else:
+                    session['user_common_profile'] = {}
+                    return None
+            except:
+                # API failed to load profile info, continue without it
+                session['user_common_profile'] = {}
+
+                sentry.client.extra_context({
+                    'time': time.strftime("%c"),
+                    'username': session['username'],
+                    'user-roles': session['user_roles'],
+                    'error-type': 'Failed to load profile',
+                })
+
+                sentry.captureException()
+                return None
 
         def get_its_view():
             try:
