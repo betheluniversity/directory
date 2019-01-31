@@ -6,9 +6,14 @@ from app import app, sentry
 
 
 def error_render_template(error, code=None):
+    if 'username' in session:
+        username = session['username']
+    else:
+        username = ''
+
     sentry.client.extra_context({
         'time': time.strftime("%c"),
-        'username': session['username']
+        'username': username
     })
 
     # Means that it's a handled error/exception
@@ -16,7 +21,7 @@ def error_render_template(error, code=None):
         # As of 11/16/2017, we're only logging 403s and 500 errors.
         if code == 403 or code > 499:
             sentry.captureException()
-            app.logger.error("%s -- %s" % (session['username'], str(error)))
+            app.logger.error("%s -- %s" % (username, str(error)))
 
     else:  # Means it's an unhandled exception
         sentry.captureException()
