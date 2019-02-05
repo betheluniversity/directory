@@ -117,6 +117,7 @@ p{
 }
 
 .silhouette-picture{
+    height: 145px;
     width: 150px;
     object-fit:cover;
     overflow:hidden;
