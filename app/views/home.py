@@ -18,7 +18,6 @@ class View(FlaskView):
 
     def before_request(self, name, **kwargs):
         def init_user():
-            session.clear()
             if 'session_time' in session.keys():
                 seconds_in_12_hours = 60 * 60 * 12  # equates to 12 hours
                 reset_session = time.time() - session['session_time'] >= seconds_in_12_hours
