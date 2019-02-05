@@ -7,9 +7,9 @@
             <div class="card-block cards">
                 <div class="card-body cards">
                     {% if row['image_path'] == '' %}
-                        <div class="photo">
-                            <div class="card-text" style="height: 114px">
-                                <div class="fa fa-stack fa-2x" style="margin: auto; width: 100%; padding-top: 1em">
+                        <div class="column">
+                            <div class="silhouette-picture">
+                                <div class="fa fa-stack fa-4x" style="margin: auto; width: 100%;">
                                     <i class="fa fa-circle fa-stack-2x" style="color: #bbb; "></i>
                                     <i class="fa fa-user fa-stack-1x fa-inverse" ></i>
                                 </div>
@@ -17,7 +17,7 @@
                         </div>
                     {% else %}
                         <div class="column">
-                                <img src="{{ row['image_path'] }}" alt="Profile Photo" id="image_path" class="directory-picture" />
+                            <img src="{{ row['image_path'] }}" alt="Profile Photo" id="image_path" class="directory-picture" />
                         </div>
                     {% endif %}
                     <div class="column border-left">

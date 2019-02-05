@@ -115,3 +115,10 @@ p{
     overflow:hidden;
     vertical-align: unset;
 }
+
+.silhouette-picture{
+    width: 150px;
+    object-fit:cover;
+    overflow:hidden;
+    vertical-align: unset;
+}
