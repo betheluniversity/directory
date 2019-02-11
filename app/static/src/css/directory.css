@@ -103,6 +103,10 @@ i.fa.fa-user.fa-stack-1x.fa-inverse {
     vertical-align: unset;
 }
 
+.navbar-brand {
+    margin-right: 0;
+}
+
 @media (min-width: 575px) {
     .border-edge {
         border-left: solid #d9dadb;
