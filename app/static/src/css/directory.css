@@ -82,29 +82,9 @@ p{
     padding-top: 11px;
 }
 
-@media (min-width: 575px) {
-    .border-edge {
-        border-left: solid #d9dadb;
-    }
-}
-
-@media (min-width: 999px) {
-    .card-view {
-        overflow: scroll;
-        height: 750px;
-        max-width: 100%;
-    }
-    #page-content-wrapper {
-        padding: 1em;
-        height: calc(100vh - 185px);
-    }
-}
-
-@media (max-width: 999px) {
-    #page-content-wrapper {
-        max-width: 700px;
-        margin: 0 auto;
-    }
+i.fa.fa-user.fa-stack-1x.fa-inverse {
+    text-align: right;
+    padding-right: 5px;
 }
 
 .directory-picture{
@@ -121,4 +101,43 @@ p{
     object-fit:cover;
     overflow:hidden;
     vertical-align: unset;
+}
+
+@media (min-width: 575px) {
+    .border-edge {
+        border-left: solid #d9dadb;
+    }
+}
+
+@media (min-width: 999px) {
+    .card-view {
+        overflow: scroll;
+        height: 750px;
+        max-width: 100%;
+    }
+    #page-content-wrapper {
+        padding: 1em;
+        height: calc(100vh - 185px);
+        min-height: 765px;
+    }
+}
+
+@media (max-width: 999px) {
+    #page-content-wrapper {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 450px) {
+    a.navbar-brand img {
+        height: 40px;
+    }
+    i.fa.fa-user.fa-stack-1x.fa-inverse {
+        padding-right: 2px;
+        padding-bottom: 10px;
+    }
+    i.fa.fa-user.fa-stack-1x.fa-inverse:before {
+        font-size: 25px;
+    }
 }
