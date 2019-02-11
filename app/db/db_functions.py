@@ -1,8 +1,7 @@
 from flask import abort
 
 from app.db.db_connection_bw import conn_bw
-from app import cache
-
+from app import app, cache
 
 
 def get_results(result, label="", type=None):
@@ -76,6 +75,10 @@ def directory_search():
             addr_street2 = data[item]['addr_street2']
             addr_zip = data[item]['addr_zip']
             phone_ext = data[item]['phone_ext']
+
+            # replacing the holder emails in banqual with regular bethel emails on directory.xp
+            if app.config['ENVIRON'] != 'prod':
+                data[item]['email'] = data[item]['email'].replace('=bethel.edu@blackhole.bethel.edu', '@bethel.edu')
 
             # the next ones potentially have multiple, split by a '|'
             bu_role = get_splits(data[item]['bu_role'])
