@@ -82,7 +82,11 @@ p{
     padding-top: 11px;
 }
 
-i.fa.fa-user.fa-stack-1x.fa-inverse {
+div#results {
+    overflow-x: hidden;
+}
+
+.dropdown-toggle i.fa.fa-user.fa-stack-1x.fa-inverse {
     text-align: right;
     padding-right: 5px;
 }
@@ -116,8 +120,9 @@ i.fa.fa-user.fa-stack-1x.fa-inverse {
 @media (min-width: 999px) {
     .card-view {
         overflow: scroll;
-        height: 750px;
+        min-height: 750px;
         max-width: 100%;
+        max-height: calc(100vh - 200px);
     }
     #page-content-wrapper {
         padding: 1em;
@@ -137,11 +142,11 @@ i.fa.fa-user.fa-stack-1x.fa-inverse {
     a.navbar-brand img {
         height: 40px;
     }
-    i.fa.fa-user.fa-stack-1x.fa-inverse {
+    .dropdown-toggle i.fa.fa-user.fa-stack-1x.fa-inverse {
         padding-right: 2px;
         padding-bottom: 10px;
     }
-    i.fa.fa-user.fa-stack-1x.fa-inverse:before {
+    .dropdown-toggle i.fa.fa-user.fa-stack-1x.fa-inverse:before {
         font-size: 25px;
     }
 }
