@@ -24,8 +24,10 @@ $(document).ready(function () {
             'faculty_or_staff': $('.faculty_or_staff').is(':checked') || 'false'
         };
 
+        console.log(event);
+
         /* Send the data using post */
-        $.post( url, $event_data ).done(function( data ) {
+        $.post( url, $event_data ).done(function(data) {
             $('#results').html(data);
         });
     });

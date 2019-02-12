@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous"> -->
         <link rel="stylesheet" href="/static/src/css/directory.css">
         <link rel="icon" type="image/png" href="{{ url_for('static', filename='src/favicons/favicon.ico') }}">
 
-        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-        <script src="/static/src/js/jquery.easy-autocomplete.min.js"></script>
-        <link rel="stylesheet" href="/static/src/css/easy-autocomplete.min.css">
+        <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
+        <!-- <script src="/static/src/js/jquery.easy-autocomplete.min.js"></script> -->
+        <!-- <link rel="stylesheet" href="/static/src/css/easy-autocomplete.min.css"> -->
 
         <link rel="apple-touch-icon" href="{{ url_for('static', filename='src/favicons/apple-icon-57x57.png') }}">
         <link rel="apple-touch-icon" sizes="57x57" href="{{ url_for('static', filename='src/favicons/apple-icon-57x57.png') }}">
@@ -39,56 +38,42 @@
         <title>Directory | Bethel University</title>
     </head>
 
-    <nav class="navbar navbar-light" style="background-color: #0F2C52; max-height: 60px">
+    <body>
+    <nav class="navbar  navbar-dark  navbar-expand-lg" style="background-color: #0F2C52;">
         <a class="navbar-brand" href="/">
-            <img src="{{ url_for('static', filename='src/img/logo-directory.png') }}" height="56"
-                 class="d-inline-block align-top" alt="">
+            <img src="/static/src/img/shield.svg" height="48" alt="">
+            <span class="ml-2  h6" style="color: #ffc600">Directory</span>
         </a>
 
-        <div class="navbar__profile-group  ml-auto">
-            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #ffffff">
-                {% if 'photo' in session['profile']['0'] %}
-                    <img width="50" height="50" title="" src="{{ session['profile']['photo'] }}" alt="{{ session['profile']['pref_first_name'] }}" class="rounded-circle">
-                {% else %}
-                    <span class="fa fa-stack fa-2x">
-                        <i class="fa fa-user fa-stack-1x fa-inverse"></i>
-                    </span>
-                {% endif %}
-                <span class="u-fs14 d-none  d-sm-none  d-md-inline-block">{{ session['profile']['pref_first_name'] }}</span>
+        <div class="dropdown  ml-auto" id="profileDropdown--link">
+            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white">
+                {{ session['profile']['pref_first_name'] }}Michael
             </a>
-            <div class="dropdown-menu  dropdown-menu-right" style="right:0;left:auto;">
+              
+            <div class="dropdown-menu  dropdown-menu-right" id="profileDropdown--menu" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" href="https://confluence.bethel.edu/display/ITSKB/Updating+the+Bethel+Directory+-KB" target="_blank">Update my Directory data</a>
+                <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ url_for('View:logout') }}">Log out</a>
             </div>
         </div>
     </nav>
-    <body>
-        <div id="page-content-wrapper">
-            {% block content %}
-                <!-- Where the content of the templates go -->
-            {% endblock %}
-        </div>
-    </body>
 
-    <footer class="footer">
+
+    <div class="container-fluid  mt-4" style="max-width: 1200px">
+        {% block content %}
+            <!-- Where the content of the templates go -->
+        {% endblock %}
+    </div>
+
+    <footer class="footer border-top">
         <div class="inner" style="padding: 30px">
-            <span class="text-muted  u-fs14">Need Help? Contact the Help Desk at <a href="mailto=help-desk@bethel.edu" target="_blank" rel="noopener">help-desk@bethel.edu</a>
-                <br>
-                Copyright © 2019 Bethel University
-            </span>
+            <p class="text-muted  u-fs14  mb-0">Need Help? Contact the Help Desk at <a href="mailto=help-desk@bethel.edu" target="_blank" rel="noopener">help-desk@bethel.edu</a></p>
+            <p class="text-muted  u-fs14  mb-0">© 2019 Bethel University</p>
         </div>
     </footer>
 
-    <!-- Bootstrap core CSS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
-            integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
-            crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
-            integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
-            crossorigin="anonymous"></script>
-    <script src="/static/src/js/directory.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script> -->
+    <script src="/static/dist/js/main.js"></script>
+</body>
 </html>

@@ -1,17 +1,19 @@
-#page-content-wrapper {
-    padding: 1em;
-    height: calc(100vh - 185px);
-}
-
-.btn {
+/* .btn {
     color: #fff;
-    background-color: #0056B5;
-    border-color: #0056B5;
+    background-color: #0069aa;
+    border-color: #0069aa;
+} */
+
+
+.results .h3 {
+    font-size: 1.2rem;
 }
 
-.card {
-    width: 100%
-}
+@include media-breakpoint-up(sm) {
+    .results ~ .h3 {
+      font-size: 1.75rem;
+    }
+  }
 
 /* this is so that the autocomplete textbox fills the width of the card */
 .easy-autocomplete {
@@ -30,85 +32,10 @@
     border: none !important
 }
 
-.footer {
-    border-top: 1px solid #eee;
-}
 
-.home {
-}
 
-.row {
-    margin-right: 0px;
-    margin-left: 0px;
-}
 
-.search {
-    padding: 0;
-    margin: 0;
-    display: block;
-}
-a {
-    color: #103461;
-}
-
-/* results.html styling */
-
-p{
-    margin-bottom: 0.3rem
-}
-
-.advanced {
-    margin-right: 25px;
-}
-
-.cards {
-
-}
-
-.column {
-    margin-left: 1em;
-    margin-right: 1em;
-    display: inline-block;
-    vertical-align:  top;
-
-}
-
-.border-left {
-    border-left: 6px solid green;
-    padding-left: 1em;
-    height: 100%
-}
-
-.h2 {
-    padding-top: 15px;
-}
-
-#results_header {
-    padding-top: 11px;
-}
-
-@media (min-width: 575px) {
-    .border-edge {
-        border-left: solid #d9dadb;
-    }
-}
-
-@media (min-width: 999px) {
-    .card-view {
-        overflow: scroll;
-        height: 750px;
-        max-width: 100%;
-    }
-}
-
-@media (max-width: 991px) {
-    #page-content-wrapper {
-        max-width: 700px;
-        margin: 0 auto;
-    }
-}
-
-.directory-picture{
+/* .directory-picture{
     height: 170px;
     width: 150px;
     object-fit:cover;
@@ -122,4 +49,4 @@ p{
     object-fit:cover;
     overflow:hidden;
     vertical-align: unset;
-}
+} */

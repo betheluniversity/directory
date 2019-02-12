@@ -1,0 +1,23 @@
+{
+  "name": "directory",
+  "version": "0.0.1",
+  "description": "Bethel directory",
+  "private": true,
+  "repository": "https://github.com/betheluniversity/directory.git",
+  "author": "Jacob Johnson <johjacb@bethel.edu>",
+  "license": "MIT",
+  "dependencies": {
+    "autocomplete.js": "^0.35.0",
+    "bootstrap": "^4.3.0"
+  },
+  "devDependencies": {
+    "watch": "^1.0.2",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3"
+  },
+  "scripts": {
+    "dev": "webpack",
+    "build": "webpack",
+    "watch": "watch 'npm run build' ./app/static/src"
+  }
+}
