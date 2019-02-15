@@ -62,7 +62,11 @@ def directory_search():
             last_name = data[item]['last_name']
             first_name = data[item]['first_name']
             housing = data[item]['housing_building_room'].encode('utf-8')
-            email = data[item]['email']
+            # replacing blackhole emails with regular emails on non-prod env
+            if app.config['ENVIRON'] != 'prod':
+                email = data[item]['email'].replace('=bethel.edu@blackhole.bethel.edu', '@bethel.edu')
+            else:
+                email = data[item]['email']
             username = data[item]['username']
             bu_po = data[item]['bu_po']
             bu_id = data[item]['bu_id']
@@ -75,10 +79,6 @@ def directory_search():
             addr_street2 = data[item]['addr_street2']
             addr_zip = data[item]['addr_zip']
             phone_ext = data[item]['phone_ext']
-
-            # replacing the holder emails in banqual with regular bethel emails on directory.xp
-            if app.config['ENVIRON'] != 'prod':
-                data[item]['email'] = data[item]['email'].replace('=bethel.edu@blackhole.bethel.edu', '@bethel.edu')
 
             # the next ones potentially have multiple, split by a '|'
             bu_role = get_splits(data[item]['bu_role'])
