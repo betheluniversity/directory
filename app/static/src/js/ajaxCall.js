@@ -2,7 +2,6 @@ const form = document.querySelector(".directory-form");
 form.addEventListener("submit", e => {
     e.preventDefault();
     const fd = new FormData();
-    // fd.append('search_type', form.querySelector("#search_type input").value)
     fd.append('search_type', 'name_search')
     fd.append('first_name', form.querySelector("#first_name").value)
     fd.append('last_name', form.querySelector("#last_name").value)
@@ -16,10 +15,9 @@ form.addEventListener("submit", e => {
     // fd.append('student', form.querySelector(".student").value || "false" )
     // fd.append('faculty_or_staff', form.querySelector(".faculty_or_staff").value || "false")
     
-    
+    // Converting form data to an object to pass via xhr
     const obj = {};
     [...fd.entries()].forEach(entry => obj[entry[0]] = entry[1]);
-    console.log(obj);
 
     const results = document.querySelector('#results')
 
