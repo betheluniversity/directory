@@ -8,7 +8,11 @@ form.addEventListener("submit", e => {
     fd.append('username', form.querySelector("#username").value)
     fd.append('email', form.querySelector("#email").value)
     fd.append('department', form.querySelector("#department").value)
-    fd.append('bu_id', form.querySelector("#bu_id").value)
+
+    if(form.querySelector("#bu_id")){
+        fd.append('bu_id', form.querySelector("#bu_id").value)
+    }else
+        fd.append('bu_id', '')
     // fd.append('view_ids', form.querySelector(".view_ids").value || "false" )
     // fd.append('home', form.querySelector(".home").value || "false" )
     // fd.append(// 'group', form.querySelector(".group").value || "false" )
