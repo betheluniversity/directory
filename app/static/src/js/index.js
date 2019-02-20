@@ -1,6 +1,8 @@
-const showHide = require('./showHide')
-const ajaxCall = require('./ajaxCall')
+import '../css/main.scss'
+import '../css/awesomplete.css'
 
+import {  } from "./ajaxCall";
+import {  } from "./showHide";
 import {  } from "awesomplete";
 
 const input = document.getElementById("department");
