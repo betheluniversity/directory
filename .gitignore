@@ -6,3 +6,5 @@ config.py
 
 **/node_modules/
 **/app/static/dist/
+
+**/.vscode

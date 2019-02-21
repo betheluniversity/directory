@@ -1,67 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
-        <link rel="stylesheet" href="/static/dist/main.css">                
-        <link rel="icon" type="image/png" href="{{ url_for('static', filename='src/favicons/favicon.ico') }}">
 
-        <link rel="apple-touch-icon" href="{{ url_for('static', filename='src/favicons/apple-icon-57x57.png') }}">
-        <link rel="apple-touch-icon" sizes="57x57" href="{{ url_for('static', filename='src/favicons/apple-icon-57x57.png') }}">
-        <link rel="apple-touch-icon" sizes="60x60" href="{{ url_for('static', filename='src/favicons/apple-icon-60x60.png') }}">
-        <link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename='src/favicons/apple-icon-72x72.png') }}">
-        <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='src/favicons/apple-icon-76x76.png') }}">
-        <link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('static', filename='src/favicons/apple-icon-114x114.png') }}">
-        <link rel="apple-touch-icon" sizes="120x120" href="{{ url_for('static', filename='src/favicons/apple-icon-120x120.png') }}">
-        <link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename='src/favicons/apple-icon-144x144.png') }}">
-        <link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('static', filename='src/favicons/apple-icon-152x152.png') }}">
-        <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='src/favicons/apple-icon-180x180.png') }}">
-        <link rel="icon" type="image/png" sizes="192x192"  href="{{ url_for('static', filename='src/favicons/android-icon-192x192.png') }}">
-        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='src/favicons/favicon-32x32.png') }}">
-        <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='src/favicons/favicon-96x96.png') }}">
-        <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='src/favicons/favicon-16x16.png') }}">
-        <meta name="msapplication-TileColor" content="#ffffff">
-        <meta name="msapplication-TileImage" content="{{ url_for('static', filename='src/favicons/ms-icon-144x144.png') }}">
-        <meta name="theme-color" content="#ffffff">
-        <meta name="apple-mobile-web-app-title" content="Bethel Directory">
-        <link rel="shortcut icon" sizes="16x16" href="{{ url_for('static', filename='src/favicons/favicon-16x16.png') }}">
-        <link rel="apple-touch-icon-precomposed" href="{{ url_for('static', filename='src/favicons/apple-icon-precomposed.png') }}">
+<head>
+    <link rel="stylesheet" href="/static/dist/main.css">
+    {% include 'modules/favicons.html' %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Directory | Bethel University</title>
+</head>
 
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <title>Directory | Bethel University</title>
-    </head>
-
-    <body>
-    <nav class="navbar  navbar-dark  navbar-expand-lg" style="background-color: #0F2C52;">
-        <a class="navbar-brand" href="/">
-            <img src="/static/src/img/shield.svg" height="48" alt="">
-            <span class="ml-2  h6" style="color: #ffc600">Directory</span>
-        </a>
-
-        <div class="dropdown  ml-auto" id="profileDropdown--link">
-            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white">
-                {{ session['profile']['pref_first_name'] }}Michael
-            </a>
-              
-            <div class="dropdown-menu  dropdown-menu-right" id="profileDropdown--menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="https://confluence.bethel.edu/display/ITSKB/Updating+the+Bethel+Directory+-KB" target="_blank">Update my Directory data</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{{ url_for('View:logout') }}">Log out</a>
-            </div>
-        </div>
-    </nav>
-
+<body>
+    {% include 'modules/navbar.html' %}
 
     <div class="container-fluid  mt-4" style="max-width: 1200px">
         {% block content %}
-            <!-- Where the content of the templates go -->
         {% endblock %}
     </div>
 
     <footer class="footer border-top">
-        <div class="inner" style="padding: 30px">
+        <div class="container-fluid  p-4" style="max-width: 1200px">
             <p class="text-muted  u-fs14  mb-0">Need Help? Contact the Help Desk at <a href="mailto=help-desk@bethel.edu" target="_blank" rel="noopener">help-desk@bethel.edu</a></p>
             <p class="text-muted  u-fs14  mb-0">© 2019 Bethel University</p>
         </div>
@@ -69,4 +28,5 @@
 
     <script src="/static/dist/main.js"></script>
 </body>
+
 </html>

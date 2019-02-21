@@ -138,7 +138,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _css
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("// Advance search show/hide\nconst advancedSearchLink = document.querySelector('#advancedSearch--link')\nconst advancedSearchOptions = document.querySelector('#advancedSearch--options')\nadvancedSearchLink.addEventListener('click', function(){\n    advancedSearchOptions.classList.toggle('show')\n})\n\n// Profile menu show/hide\nconst profileDropdownLink = document.querySelector('#profileDropdown--link')\nconst profileDropdownMenu = document.querySelector('#profileDropdown--menu')\nprofileDropdownLink.addEventListener('click', function(){\n    profileDropdownMenu.classList.toggle('show')\n})\n\n//# sourceURL=webpack:///./app/static/src/js/showHide.js?");
+eval("// Advance search show/hide\nconst advancedSearchLink = document.querySelector('#advancedSearch--link')\nconst advancedSearchOptions = document.querySelector('#advancedSearch--options')\nadvancedSearchLink.addEventListener('click', function(){\n    advancedSearchOptions.classList.toggle('show')\n})\n\n// Profile menu show/hide\nconst profileDropdownLink = document.querySelector('#profileDropdown--link')\nconst profileDropdownMenu = document.querySelector('#profileDropdown--menu')\n\nif (profileDropdownLink){\n    profileDropdownLink.addEventListener('click', function(){\n        profileDropdownMenu.classList.toggle('show')\n    })\n}\n\n//# sourceURL=webpack:///./app/static/src/js/showHide.js?");
 
 /***/ }),
 

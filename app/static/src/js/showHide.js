@@ -8,6 +8,9 @@ advancedSearchLink.addEventListener('click', function(){
 // Profile menu show/hide
 const profileDropdownLink = document.querySelector('#profileDropdown--link')
 const profileDropdownMenu = document.querySelector('#profileDropdown--menu')
-profileDropdownLink.addEventListener('click', function(){
-    profileDropdownMenu.classList.toggle('show')
-})
+
+if (profileDropdownLink){
+    profileDropdownLink.addEventListener('click', function(){
+        profileDropdownMenu.classList.toggle('show')
+    })
+}

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="row  px-lg-4">
+<div class="row">
     <div class="search  col-md-5  col-xl-4  mb-4">
         <div class="card">
             <div class="card-header">
@@ -151,26 +151,4 @@
     </div>
     
 </div>
-
-{# TODO: this is kind of random. Should probably be moved somewhere or something. Definitely needs comments #}
-<!-- <script>
-    var options = {
-        data: {
-            {
-                depts | safe
-            }
-        },
-        list: {
-            maxNumberOfElements: 100,
-            requestDelay: 500,
-            match: {
-                enabled: true
-            },
-            sort: {
-                enabled: true
-            }
-        }
-    };
-    $('#department').easyAutocomplete(options);
-</script> -->
 {% endblock %}
