@@ -105,7 +105,7 @@
                     </div>
                 {% endif %}
 
-                {% if session['ITS_view'] == True and data['view_ids'] == 'true' %}
+                {% if session['ITS_view'] == True %}
                     {% if row['id'] != '' %}
                         <p class="mb-0">ID: {{ row['id'] }}</p>
                     {% endif %}

@@ -11,33 +11,6 @@
             <div class="card-body">
                 <form role="form" action="{{ url_for('View:search') }}" class="directory-form" method="POST">
 
-                    <!-- <div id="search_type">
-                        <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" name="search_type" id="name_search" value="name_search" checked>
-                            <label class="form-check-label" for="name_search">Name</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" name="search_type" id="username_search" value="username_search">
-                            <label class="form-check-label" for="username_search">Username</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" name="search_type" id="email_search" value="email_search">
-                            <label class="form-check-label" for="email_search">Email</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" name="search_type" id="dept_search" value="dept_search">
-                            <label class="form-check-label" for="dept_search">Department</label>
-                        </div>
-                        {% if session['ITS_view'] %}
-                            <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="search_type" id="id_search" value="id_search">
-                                <label class="form-check-label" for="id_search">ID</label>
-                            </div>
-                        {% endif %}
-                    </div> -->
-
-                    <!-- <hr> -->
-
                     <div class="form-row  mb-4">
                         <div class="col">
                             <!-- <label for="first_name">First Name:</label> -->
@@ -88,22 +61,7 @@
 
                     <div class="form-group  mb-0">
                         <button type="submit" class="btn btn-primary" id="btn--search">Search</button>
-
-                        <a class="ml-2" id="advancedSearch--link" data-toggle="collapse"  role="button" aria-expanded="false"
-                            aria-controls="advanced-options">Advanced search</a>
-
-                            
-                        <!-- <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
-                            <div class="card-body">
-
-                                {% if session['ITS_view'] %}
-                                    <label class="advanced">
-                                        <input type="checkbox" class="view_ids" name="view_ids" value="view_ids" />
-                                        Display ID's (ITS Staff)
-                                    </label>
-                                {% endif %}
-                            </div>
-                        </div> -->
+                        <a class="ml-2" id="advancedSearch--link" data-toggle="collapse"  role="button" aria-expanded="false" aria-controls="advanced-options">Advanced search</a>
                     </div>
                 </form>
             </div>
