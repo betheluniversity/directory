@@ -1,14 +1,14 @@
 const form = document.querySelector(".directory-form");
 form.addEventListener("submit", e => {
     e.preventDefault();
-    const fd = new FormData();
+    const fd = new FormData(form);
     fd.append('search_type', 'name_search')
-    fd.append('first_name', form.querySelector("#first_name").value)
-    fd.append('last_name', form.querySelector("#last_name").value)
-    fd.append('username', form.querySelector("#username").value)
-    fd.append('email', form.querySelector("#email").value)
-    fd.append('department', form.querySelector("#department").value)
-    fd.append('bu_id', form.querySelector("#bu_id").value)
+    // fd.append('first_name', form.querySelector("#first_name").value)
+    // fd.append('last_name', form.querySelector("#last_name").value)
+    // fd.append('username', form.querySelector("#username").value)
+    // fd.append('email', form.querySelector("#email").value)
+    // fd.append('department', form.querySelector("#department").value)
+    // fd.append('bu_id', form.querySelector("#bu_id").value)
     // fd.append('view_ids', form.querySelector(".view_ids").value || "false" )
     // fd.append('home', form.querySelector(".home").value || "false" )
     // fd.append(// 'group', form.querySelector(".group").value || "false" )
@@ -18,6 +18,8 @@ form.addEventListener("submit", e => {
     // Converting form data to an object to pass via xhr
     const obj = {};
     [...fd.entries()].forEach(entry => obj[entry[0]] = entry[1]);
+
+    console.log(obj);
 
     const results = document.querySelector('#results')
 

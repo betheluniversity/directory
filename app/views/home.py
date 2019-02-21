@@ -122,17 +122,32 @@ class View(FlaskView):
         # option is the advanced settings for student/staff
         viewing_role = self.base.get_viewing_role(data)
 
+        # search_type = data['search_type']
+
+        # if search_type == 'name_search':
+        #     return self.base.fl_search(data, viewing_role)
+        # elif search_type == 'username_search':
+        #     return self.base.username_search(data, viewing_role)
+        # elif search_type == 'email_search':
+        #     return self.base.email_search(data, viewing_role)
+        # elif search_type == 'dept_search':
+        #     return self.base.dept_search(data, viewing_role)
+        # elif search_type == 'id_search':
+        #     return self.base.id_search(data, viewing_role)
+        # else:
+        #     return abort(500)
+
         search_type = data['search_type']
 
-        if search_type == 'name_search':
+        if data['first_name'] != '':
             return self.base.fl_search(data, viewing_role)
-        elif search_type == 'username_search':
+        elif data['username'] != '':
             return self.base.username_search(data, viewing_role)
-        elif search_type == 'email_search':
+        elif data['email'] != '':
             return self.base.email_search(data, viewing_role)
-        elif search_type == 'dept_search':
+        elif data['department'] != '':
             return self.base.dept_search(data, viewing_role)
-        elif search_type == 'id_search':
+        elif data['bu_id'] != '':
             return self.base.id_search(data, viewing_role)
         else:
             return abort(500)
