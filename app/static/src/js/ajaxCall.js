@@ -34,6 +34,7 @@ form.addEventListener("submit", e => {
             }
 	        if (xhr.readyState>3 && xhr.status==200) { 
                 results.innerHTML = xhr.responseText
+                form.reset()
 
                 // Set listener after results have ajaxed in
                 const showDetails = document.querySelectorAll('.showDetails--link')
