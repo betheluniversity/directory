@@ -109,3 +109,14 @@
     
 </div>
 {% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        const input = document.getElementById("department");
+        const awesomplete = new Awesomplete(input, {
+            minChars: 1
+        });
+
+        awesomplete.list = {{depts|safe}};
+    </script>
+{% endblock %}
