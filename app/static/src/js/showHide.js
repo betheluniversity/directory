@@ -1,8 +1,16 @@
-// Advance search show/hide
-const advancedSearchLink = document.querySelector('#advancedSearch--link')
-const advancedSearchOptions = document.querySelector('#advancedSearch--options')
+// Advanced search show/hide
+const advancedSearchLink = document.querySelector('.advancedSearch--link')
+const advancedSearchOptions = document.querySelector('.advancedSearch--options')
+
 advancedSearchLink.addEventListener('click', function(){
-    advancedSearchOptions.classList.toggle('show')
+    if (advancedSearchOptions.classList.contains('hide')){
+        advancedSearchOptions.classList.toggle('hide')
+        advancedSearchOptions.style.height = advancedSearchOptions.scrollHeight + 'px'
+
+    } else {
+        advancedSearchOptions.style.height = '0'
+        advancedSearchOptions.classList.toggle('hide')
+    }
 })
 
 // Profile menu show/hide

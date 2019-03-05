@@ -98,10 +98,10 @@
                                     {% if i < row['college']|length - 1 %}
                                         |
                                     {% endif %}
-                                    {% endif %}
-                                    {% endfor %}
-                                </p>
-                                </div>
+                                {% endif %}
+                            {% endfor %}
+                            </p>
+                        </div>
                     </div>
                 {% endif %}
 
@@ -118,9 +118,6 @@
                     {% endif %}
                 {% endif %}
 
-    <!-- {#                    {% if data['group'] == 'true' %}#} -->
-
-            
                 {% if row['major']|length > 0 %}
                 <div class="row  py-1  border-top">
                     <div class="col-3  px-0">
@@ -134,9 +131,9 @@
                                 {% if i < row['major']|length - 1 %}
                                     |
                                 {% endif %}
-                                {% endif %}
-                                {% endfor %}
-                            </p>
+                            {% endif %}
+                         {% endfor %}
+                        </p>
                     </div>
                 </div>
                 {% endif %}
@@ -170,10 +167,10 @@
                             <p class="mb-0">
                             {% for i in range(0, row['department']|length) %}
                                 {% if i != '' %}
-                                        {{ row['department'][i] }}
-                                        {% if i < row['department']|length - 1 %}
-                                            |
-                                        {% endif %}
+                                    {{ row['department'][i] }}
+                                    {% if i < row['department']|length - 1 %}
+                                        |
+                                    {% endif %}
                                 {% endif %}
                             {% endfor %}
                             </p>
@@ -191,7 +188,6 @@
                     </div>
                 </div>
                 {% endif %}
-    <!-- {#                    {% endif %}#} -->
 
                 {% if data['home'] == 'true' %}
                     {% if row['addr_state'] != '' and row['addr_street1'] != '' and row['addr_city'] != '' and row['addr_zip'] != '' %}
@@ -208,7 +204,6 @@
                 {% endif %}
 
             </div>
-
         </div>
     </div>
     

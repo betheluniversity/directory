@@ -8,21 +8,21 @@
                 <h5 class="mb-0">Search</h5>
             </div>
 
-            <div class="card-body">
-                <form role="form" action="{{ url_for('View:search') }}" class="directory-form" method="POST">
-
+            <form role="form" action="{{ url_for('View:search') }}" class="directory-form" method="POST">
+                
+                <div class="card-body  pb-0">
                     <div class="form-row  mb-4">
                         <div class="col">
-                            <!-- <label for="first_name">First Name:</label> -->
                             <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name">
                         </div>
                         <div class="col">
-                            <!-- <label for="last_name">Last Name:</label> -->
                             <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last name">
                         </div>
                     </div>
+                </div>
 
-                    <div class="collapse" id="advancedSearch--options">
+                <div class="card-body  py-0">
+                    <div class="advancedSearch--options  hide">
                         <div class="form-group row">
                             <div class="col">
                                 <input type="username" class="form-control" id="username" name="username" placeholder="Username">
@@ -46,8 +46,10 @@
                         </div>
                         {% endif %}
                     </div>
+                </div>
 
-                    <div class="form-group mb-3">
+                <div class="card-body  card-body--z  pt-0">
+                    <div class="form-group  mb-3  ">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="student" name="student" value="student" checked>
                             <label class="form-check-label" for="inlineCheckbox1">Student</label>
@@ -61,51 +63,61 @@
 
                     <div class="form-group  mb-0">
                         <button type="submit" class="btn btn-primary" id="btn--search">Search</button>
-                        <a class="ml-2" id="advancedSearch--link" data-toggle="collapse"  role="button" aria-expanded="false" aria-controls="advanced-options">Advanced search</a>
+                        <a class="advancedSearch--link  ml-2" role="button" aria-expanded="false" aria-controls="advanced-options">Advanced search</a>
                     </div>
-                </form>
-            </div>
 
+                </div>
+            </form>
         </div>
     </div>
-    <div id="results" class="col">
-        <h2 id="results_header">Welcome!</h2>
-        <hr>
-        <p>The Bethel Directory search is designed to find results that are exact matches, as well matches that are
-            similar to
-            what you searched for.
-        </p>
-        <br />
-        <p>In the search box, you will find a variety of options to search by:</p>
-        <ul>
-            <li>Name Search</li>
-            <li>Username Search</li>
-            <li>Email Search</li>
-            <li>Department Search</li>
-            {% if session['ITS_view'] %}
-            <li>ID Search</li>
-            {% endif %}
-        </ul>
-        <p>More filter options can be found by clicking the "Advanced" button.</p>
-        <br />
+    <div id="results" class="col  pb-4">
+        <img class="loader mx-auto  my-4  hide" src="static/src/img/oval.svg" alt="" width="64">
+        <div class="introText">
+            <h2>Welcome!</h2>
+            <hr>
+            <p>The Bethel Directory search is designed to find results that are exact matches, as well matches that are similar to what you searched for. </p>
+            <p>In the search box, you will find a variety of options to search by:</p>
+            <ul>
+                <li>Name Search</li>
+                <li>Username Search</li>
+                <li>Email Search</li>
+                <li>Department Search</li>
+                {% if session['ITS_view'] %}
+                <li>ID Search</li>
+                {% endif %}
+            </ul>
+            <p>More filter options can be found by clicking the "Advanced" button.</p>
 
-        {% if 'FACULTY' in session['roles'] or 'STUDENT' in session['roles'] %}
-        <p>If you are looking for additional searching capabilities, try:</p>
-        <ul>
             {% if 'FACULTY' in session['roles'] or 'STUDENT' in session['roles'] %}
-            <li><a href="https://banner.bethel.edu/StudentSelfService/ssb/adviseeList/adviseeList">Advisor searching</a></li>
+            <p>If you are looking for additional searching capabilities, try:</p>
+            <ul>
+                {% if 'FACULTY' in session['roles'] or 'STUDENT' in session['roles'] %}
+                <li><a href="https://banner.bethel.edu/StudentSelfService/ssb/adviseeList/adviseeList">Advisor searching</a></li>
+                {% endif %}
+                {% if 'FACULTY' in session['roles'] %}
+                <li><a href="https://my.bethel.edu/faculty-academics?channel=c0c4aaac8c586513543f13a67cc51824">Faculty
+                        Courses</a></li>
+                {% endif %}
+                {% if 'STUDENT' in session['roles'] %}
+                <li><a href="https://my.bethel.edu/student-academics?channel=c0af22cb8c586513543f13a693f6a8b9">Student
+                        Courses</a></li>
+                {% endif %}
+            </ul>
             {% endif %}
-            {% if 'FACULTY' in session['roles'] %}
-            <li><a href="https://my.bethel.edu/faculty-academics?channel=c0c4aaac8c586513543f13a67cc51824">Faculty
-                    Courses</a></li>
-            {% endif %}
-            {% if 'STUDENT' in session['roles'] %}
-            <li><a href="https://my.bethel.edu/student-academics?channel=c0af22cb8c586513543f13a693f6a8b9">Student
-                    Courses</a></li>
-            {% endif %}
-        </ul>
-        {% endif %}
+        </div>
     </div>
     
 </div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        const input = document.getElementById("department");
+        const awesomplete = new Awesomplete(input, {
+            minChars: 1,
+            maxItems: 4
+        });
+
+        awesomplete.list = {{depts|safe}};
+    </script>
 {% endblock %}

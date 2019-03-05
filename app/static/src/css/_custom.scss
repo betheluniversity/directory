@@ -1,1 +1,35 @@
-$enable-responsive-font-sizes: true;
+body {
+  color:#555;
+}
+
+.card {
+  overflow: hidden;
+}
+
+.card-body {
+  background: white;
+}
+
+.form-group {
+  background: white;
+}
+
+.card-body--z {
+  z-index: 100;
+  position: relative;
+}
+
+.advancedSearch--link {
+  cursor: pointer;
+}
+
+.advancedSearch--options {
+  height: 0;
+  z-index: 1;
+  transition: all 1s;
+  position: relative;
+}
+
+
+.show {display:block}
+.hide {display:none}

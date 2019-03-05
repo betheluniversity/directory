@@ -21,13 +21,13 @@
     "node-sass": "^4.11.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "watch": "^1.0.2",
-    "webpack": "^4.29.3",
+    "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3"
   },
   "scripts": {
     "clean": "rm -rf ./app/static/dist",
     "build": "npm run clean && webpack --mode='production'",
-    "dev": "npm run clean && webpack --mode='development'",
+    "dev": "webpack --mode='development'",
     "watch": "watch 'npm run dev' ./app/static/src"
   }
 }
