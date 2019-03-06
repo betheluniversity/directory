@@ -20,31 +20,34 @@ class DirectoryController(object):
                 if self.match_option(row, viewing_role):
                     ratio = (self.fl_fuzzy(row['first_name'], row['last_name'], True, data['first_name']) +
                              self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name']))
-                    if ratio >= 120:
-                        self.make_results(row, result, ratio)
+                    if data['department'] != '':
+                        if ratio >= 120 and data['department'] in row['department']:
+                         self.make_results(row, result, ratio)
+                    else:
+                        if ratio >= 120:
+                            self.make_results(row, result, ratio)
         # first name search
         elif data['first_name'] != '' and data['last_name'] == '':
             for row in people:
-                # print(row['first_name'] + ' ' + row['last_name'])
                 if self.match_option(row, viewing_role):
-                    # print(row['first_name'] + ' ' + row['last_name'])
                     ratio = self.fl_fuzzy(row['first_name'], row['last_name'], True, data['first_name'])
-                    if ratio >= 75:
-                        self.make_results(row, result, ratio)
+                    if data['department'] != '':
+                        if ratio >= 75 and data['department'] in row['department']:
+                            self.make_results(row, result, ratio)
+                    else:
+                        if ratio >= 75:
+                            self.make_results(row, result, ratio)
         # last name search
         elif data['last_name'] != '' and data['first_name'] == '':
             for row in people:
                 if self.match_option(row, viewing_role):  # if its true, check the person
                     ratio = self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name'])
-                    if ratio >= 75:
-                        self.make_results(row, result, ratio)
-
-        elif data['last_name'] == '' and data['first_name'] == '':  # if both are empty, return everyone
-            for row in people:
-                if self.match_option(row, viewing_role):  # if its true, check the person
-                    result.append(row)
-            result.sort(key=lambda i: i['last_name'])
-            return render_template('results.html', **locals())
+                    if data['department'] != '':
+                        if ratio >= 75 and data['department'] in row['department']:
+                            self.make_results(row, result, ratio)
+                    else:
+                        if ratio >= 75:
+                            self.make_results(row, result, ratio)
 
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'], reverse=True)
