@@ -122,7 +122,7 @@ class View(FlaskView):
         # option is the advanced settings for student/staff
         viewing_role = self.base.get_viewing_role(data)
 
-        if data['first_name'] != '':
+        if data['first_name'] != '' or data['last_name'] != '':
             return self.base.fl_search(data, viewing_role)
         elif data['username'] != '':
             return self.base.username_search(data, viewing_role)
