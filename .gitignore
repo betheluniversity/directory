@@ -5,5 +5,4 @@ config.py
 *.pyc
 
 **/node_modules/
-
 **/.vscode

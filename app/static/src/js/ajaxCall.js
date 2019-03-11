@@ -1,13 +1,18 @@
+const results = document.querySelector('#results')
+const loader = results.querySelector('.loader')
+const introText = results.querySelector('.introText')
+
 const form = document.querySelector(".directory-form");
 form.addEventListener("submit", e => {
     e.preventDefault();
-    const fd = new FormData(form);
+    introText.classList.toggle('hide')
+    loader.classList.toggle('hide')
+    loader.classList.toggle('show')
 
+    const fd = new FormData(form);
     // Converting form data to an object to pass via xhr
     const obj = {};
     [...fd.entries()].forEach(entry => obj[entry[0]] = entry[1]);
-
-    const results = document.querySelector('#results')
 
     function postAjax(url, data, success) {
 	    const params = typeof data == 'string' ? data : Object.keys(data).map(
@@ -18,7 +23,7 @@ form.addEventListener("submit", e => {
 	    xhr.open('POST', url);
 	    xhr.onreadystatechange = function() {
             if (xhr.readyState==3 && xhr.status==200){
-                // console.log('loading');
+                console.log('loading');
             }
 	        if (xhr.readyState>3 && xhr.status==200) { 
                 results.innerHTML = xhr.responseText
