@@ -2,74 +2,7 @@
 
 {% block content %}
 <div class="row">
-    <div class="search  col-md-5  col-xl-4  mb-4">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0">Search</h5>
-            </div>
-
-            <form role="form" action="{{ url_for('View:search') }}" class="directory-form" method="POST">
-                
-                <div class="card-body  pb-0">
-                    <div class="form-row  mb-4">
-                        <div class="col">
-                            <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name">
-                        </div>
-                        <div class="col">
-                            <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last name">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-body  py-0">
-                    <div class="advancedSearch--options  hide">
-                        <div class="form-group row">
-                            <div class="col">
-                                <input type="username" class="form-control" id="username" name="username" placeholder="Username">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col">
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Email">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col">
-                                <input type="text" class="form-control" id="department" name="department" placeholder="Department">
-                            </div>
-                        </div>
-                        {% if session['ITS_view'] %}
-                        <div class="form-group row">
-                            <div class="col">
-                                <input type="text" class="form-control" id="bu_id" name="bu_id" placeholder="ID">
-                            </div>
-                        </div>
-                        {% endif %}
-                    </div>
-                </div>
-
-                <div class="card-body  card-body--z  pt-0">
-                    <div class="form-group  mb-3  ">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="student" name="student" value="student" checked>
-                            <label class="form-check-label" for="inlineCheckbox1">Student</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="faculty_or_staff" name="faculty_or_staff" value="faculty_or_staff"
-                                checked>
-                            <label class="form-check-label" for="inlineCheckbox2">Faculty/Staff</label>
-                        </div>
-                    </div>
-
-                    <div class="form-group  mb-0">
-                        <button type="submit" class="btn btn-primary" id="btn--search">Search</button>
-                        <a class="advancedSearch--link  ml-2" role="button" aria-expanded="false" aria-controls="advanced-options">Advanced search</a>
-                    </div>
-
-                </div>
-            </form>
-        </div>
-    </div>
+    {% include 'modules/search-form.html' %}
     <div id="results" class="col  pb-4">
         <img class="loader mx-auto  my-4  hide" src="static/src/img/oval.svg" alt="" width="64">
         <div class="introText">
@@ -110,6 +43,8 @@
 </div>
 {% endblock %}
 
+
+<!-- This is needed to connect awesomplete to the jinja variable for the department search. -->
 {% block scripts %}
     <script type="text/javascript">
         const input = document.getElementById("department");

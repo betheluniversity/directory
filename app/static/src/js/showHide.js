@@ -1,15 +1,23 @@
 // Advanced search show/hide
+const basicSearchOptions = document.querySelector('.basicSearch--options')
 const advancedSearchLink = document.querySelector('.advancedSearch--link')
 const advancedSearchOptions = document.querySelector('.advancedSearch--options')
 
+//set default
+advancedSearchOptions.style.height = '0'
+basicSearchOptions.style.height = basicSearchOptions.scrollHeight + 'px'
+
 advancedSearchLink.addEventListener('click', function(){
     if (advancedSearchOptions.classList.contains('hide')){
+        basicSearchOptions.classList.toggle('hide')
         advancedSearchOptions.classList.toggle('hide')
+        basicSearchOptions.style.height = 0
         advancedSearchOptions.style.height = advancedSearchOptions.scrollHeight + 'px'
-
     } else {
-        advancedSearchOptions.style.height = '0'
+        basicSearchOptions.classList.toggle('hide')
         advancedSearchOptions.classList.toggle('hide')
+        basicSearchOptions.style.height = basicSearchOptions.scrollHeight + 'px'
+        advancedSearchOptions.style.height = '0'
     }
 })
 
