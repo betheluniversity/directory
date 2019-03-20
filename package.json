@@ -7,10 +7,10 @@
   "author": "Jacob Johnson <johjacb@bethel.edu>",
   "license": "MIT",
   "dependencies": {
-    "autoprefixer": "^9.4.7",
+    "autoprefixer": "^9.5.0",
     "awesomplete": "^1.1.4",
     "bootstrap": "^4.3.0",
-    "css-loader": "^2.1.0",
+    "css-loader": "^2.1.1",
     "cssnano": "^4.1.10",
     "postcss-loader": "^3.0.0",
     "precss": "^4.0.0",
@@ -21,7 +21,7 @@
     "node-sass": "^4.11.0",
     "watch": "^1.0.2",
     "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3"
+    "webpack-cli": "^3.3.0"
   },
   "scripts": {
     "clean": "rm -rf ./app/static/dist",
