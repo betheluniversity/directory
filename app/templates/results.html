@@ -23,17 +23,17 @@
                     {% for i in range(0, row['role']|length) %}
                         {% if i != '' %}
                             {% if row['role'][i] == 'Staff' %}
-                            <p class="mb-0  badge  badge-primary">
+                            <p class="mb-0  text-primary">
                                 {{ row['role'][i] }}
                             </p>
                             {% endif %}
                             {% if row['role'][i] == 'Student' %}
-                            <p class="mb-0  badge  badge-success">
+                            <p class="mb-0  text-success">
                                 {{ row['role'][i] }}
                             </p>
                             {% endif %}
                             {% if row['role'][i] == 'Sponsored Staff' %}
-                            <p class="mb-0  badge  badge-info">
+                            <p class="mb-0  text-info">
                                 {{ row['role'][i] }}
                             </p>
                             {% endif %}
@@ -105,19 +105,6 @@
                     </div>
                 {% endif %}
 
-                {% if session['ITS_view'] == True %}
-                    {% if row['id'] != '' %}
-                        <p class="mb-0">ID: {{ row['id'] }}</p>
-                    {% endif %}
-                    {% if row['udc'] != '' %}
-                        <p class="mb-0">UDC: {{ row['udc'] }}</p>
-                    {% endif %}
-                {% elif row['username'] == session['username'] %}
-                    {% if row['id'] != '' %}
-                        <p class="mb-0">ID: {{ row['id'] }}</p>
-                    {% endif %}
-                {% endif %}
-
                 {% if row['major']|length > 0 %}
                 <div class="row  py-1  border-top">
                     <div class="col-3  px-0">
@@ -187,6 +174,29 @@
                         <p class="mb-0">Ext. {{ row['phone_ext'] }}</p>
                     </div>
                 </div>
+                {% endif %}
+
+                {% if session['ITS_view'] == True %}
+                    {% if row['id'] != '' %}
+                        <div class="row  py-1  border-top">
+                            <div class="col-3  px-0">
+                                <p class="mb-0"><b>ID</b></p>
+                            </div>
+                            <div class="col">
+                                <p class="mb-0">{{ row['id'] }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if row['udc'] != '' %}
+                        <div class="row  py-1  border-top">
+                            <div class="col-3  px-0">
+                                <p class="mb-0"><b>UDC</b></p>
+                            </div>
+                            <div class="col">
+                                <p class="mb-0">{{ row['udc'] }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
                 {% endif %}
 
                 {% if data['home'] == 'true' %}
