@@ -1,4 +1,5 @@
 import datetime
+import re
 
 from flask import Flask
 from flask_caching import Cache
@@ -35,8 +36,29 @@ sentry = Sentry(app, dsn=app.config['SENTRY_URL'])
 
 from app.views import error
 
+# https://stackoverflow.com/questions/919056/case-insensitive-replace
+def ireplace(string, findtxt):
+    try:
+        # find the start of the new string
+        index_l = string.lower().index(findtxt.lower())
+        # get the string with the correct capitalization
+        replacetxt = string[index_l:index_l + len(findtxt)]
+        # add in the span to color it properly
+        replacetxt = '<span class="search-match-highlight">%s</span>' % replacetxt
+    except ValueError:
+        return string
+
+    # keep capitalizations, if necessary
+
+
+    return replacetxt.join(re.compile(findtxt, flags=re.I).split(string))
+
+# try just looping over it manually
+# might be super slow, so just do a quick prototype
+
 # Shows the year for the template
 app.jinja_env.globals.update(now=datetime.datetime.now())
+app.jinja_env.globals.update(ireplace=ireplace)
 
 from app.views.home import View
 

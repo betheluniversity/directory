@@ -13,21 +13,27 @@ class DirectoryController(object):
     def fl_search(self, data, viewing_role):
         people = directory_search()
         result = []
+        search_type = ['name']
+        if data['department'] != '':
+            search_type.append('department')
 
         # first and last name search
         if data['first_name'] != '' and data['last_name'] != '':
+            search_type.append('first_name')
+            search_type.append('last_name')
             for row in people:
                 if self.match_option(row, viewing_role):
                     ratio = (self.fl_fuzzy(row['first_name'], row['last_name'], True, data['first_name']) +
                              self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name']))
                     if data['department'] != '':
                         if ratio >= 120 and data['department'] in row['department']:
-                         self.make_results(row, result, ratio)
+                            self.make_results(row, result, ratio)
                     else:
                         if ratio >= 120:
                             self.make_results(row, result, ratio)
         # first name search
         elif data['first_name'] != '' and data['last_name'] == '':
+            search_type.append('first_name')
             for row in people:
                 if self.match_option(row, viewing_role):
                     ratio = self.fl_fuzzy(row['first_name'], row['last_name'], True, data['first_name'])
@@ -39,6 +45,7 @@ class DirectoryController(object):
                             self.make_results(row, result, ratio)
         # last name search
         elif data['last_name'] != '' and data['first_name'] == '':
+            search_type.append('last_name')
             for row in people:
                 if self.match_option(row, viewing_role):  # if its true, check the person
                     ratio = self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name'])
@@ -58,6 +65,7 @@ class DirectoryController(object):
     def username_search(self, data, viewing_role):
         people = directory_search()
         result = []
+        search_type = 'username'
 
         if data['username'] != '':  # put in the student/staff filters
             for row in people:
@@ -79,6 +87,7 @@ class DirectoryController(object):
     def email_search(self, data, viewing_role):
         people = directory_search()
         result = []
+        search_type = 'email'
 
         if data['email'] != '':  # put in the student/staff filters
             for row in people:
@@ -100,6 +109,7 @@ class DirectoryController(object):
     def dept_search(self, data, viewing_role):
         people = directory_search()
         result = []
+        search_type = 'dept'
 
         if data['department'] != '':
             for row in people:
@@ -123,6 +133,7 @@ class DirectoryController(object):
     def id_search(self, data, viewing_role):
         people = directory_search()
         result = []
+        search_type = 'id'
 
         if data['bu_id'] != '':
             for row in people:
