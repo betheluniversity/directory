@@ -73,6 +73,7 @@ class View(FlaskView):
                         # This way, if the user has a profile but doesn't have a picture, the template will put in a default
                         # picture
                         common_profile.pop('photo')
+                    session['user_common_profile'] = common_profile
                 else:
                     session['user_common_profile'] = {}
                     return None
