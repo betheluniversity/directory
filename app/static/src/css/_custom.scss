@@ -40,6 +40,10 @@ body {
   // height: 0;
 }
 
-#profileDropdown--link a {
-    color: white;
+.navbar a {
+  color: white;
+}
+
+.dropdown-menu a {
+  color: #777;
 }
