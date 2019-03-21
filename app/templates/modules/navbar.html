@@ -5,13 +5,13 @@
             <span class="ml-2  h6" style="color: #ffc600">Directory</span>
         </a>
 
-        {% if session['profile'] %}
+        {% if session['user_common_profile'] %}
         <div class="dropdown  ml-auto" id="profileDropdown--link">
             <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
-                {% if session['profile']['photo'] %}
-                <img width="60" height="60" title="" src="{{ session['profile']['photo'] }}" alt="{{ session['profile']['pref_first_name'] }}"
+                {% if session['user_common_profile']['photo'] %}
+                <img width="60" height="60" title="" src="{{ session['user_common_profile']['photo'] }}" alt="{{ session['user_common_profile']['pref_first_name'] }}"
                     class="rounded-circle">
-                <span class="u-fs14 d-none  d-sm-none  d-md-inline-block">{{ session['profile']['pref_first_name'] }}</span>
+                <span class="u-fs14 d-none  d-sm-none  d-md-inline-block">{{ session['user_common_profile']['pref_first_name'] }}</span>
                 {% else %}
                 <span class="u-fs14 d-none  d-sm-none  d-md-inline-block">User</span>
                 {% endif %}
