@@ -3,16 +3,16 @@ body {
 }
 
 .card {
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 .card-body {
-  background: white;
+  // background: white;
   overflow: hidden;
 }
 
 .form-group {
-  background: white;
+  // background: white;
 }
 
 .card-body--z {
@@ -28,7 +28,7 @@ body {
 .advancedSearch--options {
   // transform: translateY(0);
   // height: 100%;
-  transition: all 1s ease;
+  transition: all 750ms ease;
 }
 
 .basicSearch--options.hide {
@@ -38,4 +38,20 @@ body {
 .advancedSearch--options.hide {
   // transform: translateY(100%);
   // height: 0;
+}
+
+.details {
+  display: none;
+}
+
+.show-details {
+  display: block;
+}
+
+.loader {
+  display: none;
+}
+
+.show-loader {
+  display: block;
 }

@@ -33,7 +33,7 @@ form.addEventListener("submit", e => {
                 const showDetails = document.querySelectorAll('.showDetails--link')
                 for (let index = 0; index < showDetails.length; index++) {
                     showDetails[index].addEventListener('click', function(){
-                        this.parentElement.parentElement.nextElementSibling.classList.toggle('show')
+                        this.parentElement.parentElement.nextElementSibling.classList.toggle('show-details')
                         this.innerHTML === 'Hide details' ? this.innerHTML = 'Show details' : this.innerHTML = 'Hide details'
                     })
                 }
