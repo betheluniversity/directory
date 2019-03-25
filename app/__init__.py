@@ -51,7 +51,7 @@ def ireplace(string, findtxt):
     # keep capitalizations, if necessary
 
 
-    return replacetxt.join(re.compile(findtxt, flags=re.I).split(string))
+    return replacetxt.join(re.compile(findtxt, flags=re.I).split(string, 1))
 
 # try just looping over it manually
 # might be super slow, so just do a quick prototype
