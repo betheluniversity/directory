@@ -49,8 +49,6 @@ def ireplace(string, findtxt):
         return string
 
     # keep capitalizations, if necessary
-
-
     return replacetxt.join(re.compile(findtxt, flags=re.I).split(string, 1))
 
 # try just looping over it manually
