@@ -29,6 +29,8 @@ class DirectoryController(object):
                     else:
                         if ratio >= 60:
                             self.make_results(row, result, ratio)
+            result.sort(key=lambda i: i['first_name'])
+            result.sort(key=lambda i: i['last_name'])
         # first name search
         elif data['first_name'] != '' and data['last_name'] == '':
             search_type.append('First name')
@@ -41,6 +43,8 @@ class DirectoryController(object):
                     else:
                         if ratio >= 75:
                             self.make_results(row, result, ratio)
+            result.sort(key=lambda i: i['last_name'])
+            result.sort(key=lambda i: i['first_name'])
         # last name search
         elif data['last_name'] != '' and data['first_name'] == '':
             search_type.append('Last name')
@@ -53,11 +57,15 @@ class DirectoryController(object):
                     else:
                         if ratio >= 75:
                             self.make_results(row, result, ratio)
+            result.sort(key=lambda i: i['first_name'])
+            result.sort(key=lambda i: i['last_name'])
+        else:
+            result.sort(key=lambda i: i['first_name'])
+            result.sort(key=lambda i: i['last_name'])
 
         if data['department'] != '':
             search_type.append('Department')
 
-        result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'], reverse=True)
 
         return render_template('results.html', **locals())
