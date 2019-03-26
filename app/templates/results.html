@@ -45,7 +45,7 @@
                     {% endif %}
 
                     {% if 'First name' in search_type %}
-                        {{ ireplace(row['first_name'], data['first_name'])|safe }},
+                        {{ ireplace(row['first_name'], data['first_name'])|safe }}
                     {% else %}
                         {{ row['first_name'] }}
                     {% endif %}
