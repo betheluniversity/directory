@@ -22,12 +22,12 @@ class DirectoryController(object):
             for row in people:
                 if self.match_option(row, viewing_role):
                     ratio = (self.fl_fuzzy(row['first_name'], row['last_name'], True, data['first_name']) +
-                             self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name']))
+                             self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name']))/2
                     if data['department'] != '':
-                        if ratio >= 120 and data['department'] in row['department']:
+                        if ratio >= 60 and data['department'] in row['department']:
                             self.make_results(row, result, ratio)
                     else:
-                        if ratio >= 120:
+                        if ratio >= 60:
                             self.make_results(row, result, ratio)
         # first name search
         elif data['first_name'] != '' and data['last_name'] == '':
@@ -71,9 +71,8 @@ class DirectoryController(object):
         if data['username'] != '':  # put in the student/staff filters
             for row in people:
                 if self.match_option(row, viewing_role):
-                    ratio = self.misc_fuzzy(data['username'], row['username'])
-                    if ratio > 75:
-                        self.make_results(row, result, ratio)
+                    if row['username'] == data['username']:
+                        self.make_results(row, result, 140)
         else:
             result = people
             result.sort(key=lambda i: i['last_name'])
@@ -94,8 +93,8 @@ class DirectoryController(object):
             for row in people:
                 if self.match_option(row, viewing_role):
                     ratio = self.misc_fuzzy(data['email'], row['email'])
-                    if ratio > 75:
-                        self.make_results(row, result, ratio)
+                    if row['email'] == data['email']:
+                        self.make_results(row, result, 140)
         else:
             result = people
             result.sort(key=lambda i: i['last_name'])
