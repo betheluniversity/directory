@@ -25,7 +25,7 @@
 {% else %}
     {% for row in result %}
 
-    <div class="result--item mb-3  pt-3  border-top">
+    <div class="person  mb-3  pt-3">
         <div class="media">
 
             {% if row['image_path'] == '' %}
@@ -37,64 +37,62 @@
             <div class="media-body">
             
                 {% if row['last_name'] != '' and row['first_name'] != '' %}
-                    <h3 class="h5">
-                    {% if 'Last name' in search_type %}
-                        {{ ireplace(row['last_name'], data['last_name'])|safe }},
-                    {% else %}
-                        {{ row['last_name'] }},
-                    {% endif %}
+                    <h3 class="person__name">
+                        {% if 'Last name' in search_type %}
+                            {{ ireplace(row['last_name'], data['last_name'])|safe }},
+                        {% else %}
+                            {{ row['last_name'] }},
+                        {% endif %}
 
-                    {% if 'First name' in search_type %}
-                        {{ ireplace(row['first_name'], data['first_name'])|safe }},
-                    {% else %}
-                        {{ row['first_name'] }}
-                    {% endif %}
+                        {% if 'First name' in search_type %}
+                            {{ ireplace(row['first_name'], data['first_name'])|safe }},
+                        {% else %}
+                            {{ row['first_name'] }}
+                        {% endif %}
                     </h3>
                 {% endif %}
 
-                {% if row['role']|length > 0 %}
+                <!-- {% if row['role']|length > 0 %}
                     {% for i in range(0, row['role']|length) %}
                         {% if i != '' %}
                             {% if row['role'][i] == 'Staff' %}
-                            <p class="mb-0  text-primary">
+                            <p class="person__role">
                                 {{ row['role'][i] }}
                             </p>
                             {% endif %}
                             {% if row['role'][i] == 'Student' %}
-                            <p class="mb-0  text-success">
+                            <p class="person__role">
                                 {{ row['role'][i] }}
                             </p>
                             {% endif %}
                             {% if row['role'][i] == 'Sponsored Staff' %}
-                            <p class="mb-0  text-info">
+                            <p class="person__role">
                                 {{ row['role'][i] }}
                             </p>
                             {% endif %}
                         {% endif %}
                     {% endfor %}
+                {% endif %} -->
+
+                {% if row['role']|length > 0 %}
+                    <p class="person__role">
+                        {% for i in range(0, row['role']|length) %}
+                            {% if i != '' %}
+                                {{ row['role'][i] }}{% if i < row['role']|length - 1 %}, {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </p>
                 {% endif %}
 
-                <p>
-                    {% if 'Department' in search_type %}
-                        {{ row['department'][0] }}
-                    {% elif 'Username' in search_type %}
-                        {{ row['username'] }}
-                    {% elif 'Email' in search_type %}
-                        {{ row['email'] }}
-                    {% elif 'ID' in search_type %}
-                        {{ row['id'] }}
-                    {% endif %}
-                </p>
-
-                <p class="showDetails--link" style="cursor:pointer">
+                <!-- <p class="person__details__link">
                     <a aria-expanded="false" aria-controls="showDetails">
-                        Show details
+                        + Details
                     </a>
-                </p>
+                </p> -->
             </div>
         </div>
 
-        <div class="details  mt-3  mb-5" id="showDetails">
+        <div class="person__details  mt-3  mb-5" id="showDetails">
             <div class="container">
 
                 {% if row['username'] != '' %}

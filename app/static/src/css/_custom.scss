@@ -40,11 +40,40 @@ body {
   // height: 0;
 }
 
-.details {
+.person {
+  border-top: 1px solid #eaedf0;
+}
+
+.person:hover {
+  cursor:pointer;
+}
+
+.person__name {
+  font-size: 1.15rem;
+  color: #555;
+}
+
+.person:hover .person__name {
+  color: #0069aa;
+}
+
+.person__role {
+  font-size: .8rem;
+  color: #999;
+}
+
+.person__details__link {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: .8rem;
+  cursor: pointer;
+}
+
+.person__details {
   display: none;
 }
 
-.show-details {
+.show-details .person__details {
   display: block;
 }
 

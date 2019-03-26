@@ -30,11 +30,13 @@ form.addEventListener("submit", e => {
                 form.reset()
 
                 // Set listener after results have ajaxed in
-                const showDetails = document.querySelectorAll('.showDetails--link')
+                const showDetails = document.querySelectorAll('.person')
+                // const showDetails = document.querySelectorAll('.person__details__link')
                 for (let index = 0; index < showDetails.length; index++) {
                     showDetails[index].addEventListener('click', function(){
-                        this.parentElement.parentElement.nextElementSibling.classList.toggle('show-details')
-                        this.innerHTML === 'Hide details' ? this.innerHTML = 'Show details' : this.innerHTML = 'Hide details'
+                        // this.parentElement.parentElement.nextElementSibling.classList.toggle('show-details')
+                        this.classList.toggle('show-details')
+                        // this.innerHTML === '- Hide details' ? this.innerHTML = '+ Show details' : this.innerHTML = '- Hide details'
                     })
                 }
             }
