@@ -1,4 +1,4 @@
-# directory
+# Bethel Directory
 
 Coming soon!
 
