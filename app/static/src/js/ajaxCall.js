@@ -25,6 +25,7 @@ form.addEventListener("submit", e => {
             if (xhr.readyState==3 && xhr.status==200){
                 console.log('loading');
             } else if (xhr.status >= 500 || xhr.status == 0) {
+                // status code 0 is returned when you are signed out of CAS.
                 location.href = "/";
             } else if (xhr.readyState>3 && xhr.status==200) {
                 results.innerHTML = xhr.responseText
