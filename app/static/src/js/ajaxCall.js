@@ -24,7 +24,7 @@ form.addEventListener("submit", e => {
 	    xhr.onreadystatechange = function() {
             if (xhr.readyState==3 && xhr.status==200){
                 console.log('loading');
-            } else if (xhr.status >= 500 || xhr.status == 403) {
+            } else if (xhr.status >= 500 || xhr.status == 0) {
                 location.href = "/";
             } else if (xhr.readyState>3 && xhr.status==200) {
                 results.innerHTML = xhr.responseText
