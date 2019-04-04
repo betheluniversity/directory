@@ -24,8 +24,9 @@ form.addEventListener("submit", e => {
 	    xhr.onreadystatechange = function() {
             if (xhr.readyState==3 && xhr.status==200){
                 console.log('loading');
-            }
-	        if (xhr.readyState>3 && xhr.status==200) { 
+            } else if (xhr.status >= 500) {
+                location.href = "/";
+            } else if (xhr.readyState>3 && xhr.status==200) {
                 results.innerHTML = xhr.responseText
                 form.reset()
 
@@ -41,9 +42,9 @@ form.addEventListener("submit", e => {
 	    };
 	    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 	    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	    xhr.send(params);
+        xhr.send(params);
 	    return xhr;
 	}
 
-	postAjax('/search', obj);
+    postAjax('/search', obj);
 })
