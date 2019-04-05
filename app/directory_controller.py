@@ -22,13 +22,15 @@ class DirectoryController(object):
             for row in people:
                 if self.match_option(row, viewing_role):
                     ratio = (self.fl_fuzzy(row['first_name'], row['last_name'], True, data['first_name']) +
-                             self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name']))
+                             self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name']))/2
                     if data['department'] != '':
-                        if ratio >= 120 and data['department'] in row['department']:
+                        if ratio >= 60 and data['department'] in row['department']:
                             self.make_results(row, result, ratio)
                     else:
-                        if ratio >= 120:
+                        if ratio >= 60:
                             self.make_results(row, result, ratio)
+            result.sort(key=lambda i: i['first_name'])
+            result.sort(key=lambda i: i['last_name'])
         # first name search
         elif data['first_name'] != '' and data['last_name'] == '':
             search_type.append('First name')
@@ -41,6 +43,8 @@ class DirectoryController(object):
                     else:
                         if ratio >= 75:
                             self.make_results(row, result, ratio)
+            result.sort(key=lambda i: i['last_name'])
+            result.sort(key=lambda i: i['first_name'])
         # last name search
         elif data['last_name'] != '' and data['first_name'] == '':
             search_type.append('Last name')
@@ -53,11 +57,15 @@ class DirectoryController(object):
                     else:
                         if ratio >= 75:
                             self.make_results(row, result, ratio)
+            result.sort(key=lambda i: i['first_name'])
+            result.sort(key=lambda i: i['last_name'])
+        else:
+            result.sort(key=lambda i: i['first_name'])
+            result.sort(key=lambda i: i['last_name'])
 
         if data['department'] != '':
             search_type.append('Department')
 
-        result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'], reverse=True)
 
         return render_template('results.html', **locals())
@@ -71,9 +79,8 @@ class DirectoryController(object):
         if data['username'] != '':  # put in the student/staff filters
             for row in people:
                 if self.match_option(row, viewing_role):
-                    ratio = self.misc_fuzzy(data['username'], row['username'])
-                    if ratio > 75:
-                        self.make_results(row, result, ratio)
+                    if row['username'] == data['username']:
+                        self.make_results(row, result, 140)
         else:
             result = people
             result.sort(key=lambda i: i['last_name'])
@@ -94,8 +101,8 @@ class DirectoryController(object):
             for row in people:
                 if self.match_option(row, viewing_role):
                     ratio = self.misc_fuzzy(data['email'], row['email'])
-                    if ratio > 75:
-                        self.make_results(row, result, ratio)
+                    if row['email'] == data['email']:
+                        self.make_results(row, result, 140)
         else:
             result = people
             result.sort(key=lambda i: i['last_name'])

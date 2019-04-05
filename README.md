@@ -1,43 +1,7 @@
-# directory
-A pythonic remake of the infamous directory.bethel.edu
+# Bethel Directory
 
-## Planning Notes:
+Coming soon!
 
-#### Search Types:
- - #### First/Last name:
-    - Normal first and last name search for students
- - #### Username
- - #### E-Mail
- - #### Department:
-    - Staff and faculty within a department
- - #### ID
-    - Used primarily by staff and faculty as students cannot see other students IDs
- - #### Phone number
+A pythonic remake of the old directory.bethel.edu. The initial launch is mostly just a styling update, but there will be room for future updates now that we have access to edit the data and the styling.
 
-#### Searching For (input):
-All inputs that may be entered into whichever solution are as follows:
-- Name {First, and/or last}
-- Username (ex. grg27487)
-- User ID
-- Department Name (ex. Department of Math and Computer Science)
-
-#### Return from Search:
-Two types of return, based on general role:
-- Student:
-    - Name
-    - Email
-    - PO #
-    - User ID
-    - Address
-    - Major/Minor/Program/Year
-    - Location/Room
-    - Image URL
-- Faculty/Staff:
-    - Name
-    - Email
-    - PO # (if applicable)
-    - User ID
-    - Address
-    - Department
-    - Job Title
-    - Ext. #
+The directory is mainly used for finding basic student, staff, and faculty information through sophisticated searching capabilities. 
