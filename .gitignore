@@ -1,0 +1,9 @@
+
+.idea
+
+config.py
+*.pyc
+
+**/node_modules/
+**/.vscode
+**/app/static/dist

@@ -1,0 +1,16 @@
+Flask
+requests
+Jinja2
+sqlalchemy
+cx_Oracle
+Flask-Classy
+urllib3
+requests
+fuzzywuzzy
+flask-caching
+python-Levenshtein
+werkzeug
+python-ldap
+redis
+raven
+blinker

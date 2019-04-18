@@ -1,0 +1,133 @@
+html, body {
+  color:#555;
+  height: 100vh;
+}
+
+.stickyWrapper {
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.divide {
+  display: none;
+  height: 100%;
+  background: #fdfdfd;
+  position: fixed;
+  z-index: -1;
+}
+
+@media (min-width: 768px) {
+  .divide {
+    display: block;
+    width: 44vw;
+  }
+}
+
+@media (min-width: 1200px) {
+  .divide {
+    width: calc(50vw - 180px);
+  }
+}
+
+.accordionTitle {
+  cursor: pointer;
+  transition: all 500ms ease;
+}
+
+.accordionTitle__content::before {
+  content: '';
+  display: inline-block;
+  border-right: 2px solid #556;
+  border-bottom: 2px solid #556;
+  width: 6px; 
+  height: 6px;
+  transform: rotate(-135deg);
+  margin-right: .5em;
+}
+
+
+.active .accordionTitle__content::before {
+  transform: rotate(45deg);
+  border-color: #fff;
+  margin-bottom: .2em;
+}
+
+.accordionContent {
+  overflow: hidden;
+  transition: height 500ms ease;
+  // border-top: 1px solid #dfdfdf;
+  border-bottom: 1px solid #dfdfdf;
+}
+
+.hide-accordion {
+  // height: 0;
+  transition: height 500ms ease;
+}
+
+.card-header {
+  background: #00000005;
+  border-bottom: 0;
+}
+
+.active .card-header {
+  color: #0069aa;
+  color: #fff;
+  border-bottom: 1px solid #0069aa35;
+  background: #0069aa;
+  // background: #0069aa linear-gradient(180deg,#268fff,#0069aa) repeat-x;
+}
+
+.person {
+  border-top: 1px solid #eaedf0;
+}
+
+.person:hover {
+  cursor:pointer;
+}
+
+.person__name {
+  font-size: 1.15rem;
+  color: #555;
+}
+
+.person:hover .person__name {
+  color: #0069aa;
+}
+
+.person__role {
+  font-size: .8rem;
+  color: #999;
+}
+
+.person__details__link {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: .8rem;
+  cursor: pointer;
+}
+
+
+.show-details .person__details {
+  display: block;
+}
+
+.navbar a {
+  color: white;
+}
+
+.dropdown-menu a {
+  color: #777;
+}
+
+.search-match-highlight {
+  background-color: #fff5bf;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}

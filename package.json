@@ -1,0 +1,38 @@
+{
+  "name": "directory",
+  "version": "0.0.1",
+  "description": "Bethel directory",
+  "private": true,
+  "repository": "https://github.com/betheluniversity/directory.git",
+  "author": "Jacob Johnson <johjacb@bethel.edu>",
+  "license": "MIT",
+  "dependencies": {
+    "autoprefixer": "^9.5.0",
+    "awesomplete": "^1.1.4",
+    "bootstrap": "^4.3.0",
+    "css-loader": "^2.1.1",
+    "cssnano": "^4.1.10",
+    "postcss-loader": "^3.0.0",
+    "precss": "^4.0.0",
+    "sass-loader": "^7.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "mini-css-extract-plugin": "^0.5.0",
+    "node-sass": "^4.11.0",
+    "watch": "^1.0.2",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
+  },
+  "scripts": {
+    "clean": "rm -rf ./app/static/dist",
+    "build": "npm run clean && webpack --mode='production'",
+    "dev": "webpack --mode='development'",
+    "watch": "watch 'npm run dev' ./app/static/src"
+  }
+}
