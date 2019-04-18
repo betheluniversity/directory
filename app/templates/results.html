@@ -1,4 +1,6 @@
-<h2 class="h4">Search Results for:</h2>
+<div id="infiniteScroll">
+
+<h2 class="h4">Search results for:</h2>
 
 <p>
 {% for type in search_type %}
@@ -25,7 +27,7 @@
 {% else %}
     {% for row in result %}
 
-    <div class="result--item mb-3  pt-3  border-top">
+    <div class="person  mb-3  pt-3">
         <div class="media">
 
             {% if row['image_path'] == '' %}
@@ -37,12 +39,12 @@
             <div class="media-body">
             
                 {% if row['last_name'] != '' and row['first_name'] != '' %}
-                    <h3 class="h5">
-                    {% if 'Last name' in search_type %}
-                        {{ ireplace(row['last_name'], data['last_name'])|safe }},
-                    {% else %}
-                        {{ row['last_name'] }},
-                    {% endif %}
+                    <h3 class="person__name">
+                        {% if 'Last name' in search_type %}
+                            {{ ireplace(row['last_name'], data['last_name'])|safe }},
+                        {% else %}
+                            {{ row['last_name'] }},
+                        {% endif %}
 
                     {% if 'First name' in search_type %}
                         {{ ireplace(row['first_name'], data['first_name'])|safe }}
@@ -52,53 +54,51 @@
                     </h3>
                 {% endif %}
 
-                {% if row['role']|length > 0 %}
+                <!-- {% if row['role']|length > 0 %}
                     {% for i in range(0, row['role']|length) %}
                         {% if i != '' %}
                             {% if row['role'][i] == 'Staff' %}
-                            <p class="mb-0  badge  badge-primary">
+                            <p class="person__role">
                                 {{ row['role'][i] }}
                             </p>
                             {% endif %}
                             {% if row['role'][i] == 'Student' %}
-                            <p class="mb-0  badge  badge-success">
+                            <p class="person__role">
                                 {{ row['role'][i] }}
                             </p>
                             {% endif %}
                             {% if row['role'][i] == 'Sponsored Staff' %}
-                            <p class="mb-0  badge  badge-info">
+                            <p class="person__role">
                                 {{ row['role'][i] }}
                             </p>
                             {% endif %}
                         {% endif %}
                     {% endfor %}
+                {% endif %} -->
+
+                {% if row['role']|length > 0 %}
+                    <p class="person__role">
+                        {% for i in range(0, row['role']|length) %}
+                            {% if i != '' %}
+                                {{ row['role'][i] }}{% if i < row['role']|length - 1 %}, {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </p>
                 {% endif %}
 
-                <p>
-                    {% if 'Department' in search_type %}
-                        {{ row['department'][0] }}
-                    {% elif 'Username' in search_type %}
-                        {{ row['username'] }}
-                    {% elif 'Email' in search_type %}
-                        {{ row['email'] }}
-                    {% elif 'ID' in search_type %}
-                        {{ row['id'] }}
-                    {% endif %}
-                </p>
-
-                <p class="showDetails--link" style="cursor:pointer">
+                <!-- <p class="person__details__link">
                     <a aria-expanded="false" aria-controls="showDetails">
-                        Show details
+                        + Details
                     </a>
-                </p>
+                </p> -->
             </div>
         </div>
 
-        <div class="collapse  mt-3  mb-5" id="showDetails">
+        <div class="person__details  mt-3  mb-5  hide" id="showDetails">
             <div class="container">
 
                 {% if row['username'] != '' %}
-                <div class="row  py-1  border-top">
+                <div class="row  py-1 ">
                     <div class="col-3  px-0">
                         <p class="mb-0"><b>Username</b></p>
                     </div>
@@ -109,7 +109,7 @@
                 {% endif %}
 
                 {% if row['email'] != '' %}
-                <div class="row  py-1  border-top">
+                <div class="row  py-1 ">
                     <div class="col-3  px-0">
                         <p class="mb-0"><b>Email</b></p>
                     </div>
@@ -120,7 +120,7 @@
                 {% endif %}
                 
                 {% if row['po'] != '' %}
-                <div class="row  py-1  border-top">
+                <div class="row  py-1 ">
                     <div class="col-3  px-0">
                         <p class="mb-0"><b>PO</b></p>
                     </div>
@@ -131,7 +131,7 @@
                 {% endif %}
 
                 {% if row['college'][0]|length > 0 %}
-                <div class="row  py-1  border-top">
+                <div class="row  py-1 ">
                         <div class="col-3  px-0">
                             <p class="mb-0"><b>College</b></p>
                         </div>
@@ -150,21 +150,8 @@
                     </div>
                 {% endif %}
 
-                {% if session['ITS_view'] == True %}
-                    {% if row['id'] != '' %}
-                        <p class="mb-0">ID: {{ row['id'] }}</p>
-                    {% endif %}
-                    {% if row['udc'] != '' %}
-                        <p class="mb-0">UDC: {{ row['udc'] }}</p>
-                    {% endif %}
-                {% elif row['username'] == session['username'] %}
-                    {% if row['id'] != '' %}
-                        <p class="mb-0">ID: {{ row['id'] }}</p>
-                    {% endif %}
-                {% endif %}
-
                 {% if row['major'][0]|length > 0 %}
-                <div class="row  py-1  border-top">
+                <div class="row  py-1 ">
                     <div class="col-3  px-0">
                         <p class="mb-0"><b>Major</b></p>
                     </div>
@@ -184,7 +171,7 @@
                 {% endif %}
 
                 {% if row['minor'][0]|length > 0 %}
-                <div class="row  py-1  border-top">
+                <div class="row  py-1 ">
                         <div class="col-3  px-0">
                             <p class="mb-0"><b>Minor</b></p>
                         </div>
@@ -204,9 +191,9 @@
                 {% endif %}
 
                 {% if row['department'][0]|length > 0 %}
-                <div class="row  py-1  border-top">
+                <div class="row  py-1 ">
                         <div class="col-3  px-0">
-                            <p class="mb-0"><b>Department</b></p>
+                            <p class="mb-0"><b>Dept.</b></p>
                         </div>
                         <div class="col">
                             <p class="mb-0">
@@ -224,7 +211,7 @@
                 {% endif %}
 
                 {% if row['phone_ext'] != '' %}
-                <div class="row  py-1  border-top">
+                <div class="row  py-1 ">
                     <div class="col-3  px-0">
                         <p class="mb-0"><b>Ext</b></p>
                     </div>
@@ -232,6 +219,29 @@
                         <p class="mb-0">Ext. {{ row['phone_ext'] }}</p>
                     </div>
                 </div>
+                {% endif %}
+
+                {% if session['ITS_view'] == True %}
+                    {% if row['id'] != '' %}
+                        <div class="row  py-1 ">
+                            <div class="col-3  px-0">
+                                <p class="mb-0"><b>ID</b></p>
+                            </div>
+                            <div class="col">
+                                <p class="mb-0">{{ row['id'] }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if row['udc'] != '' %}
+                        <div class="row  py-1 ">
+                            <div class="col-3  px-0">
+                                <p class="mb-0"><b>UDC</b></p>
+                            </div>
+                            <div class="col">
+                                <p class="mb-0">{{ row['udc'] }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
                 {% endif %}
 
                 {% if data['home'] == 'true' %}
@@ -254,3 +264,5 @@
     
     {% endfor %}
 {% endif %}
+
+</div>
