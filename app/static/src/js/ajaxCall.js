@@ -11,14 +11,14 @@ form.addEventListener('submit', e => {
 
     const fd = new FormData(form)
     // Converting form data to an object to pass via xhr
-    const obj = {};
+    obj = {};
     [...fd.entries()].forEach(entry => obj[entry[0]] = entry[1])
 
-    function postAjax (url, data, success) {
+    function postAjax (url, data, callback) {
         const params = typeof data === 'string' ? data : Object.keys(data).map(
             function (k) { return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }
         ).join('&')
-
+        console.log(params)
         const xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP')
         xhr.open('POST', url)
         xhr.onreadystatechange = function () {
@@ -26,43 +26,9 @@ form.addEventListener('submit', e => {
                 console.log('Loading...')
             } else if (xhr.status >= 500 || xhr.status === 0) {
                 // status code 0 is returned when you are signed out of CAS.
-                location.href = '/'
+                // location.href = '/'
             } else if (xhr.readyState > 3 && xhr.status === 200) {
-                form.reset()
-                results.innerHTML = xhr.responseText
-
-                const infiniteScroll = document.querySelector('#infiniteScroll')
-
-                // Add 20 items.
-                var nextItem = 1
-                var loadMore = function () {
-                    for (var i = 0; i < 20; i++) {
-                        var item = document.createElement('li')
-                        item.innerText = 'Item ' + nextItem++
-                        infiniteScroll.appendChild(item)
-                    }
-                }
-
-                // Detect when scrolled to bottom.
-                infiniteScroll.addEventListener('scroll', function () {
-                    if (infiniteScroll.scrollTop + infiniteScroll.clientHeight >= infiniteScroll.scrollHeight) {
-                        loadMore()
-                    }
-                })
-
-                // Initially load some items.
-                loadMore()
-
-                // Set listener after results have ajaxed in
-                const showDetails = document.querySelectorAll('.person')
-                // const showDetails = document.querySelectorAll('.person__details__link')
-                for (let index = 0; index < showDetails.length; index++) {
-                    showDetails[index].addEventListener('click', function () {
-                        // this.parentElement.parentElement.nextElementSibling.classList.toggle('show-details')
-                        this.classList.toggle('show-details')
-                        // this.innerHTML === '- Hide details' ? this.innerHTML = '+ Show details' : this.innerHTML = '- Hide details'
-                    })
-                }
+                callback(xhr)
             }
         }
         xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
@@ -71,5 +37,43 @@ form.addEventListener('submit', e => {
         return xhr
     }
 
-    postAjax('/search', obj)
+    postAjax('/search', obj, function(xhr){
+        form.reset()
+        results.innerHTML = xhr.responseText
+
+        // Set listener after results have ajaxed in
+        const showDetails = document.querySelectorAll('.person')
+        // const showDetails = document.querySelectorAll('.person__details__link')
+        for (let index = 0; index < showDetails.length; index++) {
+            showDetails[index].addEventListener('click', function () {
+                // this.parentElement.parentElement.nextElementSibling.classList.toggle('show-details')
+                this.classList.toggle('show-details')
+                // this.innerHTML === '- Hide details' ? this.innerHTML = '+ Show details' : this.innerHTML = '- Hide details'
+            })
+        }
+
+        const infiniteScroll = document.querySelector('#infiniteScroll')
+        window.onscroll = function(ev) {
+            // you're at the bottom of the page
+            if ((window.innerHeight + window.scrollY) >= infiniteScroll.offsetHeight
+                    && parseInt(document.querySelector('#infiniteDataContainer').getAttribute('page')) < parseInt(document.querySelector('#infiniteDataContainer').getAttribute('max-page'))
+                    && document.querySelector('#infiniteDataContainer').getAttribute('busy') === 'false') {
+                document.querySelector('#infiniteDataContainer').setAttribute('busy', 'true');
+                // increase page number
+                page_number = parseInt(document.querySelector('#infiniteDataContainer').getAttribute('page')) + 1
+                document.querySelector('#infiniteDataContainer').setAttribute('page', page_number)
+
+                // get new page number
+                new_page_number = document.querySelector('#infiniteDataContainer').getAttribute('page')
+
+                // get data and add on page number
+                obj = document.querySelector('#infiniteDataContainer').getAttribute('data') + '&page=' + new_page_number;
+                postAjax('/search', obj, function(xhr){
+                    // append results
+                    infiniteScroll.innerHTML = infiniteScroll.innerHTML + xhr.responseText;
+                    document.querySelector('#infiniteDataContainer').setAttribute('busy', 'false')
+                })
+            }
+        };
+    })
 })
