@@ -1,3 +1,5 @@
+import math
+
 from flask import render_template
 from fuzzywuzzy import fuzz
 
@@ -68,7 +70,11 @@ class DirectoryController(object):
 
         result.sort(key=lambda i: i['ratio'], reverse=True)
 
-        return render_template('results.html', **locals())
+        return {
+            'results': result,
+            'search_type': search_type,
+            'total_pages': math.ceil(len(result)/20)
+        }
 
     # Username search executes, creates, and formats the username searches
     def username_search(self, data, viewing_role):
@@ -89,7 +95,11 @@ class DirectoryController(object):
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'], reverse=True)
 
-        return render_template('results.html', **locals())
+        return {
+            'results': result,
+            'search_type': search_type,
+            'total_pages': math.ceil(len(result)/20)
+        }
 
     # Email search, executes, creates, and formats the email search and results
     def email_search(self, data, viewing_role):
@@ -111,7 +121,11 @@ class DirectoryController(object):
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'], reverse=True)
 
-        return render_template('results.html', **locals())
+        return {
+            'results': result,
+            'search_type': search_type,
+            'total_pages': math.ceil(len(result)/20)
+        }
 
     # department search, subject to change
     def dept_search(self, data, viewing_role):
@@ -133,7 +147,11 @@ class DirectoryController(object):
 
         result.sort(key=lambda i: i['last_name'])
 
-        return render_template('results.html', **locals())
+        return {
+            'results': result,
+            'search_type': search_type,
+            'total_pages': math.ceil(len(result)/20)
+        }
 
     # id search, only visible to those whose roles allow it
     # does the same as the other search functions
@@ -154,7 +172,11 @@ class DirectoryController(object):
 
         result.sort(key=lambda i: i['last_name'])
 
-        return render_template('results.html', **locals())
+        return {
+            'results': result,
+            'search_type': search_type,
+            'total_pages': math.ceil(len(result)/20)
+        }
 
     def get_viewing_role(self, data):
         if data.get('faculty_or_staff') == 'true' and data.get('student') == 'true':
