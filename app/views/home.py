@@ -2,6 +2,7 @@ import ldap
 import re
 import requests
 import time
+from urllib.parse import urlencode
 
 from flask import render_template, request, session, abort, make_response, redirect
 from flask import json as fjson
@@ -124,17 +125,29 @@ class View(FlaskView):
         viewing_role = self.base.get_viewing_role(data)
 
         if data['first_name'] != '' or data['last_name'] != '':  # first and last name search will also factor in department if both are filled out
-            return self.base.fl_search(data, viewing_role)
+            results_data = self.base.fl_search(data, viewing_role)
         elif data['username'] != '':
-            return self.base.username_search(data, viewing_role)
+            results_data = self.base.username_search(data, viewing_role)
         elif data['email'] != '':
-            return self.base.email_search(data, viewing_role)
+            results_data = self.base.email_search(data, viewing_role)
         elif data['department'] != '':
-            return self.base.dept_search(data, viewing_role)
+            results_data = self.base.dept_search(data, viewing_role)
         elif data['bu_id'] != '':
-            return self.base.id_search(data, viewing_role)
+            results_data = self.base.id_search(data, viewing_role)
         else:
             return abort(500)
+
+        # add the page number to the results
+        results_data['page'] = int(data.get('page', 1))
+        results = render_template('results.html', **locals())
+
+        # the first page should also load the base
+        if results_data['page'] == 1:
+            form_data = urlencode(data)
+            # user results to build the template?
+            return render_template('results_base.html', **locals())
+        else:
+            return results
 
     def logout(self):
         session.clear()
