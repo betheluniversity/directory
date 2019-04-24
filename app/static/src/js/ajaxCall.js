@@ -66,7 +66,7 @@ form.addEventListener('submit', e => {
 
                 // increase page number
                 const new_page_number = parseInt(infiniteDataContainer.getAttribute('page')) + 1
-                infiniteDataContainer.setAttribute('page', page_number)
+                infiniteDataContainer.setAttribute('page', new_page_number)
 
                 // get data and append page number to the data
                 obj = infiniteDataContainer.getAttribute('data') + '&page=' + new_page_number;
