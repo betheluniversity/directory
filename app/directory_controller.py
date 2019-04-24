@@ -12,7 +12,11 @@ class DirectoryController(object):
         pass
 
     # first and last name search. Holds the details and logic surrounding the first and last name searches
-    def fl_search(self, data, viewing_role):
+    def fl_department_search(self, data, viewing_role):
+        if data['department'] != '':
+            data['first_name'] = data['dept_first_name']
+            data['last_name'] = data['dept_last_name']
+
         people = directory_search()
         result = []
         search_type = []
@@ -62,6 +66,14 @@ class DirectoryController(object):
             result.sort(key=lambda i: i['first_name'])
             result.sort(key=lambda i: i['last_name'])
         else:
+            for row in people:
+                if self.match_option(row, viewing_role):  # if its true, check the person
+                    ratio = self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name'])
+                    if data['department'] != '':
+                        if data['department'] in row['department']:
+                            self.make_results(row, result, ratio)
+                    else:
+                        self.make_results(row, result, ratio)
             result.sort(key=lambda i: i['first_name'])
             result.sort(key=lambda i: i['last_name'])
 

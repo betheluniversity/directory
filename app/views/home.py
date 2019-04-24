@@ -124,14 +124,12 @@ class View(FlaskView):
         # option is the advanced settings for student/staff
         viewing_role = self.base.get_viewing_role(data)
 
-        if data['first_name'] != '' or data['last_name'] != '':  # first and last name search will also factor in department if both are filled out
-            results_data = self.base.fl_search(data, viewing_role)
+        if data['first_name'] != '' or data['last_name'] != '' or data['department'] != '':  # first and last name search will also factor in department if both are filled out
+            results_data = self.base.fl_department_search(data, viewing_role)
         elif data['username'] != '':
             results_data = self.base.username_search(data, viewing_role)
         elif data['email'] != '':
             results_data = self.base.email_search(data, viewing_role)
-        elif data['department'] != '':
-            results_data = self.base.dept_search(data, viewing_role)
         elif data['bu_id'] != '':
             results_data = self.base.id_search(data, viewing_role)
         else:
