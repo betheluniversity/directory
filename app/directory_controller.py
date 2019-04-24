@@ -9,7 +9,7 @@ from app.db.db_functions import directory_search
 
 class DirectoryController(object):
     def __init__(self):
-        pass
+        self.people_per_page = 20
 
     # first and last name search. Holds the details and logic surrounding the first and last name searches
     def fl_search(self, data, viewing_role):
@@ -73,7 +73,7 @@ class DirectoryController(object):
         return {
             'results': result,
             'search_type': search_type,
-            'total_pages': math.ceil(len(result)/20)
+            'total_pages': math.ceil(len(result)/self.people_per_page)
         }
 
     # Username search executes, creates, and formats the username searches
@@ -98,7 +98,7 @@ class DirectoryController(object):
         return {
             'results': result,
             'search_type': search_type,
-            'total_pages': math.ceil(len(result)/20)
+            'total_pages': math.ceil(len(result)/self.people_per_page)
         }
 
     # Email search, executes, creates, and formats the email search and results
@@ -124,7 +124,7 @@ class DirectoryController(object):
         return {
             'results': result,
             'search_type': search_type,
-            'total_pages': math.ceil(len(result)/20)
+            'total_pages': math.ceil(len(result)/self.people_per_page)
         }
 
     # department search, subject to change
@@ -150,7 +150,7 @@ class DirectoryController(object):
         return {
             'results': result,
             'search_type': search_type,
-            'total_pages': math.ceil(len(result)/20)
+            'total_pages': math.ceil(len(result)/self.people_per_page)
         }
 
     # id search, only visible to those whose roles allow it
@@ -175,7 +175,7 @@ class DirectoryController(object):
         return {
             'results': result,
             'search_type': search_type,
-            'total_pages': math.ceil(len(result)/20)
+            'total_pages': math.ceil(len(result)/self.people_per_page)
         }
 
     def get_viewing_role(self, data):

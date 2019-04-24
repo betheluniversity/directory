@@ -56,22 +56,10 @@ form.addEventListener('submit', e => {
         window.onscroll = function(ev) {
             // you're at the bottom of the page
             if ((window.innerHeight + window.scrollY) >= infiniteScroll.offsetHeight
-                    && parseInt(document.querySelector('#infiniteDataContainer').getAttribute('page')) < parseInt(document.querySelector('#infiniteDataContainer').getAttribute('max-page'))
-                    && document.querySelector('#infiniteDataContainer').getAttribute('busy') === 'false') {
-                document.querySelector('#infiniteDataContainer').setAttribute('busy', 'true');
-                // increase page number
-                page_number = parseInt(document.querySelector('#infiniteDataContainer').getAttribute('page')) + 1
-                document.querySelector('#infiniteDataContainer').setAttribute('page', page_number)
 
-                // get new page number
-                new_page_number = document.querySelector('#infiniteDataContainer').getAttribute('page')
 
-                // get data and add on page number
-                obj = document.querySelector('#infiniteDataContainer').getAttribute('data') + '&page=' + new_page_number;
                 postAjax('/search', obj, function(xhr){
-                    // append results
                     infiniteScroll.innerHTML = infiniteScroll.innerHTML + xhr.responseText;
-                    document.querySelector('#infiniteDataContainer').setAttribute('busy', 'false')
                 })
             }
         };

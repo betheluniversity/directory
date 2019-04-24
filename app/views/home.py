@@ -137,10 +137,11 @@ class View(FlaskView):
         else:
             return abort(500)
 
+        # add the page number to the results
         results_data['page'] = int(data.get('page', 1))
-
         results = render_template('results.html', **locals())
 
+        # the first page should also load the base
         if results_data['page'] == 1:
             form_data = urlencode(data)
             # user results to build the template?
