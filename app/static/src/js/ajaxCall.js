@@ -75,7 +75,7 @@ form.addEventListener('submit', e => {
                     infiniteScroll.innerHTML = infiniteScroll.innerHTML + xhr.responseText;
 
                     // allow the
-                    infiniteDataContainer.setAttribute('busy', 'false')
+                    document.querySelector('#infiniteDataContainer').setAttribute('busy', 'false')
                 })
             }
         };
