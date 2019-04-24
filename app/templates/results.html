@@ -16,13 +16,13 @@
 
                         {% if row['last_name'] != '' and row['first_name'] != '' %}
                             <h3 class="person__name">
-                                {% if 'Last name' in search_type %}
+                                {% if data['last_name'] != '' %}
                                     {{ ireplace(row['last_name'], data['last_name'])|safe }},
                                 {% else %}
                                     {{ row['last_name'] }},
                                 {% endif %}
 
-                            {% if 'First name' in search_type %}
+                            {% if data['first_name'] != '' %}
                                 {{ ireplace(row['first_name'], data['first_name'])|safe }}
                             {% else %}
                                 {{ row['first_name'] }}

@@ -12,15 +12,24 @@ class DirectoryController(object):
         pass
 
     # first and last name search. Holds the details and logic surrounding the first and last name searches
-    def fl_search(self, data, viewing_role):
+    def fl_department_search(self, data, viewing_role):
         people = directory_search()
         result = []
         search_type = []
 
+        # set the search_type options
+        # for dept searches, transfer over the dept names
+        if data['department'] != '':
+            search_type.append('Department: {}'.format(data['department']))
+            data['first_name'] = data['dept_first_name']
+            data['last_name'] = data['dept_last_name']
+        if data['first_name'] != '':
+            search_type.append('First name: {}'.format(data['first_name']))
+        if data['last_name'] != '':
+            search_type.append('Last name: {}'.format(data['last_name']))
+
         # first and last name search
         if data['first_name'] != '' and data['last_name'] != '':
-            search_type.append('First name')
-            search_type.append('Last name')
             for row in people:
                 if self.match_option(row, viewing_role):
                     ratio = (self.fl_fuzzy(row['first_name'], row['last_name'], True, data['first_name']) +
@@ -35,7 +44,6 @@ class DirectoryController(object):
             result.sort(key=lambda i: i['last_name'])
         # first name search
         elif data['first_name'] != '' and data['last_name'] == '':
-            search_type.append('First name')
             for row in people:
                 if self.match_option(row, viewing_role):
                     ratio = self.fl_fuzzy(row['first_name'], row['last_name'], True, data['first_name'])
@@ -49,7 +57,6 @@ class DirectoryController(object):
             result.sort(key=lambda i: i['first_name'])
         # last name search
         elif data['last_name'] != '' and data['first_name'] == '':
-            search_type.append('Last name')
             for row in people:
                 if self.match_option(row, viewing_role):  # if its true, check the person
                     ratio = self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name'])
@@ -62,11 +69,16 @@ class DirectoryController(object):
             result.sort(key=lambda i: i['first_name'])
             result.sort(key=lambda i: i['last_name'])
         else:
+            for row in people:
+                if self.match_option(row, viewing_role):  # if its true, check the person
+                    ratio = self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name'])
+                    if data['department'] != '':
+                        if data['department'] in row['department']:
+                            self.make_results(row, result, ratio)
+                    else:
+                        self.make_results(row, result, ratio)
             result.sort(key=lambda i: i['first_name'])
             result.sort(key=lambda i: i['last_name'])
-
-        if data['department'] != '':
-            search_type.append('Department')
 
         result.sort(key=lambda i: i['ratio'], reverse=True)
 
@@ -80,7 +92,7 @@ class DirectoryController(object):
     def username_search(self, data, viewing_role):
         people = directory_search()
         result = []
-        search_type = ['Username']
+        search_type = ['Username: {}'.format(data['username'])]
 
         if data['username'] != '':  # put in the student/staff filters
             for row in people:
@@ -105,7 +117,7 @@ class DirectoryController(object):
     def email_search(self, data, viewing_role):
         people = directory_search()
         result = []
-        search_type = ['Email']
+        search_type = ['Email: {}'.format(data['email'])]
 
         if data['email'] != '':  # put in the student/staff filters
             for row in people:
@@ -120,32 +132,6 @@ class DirectoryController(object):
 
         result.sort(key=lambda i: i['last_name'])
         result.sort(key=lambda i: i['ratio'], reverse=True)
-
-        return {
-            'results': result,
-            'search_type': search_type,
-            'total_pages': math.ceil(len(result)/20)
-        }
-
-    # department search, subject to change
-    def dept_search(self, data, viewing_role):
-        people = directory_search()
-        result = []
-        search_type = ['Department']
-
-        if data['department'] != '':
-            for row in people:
-                if self.match_option(row, viewing_role):
-                    for item in row['department']:
-                        if data['department'] in item:
-                            result.append(row)
-                            break
-        else:
-            result = people
-            result.sort(key=lambda i: i['last_name'])
-            return render_template('results.html', **locals())
-
-        result.sort(key=lambda i: i['last_name'])
 
         return {
             'results': result,
