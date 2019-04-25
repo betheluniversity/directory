@@ -9,7 +9,7 @@ from flask import json as fjson
 from flask_classy import FlaskView, route
 
 from app import app, sentry
-from app.db.db_functions import departments, portal_profile
+from app.db.db_functions import portal_profile
 from app.directory_controller import DirectoryController
 
 
@@ -114,7 +114,6 @@ class View(FlaskView):
 
     @route('/', methods=['GET'])
     def index(self):
-        depts = departments()
         return render_template('index.html', **locals())
 
     @route('search', methods=['POST'])
@@ -133,7 +132,7 @@ class View(FlaskView):
         elif data.get('bu_id', '') != '':
             results_data = self.base.id_search(data, viewing_role)
         else:
-            return abort(500)
+            results_data = {}
 
         # add the page number to the results
         results_data['page'] = int(data.get('page', 1))

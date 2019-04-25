@@ -1,8 +1,8 @@
-{% extends "base.html" %}
+{% extends "index.html" %}
 
 {% block title %} Whoops {% endblock %}
 
-{% block content %}
+{% block result_content %}
     {% if code == 403 %}
         <h1 class="my-4">No permission</h1>
         <p>Sorry, it looks like you don’t have permission to visit this page! Try returning to the
