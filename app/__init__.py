@@ -36,6 +36,7 @@ sentry = Sentry(app, dsn=app.config['SENTRY_URL'])
 
 from app.views import error
 
+
 # https://stackoverflow.com/questions/919056/case-insensitive-replace
 def ireplace(string, findtxt):
     try:

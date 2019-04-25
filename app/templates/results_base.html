@@ -1,0 +1,13 @@
+<div id="infiniteScroll">
+
+<h2 id='infiniteDataContainer' class="h4" data="{{ form_data|safe }}" page="1" max-page="{{ results_data['total_pages'] }}" busy="false">Search results for:</h2>
+
+<p>
+{% for type in results_data['search_type'] %}
+    {% if loop.count != 1 %}<br>{% endif %}{{ type }}
+{% endfor %}
+</p>
+
+{{ results|safe }}
+
+</div>

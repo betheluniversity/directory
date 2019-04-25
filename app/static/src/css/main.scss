@@ -1,3 +1,7 @@
 $enable-responsive-font-sizes: true;
+// $enable-gradients: true;
+$theme-colors: (
+    "primary": #0069aa
+);
 @import '~bootstrap/scss/bootstrap';
 @import 'custom';

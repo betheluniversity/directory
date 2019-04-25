@@ -12,21 +12,23 @@
 </head>
 
 <body>
-    {% include 'modules/navbar.html' %}
+    <div class="stickyWrapper">
+        {% include 'modules/navbar.html' %}
+        <div class="divide"></div>
+        <div class="container-fluid  mt-3  mt-md-5" style="max-width: 1200px">
+            {% block content %}
+            {% endblock %}
+        </div>
 
-    <div class="container-fluid  mt-3  mt-md-5" style="max-width: 1200px">
-        {% block content %}
-        {% endblock %}
+        <footer class="footer border-top  bg-white  p-4">
+            <div class="container-fluid  p-4" style="max-width: 1200px">
+                <p class="text-muted  u-fs14  mb-0">Need Help? Contact the Help Desk at <a href="mailto=help-desk@bethel.edu" target="_blank" rel="noopener">help-desk@bethel.edu</a></p>
+                <p class="text-muted  u-fs14  mb-0">© 2019 Bethel University</p>
+            </div>
+        </footer>
     </div>
 
-    <footer class="footer border-top">
-        <div class="container-fluid  p-4" style="max-width: 1200px">
-            <p class="text-muted  u-fs14  mb-0">Need Help? Contact the Help Desk at <a href="mailto=help-desk@bethel.edu" target="_blank" rel="noopener">help-desk@bethel.edu</a></p>
-            <p class="text-muted  u-fs14  mb-0">© 2019 Bethel University</p>
-        </div>
-    </footer>
-
-    <script src="/static/dist/main.js"></script>
+     <script src="/static/dist/main.js"></script>
     {% block scripts %}{% endblock %}
 </body>
 
