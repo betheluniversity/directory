@@ -34,7 +34,9 @@ else:
 from raven.contrib.flask import Sentry
 sentry = Sentry(app, dsn=app.config['SENTRY_URL'])
 
+from app.db.db_functions import departments
 from app.views import error
+
 
 # https://stackoverflow.com/questions/919056/case-insensitive-replace
 def ireplace(string, findtxt):
@@ -57,6 +59,7 @@ def ireplace(string, findtxt):
 # Shows the year for the template
 app.jinja_env.globals.update(now=datetime.datetime.now())
 app.jinja_env.globals.update(ireplace=ireplace)
+app.jinja_env.globals.update(depts=departments())
 
 from app.views.home import View
 
