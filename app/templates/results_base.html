@@ -4,21 +4,7 @@
 
 <p>
 {% for type in results_data['search_type'] %}
-    {% if search_type|length == 1 %}
-        {{ type }}
-    {% elif search_type|length == 2 %}
-        {% if loop.index == 1 %}
-            {{ type }} and
-        {% else %}
-            {{ type }}
-        {% endif %}
-    {% else %}
-        {% if loop.index == search_type|length %}
-            and {{ type }}
-        {% else %}
-            {{ type }},
-        {% endif %}
-    {% endif %}
+    {% if loop.count != 1 %}<br>{% endif %}{{ type }}
 {% endfor %}
 </p>
 
