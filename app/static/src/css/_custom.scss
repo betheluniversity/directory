@@ -92,14 +92,11 @@ html, body {
   color: #999;
 }
 
-.person__details__link {
+.person__details__link,
+.person__home__link {
   font-size: .8rem;
   cursor: pointer;
 }
-
-// .person__details.show-details  {
-//   display: block;
-// }
 
 .navbar a {
   color: white;

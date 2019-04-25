@@ -200,13 +200,13 @@
 
                         {% if row['addr_state'] != '' and row['addr_street1'] != '' and row['addr_city'] != '' and row['addr_zip'] != '' and row['phone'] != '' %}
 
-                            <p class="row  person__home__link mt-2"><small>
+                            <div class="row  person__home__link  mt-2">
                                 <a aria-expanded="false" aria-controls="showHomeDetails">
                                     + Show home details
-                                </a></small>
-                            </p>
+                                </a>
+                            </div>
 
-                            <div class="homeDetails">
+                            <div class="person__home  hide">
                                 {% if row['addr_state'] != '' and row['addr_street1'] != '' and row['addr_city'] != '' and row['addr_zip'] != '' %}
                                     <div class="row  py-1 ">
                                         <div class="col-3  px-0">
