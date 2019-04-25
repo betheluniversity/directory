@@ -12,14 +12,7 @@
                         <img src="{{ row['image_path'] }}" width="120" alt="Profile Photo" id="image_path" class="mr-3">
                     {% endif %}
 
-                <p class="person__details__link">
-                    <a aria-expanded="false" aria-controls="showDetails">
-                        + Details
-                    </a>
-                </p>
-            </div>
-        </div>
-
+                    <div class="media-body">
                         {% if row['last_name'] != '' and row['first_name'] != '' %}
                             <h3 class="person__name">
                                 {% if 'Last name' in search_type %}
@@ -36,28 +29,6 @@
                             </h3>
                         {% endif %}
 
-                        <!-- {% if row['role']|length > 0 %}
-                            {% for i in range(0, row['role']|length) %}
-                                {% if i != '' %}
-                                    {% if row['role'][i] == 'Staff' %}
-                                    <p class="person__role">
-                                        {{ row['role'][i] }}
-                                    </p>
-                                    {% endif %}
-                                    {% if row['role'][i] == 'Student' %}
-                                    <p class="person__role">
-                                        {{ row['role'][i] }}
-                                    </p>
-                                    {% endif %}
-                                    {% if row['role'][i] == 'Sponsored Staff' %}
-                                    <p class="person__role">
-                                        {{ row['role'][i] }}
-                                    </p>
-                                    {% endif %}
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %} -->
-
                         {% if row['role']|length > 0 %}
                             <p class="person__role">
                                 {% for i in range(0, row['role']|length) %}
@@ -68,11 +39,11 @@
                             </p>
                         {% endif %}
 
-                        <!-- <p class="person__details__link">
+                        <p class="person__details__link">
                             <a aria-expanded="false" aria-controls="showDetails">
                                 + Details
                             </a>
-                        </p> -->
+                        </p>
                     </div>
                 </div>
 
@@ -226,18 +197,41 @@
                             {% endif %}
                         {% endif %}
 
-                        {% if data['home'] == 'true' %}
-                            {% if row['addr_state'] != '' and row['addr_street1'] != '' and row['addr_city'] != '' and row['addr_zip'] != '' %}
-                                <p class="mb-0">{{ row['addr_street1'] }}</p>
-                                {% if row['addr_street2'] != '' %}
-                                    <p class="mb-0">{{ row['addr_street2'] }}</p>
-                                {% endif %}
-                                <p class="mb-0">{{ row['addr_city'] }}, {{ row['addr_state'] }} {{ row['addr_zip'] }}</p>
-                            {% endif %}
+                        {% if row['addr_state'] != '' and row['addr_street1'] != '' and row['addr_city'] != '' and row['addr_zip'] != '' and row['phone'] != '' %}
 
-                            {% if row['phone'] != '' %}
-                                <p class="mb-0">{{ row['phone'] }}</p>
-                            {% endif %}
+                            <p class="row  person__home__link mt-2"><small>
+                                <a aria-expanded="false" aria-controls="showHomeDetails">
+                                    + Show home details
+                                </a></small>
+                            </p>
+
+                            <div class="homeDetails">
+                                {% if row['addr_state'] != '' and row['addr_street1'] != '' and row['addr_city'] != '' and row['addr_zip'] != '' %}
+                                    <div class="row  py-1 ">
+                                        <div class="col-3  px-0">
+                                            <p class="mb-0"><b>Address</b></p>
+                                        </div>
+                                        <div class="col">
+                                            <p class="mb-0">{{ row['addr_street1'] }}</p>
+                                            {% if row['addr_street2'] != '' %}
+                                                <p class="mb-0">{{ row['addr_street2'] }}</p>
+                                            {% endif %}
+                                            <p class="mb-0">{{ row['addr_city'] }}, {{ row['addr_state'] }} {{ row['addr_zip'] }}</p>
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                {% if row['phone'] != '' %}
+                                    <div class="row  py-1 ">
+                                        <div class="col-3  px-0">
+                                            <p class="mb-0"><b>Phone</b></p>
+                                        </div>
+                                        <div class="col">
+                                            <p class="mb-0">{{ row['phone'] }}</p>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
                         {% endif %}
 
                     </div>

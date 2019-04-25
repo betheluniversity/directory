@@ -6,12 +6,11 @@ const form = document.querySelector('.directory-form')
 form.addEventListener('submit', e => {
     e.preventDefault()
     introText.classList.toggle('hide')
-    loader.classList.toggle('hide')
-    // loader.classList.toggle('show')
+    loader.classList.toggle('hide-loader')
 
     const fd = new FormData(form)
     // Converting form data to an object to pass via xhr
-    obj = {};
+    let obj = {};
     [...fd.entries()].forEach(entry => obj[entry[0]] = entry[1])
 
     function postAjax (url, data, callback) {
@@ -29,6 +28,7 @@ form.addEventListener('submit', e => {
                 // location.href = '/'
             } else if (xhr.readyState > 3 && xhr.status === 200) {
                 callback(xhr)
+                form.reset()
             }
         }
         xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
@@ -37,43 +37,44 @@ form.addEventListener('submit', e => {
         return xhr
     }
 
-    postAjax('/search', obj, function(xhr){
-        form.reset()
+    postAjax('/search', obj, function (xhr) {
         results.innerHTML = xhr.responseText
 
         // Set listener after results have ajaxed in
-        const showDetails = document.querySelectorAll('.person')
-        // const showDetails = document.querySelectorAll('.person__details__link')
+        const showDetails = document.querySelectorAll('.person__details__link')
         for (let index = 0; index < showDetails.length; index++) {
             showDetails[index].addEventListener('click', function () {
-                // this.parentElement.parentElement.nextElementSibling.classList.toggle('show-details')
-                this.classList.toggle('show-details')
-                // this.innerHTML === '- Hide details' ? this.innerHTML = '+ Show details' : this.innerHTML = '- Hide details'
+                this.parentElement.parentElement.nextElementSibling.classList.toggle('hide')
+                this.innerHTML === '- Hide details' ? this.innerHTML = '+ Show details' : this.innerHTML = '- Hide details'
             })
         }
 
         const infiniteScroll = document.querySelector('#infiniteScroll')
-        window.onscroll = function(ev) {
+        const iDC = document.querySelector('#infiniteDataContainer')
+
+        window.onscroll = function (ev) {
             // you're at the bottom of the page
-            if ((window.innerHeight + window.scrollY) >= infiniteScroll.offsetHeight
-                    && parseInt(document.querySelector('#infiniteDataContainer').getAttribute('page')) < parseInt(document.querySelector('#infiniteDataContainer').getAttribute('max-page'))
-                    && document.querySelector('#infiniteDataContainer').getAttribute('busy') === 'false') {
-                document.querySelector('#infiniteDataContainer').setAttribute('busy', 'true');
+            if ((window.innerHeight + window.scrollY) >= infiniteScroll.offsetHeight &&
+                    parseInt(iDC.getAttribute('page')) < parseInt(iDC.getAttribute('max-page')) &&
+                    iDC.getAttribute('busy') === 'false') {
+                // set to busy
+                iDC.setAttribute('busy', 'true')
+
                 // increase page number
-                page_number = parseInt(document.querySelector('#infiniteDataContainer').getAttribute('page')) + 1
-                document.querySelector('#infiniteDataContainer').setAttribute('page', page_number)
+                let pageNumber = parseInt(iDC.getAttribute('page')) + 1
+                iDC.setAttribute('page', pageNumber)
 
                 // get new page number
-                new_page_number = document.querySelector('#infiniteDataContainer').getAttribute('page')
+                let newPageNumber = iDC.getAttribute('page')
 
                 // get data and add on page number
-                obj = document.querySelector('#infiniteDataContainer').getAttribute('data') + '&page=' + new_page_number;
-                postAjax('/search', obj, function(xhr){
+                obj = iDC.getAttribute('data') + '&page=' + newPageNumber
+                postAjax('/search', obj, function (xhr) {
                     // append results
-                    infiniteScroll.innerHTML = infiniteScroll.innerHTML + xhr.responseText;
-                    document.querySelector('#infiniteDataContainer').setAttribute('busy', 'false')
+                    infiniteScroll.innerHTML = infiniteScroll.innerHTML + xhr.responseText
+                    iDC.setAttribute('busy', 'false')
                 })
             }
-        };
+        }
     })
 })

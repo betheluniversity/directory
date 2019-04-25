@@ -82,17 +82,9 @@ html, body {
   border-top: 1px solid #eaedf0;
 }
 
-.person:hover {
-  cursor:pointer;
-}
-
 .person__name {
   font-size: 1.15rem;
   color: #555;
-}
-
-.person:hover .person__name {
-  color: #0069aa;
 }
 
 .person__role {
@@ -105,10 +97,9 @@ html, body {
   cursor: pointer;
 }
 
-
-.show-details .person__details {
-  display: block;
-}
+// .person__details.show-details  {
+//   display: block;
+// }
 
 .navbar a {
   color: white;
