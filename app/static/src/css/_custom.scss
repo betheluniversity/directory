@@ -82,17 +82,9 @@ html, body {
   border-top: 1px solid #eaedf0;
 }
 
-.person:hover {
-  cursor:pointer;
-}
-
 .person__name {
   font-size: 1.15rem;
   color: #555;
-}
-
-.person:hover .person__name {
-  color: #0069aa;
 }
 
 .person__role {
@@ -100,61 +92,10 @@ html, body {
   color: #999;
 }
 
-.person__details__link {
-  text-transform: uppercase;
-  font-weight: bold;
+.person__details__link,
+.person__home__link {
   font-size: .8rem;
   cursor: pointer;
-}
-
-
-.show-details .person__details {
-  display: block;
-}
-
-.person {
-  border-top: 1px solid #eaedf0;
-}
-
-.person:hover {
-  cursor:pointer;
-}
-
-.person__name {
-  font-size: 1.15rem;
-  color: #555;
-}
-
-.person:hover .person__name {
-  color: #0069aa;
-}
-
-.person__role {
-  font-size: .8rem;
-  color: #999;
-}
-
-.person__details__link {
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: .8rem;
-  cursor: pointer;
-}
-
-.person__details {
-  display: none;
-}
-
-.show-details .person__details {
-  display: block;
-}
-
-.loader {
-  display: none;
-}
-
-.show-loader {
-  display: block;
 }
 
 .navbar a {
@@ -176,3 +117,8 @@ html, body {
 .hide {
   display: none;
 }
+
+.loader.hide-loader {
+  display: none;
+}
+
