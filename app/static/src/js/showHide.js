@@ -37,39 +37,6 @@ function toggleAccordion (e) {
     })
 }
 
-
-
-// add listener to each title
-// for (var i = 0, len = accordionItems.length; i < len; i++) {
-//     accordion = accordionItems[i]
-//     let accordionTitle = accordion.firstElementChild
-//     accordionTitle.addEventListener('click', toggleAccordion)
-// }
-
-// function toggleAccordion (e) {
-//     form.reset()
-    // for (var i = 0, len = accordionItems.length; i < len; i++) {
-    //     accordion = accordionItems[i]
-    //
-    //     if (this.parentElement == accordion) {
-    //         accordion.classList.add('active')
-    //     } else {
-    //         accordion.classList.remove('active')
-    //     }
-    // }
-    //
-    // for (var i = 0, len = accordionContentPanes.length; i < len; i++) {
-    //     accordionContent = accordionContentPanes[i]
-    //     if (accordionContent.previousElementSibling === this) {
-    //         accordionContent.classList.remove('hide-accordion')
-    //         accordionContent.style.height = accordionContent.scrollHeight + 'px'
-    //     } else {
-    //         accordionContent.classList.add('hide-accordion')
-    //         accordionContent.style.height = '0px'
-    //     }
-    // };
-// }
-
 // Profile menu show/hide
 const profileDropdownLink = document.querySelector('#profileDropdown--link')
 const profileDropdownMenu = document.querySelector('#profileDropdown--menu')
