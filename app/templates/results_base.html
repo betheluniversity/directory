@@ -4,7 +4,7 @@
 
 <p>
 {% for type in results_data['search_type'] %}
-    {% if loop.count != 1 %}<br>{% endif %}{{ type }}
+    {% if loop.index != 1 %}<br>{% endif %}{{ type }}
 {% endfor %}
 </p>
 
