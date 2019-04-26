@@ -21,7 +21,7 @@ function toggleAccordion (e) {
     for (var i = 0, len = accordionItems.length; i < len; i++) {
         accordion = accordionItems[i]
 
-        if (this.parentElement == accordion) {
+        if (this.parentElement == accordionz) {
             accordion.classList.add('active')
         } else {
             accordion.classList.remove('active')
