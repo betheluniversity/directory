@@ -6,15 +6,6 @@
 import '../css/main.scss'
 import '../css/awesomplete.css'
 
-// es6
-// import RxDB from 'rxdb';
-// es5
-// var RxDB = require('rxdb');
-// es6
-import 'babel-polyfill';
-// es5
-// require('babel-polyfill');
-
 import { } from './microsoftEdgeFixes'
 import { } from './ajaxCall'
 import { } from './showHide'
