@@ -1,5 +1,6 @@
 const accordionItems = document.querySelectorAll('.accordionItem')
 const accordionContentPanes = document.querySelectorAll('.accordionContent')
+const form = document.querySelector('.directory-form')
 
 // First open by default, setting closed to have an explicit height for animation to work
 const firstItem = accordionItems[0].querySelector('.accordionContent')
@@ -15,6 +16,7 @@ accordionItems.forEach(function (accordion) {
 })
 
 function toggleAccordion (e) {
+    form.reset()
     accordionItems.forEach(a => {
         if (this.parentElement === a) {
             a.classList.add('active')
