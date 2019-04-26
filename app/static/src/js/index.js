@@ -6,7 +6,6 @@
 import '../css/main.scss'
 import '../css/awesomplete.css'
 
-// import { } from './serializeHelper'
 import { } from './microsoftEdgeFixes'
 import { } from './ajaxCall'
 import { } from './showHide'

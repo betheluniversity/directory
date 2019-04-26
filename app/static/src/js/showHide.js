@@ -9,36 +9,66 @@ firstItem.style.height = firstItem.scrollHeight + 'px'
 accordionItems[1].querySelector('.accordionContent').style.height = '0px'
 accordionItems[2].querySelector('.accordionContent').style.height = '0px'
 
+
 // add listener to each title
-for (var i = 0, len = accordionItems.length; i < len; i++) {
-    accordion = accordionItems[i]
+accordionItems.forEach(function (accordion) {
     let accordionTitle = accordion.firstElementChild
     accordionTitle.addEventListener('click', toggleAccordion)
-}
+})
 
 function toggleAccordion (e) {
     form.reset()
-    for (var i = 0, len = accordionItems.length; i < len; i++) {
-        accordion = accordionItems[i]
-
-        if (this.parentElement == accordionz) {
-            accordion.classList.add('active')
+    accordionItems.forEach(a => {
+        if (this.parentElement === a) {
+            a.classList.add('active')
         } else {
-            accordion.classList.remove('active')
+            a.classList.remove('active')
         }
-    }
+    })
 
-    for (var i = 0, len = accordionContentPanes.length; i < len; i++) {
-        accordionContent = accordionContentPanes[i]
-        if (accordionContent.previousElementSibling === this) {
-            accordionContent.classList.remove('hide-accordion')
-            accordionContent.style.height = accordionContent.scrollHeight + 'px'
+    accordionContentPanes.forEach(a => {
+        if (a.previousElementSibling === this) {
+            a.classList.remove('hide-accordion')
+            a.style.height = a.scrollHeight + 'px'
         } else {
-            accordionContent.classList.add('hide-accordion')
-            accordionContent.style.height = '0px'
+            a.classList.add('hide-accordion')
+            a.style.height = '0px'
         }
-    };
+    })
 }
+
+
+
+// add listener to each title
+// for (var i = 0, len = accordionItems.length; i < len; i++) {
+//     accordion = accordionItems[i]
+//     let accordionTitle = accordion.firstElementChild
+//     accordionTitle.addEventListener('click', toggleAccordion)
+// }
+
+// function toggleAccordion (e) {
+//     form.reset()
+    // for (var i = 0, len = accordionItems.length; i < len; i++) {
+    //     accordion = accordionItems[i]
+    //
+    //     if (this.parentElement == accordion) {
+    //         accordion.classList.add('active')
+    //     } else {
+    //         accordion.classList.remove('active')
+    //     }
+    // }
+    //
+    // for (var i = 0, len = accordionContentPanes.length; i < len; i++) {
+    //     accordionContent = accordionContentPanes[i]
+    //     if (accordionContent.previousElementSibling === this) {
+    //         accordionContent.classList.remove('hide-accordion')
+    //         accordionContent.style.height = accordionContent.scrollHeight + 'px'
+    //     } else {
+    //         accordionContent.classList.add('hide-accordion')
+    //         accordionContent.style.height = '0px'
+    //     }
+    // };
+// }
 
 // Profile menu show/hide
 const profileDropdownLink = document.querySelector('#profileDropdown--link')
