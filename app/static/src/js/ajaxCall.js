@@ -3,6 +3,43 @@ const loader = results.querySelector('.loader')
 const introText = results.querySelector('.introText')
 const form = document.querySelector('.directory-form')
 
+/*!
+ * Serialize all form data into a query string
+ * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
+ * @param  {Node}   form The form to serialize
+ * @return {String}      The serialized form data
+ */
+var serialize = function (form) {
+
+	// Setup our serialized data
+	var serialized = [];
+
+	// Loop through each field in the form
+	for (var i = 0; i < form.elements.length; i++) {
+
+		var field = form.elements[i];
+
+		// Don't serialize fields without a name, submits, buttons, file and reset inputs, and disabled fields
+		if (!field.name || field.disabled || field.type === 'file' || field.type === 'reset' || field.type === 'submit' || field.type === 'button') continue;
+
+		// If a multi-select, get all selections
+		if (field.type === 'select-multiple') {
+			for (var n = 0; n < field.options.length; n++) {
+				if (!field.options[n].selected) continue;
+				serialized.push(encodeURIComponent(field.name) + "=" + encodeURIComponent(field.options[n].value));
+			}
+		}
+
+		// Convert field data to a query string
+		else if ((field.type !== 'checkbox' && field.type !== 'radio') || field.checked) {
+			serialized.push(encodeURIComponent(field.name) + "=" + encodeURIComponent(field.value));
+		}
+	}
+
+	return serialized.join('&');
+
+};
+
 function postAjax (url, data, callback) {
     const params = typeof data === 'string' ? data : Object.keys(data).map(
         function (k) { return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }
@@ -51,14 +88,16 @@ form.addEventListener('submit', e => {
     introText.classList.toggle('hide')
     loader.classList.toggle('hide-loader')
 
-    const fd = new FormData(form)
+    // const fd = new FormData(form)
     // Converting form data to an object to pass via xhr
-    let obj = {};
-    [...fd.entries()].forEach(entry => obj[entry[0]] = entry[1])
+    // let obj = {};
+    // [...fd.entries()].forEach(entry => obj[entry[0]] = entry[1])
     // fd.forEach((value, key) => {obj[key] = value});
     // var obj = JSON.stringify(obj);
 
-    // let obj = serialize(form);
+
+
+    let obj = serialize(form);
 
     postAjax('/search', obj, function (xhr) {
         results.innerHTML = xhr.responseText

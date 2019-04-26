@@ -1,3 +1,5 @@
+alert('TEST');
+
 /*!
  * Serialize all form data into a query string
  * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
