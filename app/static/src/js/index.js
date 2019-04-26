@@ -6,22 +6,7 @@
 import '../css/main.scss'
 import '../css/awesomplete.css'
 
-if (!Object.entries)
-    Object.entries = function (obj) {
-        var ownProps = Object.keys(obj),
-            i = ownProps.length,
-            resArray = new Array(i); // preallocate the Array
-        while (i--)
-            resArray[i] = [ownProps[i], obj[ownProps[i]]];
-
-        return resArray;
-    };
-
-// missing forEach on NodeList for IE11
-if (window.NodeList && !NodeList.prototype.forEach) {
-  NodeList.prototype.forEach = Array.prototype.forEach;
-}
-
+import { } from './microsoftEdgeFixes'
 import { } from './ajaxCall'
 import { } from './showHide'
 import { } from 'awesomplete'
