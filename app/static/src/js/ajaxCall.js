@@ -51,19 +51,14 @@ form.addEventListener('submit', e => {
     introText.classList.toggle('hide')
     loader.classList.toggle('hide-loader')
 
-    // const fd = new FormData(form)
+    const fd = new FormData(form)
     // Converting form data to an object to pass via xhr
-    // let obj = {};
-    // [...fd.entries()].forEach(entry => obj[entry[0]] = entry[1])
+    let obj = {};
+    [...fd.entries()].forEach(entry => obj[entry[0]] = entry[1])
     // fd.forEach((value, key) => {obj[key] = value});
     // var obj = JSON.stringify(obj);
 
-    const fd = new FormData(form);
-    let obj = {};
-
-    for (const [key, value]  of fd.entries()) {
-        obj[key] = value;
-    }
+    // let obj = serialize(form);
 
     postAjax('/search', obj, function (xhr) {
         results.innerHTML = xhr.responseText
