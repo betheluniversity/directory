@@ -54,7 +54,9 @@ form.addEventListener('submit', e => {
     const fd = new FormData(form)
     // Converting form data to an object to pass via xhr
     let obj = {};
-    [...fd.entries()].forEach(entry => obj[entry[0]] = entry[1])
+    // [...fd.entries()].forEach(entry => obj[entry[0]] = entry[1])
+    fd.forEach((value, key) => {obj[key] = value});
+    // var obj = JSON.stringify(obj);
 
     postAjax('/search', obj, function (xhr) {
         results.innerHTML = xhr.responseText
