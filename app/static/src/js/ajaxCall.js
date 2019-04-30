@@ -3,6 +3,8 @@ const loader = results.querySelector('.loader')
 const introText = results.querySelector('.introText')
 const form = document.querySelector('.directory-form')
 
+
+// Found this here: https://vanillajstoolkit.com/helpers/serialize/
 /*!
  * Serialize all form data into a query string
  * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
