@@ -3,42 +3,46 @@ const loader = results.querySelector('.loader')
 const introText = results.querySelector('.introText')
 const form = document.querySelector('.directory-form')
 
-/*!
- * Serialize all form data into a query string
- * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
- * @param  {Node}   form The form to serialize
- * @return {String}      The serialized form data
- */
-var serialize = function (form) {
+form.addEventListener('submit', e => {
+    e.preventDefault()
+    introText.classList.toggle('hide')
+    loader.classList.toggle('hide-loader')
 
-	// Setup our serialized data
-	var serialized = [];
+    let obj = serialize(form)
 
-	// Loop through each field in the form
-	for (var i = 0; i < form.elements.length; i++) {
+    postAjax('/search', obj, function (xhr) {
+        results.innerHTML = xhr.responseText
 
-		var field = form.elements[i];
+        const infiniteScroll = document.querySelector('#infiniteScroll')
+        const iDC = document.querySelector('#infiniteDataContainer')
 
-		// Don't serialize fields without a name, submits, buttons, file and reset inputs, and disabled fields
-		if (!field.name || field.disabled || field.type === 'file' || field.type === 'reset' || field.type === 'submit' || field.type === 'button') continue;
+        window.onscroll = function (ev) {
+            // you're at the bottom of the page
+            if ((window.innerHeight + window.scrollY) >= infiniteScroll.offsetHeight &&
+                    parseInt(iDC.getAttribute('page')) < parseInt(iDC.getAttribute('max-page')) &&
+                    iDC.getAttribute('busy') === 'false') {
+                // set to busy
+                iDC.setAttribute('busy', 'true')
 
-		// If a multi-select, get all selections
-		if (field.type === 'select-multiple') {
-			for (var n = 0; n < field.options.length; n++) {
-				if (!field.options[n].selected) continue;
-				serialized.push(encodeURIComponent(field.name) + "=" + encodeURIComponent(field.options[n].value));
-			}
-		}
+                // increase page number
+                let pageNumber = parseInt(iDC.getAttribute('page')) + 1
+                iDC.setAttribute('page', pageNumber)
 
-		// Convert field data to a query string
-		else if ((field.type !== 'checkbox' && field.type !== 'radio') || field.checked) {
-			serialized.push(encodeURIComponent(field.name) + "=" + encodeURIComponent(field.value));
-		}
-	}
+                // get new page number
+                let newPageNumber = iDC.getAttribute('page')
 
-	return serialized.join('&');
+                // get data and add on page number
+                obj = iDC.getAttribute('data') + '&page=' + newPageNumber
+                postAjax('/search', obj, function (xhr) {
+                    // append results
+                    infiniteScroll.innerHTML = infiniteScroll.innerHTML + xhr.responseText
+                    iDC.setAttribute('busy', 'false')
+                })
+            }
+        }
+    })
+})
 
-};
 
 function postAjax (url, data, callback) {
     const params = typeof data === 'string' ? data : Object.keys(data).map(
@@ -83,42 +87,37 @@ function detailsLink () {
     }
 }
 
-form.addEventListener('submit', e => {
-    e.preventDefault()
-    introText.classList.toggle('hide')
-    loader.classList.toggle('hide-loader')
+/*!
+ * Serialize all form data into a query string
+ * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
+ * @param  {Node}   form The form to serialize
+ * @return {String}      The serialized form data
+ * url:  https://vanillajstoolkit.com/helpers/serialize/
+ */
+function serialize (form) {
+    // Setup our serialized data
+    var serialized = []
 
-    let obj = serialize(form);
+    // Loop through each field in the form
+    for (var i = 0; i < form.elements.length; i++) {
+        var field = form.elements[i]
 
-    postAjax('/search', obj, function (xhr) {
-        results.innerHTML = xhr.responseText
+        // Don't serialize fields without a name, submits, buttons, file and reset inputs, and disabled fields
+        if (!field.name || field.disabled || field.type === 'file' || field.type === 'reset' || field.type === 'submit' || field.type === 'button') continue
 
-        const infiniteScroll = document.querySelector('#infiniteScroll')
-        const iDC = document.querySelector('#infiniteDataContainer')
-
-        window.onscroll = function (ev) {
-            // you're at the bottom of the page
-            if ((window.innerHeight + window.scrollY) >= infiniteScroll.offsetHeight &&
-                    parseInt(iDC.getAttribute('page')) < parseInt(iDC.getAttribute('max-page')) &&
-                    iDC.getAttribute('busy') === 'false') {
-                // set to busy
-                iDC.setAttribute('busy', 'true')
-
-                // increase page number
-                let pageNumber = parseInt(iDC.getAttribute('page')) + 1
-                iDC.setAttribute('page', pageNumber)
-
-                // get new page number
-                let newPageNumber = iDC.getAttribute('page')
-
-                // get data and add on page number
-                obj = iDC.getAttribute('data') + '&page=' + newPageNumber
-                postAjax('/search', obj, function (xhr) {
-                    // append results
-                    infiniteScroll.innerHTML = infiniteScroll.innerHTML + xhr.responseText
-                    iDC.setAttribute('busy', 'false')
-                })
+        // If a multi-select, get all selections
+        if (field.type === 'select-multiple') {
+            for (var n = 0; n < field.options.length; n++) {
+                if (!field.options[n].selected) continue
+                serialized.push(encodeURIComponent(field.name) + '=' + encodeURIComponent(field.options[n].value))
             }
         }
-    })
-})
+
+        // Convert field data to a query string
+        else if ((field.type !== 'checkbox' && field.type !== 'radio') || field.checked) {
+            serialized.push(encodeURIComponent(field.name) + '=' + encodeURIComponent(field.value))
+        }
+    }
+
+    return serialized.join('&')
+}
