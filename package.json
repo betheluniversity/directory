@@ -14,7 +14,8 @@
     "cssnano": "^4.1.10",
     "postcss-loader": "^3.0.0",
     "precss": "^4.0.0",
-    "sass-loader": "^7.1.0"
+    "sass-loader": "^7.1.0",
+    "tar": ">=4.4.2"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
