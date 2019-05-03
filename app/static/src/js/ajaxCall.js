@@ -57,7 +57,6 @@ function postAjax (url, data, callback) {
     const xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP')
     xhr.open('POST', url)
     xhr.onreadystatechange = function () {
-        console.log(xhr.readyState + ' ' + xhr.status)
         if( xhr.status === 0) {
             location.href = '/'
         } else if (xhr.readyState === 3 && xhr.status === 200) {
