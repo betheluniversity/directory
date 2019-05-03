@@ -1,12 +1,13 @@
-const results = document.querySelector('#results')
-const loader = results.querySelector('.loader')
-const introText = results.querySelector('.introText')
 const form = document.querySelector('.directory-form')
+const results = document.querySelector('#results')
+const introText = results.querySelector('.introText')
+const loader = document.querySelector('.loader')
 
 form.addEventListener('submit', e => {
     e.preventDefault()
     introText.classList.toggle('hide')
-    loader.classList.toggle('hide-loader')
+    // show load animation
+    loader.classList.remove('hide-loader')
 
     let obj = serialize(form)
 
@@ -31,18 +32,22 @@ form.addEventListener('submit', e => {
                 // get new page number
                 let newPageNumber = iDC.getAttribute('page')
 
+
+                if (pageNumber === parseInt(iDC.getAttribute('max-page'))) {
+                    loader.classList.add('hide-loader')
+                }
+
                 // get data and add on page number
                 obj = iDC.getAttribute('data') + '&page=' + newPageNumber
                 postAjax('/search', obj, function (xhr) {
                     // append results
-                    infiniteScroll.innerHTML = infiniteScroll.innerHTML + xhr.responseText
+                    infiniteScroll.innerHTML += xhr.responseText
                     iDC.setAttribute('busy', 'false')
                 })
             }
         }
     })
 })
-
 
 function postAjax (url, data, callback) {
     const params = typeof data === 'string' ? data : Object.keys(data).map(
@@ -52,11 +57,11 @@ function postAjax (url, data, callback) {
     const xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP')
     xhr.open('POST', url)
     xhr.onreadystatechange = function () {
+        if (xhr.readyState === 1) {
+
+        }
         if (xhr.readyState === 3 && xhr.status === 200) {
             console.log('Loading...')
-        } else if (xhr.status >= 500 || xhr.status === 0) {
-            // status code 0 is returned when you are signed out of CAS.
-            // location.href = '/'
         } else if (xhr.readyState > 3 && xhr.status === 200) {
             callback(xhr)
             form.reset()
@@ -96,18 +101,18 @@ function detailsLink () {
  */
 function serialize (form) {
     // Setup our serialized data
-    var serialized = []
+    const serialized = []
 
     // Loop through each field in the form
-    for (var i = 0; i < form.elements.length; i++) {
-        var field = form.elements[i]
+    for (let i = 0; i < form.elements.length; i++) {
+        const field = form.elements[i]
 
         // Don't serialize fields without a name, submits, buttons, file and reset inputs, and disabled fields
         if (!field.name || field.disabled || field.type === 'file' || field.type === 'reset' || field.type === 'submit' || field.type === 'button') continue
 
         // If a multi-select, get all selections
         if (field.type === 'select-multiple') {
-            for (var n = 0; n < field.options.length; n++) {
+            for (let n = 0; n < field.options.length; n++) {
                 if (!field.options[n].selected) continue
                 serialized.push(encodeURIComponent(field.name) + '=' + encodeURIComponent(field.options[n].value))
             }
