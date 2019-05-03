@@ -28,7 +28,7 @@ function toggleAccordion (e) {
     accordionContentPanes.forEach(a => {
         if (a.previousElementSibling === this) {
             // For the department search, require the department to be selected
-            if( a.classList.contains('departmentClick') )
+            if( a.classList.contains('departmentRequired') )
                 document.getElementById('department').required = true;
             else
                 document.getElementById('department').required = false;
