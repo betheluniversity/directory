@@ -58,6 +58,7 @@ function postAjax (url, data, callback) {
     xhr.open('POST', url)
     xhr.onreadystatechange = function () {
         if( xhr.status === 0) {
+            // if the user is logged out, we send them back to the homepage
             location.href = '/'
         } else if (xhr.readyState === 3 && xhr.status === 200) {
             console.log('Loading...')
