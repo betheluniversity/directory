@@ -9,7 +9,6 @@ firstItem.style.height = firstItem.scrollHeight + 'px'
 accordionItems[1].querySelector('.accordionContent').style.height = '0px'
 accordionItems[2].querySelector('.accordionContent').style.height = '0px'
 
-
 // add listener to each title
 accordionItems.forEach(function (accordion) {
     let accordionTitle = accordion.firstElementChild
@@ -28,6 +27,12 @@ function toggleAccordion (e) {
 
     accordionContentPanes.forEach(a => {
         if (a.previousElementSibling === this) {
+            // For the department search, require the department to be selected
+            if( a.classList.contains('departmentClick') )
+                document.getElementById('department').required = true;
+            else
+                document.getElementById('department').required = false;
+
             a.classList.remove('hide-accordion')
             a.style.height = a.scrollHeight + 'px'
         } else {
