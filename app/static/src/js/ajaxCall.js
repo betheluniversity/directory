@@ -57,9 +57,7 @@ function postAjax (url, data, callback) {
     const xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP')
     xhr.open('POST', url)
     xhr.onreadystatechange = function () {
-        console.log(xhr.readyState)
-        if (xhr.readyState === 1) {
-        }
+        console.log(xhr.readyState + ' ' + xhr.status)
         if (xhr.readyState === 3 && xhr.status === 200) {
             console.log('Loading...')
         } else if (xhr.readyState > 3 && xhr.status === 200) {
@@ -67,6 +65,9 @@ function postAjax (url, data, callback) {
             form.reset()
             detailsLink()
         }
+        // else if (xhr.readyState > 4) {
+        //     location.href = '/'
+        // }
     }
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
