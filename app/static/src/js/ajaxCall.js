@@ -6,7 +6,6 @@ const loader = document.querySelector('.loader')
 form.addEventListener('submit', e => {
     e.preventDefault()
     introText.classList.toggle('hide')
-    // show load animation
     loader.classList.remove('hide-loader')
 
     let obj = serialize(form)
@@ -16,11 +15,18 @@ form.addEventListener('submit', e => {
 
         const infiniteScroll = document.querySelector('#infiniteScroll')
         const iDC = document.querySelector('#infiniteDataContainer')
+        const maxPage = parseInt(iDC.getAttribute('max-page'))
+
+        // hide loader if only 1 page
+        if (maxPage === 0 || maxPage === 1) {
+            loader.classList.add('hide-loader')
+        }
 
         window.onscroll = function (ev) {
             // you're at the bottom of the page
+
             if ((window.innerHeight + window.scrollY) >= infiniteScroll.offsetHeight &&
-                    parseInt(iDC.getAttribute('page')) < parseInt(iDC.getAttribute('max-page')) &&
+                    parseInt(iDC.getAttribute('page')) < maxPage &&
                     iDC.getAttribute('busy') === 'false') {
                 // set to busy
                 iDC.setAttribute('busy', 'true')
@@ -32,17 +38,17 @@ form.addEventListener('submit', e => {
                 // get new page number
                 let newPageNumber = iDC.getAttribute('page')
 
-
-                if (pageNumber === parseInt(iDC.getAttribute('max-page'))) {
-                    loader.classList.add('hide-loader')
-                }
-
                 // get data and add on page number
                 obj = iDC.getAttribute('data') + '&page=' + newPageNumber
                 postAjax('/search', obj, function (xhr) {
                     // append results
                     infiniteScroll.innerHTML += xhr.responseText
                     iDC.setAttribute('busy', 'false')
+
+                    // hide loader at end of search results
+                    if (parseInt(newPageNumber) === maxPage) {
+                        loader.classList.add('hide-loader')
+                    }
                 })
             }
         }
@@ -57,7 +63,7 @@ function postAjax (url, data, callback) {
     const xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP')
     xhr.open('POST', url)
     xhr.onreadystatechange = function () {
-        if( xhr.status === 0) {
+        if (xhr.status === 0) {
             // if the user is logged out, we send them back to the homepage
             location.href = '/'
         } else if (xhr.readyState === 3 && xhr.status === 200) {
@@ -123,6 +129,5 @@ function serialize (form) {
             serialized.push(encodeURIComponent(field.name) + '=' + encodeURIComponent(field.value))
         }
     }
-
     return serialized.join('&')
 }
