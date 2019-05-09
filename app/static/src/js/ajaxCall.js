@@ -64,7 +64,7 @@ function postAjax (url, data, callback) {
     const xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP')
     xhr.open('POST', url)
     xhr.onreadystatechange = function () {
-
+        console.log(xhr.readyState + ' ' + xhr.status )
         if (xhr.readyState === 3 && xhr.status === 200) {
             console.log('Loading...')
         } else if (xhr.readyState > 3 && xhr.status === 200) {
