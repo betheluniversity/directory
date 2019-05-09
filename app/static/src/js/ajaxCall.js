@@ -24,6 +24,7 @@ form.addEventListener('submit', e => {
         }
 
         window.onscroll = function (ev) {
+            console.log(window.innerHeight + ' ' + window.scrollY + ' ' + infiniteScroll.offsetHeight)
             // you're at the bottom of the page
 
             if ((window.innerHeight + window.scrollY) >= infiniteScroll.offsetHeight &&
@@ -64,6 +65,7 @@ function postAjax (url, data, callback) {
     const xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP')
     xhr.open('POST', url)
     xhr.onreadystatechange = function () {
+        // todo: delete this line, once we have sorted everything out
         console.log(xhr.readyState + ' ' + xhr.status )
         if (xhr.readyState === 3 && xhr.status === 200) {
             console.log('Loading...')
