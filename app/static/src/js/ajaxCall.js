@@ -64,9 +64,10 @@ function postAjax (url, data, callback) {
     const xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP')
     xhr.open('POST', url)
     xhr.onreadystatechange = function () {
-        // alert(xhr.readyState)
-        // alert(xhr.status)
+
         if (xhr.status === 0) {
+            alert(xhr.readyState)
+            alert(xhr.status)
             // if the user is logged out, we send them back to the homepage
             // location.href = '/'
         } else if (xhr.readyState === 3 && xhr.status === 200) {
