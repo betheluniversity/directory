@@ -93,9 +93,16 @@ html, body {
 }
 
 .person__details__link,
-.person__home__link {
+.person__home__link,
+.person__id__link {
   font-size: .8rem;
   cursor: pointer;
+}
+
+@media (min-width: 992px) {
+  .person__details .container-fluid {
+    margin-left: 137px;
+  }
 }
 
 .navbar a {
@@ -104,6 +111,11 @@ html, body {
 
 .dropdown-menu a {
   color: #777;
+}
+
+.dropdown-toggle:hover {
+  text-decoration: none;
+  color: #ffc600;
 }
 
 .search-match-highlight {

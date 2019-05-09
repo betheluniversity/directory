@@ -49,11 +49,11 @@
                 </div>
 
                 <div class="person__details  mt-3  mb-5  hide" id="showDetails">
-                    <div class="container">
+                    <div class="container-fluid">
 
                         {% if row['username'] != '' %}
                         <div class="row  py-1 ">
-                            <div class="col-3  px-0">
+                            <div class="col-3  col-xl-2  px-0">
                                 <p class="mb-0"><b>Username</b></p>
                             </div>
                             <div class="col">
@@ -64,7 +64,7 @@
 
                         {% if row['email'] != '' %}
                         <div class="row  py-1 ">
-                            <div class="col-3  px-0">
+                            <div class="col-3  col-xl-2  px-0">
                                 <p class="mb-0"><b>Email</b></p>
                             </div>
                             <div class="col">
@@ -75,7 +75,7 @@
 
                         {% if row['po'] != '' %}
                         <div class="row  py-1 ">
-                            <div class="col-3  px-0">
+                            <div class="col-3  col-xl-2  px-0">
                                 <p class="mb-0"><b>PO</b></p>
                             </div>
                             <div class="col">
@@ -86,7 +86,7 @@
 
                         {% if row['college'][0]|length > 0 %}
                         <div class="row  py-1 ">
-                                <div class="col-3  px-0">
+                                <div class="col-3  col-xl-2  px-0">
                                     <p class="mb-0"><b>College</b></p>
                                 </div>
                                 <div class="col">
@@ -106,7 +106,7 @@
 
                         {% if row['major'][0]|length > 0 %}
                         <div class="row  py-1 ">
-                            <div class="col-3  px-0">
+                            <div class="col-3  col-xl-2  px-0">
                                 <p class="mb-0"><b>Major</b></p>
                             </div>
                             <div class="col">
@@ -126,7 +126,7 @@
 
                         {% if row['minor'][0]|length > 0 %}
                         <div class="row  py-1 ">
-                                <div class="col-3  px-0">
+                                <div class="col-3  col-xl-2  px-0">
                                     <p class="mb-0"><b>Minor</b></p>
                                 </div>
                                 <div class="col">
@@ -146,7 +146,7 @@
 
                         {% if row['department'][0]|length > 0 %}
                         <div class="row  py-1 ">
-                                <div class="col-3  px-0">
+                                <div class="col-3  col-xl-2  px-0">
                                     <p class="mb-0"><b>Dept.</b></p>
                                 </div>
                                 <div class="col">
@@ -166,7 +166,7 @@
 
                         {% if row['phone_ext'] != '' %}
                         <div class="row  py-1 ">
-                            <div class="col-3  px-0">
+                            <div class="col-3  col-xl-2  px-0">
                                 <p class="mb-0"><b>Ext</b></p>
                             </div>
                             <div class="col">
@@ -178,7 +178,7 @@
                         {% if session['ITS_view'] == True %}
                             {% if row['id'] != '' %}
                                 <div class="row  py-1 ">
-                                    <div class="col-3  px-0">
+                                    <div class="col-3  col-xl-2  px-0">
                                         <p class="mb-0"><b>ID</b></p>
                                     </div>
                                     <div class="col">
@@ -188,7 +188,7 @@
                             {% endif %}
                             {% if row['udc'] != '' %}
                                 <div class="row  py-1 ">
-                                    <div class="col-3  px-0">
+                                    <div class="col-3  col-xl-2  px-0">
                                         <p class="mb-0"><b>UDC</b></p>
                                     </div>
                                     <div class="col">
@@ -209,7 +209,7 @@
                             <div class="person__home  hide">
                                 {% if row['addr_state'] != '' and row['addr_street1'] != '' and row['addr_city'] != '' and row['addr_zip'] != '' %}
                                     <div class="row  py-1 ">
-                                        <div class="col-3  px-0">
+                                        <div class="col-3  col-xl-2  px-0">
                                             <p class="mb-0"><b>Address</b></p>
                                         </div>
                                         <div class="col">
@@ -224,7 +224,7 @@
 
                                 {% if row['phone'] != '' %}
                                     <div class="row  py-1 ">
-                                        <div class="col-3  px-0">
+                                        <div class="col-3  col-xl-2  px-0">
                                             <p class="mb-0"><b>Phone</b></p>
                                         </div>
                                         <div class="col">

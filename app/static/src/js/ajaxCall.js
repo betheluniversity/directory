@@ -7,6 +7,7 @@ form.addEventListener('submit', e => {
     e.preventDefault()
     introText.classList.toggle('hide')
     loader.classList.remove('hide-loader')
+    results.innerHTML = ''
 
     let obj = serialize(form)
 
@@ -18,7 +19,7 @@ form.addEventListener('submit', e => {
         const maxPage = parseInt(iDC.getAttribute('max-page'))
 
         // hide loader if only 1 page
-        if (maxPage === 0 || maxPage === 1) {
+        if (maxPage === 0 || maxPage === 1 || isNaN(maxPage)) {
             loader.classList.add('hide-loader')
         }
 
@@ -87,10 +88,16 @@ function detailsLink () {
         showDetails[index].addEventListener('click', function () {
             let next = this.parentElement.parentElement.nextElementSibling
             next.classList.toggle('hide')
-            this.innerHTML === '- Hide details' ? this.innerHTML = '+ Show details' : this.innerHTML = '- Hide details'
+            this.innerHTML === '- Hide details' ? this.innerHTML = '+ Details' : this.innerHTML = '- Hide details'
             let homeLink = next.querySelector('.person__home__link')
             if (homeLink) {
                 homeLink.addEventListener('click', function () {
+                    this.nextElementSibling.classList.toggle('hide')
+                })
+            }
+            let idLink = next.querySelector('.person__id__link')
+            if (idLink) {
+                idLink.addEventListener('click', function () {
                     this.nextElementSibling.classList.toggle('hide')
                 })
             }
