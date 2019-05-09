@@ -25,8 +25,7 @@ form.addEventListener('submit', e => {
 
         window.onscroll = function (ev) {
             // you're at the bottom of the page
-
-            if ((window.innerHeight + window.scrollY) >= infiniteScroll.offsetHeight &&
+            if ((window.innerHeight + window.pageYOffset) >= infiniteScroll.offsetHeight &&
                     parseInt(iDC.getAttribute('page')) < maxPage &&
                     iDC.getAttribute('busy') === 'false') {
                 // set to busy
@@ -64,15 +63,15 @@ function postAjax (url, data, callback) {
     const xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP')
     xhr.open('POST', url)
     xhr.onreadystatechange = function () {
-        if (xhr.status === 0) {
-            // if the user is logged out, we send them back to the homepage
-            location.href = '/'
-        } else if (xhr.readyState === 3 && xhr.status === 200) {
+        if (xhr.readyState === 3 && xhr.status === 200) {
             console.log('Loading...')
         } else if (xhr.readyState > 3 && xhr.status === 200) {
             callback(xhr)
             form.reset()
             detailsLink()
+        } else if (xhr.readyState > 3 && xhr.status === 0) {
+            // if the user is logged out, we send them back to the homepage
+            location.href = '/'
         }
     }
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
