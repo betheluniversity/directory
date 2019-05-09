@@ -24,10 +24,8 @@ form.addEventListener('submit', e => {
         }
 
         window.onscroll = function (ev) {
-            console.log(window.innerHeight + ' ' + window.scrollY + ' ' + infiniteScroll.offsetHeight)
             // you're at the bottom of the page
-
-            if ((window.innerHeight + window.scrollY) >= infiniteScroll.offsetHeight &&
+            if ((window.innerHeight + window.pageYOffset) >= infiniteScroll.offsetHeight &&
                     parseInt(iDC.getAttribute('page')) < maxPage &&
                     iDC.getAttribute('busy') === 'false') {
                 // set to busy
