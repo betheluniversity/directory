@@ -176,6 +176,13 @@
                         {% endif %}
 
                         {% if session['ITS_view'] == True %}
+                            <div class="row  person__id__link  mt-2">
+                                <a aria-expanded="false" aria-controls="showIdDetails">
+                                    + Show ID
+                                </a>
+                            </div>
+
+                            <div class="person__id  hide"></div>
                             {% if row['id'] != '' %}
                                 <div class="row  py-1 ">
                                     <div class="col-3  col-xl-2  px-0">
