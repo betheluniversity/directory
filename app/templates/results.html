@@ -182,27 +182,28 @@
                                 </a>
                             </div>
 
-                            <div class="person__id  hide"></div>
-                            {% if row['id'] != '' %}
-                                <div class="row  py-1 ">
-                                    <div class="col-3  col-xl-2  px-0">
-                                        <p class="mb-0"><b>ID</b></p>
+                            <div class="person__id  hide">
+                                {% if row['id'] != '' %}
+                                    <div class="row  py-1 ">
+                                        <div class="col-3  col-xl-2  px-0">
+                                            <p class="mb-0"><b>ID</b></p>
+                                        </div>
+                                        <div class="col">
+                                            <p class="mb-0">{{ row['id'] }}</p>
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <p class="mb-0">{{ row['id'] }}</p>
+                                {% endif %}
+                                {% if row['udc'] != '' %}
+                                    <div class="row  py-1 ">
+                                        <div class="col-3  col-xl-2  px-0">
+                                            <p class="mb-0"><b>UDC</b></p>
+                                        </div>
+                                        <div class="col">
+                                            <p class="mb-0">{{ row['udc'] }}</p>
+                                        </div>
                                     </div>
-                                </div>
-                            {% endif %}
-                            {% if row['udc'] != '' %}
-                                <div class="row  py-1 ">
-                                    <div class="col-3  col-xl-2  px-0">
-                                        <p class="mb-0"><b>UDC</b></p>
-                                    </div>
-                                    <div class="col">
-                                        <p class="mb-0">{{ row['udc'] }}</p>
-                                    </div>
-                                </div>
-                            {% endif %}
+                                {% endif %}
+                            </div>
                         {% endif %}
 
                         {% if row['addr_state'] != '' and row['addr_street1'] != '' and row['addr_city'] != '' and row['addr_zip'] != '' and row['phone'] != '' %}
