@@ -11,3 +11,9 @@ import { } from './ajaxCall'
 import { } from './showHide'
 import { } from 'awesomplete'
 /// //////////////////////////////////////////////////////////////////////////
+
+// adding this bit to remove a preload class which prevents css animations
+// from running by default
+window.addEventListener('load', function () {
+    document.body.classList.remove('preload')
+})

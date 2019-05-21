@@ -4,7 +4,7 @@ const form = document.querySelector('.directory-form')
 
 // First open by default, setting closed to have an explicit height for animation to work
 const firstItem = accordionItems[0].querySelector('.accordionContent')
-accordionItems[0].classList.add('active')
+// accordionItems[0].classList.add('active')
 firstItem.style.height = firstItem.scrollHeight + 'px'
 accordionItems[1].querySelector('.accordionContent').style.height = '0px'
 accordionItems[2].querySelector('.accordionContent').style.height = '0px'
@@ -28,10 +28,11 @@ function toggleAccordion (e) {
     accordionContentPanes.forEach(a => {
         if (a.previousElementSibling === this) {
             // For the department search, require the department to be selected
-            if( a.classList.contains('departmentRequired') )
-                document.getElementById('department').required = true;
-            else
-                document.getElementById('department').required = false;
+            if (a.classList.contains('departmentRequired')) {
+                document.getElementById('department').required = true
+            } else {
+                document.getElementById('department').required = false
+            }
 
             a.classList.remove('hide-accordion')
             a.style.height = a.scrollHeight + 'px'

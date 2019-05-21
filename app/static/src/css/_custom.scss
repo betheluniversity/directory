@@ -3,6 +3,10 @@ html, body {
   height: 100vh;
 }
 
+// prevents animations from running on page load
+// js remove this class after document ready
+.preload * {transition:none!important}
+
 .stickyWrapper {
   min-height: 100%;
   display: grid;
@@ -30,10 +34,6 @@ html, body {
   }
 }
 
-.accordionTitle {
-  cursor: pointer;
-  transition: all 500ms ease;
-}
 
 .accordionTitle__content::before {
   content: '';
@@ -46,7 +46,6 @@ html, body {
   margin-right: .5em;
 }
 
-
 .active .accordionTitle__content::before {
   transform: rotate(45deg);
   border-color: #fff;
@@ -58,24 +57,31 @@ html, body {
   transition: height 500ms ease;
   // border-top: 1px solid #dfdfdf;
   border-bottom: 1px solid #dfdfdf;
+  height: 0;
 }
 
-.hide-accordion {
-  // height: 0;
-  transition: height 500ms ease;
+.accordionItem.active .accordionContent {
+  height: auto;
 }
+
+// .hide-accordion {
+//   // height: 0;
+//   transition: height 500ms ease;
+// }
 
 .card-header {
   background: #00000005;
   border-bottom: 0;
+  cursor: pointer;
 }
 
 .active .card-header {
-  color: #0069aa;
+  // color: #0069aa;
   color: #fff;
   border-bottom: 1px solid #0069aa35;
   background: #0069aa;
   // background: #0069aa linear-gradient(180deg,#268fff,#0069aa) repeat-x;
+  transition: all 500ms ease;
 }
 
 .person {
