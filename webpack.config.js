@@ -16,6 +16,15 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /bootstrap\.native/,
+                use: {
+                    loader: 'bootstrap.native-loader',
+                    options: {
+                        only: ['collapse']
+                    }
+                }
+            },
+            {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader' },

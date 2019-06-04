@@ -6,6 +6,7 @@
 import '../css/main.scss'
 import '../css/awesomplete.css'
 
+// import 'bootstrap.native'
 import { } from './microsoftEdgeFixes'
 import { } from './ajaxCall'
 import { } from './showHide'

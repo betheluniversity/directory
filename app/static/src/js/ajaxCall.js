@@ -1,3 +1,5 @@
+import { Collapse } from 'bootstrap.native'
+
 const form = document.querySelector('.directory-form')
 const results = document.querySelector('#results')
 const introText = results.querySelector('.introText')
@@ -59,7 +61,6 @@ function postAjax (url, data, callback) {
     const params = typeof data === 'string' ? data : Object.keys(data).map(
         function (k) { return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }
     ).join('&')
-    // console.log(params)
     const xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP')
     xhr.open('POST', url)
     xhr.onreadystatechange = function () {
@@ -67,7 +68,6 @@ function postAjax (url, data, callback) {
             console.log('Loading...')
         } else if (xhr.readyState > 3 && xhr.status === 200) {
             callback(xhr)
-            form.reset()
             detailsLink()
         } else if (xhr.readyState > 3 && xhr.status === 0) {
             // if the user is logged out, we send them back to the homepage
@@ -84,20 +84,50 @@ function detailsLink () {
     // Set listener after results have ajaxed in
     const showDetails = document.querySelectorAll('.person__details__link')
     for (let index = 0; index < showDetails.length; index++) {
+        let collapseLink = showDetails[index]
+        let collapseDiv = showDetails[index].parentElement.parentElement.nextElementSibling
+        // Generate random 6 digit number to make the collapse HREF and ID unique
+        let randomNum = 'id' + Math.floor(100000 + Math.random() * 900000)
+        collapseLink.setAttribute('data-target', '#' + randomNum)
+        collapseDiv.setAttribute('id', randomNum)
+
+        // Initialize new collapse elements due to ajaxing
+        let collapse = new Collapse(collapseLink)
+        let collapseInit = collapse.Collapse
+
         showDetails[index].addEventListener('click', function () {
-            let next = this.parentElement.parentElement.nextElementSibling
-            next.classList.toggle('hide')
-            this.innerHTML === '- Hide details' ? this.innerHTML = '+ Details' : this.innerHTML = '- Hide details'
-            let homeLink = next.querySelector('.person__home__link')
-            if (homeLink) {
-                homeLink.addEventListener('click', function () {
-                    this.nextElementSibling.classList.toggle('hide')
+            this.classList.toggle('active')
+
+            let homeDetailsLink = collapseDiv.querySelector('.person__home__link')
+            if (homeDetailsLink) {
+                let homeDetailsDiv = homeDetailsLink.nextElementSibling
+                // Generate random 6 digit number to make the collapse HREF and ID unique
+                let randomNum2 = 'id' + Math.floor(100000 + Math.random() * 900000)
+                homeDetailsLink.setAttribute('data-target', '#' + randomNum2)
+                homeDetailsDiv.setAttribute('id', randomNum2)
+
+                // Initialize new collapse elements due to ajaxing
+                let collapseHome = new Collapse(homeDetailsLink)
+                let collapseHomeInit = collapseHome.Collapse
+
+                homeDetailsLink.addEventListener('click', function () {
+                    this.classList.toggle('active')
                 })
             }
-            let idLink = next.querySelector('.person__id__link')
+            let idLink = collapseDiv.querySelector('.person__id__link')
             if (idLink) {
+                let idDiv = idLink.nextElementSibling
+                // Generate random 6 digit number to make the collapse HREF and ID unique
+                let randomNum3 = 'id' + Math.floor(100000 + Math.random() * 900000)
+                idLink.setAttribute('data-target', '#' + randomNum3)
+                idDiv.setAttribute('id', randomNum3)
+
+                // Initialize new collapse elements due to ajaxing
+                let collapseID = new Collapse(idLink)
+                let collapseIDInit = collapseID.Collapse
+
                 idLink.addEventListener('click', function () {
-                    this.nextElementSibling.classList.toggle('hide')
+                    this.classList.toggle('active')
                 })
             }
         })

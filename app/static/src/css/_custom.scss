@@ -34,7 +34,6 @@ html, body {
   }
 }
 
-
 .accordionTitle__content::before {
   content: '';
   display: inline-block;
@@ -64,11 +63,6 @@ html, body {
   height: auto;
 }
 
-// .hide-accordion {
-//   // height: 0;
-//   transition: height 500ms ease;
-// }
-
 .card-header {
   background: #00000005;
   border-bottom: 0;
@@ -96,6 +90,7 @@ html, body {
 .person__role {
   font-size: .8rem;
   color: #999;
+  margin-bottom: 0;
 }
 
 .person__details__link,
@@ -103,11 +98,38 @@ html, body {
 .person__id__link {
   font-size: .8rem;
   cursor: pointer;
+  display: block;
+  padding-left: 0;
+  color: #0069aa;
+  margin-bottom: 1em;
+  margin-top: 1em;
 }
 
+.person__details__link::before,
+.person__home__link::before,
+.person__id__link::before {
+  content: '';
+  display: inline-block;
+  border-right: 2px solid #0069aa;
+  border-bottom: 2px solid #0069aa;
+  width: 6px; 
+  height: 6px;
+  transform: rotate(45deg);
+  margin-right: .3em;
+  margin-bottom: .15em;
+}
+
+.active.person__details__link::before,
+.active.person__home__link::before,
+.active.person__id__link::before {
+  transform: rotate(-135deg);
+  margin-bottom: 0;
+}
+
+
 @media (min-width: 992px) {
-  .person__details .container-fluid {
-    margin-left: 137px;
+  .person__details > .container-fluid {
+    padding-left: 150px;
   }
 }
 
@@ -139,4 +161,3 @@ html, body {
 .loader.hide-loader {
   display: none;
 }
-
