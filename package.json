@@ -11,6 +11,7 @@
     "awesomplete": "^1.1.4",
     "bootstrap": "^4.3.0",
     "bootstrap.native": "^2.0.26",
+    "core-js": "3",
     "css-loader": "^2.1.1",
     "cssnano": "^4.1.10",
     "postcss-loader": "^3.0.0",
@@ -44,7 +45,7 @@
     "watch": "watch 'npm run dev' ./app/static/src"
   },
   "browserslist": [
-    "defaults",
+    "last 2 versions",
     "ie 11"
   ]
 }

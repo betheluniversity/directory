@@ -16,6 +16,11 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader'
+            },
+            {
                 test: /bootstrap\.native/,
                 use: {
                     loader: 'bootstrap.native-loader',
@@ -24,10 +29,6 @@ module.exports = {
                     }
                 }
             },
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader' },
             {
                 test: /\.(css|scss)$/,
                 use: [{
