@@ -45,7 +45,7 @@
     "watch": "watch 'npm run dev' ./app/static/src"
   },
   "browserslist": [
-    "last 2 versions",
+    "last 1 version",
     "ie 11"
   ]
 }
