@@ -13,18 +13,17 @@
                     <p>The Bethel Directory search is designed to find results that are exact matches, as well matches that are similar to what you searched for. </p>
                     <p>In the search box, you will find a variety of options to search by:</p>
                     <ul>
-                        <li>Name Search</li>
-                        <li>Username Search</li>
-                        <li>Email Search</li>
-                        <li>Department Search</li>
+                        <li>Name</li>
+                        <li>Department</li>
+                        <li>Username</li>
+                        <li>Email</li>
                         {% if session['ITS_view'] %}
-                        <li>ID Search</li>
+                        <li>ID</li>
                         {% endif %}
                     </ul>
-                    <p>More filter options can be found by clicking the "Advanced" button.</p>
 
                     {% if 'FACULTY' in session['roles'] or 'STUDENT' in session['roles'] %}
-                    <p>If you are looking for additional searching capabilities, try:</p>
+                    <p>If you are looking for additional searching capabilities, try looking elsewhere:</p>
                     <ul>
                         {% if 'FACULTY' in session['roles'] or 'STUDENT' in session['roles'] %}
                         <li><a href="https://banner.bethel.edu/StudentSelfService/ssb/adviseeList/adviseeList">Advisor searching</a></li>
