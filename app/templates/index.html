@@ -52,7 +52,8 @@
         const input = document.getElementById("department");
         const awesomplete = new Awesomplete(input, {
             minChars: 1,
-            maxItems: 3
+            maxItems: 3,
+            autoFirst: true
         });
         awesomplete.list = {{depts|safe}};
     </script>
