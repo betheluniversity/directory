@@ -57,7 +57,7 @@
                 <div class="collapse">
                     <div class="person__details  pt-3  pb-4">
                             <div class="container-fluid">
-        
+
                                 {% if row['username'] != '' %}
                                 <div class="row  py-1 ">
                                     <div class="col-3  col-xl-2  px-0">
@@ -181,8 +181,8 @@
                                     </div>
                                 </div>
                                 {% endif %}
-        
-                                {% if session['ITS_view'] == True %}
+
+                                {% if 'STAFF' in session['roles'] and (row['id'] != '' or row['udc'] != '') %}
                                     <div class="row  person__id__link">
                                         <a aria-expanded="false" aria-controls="showIdDetails">
                                             Show ID
@@ -201,7 +201,7 @@
                                                     </div>
                                                 </div>
                                             {% endif %}
-                                            {% if row['udc'] != '' %}
+                                            {% if session['ITS_view'] == True and row['udc'] != '' %}
                                                 <div class="row  py-1 ">
                                                     <div class="col-3  col-xl-2  px-0">
                                                         <p class="mb-0"><b>UDC</b></p>
