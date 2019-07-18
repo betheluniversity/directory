@@ -62,11 +62,8 @@ def directory_search():
             last_name = data[item]['last_name']
             first_name = data[item]['first_name']
             housing = data[item]['housing_building_room'].encode('utf-8')
-            # replacing blackhole emails with regular emails on non-prod env
-            if app.config['ENVIRON'] != 'prod':
-                email = data[item]['email'].replace('=bethel.edu@blackhole.bethel.edu', '@bethel.edu')
-            else:
-                email = data[item]['email']
+            # replacing blackhole emails with regular emails
+            email = data[item]['email'].replace('=bethel.edu@blackhole.bethel.edu', '@bethel.edu')
             username = data[item]['username']
             bu_po = data[item]['bu_po']
             bu_id = data[item]['bu_id']
