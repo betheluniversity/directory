@@ -57,7 +57,7 @@
                 <div class="collapse">
                     <div class="person__details  pt-3  pb-4">
                             <div class="container-fluid">
-        
+
                                 {% if row['username'] != '' %}
                                 <div class="row  py-1 ">
                                     <div class="col-3  col-xl-2  px-0">
@@ -68,7 +68,7 @@
                                     </div>
                                 </div>
                                 {% endif %}
-        
+
                                 {% if row['email'] != '' %}
                                 <div class="row  py-1 ">
                                     <div class="col-3  col-xl-2  px-0">
@@ -87,6 +87,69 @@
                                     </div>
                                     <div class="col">
                                         <p class="mb-0">{{ row['po'] }}</p>
+                                    </div>
+                                </div>
+                                {% endif %}
+
+                                {% if row['title'][0]|length > 0 %}
+                                <div class="row  py-1 ">
+                                        <div class="col-3  col-xl-2  px-0">
+                                            <p class="mb-0"><b>Job Title</b></p>
+                                        </div>
+                                        <div class="col">
+                                            <p class="mb-0">
+                                            {% for i in range(0, row['title']|length) %}
+                                                {% if i != '' %}
+                                                    {{ row['title'][i] }}
+                                                    {% if i < row['title']|length - 1 %}
+                                                        |
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            </p>
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                {% if row['department'][0]|length > 0 %}
+                                <div class="row  py-1 ">
+                                        <div class="col-3  col-xl-2  px-0">
+                                            <p class="mb-0"><b>Dept.</b></p>
+                                        </div>
+                                        <div class="col">
+                                            <p class="mb-0">
+                                            {% for i in range(0, row['department']|length) %}
+                                                {% if i != '' %}
+                                                    {{ row['department'][i] }}
+                                                    {% if i < row['department']|length - 1 %}
+                                                        |
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            </p>
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                {% if row['office_number'] != '' %}
+                                <div class="row  py-1 ">
+                                    <div class="col-3  col-xl-2  px-0">
+                                        <p class="mb-0"><b>PO</b></p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="mb-0">{{ row['office_number'] }}</p>
+                                    </div>
+                                </div>
+                                {% endif %}
+
+
+                                {% if row['phone_ext'] != '' %}
+                                <div class="row  py-1 ">
+                                    <div class="col-3  col-xl-2  px-0">
+                                        <p class="mb-0"><b>Ext</b></p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="mb-0">Ext. {{ row['phone_ext'] }}</p>
                                     </div>
                                 </div>
                                 {% endif %}
@@ -150,34 +213,14 @@
                                         </div>
                                     </div>
                                 {% endif %}
-        
-                                {% if row['department'][0]|length > 0 %}
-                                <div class="row  py-1 ">
-                                        <div class="col-3  col-xl-2  px-0">
-                                            <p class="mb-0"><b>Dept.</b></p>
-                                        </div>
-                                        <div class="col">
-                                            <p class="mb-0">
-                                            {% for i in range(0, row['department']|length) %}
-                                                {% if i != '' %}
-                                                    {{ row['department'][i] }}
-                                                    {% if i < row['department']|length - 1 %}
-                                                        |
-                                                    {% endif %}
-                                                {% endif %}
-                                            {% endfor %}
-                                            </p>
-                                        </div>
-                                    </div>
-                                {% endif %}
-        
-                                {% if row['phone_ext'] != '' %}
+
+                                {% if row['dorm'] != '' %}
                                 <div class="row  py-1 ">
                                     <div class="col-3  col-xl-2  px-0">
-                                        <p class="mb-0"><b>Ext</b></p>
+                                        <p class="mb-0"><b>PO</b></p>
                                     </div>
                                     <div class="col">
-                                        <p class="mb-0">Ext. {{ row['phone_ext'] }}</p>
+                                        <p class="mb-0">{{ row['dorm'] }}</p>
                                     </div>
                                 </div>
                                 {% endif %}
