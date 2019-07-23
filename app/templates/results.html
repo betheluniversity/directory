@@ -215,12 +215,10 @@
                                 {% endif %}
         
                                 {% if row['addr_state'] != '' and row['addr_street1'] != '' and row['addr_city'] != '' and row['addr_zip'] != '' and row['phone'] != '' %}
-        
-                                    <div class="row  person__home__link">
-                                        <a aria-expanded="false" aria-controls="showHomeDetails">
-                                            Home details
-                                        </a>
-                                    </div>
+
+                                    <button class="row  btn  btn-primary  btn-sm  person__home__link">
+                                            Home Details
+                                    </button>
                                     
                                     <div class="row  collapse  collapseHome">
                                         <div class="container-fluid">
