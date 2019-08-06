@@ -57,6 +57,16 @@
                 <div class="collapse">
                     <div class="person__details  pt-3  pb-4">
                             <div class="container-fluid">
+                                {% if row['email'] != '' %}
+                                <div class="row  py-1 ">
+                                    <div class="col-3  col-xl-2  px-0">
+                                        <p class="mb-0"><b>Email</b></p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="mb-0"><a href="mailto:{{ row['email'] }}" target="_blank">{{ row['email'] }}</a></p>
+                                    </div>
+                                </div>
+                                {% endif %}
 
                                 {% if row['username'] != '' %}
                                 <div class="row  py-1 ">
@@ -65,17 +75,6 @@
                                     </div>
                                     <div class="col">
                                         <p class="mb-0">{{ row['username'] }}</p>
-                                    </div>
-                                </div>
-                                {% endif %}
-
-                                {% if row['email'] != '' %}
-                                <div class="row  py-1 ">
-                                    <div class="col-3  col-xl-2  px-0">
-                                        <p class="mb-0"><b>Email</b></p>
-                                    </div>
-                                    <div class="col">
-                                        <p class="mb-0"><a href="mailto:{{ row['email'] }}" target="_blank">{{ row['email'] }}</a></p>
                                     </div>
                                 </div>
                                 {% endif %}
