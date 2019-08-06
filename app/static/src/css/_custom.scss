@@ -94,7 +94,6 @@ html, body {
 }
 
 .person__details__link,
-.person__home__link,
 .person__id__link {
   font-size: .8rem;
   cursor: pointer;
@@ -106,7 +105,6 @@ html, body {
 }
 
 .person__details__link::before,
-.person__home__link::before,
 .person__id__link::before {
   content: '';
   display: inline-block;
@@ -120,7 +118,6 @@ html, body {
 }
 
 .active.person__details__link::before,
-.active.person__home__link::before,
 .active.person__id__link::before {
   transform: rotate(-135deg);
   margin-bottom: 0;
