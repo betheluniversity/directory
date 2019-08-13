@@ -76,6 +76,8 @@ def directory_search():
             addr_street2 = data[item]['addr_street2']
             addr_zip = data[item]['addr_zip']
             phone_ext = data[item]['phone_ext']
+            office_number = data[item]['office_building_room']
+            dorm = data[item]['housing_building_room']
 
             # the next ones potentially have multiple, split by a '|'
             bu_role = get_splits(data[item]['bu_role'])
@@ -106,7 +108,9 @@ def directory_search():
                             'college': college,
                             'title': title,
                             'addr_zip': addr_zip,
-                            'phone_ext': phone_ext
+                            'phone_ext': phone_ext,
+                            'office_number': office_number,
+                            'dorm': dorm
                             })
         return results
     except:
