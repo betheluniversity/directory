@@ -49,17 +49,3 @@ export function expandSection (element) {
     // mark the section as "currently not collapsed"
     element.setAttribute('data-collapsed', 'false')
 }
-
-
-
-// document.querySelector('#toggle-button').addEventListener('click', function (e) {
-//     var section = document.querySelector('.section.collapsible')
-//     var isCollapsed = section.getAttribute('data-collapsed') === 'true'
-
-//     if (isCollapsed) {
-//         expandSection(section)
-//         section.setAttribute('data-collapsed', 'false')
-//     } else {
-//         collapseSection(section)
-//     }
-// })
