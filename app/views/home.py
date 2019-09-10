@@ -43,6 +43,8 @@ class View(FlaskView):
             if 'ITS_view' not in session.keys():
                 get_its_view()
 
+            log_user(session['username'])
+
         def get_user():
             if app.config['ENVIRON'] == 'prod':
                 username = request.environ.get('REMOTE_USER')
@@ -109,6 +111,31 @@ class View(FlaskView):
                             session['ITS_view'] = True
             except:
                 session['ITS_view'] = False
+
+        def log_user(username):
+            # split each line, check if username is first.
+            # write username, first, last, roles
+            with open('{}'.format(app.config['ALL_USERS_CSV_FILE_PATH']), 'r+') as f:
+                file_data = f.read()
+
+                # if its blank, add the headers
+                if len(file_data) == 0:
+                    f.write('Username,Name,Banner Roles')
+
+                # read the file to see if the user has already been added
+                is_new_user = True
+                for line in file_data.split('\n'):
+                    if line.startswith(username):
+                        is_new_user = False
+                        break
+
+                if is_new_user:
+                    name = session['user_common_profile']['pref_first_last_name']
+                    banner_roles = '|'.join(session['roles'])
+                    user_data = '\n{}, {}, {}'.format(username, name, banner_roles)
+                    f.writelines(user_data)
+
+                f.close()
 
         init_user()
 

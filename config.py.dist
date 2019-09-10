@@ -12,6 +12,8 @@ ENVIRON = 'test'
 
 SENTRY_URL = ''
 
+ALL_USERS_CSV_FILE_PATH = ''
+
 API_USERNAME = ''
 API_PASSWORD = ''
 API_URL = ''
