@@ -75,7 +75,7 @@ def directory_search():
             addr_street1 = data[item]['addr_street1']
             addr_street2 = data[item]['addr_street2']
             addr_zip = data[item]['addr_zip']
-            phone_ext = data[item]['phone_ext']
+            phone_ext = data[item]['phone_ext'].split('*', 1)[0]
             office_number = data[item]['office_building_room']
             dorm = data[item]['housing_building_room']
 
