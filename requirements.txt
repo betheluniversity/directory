@@ -11,5 +11,4 @@ python-Levenshtein
 werkzeug
 python-ldap
 redis
-raven
 blinker
