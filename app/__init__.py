@@ -27,6 +27,11 @@ else:
         'CACHE_KEY_PREFIX': 'directory-'
     })
 
+if app.config['SENTRY_URL']:
+    import sentry_sdk
+    from sentry_sdk.integrations.flask import FlaskIntegration
+    sentry_sdk.init(dsn=app.config['SENTRY_URL'], integrations=[FlaskIntegration()])
+    from app.views import error
 
 from app.db.db_functions import departments
 
