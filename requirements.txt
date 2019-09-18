@@ -11,4 +11,5 @@ python-Levenshtein
 werkzeug
 python-ldap
 redis
+sentry_sdk[flask]
 blinker
