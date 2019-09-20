@@ -60,7 +60,7 @@ def directory_search():
         for item in data:
 
             last_name = data[item]['last_name']
-            first_name = data[item]['first_name']
+            first_name = data[item]['pref_first_name']  # we have 'first_name' available to us, but pref is desired.
             housing = data[item]['housing_building_room'].encode('utf-8')
             # replacing blackhole emails with regular emails
             email = data[item]['email'].replace('=bethel.edu@blackhole.bethel.edu', '@bethel.edu')
