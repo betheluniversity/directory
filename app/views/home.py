@@ -144,6 +144,11 @@ class View(FlaskView):
     def index(self):
         return render_template('index.html', **locals())
 
+    @route('/jira-endpoint', methods=['GET'])
+    def jira_endpoint(self):
+        jira_endpoint = True
+        return render_template('jira_endpoint.html', **locals())
+
     @route('search', methods=['POST'])
     def search(self):
         data = request.form.to_dict()
