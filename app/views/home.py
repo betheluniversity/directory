@@ -147,7 +147,7 @@ class View(FlaskView):
     @route('/jira-endpoint', methods=['GET'])
     def jira_endpoint(self):
         jira_endpoint = True
-        return render_template('jira_endpoint.html', **locals())
+        return render_template('index.html', **locals())
 
     @route('search', methods=['POST'])
     def search(self):
