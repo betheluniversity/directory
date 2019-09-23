@@ -4,6 +4,8 @@ import re
 from flask import Flask
 from flask_caching import Cache
 
+import sentry_sdk
+
 app = Flask(__name__)
 app.config.from_object('config')
 
@@ -28,7 +30,6 @@ else:
     })
 
 if app.config['SENTRY_URL']:
-    import sentry_sdk
     from sentry_sdk.integrations.flask import FlaskIntegration
     sentry_sdk.init(dsn=app.config['SENTRY_URL'], integrations=[FlaskIntegration()])
     from app.views import error
