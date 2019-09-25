@@ -8,7 +8,8 @@ from flask import render_template, request, session, abort, make_response, redir
 from flask import json as fjson
 from flask_classy import FlaskView, route
 
-from app import app, sentry
+from app import app, sentry_sdk
+from sentry_sdk import configure_scope
 from app.db.db_functions import portal_profile, reset_directory_data
 from app.directory_controller import DirectoryController, requires_auth
 
@@ -84,14 +85,13 @@ class View(FlaskView):
                 # API failed to load profile info, continue without it
                 session['user_common_profile'] = {}
 
-                sentry.client.extra_context({
-                    'time': time.strftime("%c"),
-                    'username': session['username'],
-                    'user-roles': session['user_roles'],
-                    'error-type': 'Failed to load profile',
-                })
+                with configure_scope() as scope:
+                    scope.set_tag("time", time.strftime("%c"))
+                    scope.set_tag("username", session['username'])
+                    scope.set_tag("user-roles", session['user_roles'])
+                    scope.set_tag("error-type", "Failed to load profile")
 
-                sentry.captureException()
+                sentry_sdk.capture_exception()
                 return None
 
         def get_its_view():
