@@ -45,15 +45,27 @@ def portal_profile(username):
         return abort(503)
 
 
-# 4 hour cache = 14400
-@cache.memoize(timeout=14400)
 def directory_search():
+    if cache.get('directory_search') is None:
+        directory_data = get_directory_data()
+        # cache for 24 hours, as every 4 we clear it with reset_directory_data() via cron
+        cache.set(key='directory_search', value=directory_data, timeout=86400)
+        return directory_data
+    else:
+        return cache.get('directory_search')
+
+
+def reset_directory_data():
+    cache.set('directory_search', get_directory_data())
+
+
+def get_directory_data():
     try:
         call_cursor_bw = conn_bw.cursor()
         result_cursor_bw = conn_bw.cursor()
         data = []
         results = []
-        #
+
         call_cursor_bw.callproc('bth_websrv_api.web_directory', (result_cursor_bw,))
         data = get_results(result_cursor_bw.fetchall())
         # todo: change data[item] to be able to use item? Use .items() or something

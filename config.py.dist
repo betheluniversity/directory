@@ -8,6 +8,8 @@ LOGOUT_URL = ''
 
 ENVIRON = 'test'
 
+CASCADE_LOGIN = ''
+
 # TEST_USER = ''
 
 SENTRY_URL = ''
