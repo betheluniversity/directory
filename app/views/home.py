@@ -9,8 +9,8 @@ from flask import json as fjson
 from flask_classy import FlaskView, route
 
 from app import app, sentry
-from app.db.db_functions import portal_profile
-from app.directory_controller import DirectoryController
+from app.db.db_functions import portal_profile, reset_directory_data
+from app.directory_controller import DirectoryController, requires_auth
 
 
 class View(FlaskView):
@@ -143,6 +143,12 @@ class View(FlaskView):
     @route('/', methods=['GET'])
     def index(self):
         return render_template('index.html', **locals())
+
+    @requires_auth
+    @route('/public/clear-cache', methods=['GET'])
+    def clear_cache(self):
+        reset_directory_data()
+        return 'success'
 
     @route('/jira-endpoint', methods=['GET'])
     def jira_endpoint(self):
