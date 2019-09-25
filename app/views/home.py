@@ -145,8 +145,8 @@ class View(FlaskView):
         return render_template('index.html', **locals())
 
     @requires_auth
-    @route('/public/clear-cache', methods=['GET'])
-    def clear_cache(self):
+    @route('/public/reset-cache', methods=['GET'])
+    def reset_cache(self):
         reset_directory_data()
         return 'success'
 
