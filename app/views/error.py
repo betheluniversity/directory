@@ -52,4 +52,4 @@ def server_error(e):
 
 @app.errorhandler(Exception)
 def other_error(e):
-    return error_render_template(e, 0)
+    return error_render_template(e, 500)
