@@ -138,7 +138,9 @@ class View(FlaskView):
 
                     f.close()
                 session['user_logged'] = True
-        init_user()
+
+        if '/public/' not in request.url:
+            init_user()
 
     @route('/', methods=['GET'])
     def index(self):
