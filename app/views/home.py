@@ -41,8 +41,8 @@ class View(FlaskView):
             if 'profile' not in session.keys():
                 session['profile'] = get_profile(session['username'])
 
-            if 'ITS_view' not in session.keys():
-                get_its_view()
+            if 'ID_view' not in session.keys():
+                get_id_view()
 
             log_user(session['username'])
 
@@ -94,9 +94,9 @@ class View(FlaskView):
                 sentry_sdk.capture_exception()
                 return None
 
-        def get_its_view():
+        def get_id_view():
             try:
-                session['ITS_view'] = False
+                session['ID_view'] = False
                 con = ldap.initialize(app.config['LDAP_CONNECTION_INFO'])
                 con.simple_bind_s('BU\svc-tinker', app.config['LDAP_SVC_TINKER_PASSWORD'])
 
@@ -107,10 +107,10 @@ class View(FlaskView):
                 for result in results:
                     for ldap_string in result[1]['memberOf']:
                         user_iam_group = re.search('CN=([^,]*)', str(ldap_string)).group(1)
-                        if user_iam_group == 'ITS - Employees':
-                            session['ITS_view'] = True
+                        if user_iam_group == 'ITS - Employees' or user_iam_group == 'CommMktg - Employees':
+                            session['ID_view'] = True
             except:
-                session['ITS_view'] = False
+                session['ID_view'] = False
 
         def log_user(username):
             if not session.get('user_logged'):
