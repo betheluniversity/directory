@@ -238,34 +238,35 @@
                                     </div>
                                 {% endif %}
                             {% endif %}
-    
-                            {% if row['addr_state'] != '' and row['addr_street1'] != '' and row['addr_city'] != '' and row['addr_zip'] != '' and row['phone'] != '' %}
-                                {% if row['addr_state'] != '' and row['addr_street1'] != '' and row['addr_city'] != '' and row['addr_zip'] != '' %}
-                                    <div class="row  py-1 ">
-                                        <div class="col-3  col-xl-2  px-0">
-                                            <p class="mb-0"><b>Address</b></p>
-                                        </div>
-                                        <div class="col">
-                                            <p class="mb-0">{{ row['addr_street1'] }}</p>
-                                            {% if row['addr_street2'] != '' %}
-                                                <p class="mb-0">{{ row['addr_street2'] }}</p>
-                                            {% endif %}
-                                            <p class="mb-0">{{ row['addr_city'] }}, {{ row['addr_state'] }} {{ row['addr_zip'] }}</p>
-                                        </div>
-                                    </div>
-                                {% endif %}
 
-                                {% if row['phone'] != '' %}
-                                    <div class="row  py-1 ">
-                                        <div class="col-3  col-xl-2  px-0">
-                                            <p class="mb-0"><b>Phone</b></p>
-                                        </div>
-                                        <div class="col">
-                                            <p class="mb-0">{{ row['phone'] }}</p>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            {% endif %}
+                        {#  todo: we hide these on 9/27 due to privacy concerns #}
+{#                            {% if row['addr_state'] != '' and row['addr_street1'] != '' and row['addr_city'] != '' and row['addr_zip'] != '' and row['phone'] != '' %}#}
+{#                                {% if row['addr_state'] != '' and row['addr_street1'] != '' and row['addr_city'] != '' and row['addr_zip'] != '' %}#}
+{#                                    <div class="row  py-1 ">#}
+{#                                        <div class="col-3  col-xl-2  px-0">#}
+{#                                            <p class="mb-0"><b>Address</b></p>#}
+{#                                        </div>#}
+{#                                        <div class="col">#}
+{#                                            <p class="mb-0">{{ row['addr_street1'] }}</p>#}
+{#                                            {% if row['addr_street2'] != '' %}#}
+{#                                                <p class="mb-0">{{ row['addr_street2'] }}</p>#}
+{#                                            {% endif %}#}
+{#                                            <p class="mb-0">{{ row['addr_city'] }}, {{ row['addr_state'] }} {{ row['addr_zip'] }}</p>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                {% endif %}#}
+{##}
+{#                                {% if row['phone'] != '' %}#}
+{#                                    <div class="row  py-1 ">#}
+{#                                        <div class="col-3  col-xl-2  px-0">#}
+{#                                            <p class="mb-0"><b>Phone</b></p>#}
+{#                                        </div>#}
+{#                                        <div class="col">#}
+{#                                            <p class="mb-0">{{ row['phone'] }}</p>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                {% endif %}#}
+{#                            {% endif %}#}
     
                         </div>
                     </div>
