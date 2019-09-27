@@ -216,7 +216,7 @@
                                 </div>
                             {% endif %}
 
-                            {% if 'STAFF' in session['roles'] and (row['id'] != '' or row['udc'] != '') %}
+                            {% if session['ID_view'] == True and (row['id'] != '' or row['udc'] != '') %}
                                 {% if row['id'] != '' %}
                                     <div class="row  py-1 ">
                                         <div class="col-3  col-xl-2  px-0">
@@ -227,7 +227,7 @@
                                         </div>
                                     </div>
                                 {% endif %}
-                                {% if session['ID_view'] == True and row['udc'] != '' %}
+                                {% if row['udc'] != '' %}
                                     <div class="row  py-1 ">
                                         <div class="col-3  col-xl-2  px-0">
                                             <p class="mb-0"><b>UDC</b></p>
