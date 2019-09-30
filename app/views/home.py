@@ -131,10 +131,14 @@ class View(FlaskView):
                             break
 
                     if is_new_user:
-                        name = session['user_common_profile']['pref_first_last_name']
-                        banner_roles = '|'.join(session['roles'])
-                        user_data = '\n{}, {}, {}'.format(username, name, banner_roles)
-                        f.writelines(user_data)
+                        try:
+                            name = session['user_common_profile']['pref_first_last_name']
+                            banner_roles = '|'.join(session['roles'])
+                            user_data = '\n{}, {}, {}'.format(username, name, banner_roles)
+                            f.writelines(user_data)
+                        except:
+                            # don't log a user who doesn't have a pref_first_last_name or roles...
+                            pass
 
                     f.close()
                 session['user_logged'] = True
