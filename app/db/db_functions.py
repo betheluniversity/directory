@@ -45,22 +45,34 @@ def portal_profile(username):
         return abort(503)
 
 
-# 4 hour cache = 14400
-@cache.memoize(timeout=14400)
 def directory_search():
+    if cache.get('directory_search') is None:
+        directory_data = get_directory_data()
+        # cache for 24 hours, as every 4 we clear it with reset_directory_data() via cron
+        cache.set(key='directory_search', value=directory_data, timeout=86400)
+        return directory_data
+    else:
+        return cache.get('directory_search')
+
+
+def reset_directory_data():
+    cache.set('directory_search', get_directory_data())
+
+
+def get_directory_data():
     try:
         call_cursor_bw = conn_bw.cursor()
         result_cursor_bw = conn_bw.cursor()
         data = []
         results = []
-        #
+
         call_cursor_bw.callproc('bth_websrv_api.web_directory', (result_cursor_bw,))
         data = get_results(result_cursor_bw.fetchall())
         # todo: change data[item] to be able to use item? Use .items() or something
         for item in data:
 
             last_name = data[item]['last_name']
-            first_name = data[item]['first_name']
+            first_name = data[item]['pref_first_name']  # we have 'first_name' available to us, but pref is desired.
             housing = data[item]['housing_building_room'].encode('utf-8')
             # replacing blackhole emails with regular emails
             email = data[item]['email'].replace('=bethel.edu@blackhole.bethel.edu', '@bethel.edu')
@@ -75,7 +87,7 @@ def directory_search():
             addr_street1 = data[item]['addr_street1']
             addr_street2 = data[item]['addr_street2']
             addr_zip = data[item]['addr_zip']
-            phone_ext = data[item]['phone_ext']
+            phone_ext = data[item]['phone_ext'].split('*', 1)[0]  # this split is to fix numbers like "123.123.123*1234"
             office_number = data[item]['office_building_room']
             dorm = data[item]['housing_building_room']
 

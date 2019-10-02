@@ -13,19 +13,25 @@
 
 <body class="preload">
     <div class="stickyWrapper">
-        {% include 'modules/navbar.html' %}
+        {# the jira endpoint doesn't need a nav #}
+        {% if jira_endpoint != True %}
+            {% include 'modules/navbar.html' %}
+        {% endif %}
         <div class="divide"></div>
         <div class="container-fluid  mt-3  mt-md-5" style="max-width: 1200px">
             {% block content %}
             {% endblock %}
         </div>
 
-        <footer class="footer border-top  bg-white  p-4">
-            <div class="container-fluid  p-4" style="max-width: 1200px">
-                <p class="text-muted  u-fs14  mb-0">Need Help? Contact the Help Desk at <a href="mailto=help-desk@bethel.edu" target="_blank" rel="noopener">help-desk@bethel.edu</a></p>
-                <p class="text-muted  u-fs14  mb-0">© 2019 Bethel University</p>
-            </div>
-        </footer>
+        {# the jira endpoint doesn't need a footer #}
+        {% if jira_endpoint != True %}
+            <footer class="footer border-top  bg-white  p-4">
+                <div class="container-fluid  p-4" style="max-width: 1200px">
+                    <p class="text-muted  u-fs14  mb-0">Need Help? Contact the Help Desk at <a href="mailto=helpdesk@bethel.edu" target="_blank" rel="noopener">helpdesk@bethel.edu</a></p>
+                    <p class="text-muted  u-fs14  mb-0">© 2019 Bethel University</p>
+                </div>
+            </footer>
+        {% endif %}
     </div>
 
     <script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=CustomEvent"></script>

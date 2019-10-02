@@ -8,9 +8,13 @@ LOGOUT_URL = ''
 
 ENVIRON = 'test'
 
+CASCADE_LOGIN = ''
+
 # TEST_USER = ''
 
 SENTRY_URL = ''
+
+ALL_USERS_CSV_FILE_PATH = ''
 
 API_USERNAME = ''
 API_PASSWORD = ''

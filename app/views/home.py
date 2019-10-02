@@ -8,9 +8,10 @@ from flask import render_template, request, session, abort, make_response, redir
 from flask import json as fjson
 from flask_classy import FlaskView, route
 
-from app import app, sentry
-from app.db.db_functions import portal_profile
-from app.directory_controller import DirectoryController
+from app import app, sentry_sdk
+from sentry_sdk import configure_scope
+from app.db.db_functions import portal_profile, reset_directory_data
+from app.directory_controller import DirectoryController, requires_auth
 
 
 class View(FlaskView):
@@ -40,8 +41,10 @@ class View(FlaskView):
             if 'profile' not in session.keys():
                 session['profile'] = get_profile(session['username'])
 
-            if 'ITS_view' not in session.keys():
-                get_its_view()
+            if 'ID_view' not in session.keys():
+                get_id_view()
+
+            log_user(session['username'])
 
         def get_user():
             if app.config['ENVIRON'] == 'prod':
@@ -82,19 +85,18 @@ class View(FlaskView):
                 # API failed to load profile info, continue without it
                 session['user_common_profile'] = {}
 
-                sentry.client.extra_context({
-                    'time': time.strftime("%c"),
-                    'username': session['username'],
-                    'user-roles': session['user_roles'],
-                    'error-type': 'Failed to load profile',
-                })
+                with configure_scope() as scope:
+                    scope.set_tag("time", time.strftime("%c"))
+                    scope.set_tag("username", session['username'])
+                    scope.set_tag("user-roles", session['user_roles'])
+                    scope.set_tag("error-type", "Failed to load profile")
 
-                sentry.captureException()
+                sentry_sdk.capture_exception()
                 return None
 
-        def get_its_view():
+        def get_id_view():
             try:
-                session['ITS_view'] = False
+                session['ID_view'] = False
                 con = ldap.initialize(app.config['LDAP_CONNECTION_INFO'])
                 con.simple_bind_s('BU\svc-tinker', app.config['LDAP_SVC_TINKER_PASSWORD'])
 
@@ -105,15 +107,58 @@ class View(FlaskView):
                 for result in results:
                     for ldap_string in result[1]['memberOf']:
                         user_iam_group = re.search('CN=([^,]*)', str(ldap_string)).group(1)
-                        if user_iam_group == 'ITS - Employees':
-                            session['ITS_view'] = True
+                        if user_iam_group == 'ITS - Employees' or user_iam_group == 'CommMktg - Employees':
+                            session['ID_view'] = True
             except:
-                session['ITS_view'] = False
+                session['ID_view'] = False
 
-        init_user()
+        def log_user(username):
+            if not session.get('user_logged'):
+                # split each line, check if username is first.
+                # write username, first, last, roles
+                with open('{}'.format(app.config['ALL_USERS_CSV_FILE_PATH']), 'r+') as f:
+                    file_data = f.read()
+
+                    # if its blank, add the headers
+                    if len(file_data) == 0:
+                        f.write('Username,Name,Banner Roles')
+
+                    # read the file to see if the user has already been added
+                    is_new_user = True
+                    for line in file_data.split('\n'):
+                        if line.startswith(username):
+                            is_new_user = False
+                            break
+
+                    if is_new_user:
+                        try:
+                            name = session['user_common_profile']['pref_first_last_name']
+                            banner_roles = '|'.join(session['roles'])
+                            user_data = '\n{}, {}, {}'.format(username, name, banner_roles)
+                            f.writelines(user_data)
+                        except:
+                            # don't log a user who doesn't have a pref_first_last_name or roles...
+                            pass
+
+                    f.close()
+                session['user_logged'] = True
+
+        if '/public/' not in request.url:
+            init_user()
 
     @route('/', methods=['GET'])
     def index(self):
+        return render_template('index.html', **locals())
+
+    @requires_auth
+    @route('/public/reset-cache', methods=['GET'])
+    def reset_cache(self):
+        reset_directory_data()
+        return 'success'
+
+    @route('/jira-endpoint', methods=['GET'])
+    def jira_endpoint(self):
+        jira_endpoint = True
         return render_template('index.html', **locals())
 
     @route('search', methods=['POST'])

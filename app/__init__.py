@@ -4,12 +4,10 @@ import re
 from flask import Flask
 from flask_caching import Cache
 
+import sentry_sdk
+
 app = Flask(__name__)
 app.config.from_object('config')
-
-if app.config['SENTRY_URL']:
-    from raven import Client
-    client = Client(app.config['SENTRY_URL'])
 
 if app.config['ENVIRON'] != 'prod':
     cache = Cache(app, config={'CACHE_TYPE': 'simple'})
@@ -31,11 +29,12 @@ else:
         'CACHE_KEY_PREFIX': 'directory-'
     })
 
-from raven.contrib.flask import Sentry
-sentry = Sentry(app, dsn=app.config['SENTRY_URL'])
+if app.config['SENTRY_URL']:
+    from sentry_sdk.integrations.flask import FlaskIntegration
+    sentry_sdk.init(dsn=app.config['SENTRY_URL'], integrations=[FlaskIntegration()])
+    from app.views import error
 
 from app.db.db_functions import departments
-from app.views import error
 
 
 # https://stackoverflow.com/questions/919056/case-insensitive-replace
