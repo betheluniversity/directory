@@ -164,6 +164,17 @@
                                     </div>
                                 </div>
                             {% endif %}
+
+                            {% if row['class_standing'] != '' %}
+                                <div class="row  py-1 ">
+                                    <div class="col-3  col-xl-2  px-0">
+                                        <p class="mb-0"><b>Year</b></p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="mb-0">{{ row['class_standing'] }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
     
                             {% if row['major'][0]|length > 0 %}
                                 <div class="row  py-1 ">
