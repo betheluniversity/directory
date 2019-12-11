@@ -120,23 +120,23 @@
                                                 </p>
                                             </div>
                                         </div>
-                                        <div class="row  py-1 ">
-                                            <div class="col-3  col-xl-2  px-0">
-                                                <p class="mb-0"><b>Dept.</b></p>
-                                            </div>
-                                            <div class="col">
-                                                <p class="mb-0">
-                                                    {% if row['department'][i]|length > 0 %}
+                                        {% if row['department'][i]|length > 0 %}
+                                            <div class="row  py-1 ">
+                                                <div class="col-3  col-xl-2  px-0">
+                                                    <p class="mb-0"><b>Dept.</b></p>
+                                                </div>
+                                                <div class="col">
+                                                    <p class="mb-0">
                                                         {{ row['department'][i] }}
-                                                    {% endif %}
-                                                    {% if i == ( row['title']|length - 1 ) and row['department']|length > row['title']|length %}
-                                                        {% for j in range((i + 1), row['department']|length) %}
-                                                            | {{ row['department'][j] }}
-                                                        {% endfor %}
-                                                    {% endif %}
-                                                </p>
+                                                        {% if i == ( row['title']|length - 1 ) and row['department']|length > row['title']|length %}
+                                                            {% for j in range((i + 1), row['department']|length) %}
+                                                                | {{ row['department'][j] }}
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
+                                        {% endif %}
                                     {% endif %}
                                 {% endfor %}
                             {% endif %}
