@@ -105,12 +105,12 @@
                             {% endif %}
 
                             {% if row['title'][0]|length > 0 and row['department'][0]|length > 0 %}
-                                <!-- <div class="row  border-top  pt-3  mt-2">
-                                    <h6 class='text-uppercase'>Staff</h6>
-                                </div> -->
+                                <div class="row  border-bottom pt-4">
+                                    <h6 class='text-uppercase' style="font-size: .7rem;letter-spacing: .05rem;">Employee</h6>
+                                </div>
                                 {% for i in range(0, row['title']|length) %}
                                     {% if i != '' %}
-                                        <div class="row  border-top  pt-2  mt-2">
+                                        <div class="row  pt-2">
                                             <div class="col-3  col-xl-2  px-0">
                                                 <p class="mb-0"><b>Job Title</b></p>
                                             </div>
@@ -142,10 +142,10 @@
                             {% endif %}
 
                                 {% if row['college'][0]|length > 0 %}
-                                    <!-- <div class="row  border-top  pt-3  mt-2">
-                                        <h6 class='text-uppercase'>Student</h6>
-                                    </div> -->
-                                    <div class="row  border-top  pt-2  mt-2">
+                                    <div class="row  border-bottom  pt-4">
+                                        <h6 class='text-uppercase' style="font-size: .7rem;letter-spacing: .05rem;">Student</h6>
+                                    </div>
+                                    <div class="row  pt-2">
                                         <div class="col-3  col-xl-2  px-0">
                                             <p class="mb-0"><b>College</b></p>
                                         </div>
@@ -217,7 +217,7 @@
 
                             {% if session['ID_view'] == True and (row['id'] != '' or row['udc'] != '') %}
                                 {% if row['id'] != '' %}
-                                    <div class="row  border-top  pt-2  mt-2">
+                                    <div class="row  mt-4">
                                         <div class="col-3  col-xl-2  px-0">
                                             <p class="mb-0"><b>ID</b></p>
                                         </div>
