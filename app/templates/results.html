@@ -104,6 +104,29 @@
                                 </div>
                             {% endif %}
 
+                            {% if session['ID_view'] == True and (row['id'] != '' or row['udc'] != '') %}
+                                {% if row['id'] != '' %}
+                                    <div class="row  py-1">
+                                        <div class="col-3  col-xl-2  px-0">
+                                            <p class="mb-0"><b>ID</b></p>
+                                        </div>
+                                        <div class="col">
+                                            <p class="mb-0">{{ row['id'] }}</p>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                {% if row['udc'] != '' %}
+                                    <div class="row  py-1 ">
+                                        <div class="col-3  col-xl-2  px-0">
+                                            <p class="mb-0"><b>UDC</b></p>
+                                        </div>
+                                        <div class="col" style="align-self:center;">
+                                            <p class="mb-0" style="font-size:.7rem">{{ row['udc'] }}</p>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+
                             {% if row['title'][0]|length > 0 and row['department'][0]|length > 0 %}
                                 <div class="row  border-bottom pt-4">
                                     <h6 class='text-uppercase' style="font-size: .7rem;letter-spacing: .05rem;">Employee</h6>
@@ -214,29 +237,6 @@
                                         </div>
                                     </div>
                                 {% endif %}
-
-                            {% if session['ID_view'] == True and (row['id'] != '' or row['udc'] != '') %}
-                                {% if row['id'] != '' %}
-                                    <div class="row  mt-4">
-                                        <div class="col-3  col-xl-2  px-0">
-                                            <p class="mb-0"><b>ID</b></p>
-                                        </div>
-                                        <div class="col">
-                                            <p class="mb-0">{{ row['id'] }}</p>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                                {% if row['udc'] != '' %}
-                                    <div class="row  py-1 ">
-                                        <div class="col-3  col-xl-2  px-0">
-                                            <p class="mb-0"><b>UDC</b></p>
-                                        </div>
-                                        <div class="col">
-                                            <p class="mb-0">{{ row['udc'] }}</p>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            {% endif %}
 
                         {#  todo: we hide these on 9/27 due to privacy concerns #}
 {#                            {% if row['addr_state'] != '' and row['addr_street1'] != '' and row['addr_city'] != '' and row['addr_zip'] != '' and row['phone'] != '' %}#}
