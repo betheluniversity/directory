@@ -52,7 +52,7 @@
                             {% if row['email'] != '' %}
                                 <div class="row  py-1 ">
                                     <div class="col-3  col-xl-2  px-0">
-                                        <p class="mb-0"><b>Email</b></p>
+                                        <p class="mb-0 font-weight-bold">Email</p>
                                     </div>
                                     <div class="col">
                                         <p class="mb-0"><a href="mailto:{{ row['email'] }}" target="_blank">{{ row['email'] }}</a></p>
@@ -63,7 +63,7 @@
                             {% if 'STAFF' in session['roles'] and row['username'] != '' %}
                                 <div class="row  py-1 ">
                                     <div class="col-3  col-xl-2  px-0">
-                                        <p class="mb-0"><b>Username</b></p>
+                                        <p class="mb-0 font-weight-bold">Username</p>
                                     </div>
                                     <div class="col">
                                         <p class="mb-0">{{ row['username'] }}</p>
@@ -74,7 +74,7 @@
                             {% if row['po'] != '' %}
                                 <div class="row  py-1 ">
                                     <div class="col-3  col-xl-2  px-0">
-                                        <p class="mb-0"><b>PO</b></p>
+                                        <p class="mb-0 font-weight-bold">PO</p>
                                     </div>
                                     <div class="col">
                                         <p class="mb-0">{{ row['po'] }}</p>
@@ -85,7 +85,7 @@
                             {% if row['office_number'] != '' %}
                                 <div class="row  py-1 ">
                                     <div class="col-3  col-xl-2  px-0">
-                                        <p class="mb-0"><b>Office</b></p>
+                                        <p class="mb-0 font-weight-bold">Office</p>
                                     </div>
                                     <div class="col">
                                         <p class="mb-0">{{ row['office_number'] }}</p>
@@ -96,7 +96,7 @@
                             {% if row['phone_ext'] != '' %}
                                 <div class="row  py-1 ">
                                     <div class="col-3  col-xl-2  px-0">
-                                        <p class="mb-0"><b>Phone</b></p>
+                                        <p class="mb-0 font-weight-bold">Phone</p>
                                     </div>
                                     <div class="col">
                                         <p class="mb-0">{{ row['phone_ext'] }}</p>
@@ -108,7 +108,7 @@
                                 {% if row['id'] != '' %}
                                     <div class="row  py-1">
                                         <div class="col-3  col-xl-2  px-0">
-                                            <p class="mb-0"><b>ID</b></p>
+                                            <p class="mb-0 font-weight-bold">ID</p>
                                         </div>
                                         <div class="col">
                                             <p class="mb-0">{{ row['id'] }}</p>
@@ -118,7 +118,7 @@
                                 {% if row['udc'] != '' %}
                                     <div class="row  py-1 ">
                                         <div class="col-3  col-xl-2  px-0">
-                                            <p class="mb-0"><b>UDC</b></p>
+                                            <p class="mb-0 font-weight-bold">UDC</p>
                                         </div>
                                         <div class="col" style="align-self:center;">
                                             <p class="mb-0" style="font-size:.7rem">{{ row['udc'] }}</p>
@@ -135,7 +135,7 @@
                                     {% if i != '' %}
                                         <div class="row  pt-2">
                                             <div class="col-3  col-xl-2  px-0">
-                                                <p class="mb-0"><b>Job Title</b></p>
+                                                <p class="mb-0 font-weight-bold">Job Title</p>
                                             </div>
                                             <div class="col">
                                                 <p class="mb-0">
@@ -146,7 +146,7 @@
                                         {% if row['department'][i]|length > 0 %}
                                             <div class="row  py-1 ">
                                                 <div class="col-3  col-xl-2  px-0">
-                                                    <p class="mb-0"><b>Dept.</b></p>
+                                                    <p class="mb-0 font-weight-bold">Dept.</p>
                                                 </div>
                                                 <div class="col">
                                                     <p class="mb-0">
@@ -170,7 +170,7 @@
                                     </div>
                                     <div class="row  pt-2">
                                         <div class="col-3  col-xl-2  px-0">
-                                            <p class="mb-0"><b>College</b></p>
+                                            <p class="mb-0 font-weight-bold">College</p>
                                         </div>
                                         <div class="col">
                                             <p class="mb-0">
@@ -190,7 +190,7 @@
                                 {% if row['major'][0]|length > 0 %}
                                     <div class="row  py-1 ">
                                         <div class="col-3  col-xl-2  px-0">
-                                            <p class="mb-0"><b>Major</b></p>
+                                            <p class="mb-0 font-weight-bold">Major</p>
                                         </div>
                                         <div class="col">
                                             <p class="mb-0">
@@ -210,7 +210,7 @@
                                 {% if row['minor'][0]|length > 0 %}
                                     <div class="row  py-1 ">
                                         <div class="col-3  col-xl-2  px-0">
-                                            <p class="mb-0"><b>Minor</b></p>
+                                            <p class="mb-0 font-weight-bold">Minor</p>
                                         </div>
                                         <div class="col">
                                             <p class="mb-0">
@@ -230,7 +230,7 @@
                                 {% if row['dorm'] != '' %}
                                     <div class="row  py-1 ">
                                         <div class="col-3  col-xl-2  px-0">
-                                            <p class="mb-0"><b>Dorm</b></p>
+                                            <p class="mb-0 font-weight-bold">Dorm</p>
                                         </div>
                                         <div class="col">
                                             <p class="mb-0">{{ row['dorm'] }}</p>
@@ -243,7 +243,7 @@
 {#                                {% if row['addr_state'] != '' and row['addr_street1'] != '' and row['addr_city'] != '' and row['addr_zip'] != '' %}#}
 {#                                    <div class="row  py-1 ">#}
 {#                                        <div class="col-3  col-xl-2  px-0">#}
-{#                                            <p class="mb-0"><b>Address</b></p>#}
+{#                                            <p class="mb-0 font-weight-bold">Address</p>#}
 {#                                        </div>#}
 {#                                        <div class="col">#}
 {#                                            <p class="mb-0">{{ row['addr_street1'] }}</p>#}
@@ -258,7 +258,7 @@
 {#                                {% if row['phone'] != '' %}#}
 {#                                    <div class="row  py-1 ">#}
 {#                                        <div class="col-3  col-xl-2  px-0">#}
-{#                                            <p class="mb-0"><b>Phone</b></p>#}
+{#                                            <p class="mb-0 font-weight-bold">Phone</p>#}
 {#                                        </div>#}
 {#                                        <div class="col">#}
 {#                                            <p class="mb-0">{{ row['phone'] }}</p>#}
