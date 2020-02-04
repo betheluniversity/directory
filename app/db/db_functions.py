@@ -90,6 +90,7 @@ def get_directory_data():
             phone_ext = data[item]['phone_ext'].split('*', 1)[0]  # this split is to fix numbers like "123.123.123*1234"
             office_number = data[item]['office_building_room']
             dorm = data[item]['housing_building_room']
+            class_standing = data[item]['stu_class']
 
             # the next ones potentially have multiple, split by a '|'
             bu_role = get_splits(data[item]['bu_role'])
@@ -122,7 +123,8 @@ def get_directory_data():
                             'addr_zip': addr_zip,
                             'phone_ext': phone_ext,
                             'office_number': office_number,
-                            'dorm': dorm
+                            'dorm': dorm,
+                            'class_standing': class_standing
                             })
         return results
     except:
