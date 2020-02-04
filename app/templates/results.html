@@ -163,23 +163,24 @@
                                     {% endif %}
                                 {% endfor %}
                             {% endif %}
-                            
-                            {% if row['class_standing'] != '' %}
-                                <div class="row  py-1 ">
-                                    <div class="col-3  col-xl-2  px-0">
-                                        <p class="mb-0"><b>Year</b></p>
-                                    </div>
-                                    <div class="col">
-                                        <p class="mb-0">{{ row['class_standing'] }}</p>
-                                    </div>
-                                </div>
-                            {% endif %}
 
                                 {% if row['college'][0]|length > 0 %}
                                     <div class="row  border-bottom  pt-4">
                                         <h6 class='text-uppercase' style="font-size: .7rem;letter-spacing: .05rem;">Student</h6>
                                     </div>
-                                    <div class="row  pt-2">
+
+                                    {% if row['class_standing'] != '' %}
+                                        <div class="row  py-1 pt-2">
+                                            <div class="col-3  col-xl-2  px-0">
+                                                <p class="mb-0"><b>Year</b></p>
+                                            </div>
+                                            <div class="col">
+                                                <p class="mb-0">{{ row['class_standing'] }}</p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+
+                                    <div class="row  py-1">
                                         <div class="col-3  col-xl-2  px-0">
                                             <p class="mb-0 font-weight-bold">College</p>
                                         </div>
