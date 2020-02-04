@@ -44,6 +44,14 @@ class View(FlaskView):
             if 'ID_view' not in session.keys():
                 get_id_view()
 
+            user_has_role = False
+            for role in session['roles']:
+                if 'STUDENT' in role or 'STAFF' in role or 'FACULTY' in role:
+                    user_has_role = True
+
+            if user_has_role == False:
+                return abort(403)
+
             log_user(session['username'])
 
         def get_user():
