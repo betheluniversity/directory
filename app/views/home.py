@@ -105,6 +105,7 @@ class View(FlaskView):
         def get_id_view():
             try:
                 session['ID_view'] = False
+                ldap.set_option(ldap.OPT_X_TLS_REQUIRE_CERT, ldap.OPT_X_TLS_NEVER)
                 con = ldap.initialize(app.config['LDAP_CONNECTION_INFO'])
                 con.simple_bind_s('BU\svc-tinker', app.config['LDAP_SVC_TINKER_PASSWORD'])
 
