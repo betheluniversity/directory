@@ -103,29 +103,30 @@
                                     </div>
                                 </div>
                             {% endif %}
-
-                            {% if session['ID_view'] == True and (row['id'] != '' or row['udc'] != '') %}
-                                {% if row['id'] != '' %}
-                                    <div class="row  py-1">
-                                        <div class="col-3  col-xl-2  px-0">
-                                            <p class="mb-0 font-weight-bold">ID</p>
-                                        </div>
-                                        <div class="col">
-                                            <p class="mb-0">{{ row['id'] }}</p>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                                {% if row['udc'] != '' %}
-                                    <div class="row  py-1 ">
-                                        <div class="col-3  col-xl-2  px-0">
-                                            <p class="mb-0 font-weight-bold">UDC</p>
-                                        </div>
-                                        <div class="col" style="align-self:center;">
-                                            <p class="mb-0" style="font-size:.7rem">{{ row['udc'] }}</p>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            {% endif %}
+                        {# TODO: We removed UDCID and ID on 2/20/2020, due to ferpa concerns. It might come back, but
+                                    for now it is removed until we address this issue again :( #}
+{#                            {% if session['ID_view'] == True and (row['id'] != '' or row['udc'] != '') %}#}
+{#                                {% if row['id'] != '' %}#}
+{#                                    <div class="row  py-1">#}
+{#                                        <div class="col-3  col-xl-2  px-0">#}
+{#                                            <p class="mb-0 font-weight-bold">ID</p>#}
+{#                                        </div>#}
+{#                                        <div class="col">#}
+{#                                            <p class="mb-0">{{ row['id'] }}</p>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                {% endif %}#}
+{#                                {% if row['udc'] != '' %}#}
+{#                                    <div class="row  py-1 ">#}
+{#                                        <div class="col-3  col-xl-2  px-0">#}
+{#                                            <p class="mb-0 font-weight-bold">UDC</p>#}
+{#                                        </div>#}
+{#                                        <div class="col" style="align-self:center;">#}
+{#                                            <p class="mb-0" style="font-size:.7rem">{{ row['udc'] }}</p>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                {% endif %}#}
+{#                            {% endif %}#}
 
                             {% if row['title'][0]|length > 0 and row['department'][0]|length > 0 %}
                                 <div class="row  border-bottom pt-4">
@@ -199,6 +200,7 @@
                                     </div>
                                 {% endif %}
 
+                                {# major #}
                                 {% if row['major'][0]|length > 0 %}
                                     <div class="row  py-1 ">
                                         <div class="col-3  col-xl-2  px-0">
@@ -219,6 +221,7 @@
                                     </div>
                                 {% endif %}
 
+                                {# minor #}
                                 {% if row['minor'][0]|length > 0 %}
                                     <div class="row  py-1 ">
                                         <div class="col-3  col-xl-2  px-0">
@@ -239,6 +242,7 @@
                                     </div>
                                 {% endif %}
 
+                                {# dorm #}
                                 {% if row['dorm'] != '' %}
                                     <div class="row  py-1 ">
                                         <div class="col-3  col-xl-2  px-0">
@@ -250,34 +254,33 @@
                                     </div>
                                 {% endif %}
 
-                        {#  todo: we hide these on 9/27 due to privacy concerns #}
-{#                            {% if row['addr_state'] != '' and row['addr_street1'] != '' and row['addr_city'] != '' and row['addr_zip'] != '' and row['phone'] != '' %}#}
-{#                                {% if row['addr_state'] != '' and row['addr_street1'] != '' and row['addr_city'] != '' and row['addr_zip'] != '' %}#}
-{#                                    <div class="row  py-1 ">#}
-{#                                        <div class="col-3  col-xl-2  px-0">#}
-{#                                            <p class="mb-0 font-weight-bold">Address</p>#}
-{#                                        </div>#}
-{#                                        <div class="col">#}
-{#                                            <p class="mb-0">{{ row['addr_street1'] }}</p>#}
-{#                                            {% if row['addr_street2'] != '' %}#}
-{#                                                <p class="mb-0">{{ row['addr_street2'] }}</p>#}
-{#                                            {% endif %}#}
-{#                                            <p class="mb-0">{{ row['addr_city'] }}, {{ row['addr_state'] }} {{ row['addr_zip'] }}</p>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                {% endif %}#}
-{##}
-{#                                {% if row['phone'] != '' %}#}
-{#                                    <div class="row  py-1 ">#}
-{#                                        <div class="col-3  col-xl-2  px-0">#}
-{#                                            <p class="mb-0 font-weight-bold">Phone</p>#}
-{#                                        </div>#}
-{#                                        <div class="col">#}
-{#                                            <p class="mb-0">{{ row['phone'] }}</p>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                {% endif %}#}
-{#                            {% endif %}#}
+                                {# address - student only #}
+                                {% if row['addr_state'] != '' and row['addr_street1'] != '' and row['addr_city'] != '' and row['addr_zip'] != '' %}
+                                    <div class="row  py-1 ">
+                                        <div class="col-3  col-xl-2  px-0">
+                                            <p class="mb-0 font-weight-bold">Address</p>
+                                        </div>
+                                        <div class="col">
+                                            <p class="mb-0">{{ row['addr_street1'] }}</p>
+                                            {% if row['addr_street2'] != '' %}
+                                                <p class="mb-0">{{ row['addr_street2'] }}</p>
+                                            {% endif %}
+                                            <p class="mb-0">{{ row['addr_city'] }}, {{ row['addr_state'] }} {{ row['addr_zip'] }}</p>
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                {# phone - student only #}
+                                {% if row['phone'] != '' %}
+                                    <div class="row  py-1 ">
+                                        <div class="col-3  col-xl-2  px-0">
+                                            <p class="mb-0 font-weight-bold">Phone</p>
+                                        </div>
+                                        <div class="col">
+                                            <p class="mb-0">{{ row['phone'] }}</p>
+                                        </div>
+                                    </div>
+                                {% endif %}
 
                         </div>
                     </div>
