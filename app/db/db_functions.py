@@ -99,7 +99,15 @@ def get_directory_data():
             class_standing = data[item]['stu_class']
 
             # the next ones potentially have multiple, split by a '|'
-            bu_role = get_splits(data[item]['bu_role'])
+            bu_role_list = get_splits(data[item]['bu_role'])
+            bu_role_sort_key = {
+                "Staff":            1,
+                "Faculty":          2,
+                "Sponsored Staff":  3,
+                "Student":          4
+            }
+            bu_role_data = sorted(bu_role_list, key=lambda x: bu_role_sort_key[x])
+            bu_role = bu_role_data
             department = get_splits(data[item]['dept'])
             major = get_splits(data[item]['stu_majr'])
             minor = get_splits(data[item]['stu_minr'])
