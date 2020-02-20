@@ -10,10 +10,6 @@ constr %= app.config['DB_KEY']
 engine_bw = create_engine(constr, convert_unicode=True)
 db_session_bw = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine_bw))
 
-conn_bw = engine_bw.raw_connection()
-call_cursor_bw = conn_bw.cursor()
-result_cursor_bw = conn_bw.cursor()
-
 Base = declarative_base()
 Base.query = db_session_bw.query_property()
 
