@@ -1,6 +1,6 @@
 from flask import abort
 
-from app.db.db_connection_bw import engine_bw
+from app.db.db_connection import engine
 from app import app, cache
 
 
@@ -36,17 +36,17 @@ def get_splits(line):
 
 def portal_profile(username):
     try:
-        conn_bw = engine_bw.raw_connection()
-        call_cursor_bw = conn_bw.cursor()
-        result_cursor_bw = conn_bw.cursor()
+        conn = engine.raw_connection()
+        call_cursor = conn.cursor()
+        result_cursor = conn.cursor()
 
-        call_cursor_bw.callproc('bth_portal_channel_api.bu_profile', (username, result_cursor_bw))
-        r = result_cursor_bw.fetchall()
-        conn_bw.close()
+        call_cursor.callproc('bth_portal_channel_api.bu_profile', (username, result_cursor))
+        r = result_cursor.fetchall()
+        conn.close()
         return get_results(r)
     except:
-        if conn_bw:
-            conn_bw.close()
+        if conn:
+            conn.close()
         return abort(503)
 
 
@@ -66,14 +66,14 @@ def reset_directory_data():
 
 def get_directory_data():
     try:
-        conn_bw = engine_bw.raw_connection()
-        call_cursor_bw = conn_bw.cursor()
-        result_cursor_bw = conn_bw.cursor()
+        conn = engine.raw_connection()
+        call_cursor = conn.cursor()
+        result_cursor = conn.cursor()
         data = []
         results = []
 
-        call_cursor_bw.callproc('bth_websrv_api.web_directory', (result_cursor_bw,))
-        data = get_results(result_cursor_bw.fetchall())
+        call_cursor.callproc('bth_websrv_api.web_directory', (result_cursor,))
+        data = get_results(result_cursor.fetchall())
         # todo: change data[item] to be able to use item? Use .items() or something
         for item in data:
 
@@ -132,11 +132,11 @@ def get_directory_data():
                             'dorm': dorm,
                             'class_standing': class_standing
                             })
-        conn_bw.close()
+        conn.close()
         return results
     except:
-        if conn_bw:
-            conn_bw.close()
+        if conn:
+            conn.close()
         return abort(503)
 
 
@@ -144,20 +144,20 @@ def get_directory_data():
 @cache.memoize(timeout=14400)
 def departments():
     try:
-        conn_bw = engine_bw.raw_connection()
-        call_cursor_bw = conn_bw.cursor()
-        result_cursor_bw = conn_bw.cursor()
+        conn = engine.raw_connection()
+        call_cursor = conn.cursor()
+        result_cursor = conn.cursor()
         results = []
 
-        call_cursor_bw.callproc('bth_websrv_api.web_directory_dept', (result_cursor_bw,))
-        data = get_results(result_cursor_bw.fetchall())
+        call_cursor.callproc('bth_websrv_api.web_directory_dept', (result_cursor,))
+        data = get_results(result_cursor.fetchall())
 
         for item in data:
             results.append(data[item]['dept'])
 
-        conn_bw.close()
+        conn.close()
         return results
     except:
-        if conn_bw:
-            conn_bw.close()
+        if conn:
+            conn.close()
         return abort(503)

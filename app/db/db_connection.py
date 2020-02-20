@@ -7,16 +7,16 @@ from app import app
 constr = app.config['CONSTR']
 constr %= app.config['DB_KEY']
 
-engine_bw = create_engine(constr, convert_unicode=True)
-db_session_bw = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine_bw))
+engine = create_engine(constr, convert_unicode=True)
+db_session = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
 
 Base = declarative_base()
-Base.query = db_session_bw.query_property()
+Base.query = db_session.query_property()
 
 
-def init_db_bw():
+def init_db():
     # import all modules here that might define models so that
     # they will be registered properly on the metadata.  Otherwise
     # you will have to import them first before calling init_db()
 
-    Base.metadata.create_all(bind=engine_bw)
+    Base.metadata.create_all(bind=engine)
