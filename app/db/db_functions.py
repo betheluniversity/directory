@@ -1,6 +1,6 @@
 from flask import abort
 
-from app.db.db_connection_bw import engine_bw
+from app.db.db_connection_bw import conn_bw
 from app import app, cache
 
 
@@ -36,17 +36,12 @@ def get_splits(line):
 
 def portal_profile(username):
     try:
-        conn_bw = engine_bw.raw_connection()
         call_cursor_bw = conn_bw.cursor()
         result_cursor_bw = conn_bw.cursor()
-
         call_cursor_bw.callproc('bth_portal_channel_api.bu_profile', (username, result_cursor_bw))
         r = result_cursor_bw.fetchall()
-        conn_bw.close()
         return get_results(r)
     except:
-        if conn_bw:
-            conn_bw.close()
         return abort(503)
 
 
@@ -66,7 +61,6 @@ def reset_directory_data():
 
 def get_directory_data():
     try:
-        conn_bw = engine_bw.raw_connection()
         call_cursor_bw = conn_bw.cursor()
         result_cursor_bw = conn_bw.cursor()
         data = []
@@ -132,11 +126,8 @@ def get_directory_data():
                             'dorm': dorm,
                             'class_standing': class_standing
                             })
-        conn_bw.close()
         return results
     except:
-        if conn_bw:
-            conn_bw.close()
         return abort(503)
 
 
@@ -144,7 +135,6 @@ def get_directory_data():
 @cache.memoize(timeout=14400)
 def departments():
     try:
-        conn_bw = engine_bw.raw_connection()
         call_cursor_bw = conn_bw.cursor()
         result_cursor_bw = conn_bw.cursor()
         results = []
@@ -155,9 +145,6 @@ def departments():
         for item in data:
             results.append(data[item]['dept'])
 
-        conn_bw.close()
         return results
     except:
-        if conn_bw:
-            conn_bw.close()
         return abort(503)
