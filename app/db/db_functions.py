@@ -99,6 +99,7 @@ def get_directory_data():
             class_standing = data[item]['stu_class']
 
             # the next ones potentially have multiple, split by a '|'
+            # this snippet could be moved into derek's script on IS's side.
             bu_role_list = get_splits(data[item]['bu_role'])
             bu_role_sort_key = {
                 "Staff":            1,
