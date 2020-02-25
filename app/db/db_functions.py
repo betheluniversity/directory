@@ -92,6 +92,7 @@ def get_directory_data():
             addr_state = data[item]['addr_state']
             addr_street1 = data[item]['addr_street1']
             addr_street2 = data[item]['addr_street2']
+            addr_street3 = data[item]['addr_street3']
             addr_zip = data[item]['addr_zip']
             phone_ext = data[item]['phone_ext'].split('*', 1)[0]  # this split is to fix numbers like "123.123.123*1234"
             office_number = data[item]['office_building_room']
@@ -111,11 +112,21 @@ def get_directory_data():
             }
             bu_role_data = sorted(bu_role_list, key=lambda x: bu_role_sort_key[x])
             bu_role = bu_role_data
-            department = get_splits(data[item]['dept'])
             major = get_splits(data[item]['stu_majr'])
             minor = get_splits(data[item]['stu_minr'])
             college = get_splits(data[item]['stu_coll'])
+
+            # TODO: these are going to be old
             title = get_splits(data[item]['title'])
+            department = get_splits(data[item]['dept'])
+
+            # TODO: these are the new ones
+            staff_title = get_splits(data[item]['staff_title'])
+            staff_dept = get_splits(data[item]['staff_dept'])
+
+            faculty_title = get_splits(data[item]['faculty_title'])
+            faculty_dept = get_splits(data[item]['faculty_dept'])
+            faculty_school = get_splits(data[item]['faculty_school'])
 
             results.append({'last_name': last_name,
                             'first_name': first_name,
@@ -131,17 +142,23 @@ def get_directory_data():
                             'addr_state': addr_state,
                             'addr_street1': addr_street1,
                             'addr_street2': addr_street2,
+                            'addr_street3': addr_street3,
                             'role': bu_role,
-                            'department': department,
+                            # 'department': department,
                             'major': major,
                             'minor': minor,
                             'college': college,
-                            'title': title,
+                            # 'title': title,
                             'addr_zip': addr_zip,
                             'phone_ext': phone_ext,
                             'office_number': office_number,
                             'dorm': dorm,
-                            'class_standing': class_standing
+                            'class_standing': class_standing,
+                            'staff_title': staff_title,
+                            'staff_dept': staff_dept,
+                            'faculty_title': faculty_title,
+                            'faculty_dept': faculty_dept,
+                            'faculty_school': faculty_school
                             })
         conn.close()
         return results
