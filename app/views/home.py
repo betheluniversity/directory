@@ -44,6 +44,7 @@ class View(FlaskView):
             if 'ID_view' not in session.keys():
                 get_id_view()
 
+            # allow users with specifically the STUDENT/STAFF/FACULTY roles.
             user_has_role = False
             if 'STUDENT' in session['roles'] or 'STAFF' in session['roles'] or 'FACULTY' in session['roles']:
                 user_has_role = True
