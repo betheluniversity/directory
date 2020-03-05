@@ -194,14 +194,15 @@ class DirectoryController(object):
     def phone_search(self, data, viewing_role):
         people = directory_search()
         result = []
-        data_phone = data['phone_number']\
+        data['phone_number'] = data['phone_number']\
             .replace('-', '').replace('.', '').replace(' ', '').replace('(', '').replace(')', '')
-        search_type = ['Phone Number: {}'.format(data_phone)]
+        search_type = ['Phone Number: {}'.format(data['phone_number'])]
 
-        if data_phone != '':
+        if data['phone_number'] != '':
             for row in people:
                 if self.match_option(row, viewing_role):
-                    if data_phone in row['phone'].replace('.', ''):
+                    row_phone = row['phone'].replace('.', '')
+                    if data['phone_number'] in row['phone'].replace('.', ''):
                         result.append(row)
             result.sort(key=lambda i: i['last_name'])
 
