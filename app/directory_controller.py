@@ -194,7 +194,8 @@ class DirectoryController(object):
     def phone_search(self, data, viewing_role):
         people = directory_search()
         result = []
-        data_phone = data['phone_number'].replace('-', '').replace('.', '')
+        data_phone = data['phone_number']\
+            .replace('-', '').replace('.', '').replace(' ', '').replace('(', '').replace(')', '')
         search_type = ['Phone Number: {}'.format(data_phone)]
 
         if data_phone != '':
