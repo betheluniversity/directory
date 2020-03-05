@@ -55,6 +55,7 @@ def ireplace(string, findtxt):
 # try just looping over it manually
 # might be super slow, so just do a quick prototype
 
+
 # Shows the year for the template
 app.jinja_env.globals.update(now=datetime.datetime.now())
 app.jinja_env.globals.update(ireplace=ireplace)
