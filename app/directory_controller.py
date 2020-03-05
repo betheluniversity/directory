@@ -191,6 +191,25 @@ class DirectoryController(object):
             'total_pages': math.ceil(len(result)/20)
         }
 
+    def phone_search(self, data, viewing_role):
+        people = directory_search()
+        result = []
+        data_phone = data['phone_number'].replace('-', '').replace('.', '')
+        search_type = ['Phone Number: {}'.format(data_phone)]
+
+        if data_phone != '':
+            for row in people:
+                if self.match_option(row, viewing_role):
+                    if data_phone in row['phone'].replace('.', ''):
+                        result.append(row)
+            result.sort(key=lambda i: i['last_name'])
+
+        return {
+            'results': result,
+            'search_type': search_type,
+            'total_pages': math.ceil(len(result)/20)
+        }
+
     def get_viewing_role(self, data):
         if data.get('faculty_or_staff') == 'true' and data.get('student') == 'true':
             return 'both'  # showing all results

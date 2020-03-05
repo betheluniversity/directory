@@ -185,6 +185,8 @@ class View(FlaskView):
             results_data = self.base.email_search(data, viewing_role)
         elif data.get('bu_id', '') != '':
             results_data = self.base.id_search(data, viewing_role)
+        elif data.get('phone_number', '') != '':
+            results_data = self.base.phone_search(data, viewing_role)
         else:
             results_data = {}
 
