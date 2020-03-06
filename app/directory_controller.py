@@ -62,7 +62,8 @@ class DirectoryController(object):
                     ratio = (self.fl_fuzzy(row['first_name'], row['last_name'], True, data['first_name']) +
                              self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name']))/2
                     if data['department'] != '':
-                        if ratio >= 60 and data['department'] in row['department']:
+                        if ratio >= 60 and (data['department'] in row['staff_dept'] or
+                                            data['department'] in row['faculty_dept']):
                             self.make_results(row, result, ratio)
                     else:
                         if ratio >= 60:
@@ -75,7 +76,8 @@ class DirectoryController(object):
                 if self.match_option(row, viewing_role):
                     ratio = self.fl_fuzzy(row['first_name'], row['last_name'], True, data['first_name'])
                     if data['department'] != '':
-                        if ratio >= 75 and data['department'] in row['department']:
+                        if ratio >= 75 and (data['department'] in row['staff_dept'] or
+                                            data['department'] in row['faculty_dept']):
                             self.make_results(row, result, ratio)
                     else:
                         if ratio >= 75:
@@ -88,7 +90,8 @@ class DirectoryController(object):
                 if self.match_option(row, viewing_role):  # if its true, check the person
                     ratio = self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name'])
                     if data['department'] != '':
-                        if ratio >= 75 and data['department'] in row['department']:
+                        if ratio >= 75 and (data['department'] in row['staff_dept'] or
+                                            data['department'] in row['faculty_dept']):
                             self.make_results(row, result, ratio)
                     else:
                         if ratio >= 75:
@@ -100,7 +103,7 @@ class DirectoryController(object):
                 if self.match_option(row, viewing_role):  # if its true, check the person
                     ratio = self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name'])
                     if data['department'] != '':
-                        if data['department'] in row['department']:
+                        if data['department'] in row['staff_dept'] or data['department'] in row['faculty_dept']:
                             self.make_results(row, result, ratio)
                     else:
                         self.make_results(row, result, ratio)
