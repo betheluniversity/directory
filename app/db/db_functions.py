@@ -116,11 +116,6 @@ def get_directory_data():
             minor = get_splits(data[item]['stu_minr'])
             college = get_splits(data[item]['stu_coll'])
 
-            # TODO: these are going to be old
-            title = get_splits(data[item]['title'])
-            department = get_splits(data[item]['dept'])
-
-            # TODO: these are the new ones
             staff_title = get_splits(data[item]['staff_title'])
             staff_dept = get_splits(data[item]['staff_dept'])
 
@@ -144,11 +139,9 @@ def get_directory_data():
                             'addr_street2': addr_street2,
                             'addr_street3': addr_street3,
                             'role': bu_role,
-                            # 'department': department,
                             'major': major,
                             'minor': minor,
                             'college': college,
-                            # 'title': title,
                             'addr_zip': addr_zip,
                             'phone_ext': phone_ext,
                             'office_number': office_number,
