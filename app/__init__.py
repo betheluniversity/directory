@@ -92,7 +92,9 @@ def ireplace(string, findtxt, phone=False):
         return string
 
     # keep capitalizations, if necessary
-    return replacetxt.join(re.compile(findtxt, flags=re.I).split(string, 1))
+    if findtxt:
+      return replacetxt.join(re.compile(findtxt, flags=re.I).split(string, 1))
+    return string
 
 # try just looping over it manually
 # might be super slow, so just do a quick prototype
