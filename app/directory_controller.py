@@ -174,7 +174,7 @@ class DirectoryController(object):
     def id_search(self, data, viewing_role):
         people = directory_search()
         result = []
-        search_type = ['ID']
+        search_type = ['ID: {}'.format(data['bu_id'])]
 
         if data['bu_id'] != '':
             for row in people:
