@@ -17,8 +17,8 @@ def error_render_template(error, code=None):
 
     # Means that it's a handled error/exception
     if code is not None:
-        # As of 11/16/2017, we're only logging 403s and 500 errors.
-        if code > 499:
+        # As of 11/16/2017, we're only logging 500 errors.
+        if code >= 500:
             sentry_sdk.capture_exception()
             app.logger.error("%s -- %s" % (username, str(error)))
 
