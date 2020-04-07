@@ -111,11 +111,11 @@ def get_directory_data():
             }
             bu_role_data = sorted(bu_role_list, key=lambda x: bu_role_sort_key[x])
             bu_role = bu_role_data
-            department = get_splits(data[item]['dept']) or ''
+            department = get_splits(data[item]['dept'])
             major = get_splits(data[item]['stu_majr'])
             minor = get_splits(data[item]['stu_minr'])
             college = get_splits(data[item]['stu_coll'])
-            title = get_splits(data[item]['title']) or ''
+            title = get_splits(data[item]['title'])
 
             results.append({'last_name': last_name,
                             'first_name': first_name,
@@ -132,11 +132,11 @@ def get_directory_data():
                             'addr_street1': addr_street1,
                             'addr_street2': addr_street2,
                             'role': bu_role,
-                            'department': department,
+                            'department': department or '',
                             'major': major,
                             'minor': minor,
                             'college': college,
-                            'title': title,
+                            'title': title or '',
                             'addr_zip': addr_zip,
                             'phone_ext': phone_ext,
                             'office_number': office_number,
