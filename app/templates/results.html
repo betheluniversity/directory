@@ -276,7 +276,7 @@
                                     </div>
                                     <div class="col">
                                         {% if row_phone != '' %}
-                                            {{ ireplace(row['phone'], data['phone_number'], True)|safe }}
+                                            {{ ireplace(row['phone'], data['phone_number'])|safe }}
                                         {% else %}
                                             <p class="mb-0">{{ row['phone'] }}</p>
                                         {% endif %}

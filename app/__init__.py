@@ -38,48 +38,47 @@ from app.db.db_functions import departments
 
 
 # https://stackoverflow.com/questions/919056/case-insensitive-replace
-def ireplace(string, findtxt, phone=False):
+def ireplace(string, findtxt):
     try:
         # find the start of the new string
         index_l = string.replace('.', '').lower().index(findtxt.lower())
 
         # if we are highlighting a phone number we need special logic
-        if phone:
-            try:
-                # make sure this is a number
-                int(string.replace('.', ''))
-                # get the index of our matching key
-                index_l = string.replace('.', '').lower().index(findtxt.lower())
-                findtxt_len = len(findtxt)
+        try:
+            # make sure this is a number
+            int(string.replace('.', ''))
+            # get the index of our matching key
+            index_l = string.replace('.', '').lower().index(findtxt.lower())
+            findtxt_len = len(findtxt)
 
-                count = string.count('.', index_l, findtxt_len + 1)
+            count = string.count('.', index_l, findtxt_len + 1)
 
-                # Do some logic to account for the '.'s in the number
-                if index_l < 3:
-                    findtxt_len += count
-                elif 2 < index_l < 6:
-                    index_l += 1
-                    findtxt_len += 1
-                elif index_l > 5:
-                    index_l += 2
-                    findtxt_len += 2
+            # Do some logic to account for the '.'s in the number
+            if index_l < 3:
+                findtxt_len += count
+            elif 2 < index_l < 6:
+                index_l += 1
+                findtxt_len += 1
+            elif index_l > 5:
+                index_l += 2
+                findtxt_len += 2
 
-                replacetxt = string[index_l:index_l + findtxt_len]
+            replacetxt = string[index_l:index_l + findtxt_len]
 
-                # pull off extra numbers that sometimes occur
-                if '.' not in replacetxt and len(replacetxt) > 3 and len(replacetxt) != len(findtxt):
+            # pull off extra numbers that sometimes occur
+            if '.' not in replacetxt and len(replacetxt) > 3 and len(replacetxt) != len(findtxt):
+                replacetxt = replacetxt[:-1]
+
+            # pull off rogue '.'s
+            if '.' in replacetxt:
+                if replacetxt.index('.') == 0:
+                    replacetxt = replacetxt[1:]
+                if replacetxt.index('.') == len(replacetxt) - 1:
                     replacetxt = replacetxt[:-1]
-
-                # pull off rogue '.'s
-                if '.' in replacetxt:
-                    if replacetxt.index('.') == 0:
-                        replacetxt = replacetxt[1:]
-                    if replacetxt.index('.') == len(replacetxt) - 1:
-                        replacetxt = replacetxt[:-1]
-                    else:
-                        findtxt = replacetxt
-            except:
-                pass
+                else:
+                    findtxt = replacetxt
+        except:
+            pass
         else:
             replacetxt = string[index_l:index_l + len(findtxt)]
 
