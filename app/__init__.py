@@ -41,19 +41,38 @@ from app.db.db_functions import departments
 def ireplace(string, findtxt):
     try:
         # find the start of the new string
-        index_l = string.lower().index(findtxt.lower())
-        # get the string with the correct capitalization
-        replacetxt = string[index_l:index_l + len(findtxt)]
+        index_l = string.replace('.', '').lower().index(findtxt.lower())
+
+        findtxt_len = len(findtxt)
+
+        # Check if the string is a number or not
+        number = False
+        try:
+            int(string.replace('.', ''))
+            if findtxt:
+                # if it is a number and we are searching for something then increase length by 2 to account for the
+                # dividing characters (2 .'s)
+                findtxt_len += 2
+                number = True
+        except:
+            pass
+
+        replacetxt = string[index_l:index_l + findtxt_len]
+
         # add in the span to color it properly
         replacetxt = '<span class="search-match-highlight">%s</span>' % replacetxt
     except ValueError:
         return string
 
+    # If it is a number then just return the replace span
+    if number:
+        return replacetxt
     # keep capitalizations, if necessary
     return replacetxt.join(re.compile(findtxt, flags=re.I).split(string, 1))
 
 # try just looping over it manually
 # might be super slow, so just do a quick prototype
+
 
 # Shows the year for the template
 app.jinja_env.globals.update(now=datetime.datetime.now())
