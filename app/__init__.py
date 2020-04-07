@@ -65,7 +65,7 @@ def ireplace(string, findtxt):
         return string
 
     # If it is a number then just return the replace span
-    if not replacetxt or number:
+    if not findtxt or number:
         return replacetxt
     # keep capitalizations, if necessary
     return replacetxt.join(re.compile(findtxt, flags=re.I).split(string, 1))
