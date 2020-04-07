@@ -43,54 +43,32 @@ def ireplace(string, findtxt):
         # find the start of the new string
         index_l = string.replace('.', '').lower().index(findtxt.lower())
 
-        # if we are highlighting a phone number we need special logic
+        findtxt_len = len(findtxt)
+
+        # Check if the string is a number or not
+        number = False
         try:
-            # make sure this is a number
             int(string.replace('.', ''))
-            # get the index of our matching key
-            index_l = string.replace('.', '').lower().index(findtxt.lower())
-            findtxt_len = len(findtxt)
-
-            count = string.count('.', index_l, findtxt_len + 1)
-
-            # Do some logic to account for the '.'s in the number
-            if index_l < 3:
-                findtxt_len += count
-            elif 2 < index_l < 6:
-                index_l += 1
-                findtxt_len += 1
-            elif index_l > 5:
-                index_l += 2
+            if findtxt:
+                # if it is a number and we are searching for something then increase length by 2 to account for the
+                # dividing characters (2 .'s)
                 findtxt_len += 2
-
-            replacetxt = string[index_l:index_l + findtxt_len]
-
-            # pull off extra numbers that sometimes occur
-            if '.' not in replacetxt and len(replacetxt) > 3 and len(replacetxt) != len(findtxt):
-                replacetxt = replacetxt[:-1]
-
-            # pull off rogue '.'s
-            if '.' in replacetxt:
-                if replacetxt.index('.') == 0:
-                    replacetxt = replacetxt[1:]
-                if replacetxt.index('.') == len(replacetxt) - 1:
-                    replacetxt = replacetxt[:-1]
-                else:
-                    findtxt = replacetxt
+                number = True
         except:
             pass
-        else:
-            replacetxt = string[index_l:index_l + len(findtxt)]
+
+        replacetxt = string[index_l:index_l + findtxt_len]
 
         # add in the span to color it properly
         replacetxt = '<span class="search-match-highlight">%s</span>' % replacetxt
     except ValueError:
         return string
 
+    # If it is a number then just return the replace span
+    if number:
+        return replacetxt
     # keep capitalizations, if necessary
-    if findtxt:
-      return replacetxt.join(re.compile(findtxt, flags=re.I).split(string, 1))
-    return string
+    return replacetxt.join(re.compile(findtxt, flags=re.I).split(string, 1))
 
 # try just looping over it manually
 # might be super slow, so just do a quick prototype
