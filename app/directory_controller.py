@@ -202,7 +202,7 @@ class DirectoryController(object):
             for row in people:
                 if self.match_option(row, viewing_role):
                     row_phone = row['phone'].replace('.', '')
-                    if data['phone_number'] in row['phone'].replace('.', ''):
+                    if data['phone_number'] == row['phone'].replace('.', ''):
                         result.append(row)
             result.sort(key=lambda i: i['last_name'])
 
