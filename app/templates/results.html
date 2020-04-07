@@ -103,7 +103,6 @@
                                     </div>
                                 </div>
                             {% endif %}
-
                         {# TODO: We removed UDCID and ID on 2/20/2020, due to ferpa concerns. It might come back, but
                                     for now it is removed until we address this issue again :( #}
 {#                            {% if session['ID_view'] == True and (row['id'] != '' or row['udc'] != '') %}#}
@@ -338,11 +337,7 @@
                                         <p class="mb-0 font-weight-bold">Phone</p>
                                     </div>
                                     <div class="col">
-                                        {% if row_phone != '' %}
-                                            {{ ireplace(row['phone'], data['phone_number'])|safe }}
-                                        {% else %}
-                                            <p class="mb-0">{{ row['phone'] }}</p>
-                                        {% endif %}
+                                        <p class="mb-0">{{ row['phone'] }}</p>
                                     </div>
                                 </div>
                             {% endif %}
