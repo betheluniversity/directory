@@ -53,9 +53,6 @@ def ireplace(string, findtxt, phone=False):
                 findtxt_len = len(findtxt)
 
                 count = string.count('.', index_l, findtxt_len + 1)
-                # if index_l > 3:
-                #     index_l += 1 + count
-                # findtxt_len += count
 
                 # Do some logic to account for the '.'s in the number
                 if index_l < 3:
