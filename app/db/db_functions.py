@@ -116,6 +116,8 @@ def get_directory_data():
             minor = get_splits(data[item]['stu_minr'])
             college = get_splits(data[item]['stu_coll'])
             title = get_splits(data[item]['title'])
+            if not title:
+                title = ''
 
             results.append({'last_name': last_name,
                             'first_name': first_name,
@@ -132,11 +134,11 @@ def get_directory_data():
                             'addr_street1': addr_street1,
                             'addr_street2': addr_street2,
                             'role': bu_role,
-                            'department': department or '',
+                            'department': department,
                             'major': major,
                             'minor': minor,
                             'college': college,
-                            'title': title or '',
+                            'title': title,
                             'addr_zip': addr_zip,
                             'phone_ext': phone_ext,
                             'office_number': office_number,
