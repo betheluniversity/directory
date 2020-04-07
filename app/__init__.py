@@ -64,8 +64,11 @@ def ireplace(string, findtxt):
     except ValueError:
         return string
 
+    # If we are running this when we shouldn't be just return the input string
+    if not findtxt:
+        return string
     # If it is a number then just return the replace span
-    if not findtxt or number:
+    if number:
         return replacetxt
     # keep capitalizations, if necessary
     return replacetxt.join(re.compile(findtxt, flags=re.I).split(string, 1))
