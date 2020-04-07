@@ -85,7 +85,7 @@ def get_directory_data():
             username = data[item]['username']
             bu_po = data[item]['bu_po']
             bu_id = data[item]['bu_id']
-            phone = data[item]['home_phone']
+            phone = data[item]['home_phone'] or ''
             image_path = data[item]['photo']
             udc = data[item]['udc_id']
             addr_city = data[item]['addr_city']
@@ -111,13 +111,11 @@ def get_directory_data():
             }
             bu_role_data = sorted(bu_role_list, key=lambda x: bu_role_sort_key[x])
             bu_role = bu_role_data
-            department = get_splits(data[item]['dept'])
+            department = get_splits(data[item]['dept']) or ''
             major = get_splits(data[item]['stu_majr'])
             minor = get_splits(data[item]['stu_minr'])
             college = get_splits(data[item]['stu_coll'])
-            title = get_splits(data[item]['title'])
-            if not title:
-                title = ''
+            title = get_splits(data[item]['title']) or ''
 
             results.append({'last_name': last_name,
                             'first_name': first_name,
