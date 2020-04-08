@@ -53,7 +53,7 @@ def ireplace(string, findtxt):
                 # dividing characters (2 .'s)
                 findtxt_len += 2
                 number = True
-        except:
+        except ValueError:
             pass
 
         replacetxt = string[index_l:index_l + findtxt_len]
