@@ -49,9 +49,8 @@ def ireplace(string, findtxt):
         number = False
         try:
             if findtxt and isinstance(int(string.replace('.', '')), int):
-                # if it is a number and we are searching for something then increase length by 2 to account for the
-                # dividing characters (2 .'s)
-                findtxt_len += 2
+                # if it is a number just use the length of the string (since findtxt doesn't have the .'s)
+                findtxt_len = len(string)
                 number = True
         except ValueError:
             pass
