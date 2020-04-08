@@ -48,8 +48,7 @@ def ireplace(string, findtxt):
         # Check if the string is a number or not
         number = False
         try:
-            int(string.replace('.', ''))
-            if findtxt:
+            if findtxt and isinstance(int(string.replace('.', '')), int):
                 # if it is a number and we are searching for something then increase length by 2 to account for the
                 # dividing characters (2 .'s)
                 findtxt_len += 2
