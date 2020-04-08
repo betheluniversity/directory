@@ -62,7 +62,8 @@ class DirectoryController(object):
                     ratio = (self.fl_fuzzy(row['first_name'], row['last_name'], True, data['first_name']) +
                              self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name']))/2
                     if data['department'] != '':
-                        if ratio >= 60 and data['department'] in row['department']:
+                        if ratio >= 60 and (data['department'] in row['staff_dept'] or
+                                            data['department'] in row['faculty_dept']):
                             self.make_results(row, result, ratio)
                     else:
                         if ratio >= 60:
@@ -75,7 +76,8 @@ class DirectoryController(object):
                 if self.match_option(row, viewing_role):
                     ratio = self.fl_fuzzy(row['first_name'], row['last_name'], True, data['first_name'])
                     if data['department'] != '':
-                        if ratio >= 75 and data['department'] in row['department']:
+                        if ratio >= 75 and (data['department'] in row['staff_dept'] or
+                                            data['department'] in row['faculty_dept']):
                             self.make_results(row, result, ratio)
                     else:
                         if ratio >= 75:
@@ -88,7 +90,8 @@ class DirectoryController(object):
                 if self.match_option(row, viewing_role):  # if its true, check the person
                     ratio = self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name'])
                     if data['department'] != '':
-                        if ratio >= 75 and data['department'] in row['department']:
+                        if ratio >= 75 and (data['department'] in row['staff_dept'] or
+                                            data['department'] in row['faculty_dept']):
                             self.make_results(row, result, ratio)
                     else:
                         if ratio >= 75:
@@ -100,7 +103,7 @@ class DirectoryController(object):
                 if self.match_option(row, viewing_role):  # if its true, check the person
                     ratio = self.fl_fuzzy(row['first_name'], row['last_name'], False, data['last_name'])
                     if data['department'] != '':
-                        if data['department'] in row['department']:
+                        if data['department'] in row['staff_dept'] or data['department'] in row['faculty_dept']:
                             self.make_results(row, result, ratio)
                     else:
                         self.make_results(row, result, ratio)
@@ -171,7 +174,7 @@ class DirectoryController(object):
     def id_search(self, data, viewing_role):
         people = directory_search()
         result = []
-        search_type = ['ID']
+        search_type = ['ID: {}'.format(data['bu_id'])]
 
         if data['bu_id'] != '':
             for row in people:
@@ -184,27 +187,6 @@ class DirectoryController(object):
             return render_template('results.html', **locals())
 
         result.sort(key=lambda i: i['last_name'])
-
-        return {
-            'results': result,
-            'search_type': search_type,
-            'total_pages': math.ceil(len(result)/20)
-        }
-
-    def phone_search(self, data, viewing_role):
-        people = directory_search()
-        result = []
-        data['phone_number'] = data['phone_number']\
-            .replace('-', '').replace('.', '').replace(' ', '').replace('(', '').replace(')', '')
-        search_type = ['Phone Number: {}'.format(data['phone_number'])]
-
-        if data['phone_number'] != '':
-            for row in people:
-                if self.match_option(row, viewing_role):
-                    row_phone = row['phone'].replace('.', '')
-                    if data['phone_number'] == row['phone'].replace('.', ''):
-                        result.append(row)
-            result.sort(key=lambda i: i['last_name'])
 
         return {
             'results': result,
