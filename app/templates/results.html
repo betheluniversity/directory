@@ -337,7 +337,11 @@
                                         <p class="mb-0 font-weight-bold">Phone</p>
                                     </div>
                                     <div class="col">
-                                        <p class="mb-0">{{ row['phone'] }}</p>
+                                        {% if row_phone != '' %}
+                                            {{ ireplace(row['phone'], data['phone_number'])|safe }}
+                                        {% else %}
+                                            <p class="mb-0">{{ row['phone'] }}</p>
+                                        {% endif %}
                                     </div>
                                 </div>
                             {% endif %}
