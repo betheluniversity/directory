@@ -46,10 +46,11 @@ class View(FlaskView):
 
             # allow users with specifically the STUDENT/STAFF/FACULTY roles.
             user_has_role = False
-            if 'STUDENT' in session['roles'] or 'STAFF' in session['roles'] or 'FACULTY' in session['roles'] or 'SPONSORED-STAFF' in session['roles']:
+            if 'STUDENT' in session['roles'] or 'STAFF' in session['roles'] or 'FACULTY' in session['roles'] or \
+                    'SPONSORED-STAFF' in session['roles'] or 'SPONSORED-FACULTY' in session['roles']:
                 user_has_role = True
 
-            if user_has_role == False:
+            if not user_has_role:
                 return abort(403)
 
             log_user(session['username'])

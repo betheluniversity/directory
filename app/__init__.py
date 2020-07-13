@@ -29,7 +29,7 @@ else:
         'CACHE_KEY_PREFIX': 'directory-'
     })
 
-if app.config['SENTRY_URL']:
+if app.config['ENVIRON'] == 'prod':
     from sentry_sdk.integrations.flask import FlaskIntegration
     sentry_sdk.init(dsn=app.config['SENTRY_URL'], integrations=[FlaskIntegration()])
     from app.views import error
