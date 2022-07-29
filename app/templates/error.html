@@ -13,6 +13,11 @@
         <p>We can’t find the page you’re looking for. Sorry about that! It’s possible that
             this page doesn’t exist or has been deleted. Try returning to the <a href="{{ url_for('View:index') }}">Directory</a>,
             or contact the Help Desk at <a href="mailto:helpdesk@bethel.edu">helpdesk@bethel.edu</a> if you need assistance. </p>
+    {% elif code == 503  %}
+        <h1 class="my-4">503 Error: Temporarily Unavailable</h1>
+        <p>{{ message }} Try returning to the
+            <a href="{{ url_for('View:index') }}">Directory</a>, or contact the Help Desk at <a href="mailto:helpdesk@bethel.edu">helpdesk@bethel.edu</a>
+            if you need assistance. </p>
     {% else %}
         <h1 class="my-4">Can't load (server error)</h1>
         <p>This page is having trouble loading. Sorry about that! Try returning to the <a href="{{ url_for('View:index') }}">Directory</a>,

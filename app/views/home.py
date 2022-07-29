@@ -19,6 +19,9 @@ class View(FlaskView):
         self.base = DirectoryController()
 
     def before_request(self, name, **kwargs):
+        if app.config['SERVER_DOWN']:
+            return render_template('error.html', code=503, message=app.config['ERROR_MESSAGE'])
+
         def init_user():
             if 'session_time' in session.keys():
                 seconds_in_12_hours = 60 * 60 * 12  # equates to 12 hours
