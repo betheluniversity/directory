@@ -17,6 +17,7 @@ from app.directory_controller import DirectoryController, requires_auth
 class View(FlaskView):
     def __init__(self):
         self.base = DirectoryController()
+        self.update_url = app.config.get('UPDATE_PROFILE_URL', '')
 
     def before_request(self, name, **kwargs):
         def init_user():
@@ -158,6 +159,7 @@ class View(FlaskView):
 
     @route('/', methods=['GET'])
     def index(self):
+        update_url = self.update_url
         return render_template('index.html', **locals())
 
     @requires_auth
