@@ -35,6 +35,7 @@ def get_splits(line):
 
 
 def portal_profile(username):
+    conn = None
     try:
         conn = engine.raw_connection()
         call_cursor = conn.cursor()
@@ -65,6 +66,7 @@ def reset_directory_data():
 
 
 def get_directory_data():
+    conn = None
     try:
         conn = engine.raw_connection()
         call_cursor = conn.cursor()
@@ -164,6 +166,7 @@ def get_directory_data():
 # 4 hour cache = 14400
 @cache.memoize(timeout=14400)
 def departments():
+    conn = None
     try:
         conn = engine.raw_connection()
         call_cursor = conn.cursor()
